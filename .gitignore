@@ -19,6 +19,7 @@ ERR
 *.o
 *.obj
 *.exe
+build
 
 # Any LLM prompts
 prompt.md
