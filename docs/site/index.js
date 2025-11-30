@@ -1,0 +1,9 @@
+var index =
+[
+    [ "A Simple Example", "index.html#a-simple-example", null ],
+    [ "Use Cases", "index.html#use-cases", null ],
+    [ "Installation", "index.html#installation", null ],
+    [ "Useful Links", "index.html#useful-links", [
+      [ "Copyright and License", "index.html#copyright-and-license", null ]
+    ] ]
+];
