@@ -28,7 +28,9 @@ prompt.md
 out/
 .vs/
 
-# Sometimes we use Quarto for documentation and we don't need to version its cache or local build.
+# Any documentation site build folders
+site/
+html/
 .quarto/
 _site/
 .luarc.json
