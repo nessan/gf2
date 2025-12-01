@@ -18,7 +18,7 @@ var searchData=
   ['shifts_15',['Bit Shifts',['../md_docs_2pages_2BitStore.html#bit-shifts',1,'']]],
   ['shrink_5fto_5ffit_16',['shrink_to_fit',['../classgf2_1_1BitPoly.html#a27659e2a0b92f9ff59d83def6610da93',1,'gf2::BitPoly::shrink_to_fit()'],['../classgf2_1_1BitVec.html#a86c9723397a5256e234fe7f9cebda6df',1,'gf2::BitVec::shrink_to_fit()']]],
   ['simple_20example_17',['Simple Example',['../index.html#a-simple-example',1,'A Simple Example'],['../md_docs_2pages_2BitGauss.html#a-simple-example-1',1,'A Simple Example']]],
-  ['simplifications_20in_200_18',['Simplifications in \(\mathbb{F}_2\)',['../GF2.html#simplifications-in-fmathbbf_2f',1,'']]],
+  ['simplifications_20in_200_18',['Simplifications in \\(\\mathbb{F}_2\\)',['../GF2.html#simplifications-in-fmathbbf_2f',1,'']]],
   ['size_19',['size',['../classgf2_1_1BitMat.html#a4b80149b9005d284382d2068de045d54',1,'gf2::BitMat::size()'],['../classgf2_1_1BitPoly.html#a275312f5ef8cdadf2208f18bcccda25a',1,'gf2::BitPoly::size()'],['../classgf2_1_1BitSet.html#ad0261223e0aa1bc04a8216bfc5db65d3',1,'gf2::BitSet::size()'],['../classgf2_1_1BitSpan.html#a394bdf415ce323567537b31779244da7',1,'gf2::BitSpan::size()'],['../classgf2_1_1BitStore.html#a808d3b02c2d34e272338ea96667eae1a',1,'gf2::BitStore::size()'],['../classgf2_1_1BitVec.html#a54e7e8f54ed7dcb6d85e7c655aba03e1',1,'gf2::BitVec::size()']]],
   ['size_20and_20type_20',['Size and Type',['../md_docs_2pages_2BitMat.html#size-and-type',1,'']]],
   ['size_20capacity_21',['Size &amp;amp; Capacity',['../md_docs_2pages_2BitVec.html#size--capacity',1,'']]],

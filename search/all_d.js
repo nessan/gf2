@@ -2,7 +2,7 @@ var searchData=
 [
   ['identity_0',['identity',['../classgf2_1_1BitMat.html#a6bf2df8fe783b5b05f354e2c1db07310',1,'gf2::BitMat']]],
   ['idiom_1',['The &lt;a href=&quot;https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern&quot;&gt;CRTP&lt;/a&gt; Idiom',['../md_docs_2pages_2BitStore.html#the-crtp-idiom',1,'']]],
-  ['in_200_2',['in 0',['../GF2.html#gaussian-elimination-in-fmathbbf_2f',1,'Gaussian Elimination in \(\mathbb{F}_2\)'],['../GF2.html#simplifications-in-fmathbbf_2f',1,'Simplifications in \(\mathbb{F}_2\)']]],
+  ['in_200_2',['in 0',['../GF2.html#gaussian-elimination-in-fmathbbf_2f',1,'Gaussian Elimination in \\(\\mathbb{F}_2\\)'],['../GF2.html#simplifications-in-fmathbbf_2f',1,'Simplifications in \\(\\mathbb{F}_2\\)']]],
   ['in_20gf_202_3',['Working in GF(2)',['../GF2.html',1,'md_docs_2pages_2Notes_2Introduction']]],
   ['index_5fand_5fmask_4',['index_and_mask',['../namespacegf2.html#ab29bbe0565dac39f445fcd73fd83cad7',1,'gf2']]],
   ['index_5fand_5foffset_5',['index_and_offset',['../namespacegf2.html#a296a376731b5bbb8601659fda1f230c4',1,'gf2']]],

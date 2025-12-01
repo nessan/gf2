@@ -1,7 +1,7 @@
 var searchData=
 [
   ['idiom_0',['The &lt;a href=&quot;https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern&quot;&gt;CRTP&lt;/a&gt; Idiom',['../md_docs_2pages_2BitStore.html#the-crtp-idiom',1,'']]],
-  ['in_200_1',['in 0',['../GF2.html#gaussian-elimination-in-fmathbbf_2f',1,'Gaussian Elimination in \(\mathbb{F}_2\)'],['../GF2.html#simplifications-in-fmathbbf_2f',1,'Simplifications in \(\mathbb{F}_2\)']]],
+  ['in_200_1',['in 0',['../GF2.html#gaussian-elimination-in-fmathbbf_2f',1,'Gaussian Elimination in \\(\\mathbb{F}_2\\)'],['../GF2.html#simplifications-in-fmathbbf_2f',1,'Simplifications in \\(\\mathbb{F}_2\\)']]],
   ['in_20gf_202_2',['Working in GF(2)',['../GF2.html',1,'md_docs_2pages_2Notes_2Introduction']]],
   ['inherited_20methods_3',['Inherited Methods',['../md_docs_2pages_2BitSet.html#inherited-methods',1,'Inherited Methods'],['../md_docs_2pages_2BitVec.html#inherited-methods-1',1,'Inherited Methods'],['../md_docs_2pages_2BitSpan.html#inherited-methods-2',1,'Inherited Methods']]],
   ['installation_4',['Installation',['../index.html#installation',1,'']]],

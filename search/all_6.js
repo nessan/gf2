@@ -30,7 +30,7 @@ var searchData=
   ['bitspan_27',['BitSpan',['../md_docs_2pages_2BitSpan.html',1,'&lt;tt&gt;BitSpan&lt;/tt&gt;'],['../classgf2_1_1BitSpan.html',1,'gf2::BitSpan&lt; Word &gt;'],['../classgf2_1_1BitSpan.html#a59ac16f99e5d33b73c16c1dd214a6a49',1,'gf2::BitSpan::BitSpan()']]],
   ['bitspan_2eh_28',['BitSpan.h',['../BitSpan_8h.html',1,'']]],
   ['bitstore_29',['BitStore',['../md_docs_2pages_2BitStore.html',1,'&lt;tt&gt;BitStore&lt;/tt&gt;'],['../classgf2_1_1BitStore.html',1,'gf2::BitStore&lt; Store &gt;']]],
-  ['bitstore_20methods_30',['BitStore Methods',['../md_docs_2pages_2BitSet.html#required-bitstore-methods',1,'Required <span class="tt">BitStore</span> Methods'],['../md_docs_2pages_2BitVec.html#required-bitstore-methods-1',1,'Required <span class="tt">BitStore</span> Methods'],['../md_docs_2pages_2BitSpan.html#required-bitstore-methods-2',1,'Required <span class="tt">BitStore</span> Methods']]],
+  ['bitstore_20methods_30',['BitStore Methods',['../md_docs_2pages_2BitSet.html#required-bitstore-methods',1,'Required &lt;span class=&quot;tt&quot;&gt;BitStore&lt;/span&gt; Methods'],['../md_docs_2pages_2BitVec.html#required-bitstore-methods-1',1,'Required &lt;span class=&quot;tt&quot;&gt;BitStore&lt;/span&gt; Methods'],['../md_docs_2pages_2BitSpan.html#required-bitstore-methods-2',1,'Required &lt;span class=&quot;tt&quot;&gt;BitStore&lt;/span&gt; Methods']]],
   ['bitstore_2eh_31',['BitStore.h',['../BitStore_8h.html',1,'']]],
   ['bitstore_3c_20bitset_3c_20n_2c_20usize_20_3e_20_3e_32',['BitStore&lt; BitSet&lt; N, usize &gt; &gt;',['../classgf2_1_1BitStore.html',1,'gf2']]],
   ['bitstore_3c_20bitspan_3c_20word_20_3e_20_3e_33',['BitStore&lt; BitSpan&lt; Word &gt; &gt;',['../classgf2_1_1BitStore.html',1,'gf2']]],

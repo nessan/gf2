@@ -6,7 +6,7 @@ var searchData=
   ['see_20also_3',['See Also',['../md_docs_2pages_2BitStore.html#see-also',1,'See Also'],['../md_docs_2pages_2BitSet.html#see-also-1',1,'See Also'],['../md_docs_2pages_2BitVec.html#see-also-2',1,'See Also'],['../md_docs_2pages_2BitSpan.html#see-also-3',1,'See Also'],['../md_docs_2pages_2BitRef.html#see-also-4',1,'See Also'],['../md_docs_2pages_2BitPoly.html#see-also-5',1,'See Also'],['../md_docs_2pages_2BitMat.html#see-also-6',1,'See Also'],['../md_docs_2pages_2BitGauss.html#see-also-7',1,'See Also'],['../md_docs_2pages_2BitLU.html#see-also-8',1,'See Also'],['../md_docs_2pages_2Iterators.html#see-also-9',1,'See Also'],['../md_docs_2pages_2assert.html#see-also-10',1,'See Also']]],
   ['shifts_4',['Bit Shifts',['../md_docs_2pages_2BitStore.html#bit-shifts',1,'']]],
   ['simple_20example_5',['Simple Example',['../index.html#a-simple-example',1,'A Simple Example'],['../md_docs_2pages_2BitGauss.html#a-simple-example-1',1,'A Simple Example']]],
-  ['simplifications_20in_200_6',['Simplifications in \(\mathbb{F}_2\)',['../GF2.html#simplifications-in-fmathbbf_2f',1,'']]],
+  ['simplifications_20in_200_6',['Simplifications in \\(\\mathbb{F}_2\\)',['../GF2.html#simplifications-in-fmathbbf_2f',1,'']]],
   ['size_20and_20type_7',['Size and Type',['../md_docs_2pages_2BitMat.html#size-and-type',1,'']]],
   ['size_20capacity_8',['Size &amp;amp; Capacity',['../md_docs_2pages_2BitVec.html#size--capacity',1,'']]],
   ['solution_20access_9',['Solution Access',['../md_docs_2pages_2BitGauss.html#solution-access',1,'']]],

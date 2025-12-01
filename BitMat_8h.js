@@ -1,7 +1,7 @@
 var BitMat_8h =
 [
-    [ "gf2::BitMat< Word >", "classgf2_1_1BitMat.html", "classgf2_1_1BitMat" ],
-    [ "std::formatter< gf2::BitMat< Word > >", "structstd_1_1formatter_3_01gf2_1_1BitMat_3_01Word_01_4_01_4.html", "structstd_1_1formatter_3_01gf2_1_1BitMat_3_01Word_01_4_01_4" ],
+    [ "gf2::BitMat&lt; Word &gt;", "classgf2_1_1BitMat.html", "classgf2_1_1BitMat" ],
+    [ "std::formatter&lt; gf2::BitMat&lt; Word &gt; &gt;", "structstd_1_1formatter_3_01gf2_1_1BitMat_3_01Word_01_4_01_4.html", "structstd_1_1formatter_3_01gf2_1_1BitMat_3_01Word_01_4_01_4" ],
     [ "gf2::dot", "namespacegf2.html#a7d77e7c9a783ced80bad8d7f7853fc67", null ],
     [ "gf2::dot", "namespacegf2.html#a575da72a3e71668c9c780c3b40b24df1", null ],
     [ "gf2::dot", "namespacegf2.html#a5f37ff9f67df131a7ba67790073647a7", null ],

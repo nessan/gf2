@@ -2,7 +2,7 @@ var searchData=
 [
   ['elementary_20operations_0',['Elementary Operations',['../md_docs_2pages_2BitMat.html#elementary-operations',1,'']]],
   ['elements_1',['Elements',['../md_docs_2pages_2BitVec.html#appending-elements',1,'Appending Elements'],['../md_docs_2pages_2BitVec.html#removing-elements',1,'Removing Elements']]],
-  ['elimination_20in_200_2',['Gaussian Elimination in \(\mathbb{F}_2\)',['../GF2.html#gaussian-elimination-in-fmathbbf_2f',1,'']]],
+  ['elimination_20in_200_2',['Gaussian Elimination in \\(\\mathbb{F}_2\\)',['../GF2.html#gaussian-elimination-in-fmathbbf_2f',1,'']]],
   ['encoding_3',['Encoding',['../md_docs_2pages_2BitStore.html#binary-string-encoding',1,'Binary String Encoding'],['../md_docs_2pages_2BitVec.html#binary-string-encoding-1',1,'Binary String Encoding'],['../md_docs_2pages_2BitStore.html#hex-string-encoding',1,'Hex String Encoding'],['../md_docs_2pages_2BitVec.html#hex-string-encoding-1',1,'Hex String Encoding']]],
   ['equality_20assertions_4',['Equality Assertions',['../md_docs_2pages_2assert.html#equality-assertions',1,'']]],
   ['equality_20operator_5',['Equality Operator',['../md_docs_2pages_2BitStore.html#equality-operator',1,'']]],

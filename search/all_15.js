@@ -16,7 +16,7 @@ var searchData=
   ['removing_20rows_20columns_13',['Appending and Removing Rows/Columns',['../md_docs_2pages_2BitMat.html#appending-and-removing-rowscolumns',1,'']]],
   ['replace_14',['replace',['../classgf2_1_1BitMat.html#aa30d19cdb95d8a39c052d84131f0f883',1,'gf2::BitMat']]],
   ['replace_5fbits_15',['replace_bits',['../namespacegf2.html#a23f5a30c88d6d08c6751fb8cc6b747d6',1,'gf2']]],
-  ['required_20bitstore_20methods_16',['Required BitStore Methods',['../md_docs_2pages_2BitSet.html#required-bitstore-methods',1,'Required <span class="tt">BitStore</span> Methods'],['../md_docs_2pages_2BitVec.html#required-bitstore-methods-1',1,'Required <span class="tt">BitStore</span> Methods'],['../md_docs_2pages_2BitSpan.html#required-bitstore-methods-2',1,'Required <span class="tt">BitStore</span> Methods']]],
+  ['required_20bitstore_20methods_16',['Required BitStore Methods',['../md_docs_2pages_2BitSet.html#required-bitstore-methods',1,'Required &lt;span class=&quot;tt&quot;&gt;BitStore&lt;/span&gt; Methods'],['../md_docs_2pages_2BitVec.html#required-bitstore-methods-1',1,'Required &lt;span class=&quot;tt&quot;&gt;BitStore&lt;/span&gt; Methods'],['../md_docs_2pages_2BitSpan.html#required-bitstore-methods-2',1,'Required &lt;span class=&quot;tt&quot;&gt;BitStore&lt;/span&gt; Methods']]],
   ['required_20methods_17',['Required Methods',['../md_docs_2pages_2BitStore.html#required-methods',1,'']]],
   ['reset_5fbits_18',['reset_bits',['../namespacegf2.html#a7e371a5f346a2c3830a8293d172aaa22',1,'gf2']]],
   ['reset_5fexcept_5fbits_19',['reset_except_bits',['../namespacegf2.html#adf5400c9f48fc978113d9ca054b03290',1,'gf2']]],

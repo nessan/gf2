@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['gaussian_20elimination_20in_200_0',['Gaussian Elimination in \(\mathbb{F}_2\)',['../GF2.html#gaussian-elimination-in-fmathbbf_2f',1,'']]],
+  ['gaussian_20elimination_20in_200_0',['Gaussian Elimination in \\(\\mathbb{F}_2\\)',['../GF2.html#gaussian-elimination-in-fmathbbf_2f',1,'']]],
   ['get_1',['get',['../classgf2_1_1BitMat.html#a20d4b073fa358adea7bdba8fee0c8fc7',1,'gf2::BitMat::get()'],['../classgf2_1_1BitStore.html#a55cdb0e7d2eeecfa2bc8cc78f6a6a766',1,'gf2::BitStore::get()']]],
   ['gf_202_2',['Working in GF(2)',['../GF2.html',1,'md_docs_2pages_2Notes_2Introduction']]],
   ['gf2_3',['gf2',['../namespacegf2.html',1,'']]],

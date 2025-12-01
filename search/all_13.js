@@ -6,7 +6,7 @@ var searchData=
   ['permutations_3',['Permutations',['../md_docs_2pages_2BitLU.html#permutations',1,'']]],
   ['permute_4',['permute',['../classgf2_1_1BitLU.html#a36dfccacabf8937863685c6c47e4d875',1,'gf2::BitLU::permute(BitMat&lt; Word &gt; &amp;B) const'],['../classgf2_1_1BitLU.html#a0efac3fdda9e0087d427c733bdb19eb7',1,'gf2::BitLU::permute(BitVec&lt; Word &gt; &amp;b) const']]],
   ['polynomial_5',['Characteristic Polynomial',['../md_docs_2pages_2BitMat.html#characteristic-polynomial',1,'']]],
-  ['polynomial_2088_6',['The Polynomial \(x^N\)',['../Reduction.html#the-polynomial-fxnf',1,'']]],
+  ['polynomial_2088_6',['The Polynomial \\(x^N\\)',['../Reduction.html#the-polynomial-fxnf',1,'']]],
   ['polynomial_20evaluation_7',['Polynomial Evaluation',['../md_docs_2pages_2BitPoly.html#polynomial-evaluation',1,'']]],
   ['polynomials_8',['Characteristic Polynomials',['../Danilevsky.html#characteristic-polynomials',1,'']]],
   ['pop_9',['pop',['../classgf2_1_1BitVec.html#a7ae048f5abad05cf4e62a3a36338a0cc',1,'gf2::BitVec']]],

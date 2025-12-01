@@ -15,7 +15,7 @@ var searchData=
   ['bitset_12',['&lt;span class=&quot;tt&quot;&gt;BitSet&lt;/span&gt;',['../md_docs_2pages_2BitSet.html',1,'']]],
   ['bitspan_13',['&lt;span class=&quot;tt&quot;&gt;BitSpan&lt;/span&gt;',['../md_docs_2pages_2BitSpan.html',1,'']]],
   ['bitstore_14',['&lt;span class=&quot;tt&quot;&gt;BitStore&lt;/span&gt;',['../md_docs_2pages_2BitStore.html',1,'']]],
-  ['bitstore_20methods_15',['BitStore Methods',['../md_docs_2pages_2BitSet.html#required-bitstore-methods',1,'Required <span class="tt">BitStore</span> Methods'],['../md_docs_2pages_2BitVec.html#required-bitstore-methods-1',1,'Required <span class="tt">BitStore</span> Methods'],['../md_docs_2pages_2BitSpan.html#required-bitstore-methods-2',1,'Required <span class="tt">BitStore</span> Methods']]],
+  ['bitstore_20methods_15',['BitStore Methods',['../md_docs_2pages_2BitSet.html#required-bitstore-methods',1,'Required &lt;span class=&quot;tt&quot;&gt;BitStore&lt;/span&gt; Methods'],['../md_docs_2pages_2BitVec.html#required-bitstore-methods-1',1,'Required &lt;span class=&quot;tt&quot;&gt;BitStore&lt;/span&gt; Methods'],['../md_docs_2pages_2BitSpan.html#required-bitstore-methods-2',1,'Required &lt;span class=&quot;tt&quot;&gt;BitStore&lt;/span&gt; Methods']]],
   ['bitvec_16',['&lt;span class=&quot;tt&quot;&gt;BitVec&lt;/span&gt;',['../md_docs_2pages_2BitVec.html',1,'']]],
   ['boolean_20assertions_17',['Boolean Assertions',['../md_docs_2pages_2assert.html#boolean-assertions',1,'']]]
 ];
