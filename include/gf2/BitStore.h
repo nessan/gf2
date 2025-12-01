@@ -23,12 +23,14 @@
 #include <string>
 namespace gf2 {
 
-/// The base class for the vector-like types in the `gf2` library: `BitSet`, `BitVec`, and `BitSpan`<br>
-/// The template parameter `Store` is a derived class --- we use the CRTP idiom for compile time polymorphism.
-/// The `Store` subclass provides an implementation for a small number of required methods.
-/// This base class uses those to implement a large number of other methods that the `Store` subclass inherits.
-/// Thus we avoid code duplication and gain a rich API for "free". <br>
-/// **Note** The `BitStore` class has no data members of its own.
+/// The base class for the vector-like types in the `gf2` library: [`BitSet`](BitSet.md), [`BitVec`](BitVec.md), and
+/// [`BitSpan`](BitSpan.md)<br> The template parameter `Store` is a derived class --- we use the CRTP idiom for compile
+/// time polymorphism. The `Store` subclass provides an implementation for a small number of required methods and in
+/// return, inherit the many methods provided by this base class.
+///
+/// @note The `BitStore` class has no data members of its own. Users typically will not use this class directly -- it's
+/// just an implementation detail to avoid code duplication. Instead, they will create Instead, they will create
+/// `gf2::BitSet` and `gf2::BitVec` instances, along with `gf2::BitSpan`'s from those objects.
 template<typename Store>
 class BitStore {
 private:

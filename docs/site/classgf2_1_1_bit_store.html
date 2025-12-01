@@ -126,9 +126,8 @@ $(function(){initNavTree('classgf2_1_1_bit_store.html','','classgf2_1_1_bit_stor
 </div><!--header-->
 <div class="contents">
 
-<p>The base class for the vector-like types in the <span class="tt"><a class="el" href="namespacegf2.html" title="The namespace for the gf2 library.">gf2</a></span> library: <span class="tt"><a class="el" href="classgf2_1_1_bit_set.html" title="A fixed-size vector over GF(2) with N bit elements compactly stored in a standard vector of primitive...">BitSet</a></span>, <span class="tt"><a class="el" href="classgf2_1_1_bit_vec.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">BitVec</a></span>, and <span class="tt"><a class="el" href="classgf2_1_1_bit_span.html" title="A bit_span is a non-owning view of contiguous bits stored in some underlying store of unsigned Words....">BitSpan</a></span><br  />
- The template parameter <span class="tt">Store</span> is a derived class &mdash; we use the CRTP idiom for compile time polymorphism. The <span class="tt">Store</span> subclass provides an implementation for a small number of required methods. This base class uses those to implement a large number of other methods that the <span class="tt">Store</span> subclass inherits. Thus we avoid code duplication and gain a rich API for "free". <br  />
- <b>Note</b> The <span class="tt"><a class="el" href="classgf2_1_1_bit_store.html" title="The base class for the vector-like types in the gf2 library: BitSet, BitVec, and BitSpan  The templat...">BitStore</a></span> class has no data members of its own.  
+<p>The base class for the vector-like types in the <span class="tt"><a class="el" href="namespacegf2.html" title="The namespace for the gf2 library.">gf2</a></span> library: <span class="tt">BitSet</span>, <span class="tt">BitVec</span>, and <span class="tt">BitSpan</span><br  />
+ The template parameter <span class="tt">Store</span> is a derived class &mdash; we use the CRTP idiom for compile time polymorphism. The <span class="tt">Store</span> subclass provides an implementation for a small number of required methods and in return, inherit the many methods provided by this base class.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_bit_store_8h_source.html">BitStore.h</a>&gt;</code></p>
@@ -336,9 +335,9 @@ static constexpr <a class="el" href="namespacegf2.html#a872a69469085fcdddf299ae4
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Store&gt;<br />
-class gf2::BitStore&lt; Store &gt;</div><p>The base class for the vector-like types in the <span class="tt"><a class="el" href="namespacegf2.html" title="The namespace for the gf2 library.">gf2</a></span> library: <span class="tt"><a class="el" href="classgf2_1_1_bit_set.html" title="A fixed-size vector over GF(2) with N bit elements compactly stored in a standard vector of primitive...">BitSet</a></span>, <span class="tt"><a class="el" href="classgf2_1_1_bit_vec.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">BitVec</a></span>, and <span class="tt"><a class="el" href="classgf2_1_1_bit_span.html" title="A bit_span is a non-owning view of contiguous bits stored in some underlying store of unsigned Words....">BitSpan</a></span><br  />
- The template parameter <span class="tt">Store</span> is a derived class &mdash; we use the CRTP idiom for compile time polymorphism. The <span class="tt">Store</span> subclass provides an implementation for a small number of required methods. This base class uses those to implement a large number of other methods that the <span class="tt">Store</span> subclass inherits. Thus we avoid code duplication and gain a rich API for "free". <br  />
- <b>Note</b> The <span class="tt"><a class="el" href="classgf2_1_1_bit_store.html" title="The base class for the vector-like types in the gf2 library: BitSet, BitVec, and BitSpan  The templat...">BitStore</a></span> class has no data members of its own. </p>
+class gf2::BitStore&lt; Store &gt;</div><p>The base class for the vector-like types in the <span class="tt"><a class="el" href="namespacegf2.html" title="The namespace for the gf2 library.">gf2</a></span> library: <span class="tt">BitSet</span>, <span class="tt">BitVec</span>, and <span class="tt">BitSpan</span><br  />
+ The template parameter <span class="tt">Store</span> is a derived class &mdash; we use the CRTP idiom for compile time polymorphism. The <span class="tt">Store</span> subclass provides an implementation for a small number of required methods and in return, inherit the many methods provided by this base class. </p>
+<dl class="section note"><dt>Note</dt><dd>The <span class="tt"><a class="el" href="classgf2_1_1_bit_store.html" title="The base class for the vector-like types in the gf2 library: BitSet, BitVec, and BitSpan  The templat...">BitStore</a></span> class has no data members of its own. Users typically will not use this class directly &ndash; it's just an implementation detail to avoid code duplication. Instead, they will create Instead, they will create <span class="tt"><a class="el" href="classgf2_1_1_bit_set.html" title="A fixed-size vector over GF(2) with N bit elements compactly stored in a standard vector of primitive...">gf2::BitSet</a></span> and <span class="tt"><a class="el" href="classgf2_1_1_bit_vec.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVec</a></span> instances, along with <span class="tt"><a class="el" href="classgf2_1_1_bit_span.html" title="A bit_span is a non-owning view of contiguous bits stored in some underlying store of unsigned Words....">gf2::BitSpan</a></span>s from those objects. </dd></dl>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a28a649f797325cbaa01e869d26b41a71" name="a28a649f797325cbaa01e869d26b41a71"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a28a649f797325cbaa01e869d26b41a71">&#9670;&#160;</a></span>all()</h2>
@@ -375,8 +374,8 @@ Example</h1>
 <div class="line">v.<a class="code hl_function" href="#a810eb708050722edd0f5490251708ebf">set</a>(1);</div>
 <div class="line">v.<a class="code hl_function" href="#a810eb708050722edd0f5490251708ebf">set</a>(2);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a28a649f797325cbaa01e869d26b41a71">all</a>(), <span class="keyword">true</span>);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a28a649f797325cbaa01e869d26b41a71"><div class="ttname"><a href="#a28a649f797325cbaa01e869d26b41a71">gf2::BitStore::all</a></div><div class="ttdeci">constexpr bool all() const</div><div class="ttdoc">Returns true if all bits in the store are set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitStore.h:325</div></div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a810eb708050722edd0f5490251708ebf"><div class="ttname"><a href="#a810eb708050722edd0f5490251708ebf">gf2::BitStore::set</a></div><div class="ttdeci">auto set(usize index, bool value=true)</div><div class="ttdoc">Sets the bit-element at the given index to the specified boolean value &amp; returns this for chaining....</div><div class="ttdef"><b>Definition</b> BitStore.h:189</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a28a649f797325cbaa01e869d26b41a71"><div class="ttname"><a href="#a28a649f797325cbaa01e869d26b41a71">gf2::BitStore::all</a></div><div class="ttdeci">constexpr bool all() const</div><div class="ttdoc">Returns true if all bits in the store are set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitStore.h:327</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a810eb708050722edd0f5490251708ebf"><div class="ttname"><a href="#a810eb708050722edd0f5490251708ebf">gf2::BitStore::set</a></div><div class="ttdeci">auto set(usize index, bool value=true)</div><div class="ttdoc">Sets the bit-element at the given index to the specified boolean value &amp; returns this for chaining....</div><div class="ttdef"><b>Definition</b> BitStore.h:191</div></div>
 <div class="ttc" id="aclassgf2_1_1_bit_vec_html"><div class="ttname"><a href="classgf2_1_1_bit_vec.html">gf2::BitVec</a></div><div class="ttdoc">A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...</div><div class="ttdef"><b>Definition</b> BitVec.h:37</div></div>
 </div><!-- fragment --> 
 </div>
@@ -414,7 +413,7 @@ Example</h1>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#abf6de8d5908a31f5e0369e7730eb9aa3">any</a>(), <span class="keyword">false</span>);</div>
 <div class="line">v.<a class="code hl_function" href="#a810eb708050722edd0f5490251708ebf">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#abf6de8d5908a31f5e0369e7730eb9aa3">any</a>(), <span class="keyword">true</span>);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_abf6de8d5908a31f5e0369e7730eb9aa3"><div class="ttname"><a href="#abf6de8d5908a31f5e0369e7730eb9aa3">gf2::BitStore::any</a></div><div class="ttdeci">constexpr bool any() const</div><div class="ttdoc">Returns true if at least one bit in the store is set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitStore.h:306</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_abf6de8d5908a31f5e0369e7730eb9aa3"><div class="ttname"><a href="#abf6de8d5908a31f5e0369e7730eb9aa3">gf2::BitStore::any</a></div><div class="ttdeci">constexpr bool any() const</div><div class="ttdoc">Returns true if at least one bit in the store is set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitStore.h:308</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -603,8 +602,8 @@ Example</h1>
 <div class="line"><a class="code hl_class" href="classgf2_1_1_bit_vec.html">BitVec</a> v{10};</div>
 <div class="line">v.<a class="code hl_function" href="#aca2bd62d3c4747c0e58332d18f18b104">copy</a>(src);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a9ad11ca61edfa7f331f27d835f480a19">to_string</a>(), <span class="stringliteral">&quot;0101010101&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a9ad11ca61edfa7f331f27d835f480a19"><div class="ttname"><a href="#a9ad11ca61edfa7f331f27d835f480a19">gf2::BitStore::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1604</div></div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_aca2bd62d3c4747c0e58332d18f18b104"><div class="ttname"><a href="#aca2bd62d3c4747c0e58332d18f18b104">gf2::BitStore::copy</a></div><div class="ttdeci">auto copy(Src src)</div><div class="ttdoc">Copies the bits from an unsigned integral src value and returns a reference to this for chaining.</div><div class="ttdef"><b>Definition</b> BitStore.h:410</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a9ad11ca61edfa7f331f27d835f480a19"><div class="ttname"><a href="#a9ad11ca61edfa7f331f27d835f480a19">gf2::BitStore::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1606</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_aca2bd62d3c4747c0e58332d18f18b104"><div class="ttname"><a href="#aca2bd62d3c4747c0e58332d18f18b104">gf2::BitStore::copy</a></div><div class="ttdeci">auto copy(Src src)</div><div class="ttdoc">Copies the bits from an unsigned integral src value and returns a reference to this for chaining.</div><div class="ttdef"><b>Definition</b> BitStore.h:412</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -688,7 +687,7 @@ Example</h1>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a4beec85045dd6d7cd0c6d2925cdc16c4">count_ones</a>(), 0);</div>
 <div class="line">v.<a class="code hl_function" href="#a810eb708050722edd0f5490251708ebf">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a4beec85045dd6d7cd0c6d2925cdc16c4">count_ones</a>(), 1);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a4beec85045dd6d7cd0c6d2925cdc16c4"><div class="ttname"><a href="#a4beec85045dd6d7cd0c6d2925cdc16c4">gf2::BitStore::count_ones</a></div><div class="ttdeci">constexpr usize count_ones() const</div><div class="ttdoc">Returns the number of set bits in the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:599</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a4beec85045dd6d7cd0c6d2925cdc16c4"><div class="ttname"><a href="#a4beec85045dd6d7cd0c6d2925cdc16c4">gf2::BitStore::count_ones</a></div><div class="ttdeci">constexpr usize count_ones() const</div><div class="ttdoc">Returns the number of set bits in the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:601</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -724,7 +723,7 @@ Example</h1>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#ac0cc0fe24052b0ae9e3e3072cf73a904">count_zeros</a>(), 10);</div>
 <div class="line">v.<a class="code hl_function" href="#a810eb708050722edd0f5490251708ebf">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#ac0cc0fe24052b0ae9e3e3072cf73a904">count_zeros</a>(), 9);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_ac0cc0fe24052b0ae9e3e3072cf73a904"><div class="ttname"><a href="#ac0cc0fe24052b0ae9e3e3072cf73a904">gf2::BitStore::count_zeros</a></div><div class="ttdeci">constexpr usize count_zeros() const</div><div class="ttdoc">Returns the number of unset bits in the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:614</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_ac0cc0fe24052b0ae9e3e3072cf73a904"><div class="ttname"><a href="#ac0cc0fe24052b0ae9e3e3072cf73a904">gf2::BitStore::count_zeros</a></div><div class="ttdeci">constexpr usize count_zeros() const</div><div class="ttdoc">Returns the number of unset bits in the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:616</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -820,7 +819,7 @@ Example</h1>
 <div class="line">v.<a class="code hl_function" href="#a51779f3d55a422b3e0e82d1c3b36048b">fill</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="classgf2_1_1_bit_vec.html#a54e7e8f54ed7dcb6d85e7c655aba03e1">size</a>(), 10);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a9ad11ca61edfa7f331f27d835f480a19">to_string</a>(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a51779f3d55a422b3e0e82d1c3b36048b"><div class="ttname"><a href="#a51779f3d55a422b3e0e82d1c3b36048b">gf2::BitStore::fill</a></div><div class="ttdeci">auto fill(std::invocable&lt; usize &gt; auto f)</div><div class="ttdoc">Fill the store by repeatedly calling f(i) and returns a reference to this for chaining.</div><div class="ttdef"><b>Definition</b> BitStore.h:534</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a51779f3d55a422b3e0e82d1c3b36048b"><div class="ttname"><a href="#a51779f3d55a422b3e0e82d1c3b36048b">gf2::BitStore::fill</a></div><div class="ttdeci">auto fill(std::invocable&lt; usize &gt; auto f)</div><div class="ttdoc">Fill the store by repeatedly calling f(i) and returns a reference to this for chaining.</div><div class="ttdef"><b>Definition</b> BitStore.h:536</div></div>
 <div class="ttc" id="aclassgf2_1_1_bit_vec_html_a54e7e8f54ed7dcb6d85e7c655aba03e1"><div class="ttname"><a href="classgf2_1_1_bit_vec.html#a54e7e8f54ed7dcb6d85e7c655aba03e1">gf2::BitVec::size</a></div><div class="ttdeci">constexpr usize size() const</div><div class="ttdoc">Returns the number of bit-elements in the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVec.h:64</div></div>
 <div class="ttc" id="anamespacegf2_html_abed1a83530f112d069e809d8883c13a8"><div class="ttname"><a href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">gf2::usize</a></div><div class="ttdeci">std::size_t usize</div><div class="ttdoc">Word type alias for the platform&#39;s &quot;native&quot;-sized unsigned integer.</div><div class="ttdef"><b>Definition</b> unsigned_word.h:41</div></div>
 </div><!-- fragment --> 
@@ -864,7 +863,7 @@ Example</h1>
 <div class="line">assert(v.first_set() == std::optional&lt;usize&gt;{27});</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1_bit_vec.html">BitVec</a> empty;</div>
 <div class="line">assert(empty.<a class="code hl_function" href="#a35e8976a21a509ede663cd3e074c235f">first_set</a>() == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a35e8976a21a509ede663cd3e074c235f"><div class="ttname"><a href="#a35e8976a21a509ede663cd3e074c235f">gf2::BitStore::first_set</a></div><div class="ttdeci">std::optional&lt; usize &gt; first_set() const</div><div class="ttdoc">Returns the index of the first set bit in the bit-store or {} if no bits are set.</div><div class="ttdef"><b>Definition</b> BitStore.h:682</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a35e8976a21a509ede663cd3e074c235f"><div class="ttname"><a href="#a35e8976a21a509ede663cd3e074c235f">gf2::BitStore::first_set</a></div><div class="ttdeci">std::optional&lt; usize &gt; first_set() const</div><div class="ttdoc">Returns the index of the first set bit in the bit-store or {} if no bits are set.</div><div class="ttdef"><b>Definition</b> BitStore.h:684</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -906,7 +905,7 @@ Example</h1>
 <div class="line">assert(v.first_unset() == std::optional&lt;usize&gt;{27});</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1_bit_vec.html">BitVec</a> empty;</div>
 <div class="line">assert(empty.<a class="code hl_function" href="#a8cb3de2547ce6e1f855c2cda031d5cea">first_unset</a>() == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a8cb3de2547ce6e1f855c2cda031d5cea"><div class="ttname"><a href="#a8cb3de2547ce6e1f855c2cda031d5cea">gf2::BitStore::first_unset</a></div><div class="ttdeci">std::optional&lt; usize &gt; first_unset() const</div><div class="ttdoc">Returns the index of the first unset bit in the bit-store or {} if no bits are unset.</div><div class="ttdef"><b>Definition</b> BitStore.h:801</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a8cb3de2547ce6e1f855c2cda031d5cea"><div class="ttname"><a href="#a8cb3de2547ce6e1f855c2cda031d5cea">gf2::BitStore::first_unset</a></div><div class="ttdeci">std::optional&lt; usize &gt; first_unset() const</div><div class="ttdoc">Returns the index of the first unset bit in the bit-store or {} if no bits are unset.</div><div class="ttdef"><b>Definition</b> BitStore.h:803</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1052,7 +1051,7 @@ Example</h1>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a55cdb0e7d2eeecfa2bc8cc78f6a6a766">get</a>(0), <span class="keyword">false</span>);</div>
 <div class="line">v.<a class="code hl_function" href="#a810eb708050722edd0f5490251708ebf">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a55cdb0e7d2eeecfa2bc8cc78f6a6a766">get</a>(0), <span class="keyword">true</span>);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a55cdb0e7d2eeecfa2bc8cc78f6a6a766"><div class="ttname"><a href="#a55cdb0e7d2eeecfa2bc8cc78f6a6a766">gf2::BitStore::get</a></div><div class="ttdeci">constexpr bool get(usize i) const</div><div class="ttdoc">Returns true if the bit at the given index i is set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitStore.h:121</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a55cdb0e7d2eeecfa2bc8cc78f6a6a766"><div class="ttname"><a href="#a55cdb0e7d2eeecfa2bc8cc78f6a6a766">gf2::BitStore::get</a></div><div class="ttdeci">constexpr bool get(usize i) const</div><div class="ttdoc">Returns true if the bit at the given index i is set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitStore.h:123</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1088,7 +1087,7 @@ Example</h1>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a3f200f5fa375f75d83d0b09aaa836824">is_empty</a>(), <span class="keyword">true</span>);</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1_bit_vec.html">BitVec</a> u{10};</div>
 <div class="line">assert_eq(u.<a class="code hl_function" href="#a3f200f5fa375f75d83d0b09aaa836824">is_empty</a>(), <span class="keyword">false</span>);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a3f200f5fa375f75d83d0b09aaa836824"><div class="ttname"><a href="#a3f200f5fa375f75d83d0b09aaa836824">gf2::BitStore::is_empty</a></div><div class="ttdeci">constexpr bool is_empty() const</div><div class="ttdoc">Returns true if the store is empty, false otherwise.</div><div class="ttdef"><b>Definition</b> BitStore.h:293</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a3f200f5fa375f75d83d0b09aaa836824"><div class="ttname"><a href="#a3f200f5fa375f75d83d0b09aaa836824">gf2::BitStore::is_empty</a></div><div class="ttdeci">constexpr bool is_empty() const</div><div class="ttdoc">Returns true if the store is empty, false otherwise.</div><div class="ttdef"><b>Definition</b> BitStore.h:295</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1128,7 +1127,7 @@ Example</h1>
 <div class="line">assert(v.last_set() == std::optional&lt;usize&gt;{27});</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1_bit_vec.html">BitVec</a> empty;</div>
 <div class="line">assert(empty.<a class="code hl_function" href="#a826beebf8a2f77e62255fc68de49dd98">last_set</a>() == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a826beebf8a2f77e62255fc68de49dd98"><div class="ttname"><a href="#a826beebf8a2f77e62255fc68de49dd98">gf2::BitStore::last_set</a></div><div class="ttdeci">std::optional&lt; usize &gt; last_set() const</div><div class="ttdoc">Returns the index of the last set bit in the bit-store or {} if no bits are set.</div><div class="ttdef"><b>Definition</b> BitStore.h:704</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a826beebf8a2f77e62255fc68de49dd98"><div class="ttname"><a href="#a826beebf8a2f77e62255fc68de49dd98">gf2::BitStore::last_set</a></div><div class="ttdeci">std::optional&lt; usize &gt; last_set() const</div><div class="ttdoc">Returns the index of the last set bit in the bit-store or {} if no bits are set.</div><div class="ttdef"><b>Definition</b> BitStore.h:706</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1170,7 +1169,7 @@ Example</h1>
 <div class="line">assert(v.last_unset() == std::optional&lt;usize&gt;{27});</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1_bit_vec.html">BitVec</a> empty;</div>
 <div class="line">assert(empty.<a class="code hl_function" href="#ac38571fa7168dd9278dea2136e7eec0a">last_unset</a>() == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_ac38571fa7168dd9278dea2136e7eec0a"><div class="ttname"><a href="#ac38571fa7168dd9278dea2136e7eec0a">gf2::BitStore::last_unset</a></div><div class="ttdeci">std::optional&lt; usize &gt; last_unset() const</div><div class="ttdoc">Returns the index of the last unset bit in the bit-store or {} if no bits are unset.</div><div class="ttdef"><b>Definition</b> BitStore.h:830</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_ac38571fa7168dd9278dea2136e7eec0a"><div class="ttname"><a href="#ac38571fa7168dd9278dea2136e7eec0a">gf2::BitStore::last_unset</a></div><div class="ttdeci">std::optional&lt; usize &gt; last_unset() const</div><div class="ttdoc">Returns the index of the last unset bit in the bit-store or {} if no bits are unset.</div><div class="ttdef"><b>Definition</b> BitStore.h:832</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1208,7 +1207,7 @@ Example</h1>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a4e5828cc3672ad8808db61212ea0609f">leading_zeros</a>(), 27);</div>
 <div class="line"><span class="keyword">auto</span> w = <a class="code hl_function" href="classgf2_1_1_bit_vec.html#abe88a62254e18559eaa3a5bdc8eec2c7">BitVec&lt;u8&gt;::ones</a>(10);</div>
 <div class="line">assert_eq(w.leading_zeros(), 0);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a4e5828cc3672ad8808db61212ea0609f"><div class="ttname"><a href="#a4e5828cc3672ad8808db61212ea0609f">gf2::BitStore::leading_zeros</a></div><div class="ttdeci">constexpr usize leading_zeros() const</div><div class="ttdoc">Returns the number of leading zeros in the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:627</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a4e5828cc3672ad8808db61212ea0609f"><div class="ttname"><a href="#a4e5828cc3672ad8808db61212ea0609f">gf2::BitStore::leading_zeros</a></div><div class="ttdeci">constexpr usize leading_zeros() const</div><div class="ttdoc">Returns the number of leading zeros in the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:629</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1287,7 +1286,7 @@ Example</h1>
 <div class="line">assert(v.next_unset(27) == std::optional&lt;usize&gt;{});</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1_bit_vec.html">BitVec</a> empty;</div>
 <div class="line">assert(empty.<a class="code hl_function" href="#a85e193d5a908ce21442f24fc1c7e5412">next_unset</a>(0) == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a85e193d5a908ce21442f24fc1c7e5412"><div class="ttname"><a href="#a85e193d5a908ce21442f24fc1c7e5412">gf2::BitStore::next_unset</a></div><div class="ttdeci">std::optional&lt; usize &gt; next_unset(usize index) const</div><div class="ttdoc">Returns the index of the next unset bit after index in the store or {} if no more unset bits exist.</div><div class="ttdef"><b>Definition</b> BitStore.h:858</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a85e193d5a908ce21442f24fc1c7e5412"><div class="ttname"><a href="#a85e193d5a908ce21442f24fc1c7e5412">gf2::BitStore::next_unset</a></div><div class="ttdeci">std::optional&lt; usize &gt; next_unset(usize index) const</div><div class="ttdoc">Returns the index of the next unset bit after index in the store or {} if no more unset bits exist.</div><div class="ttdef"><b>Definition</b> BitStore.h:860</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1324,7 +1323,7 @@ Example</h1>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#aa2d76b96f1223e390f34ea3b34500cfa">none</a>(), <span class="keyword">true</span>);</div>
 <div class="line">v.<a class="code hl_function" href="#a810eb708050722edd0f5490251708ebf">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#aa2d76b96f1223e390f34ea3b34500cfa">none</a>(), <span class="keyword">false</span>);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_aa2d76b96f1223e390f34ea3b34500cfa"><div class="ttname"><a href="#aa2d76b96f1223e390f34ea3b34500cfa">gf2::BitStore::none</a></div><div class="ttdeci">constexpr bool none() const</div><div class="ttdoc">Returns true if no bits in the store are set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitStore.h:353</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_aa2d76b96f1223e390f34ea3b34500cfa"><div class="ttname"><a href="#aa2d76b96f1223e390f34ea3b34500cfa">gf2::BitStore::none</a></div><div class="ttdeci">constexpr bool none() const</div><div class="ttdoc">Returns true if no bits in the store are set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitStore.h:355</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2079,7 +2078,7 @@ Example</h1>
 <div class="line">assert(v.previous_unset(2) == std::optional&lt;usize&gt;{});</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1_bit_vec.html">BitVec</a> empty;</div>
 <div class="line">assert(empty.<a class="code hl_function" href="#a5a78ce14c7ab3d5a1c32eb60b9005401">previous_unset</a>(0) == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a5a78ce14c7ab3d5a1c32eb60b9005401"><div class="ttname"><a href="#a5a78ce14c7ab3d5a1c32eb60b9005401">gf2::BitStore::previous_unset</a></div><div class="ttdeci">std::optional&lt; usize &gt; previous_unset(usize index) const</div><div class="ttdoc">Returns the index of the previous unset bit before index in the store or {} if no more unset bits exi...</div><div class="ttdef"><b>Definition</b> BitStore.h:899</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a5a78ce14c7ab3d5a1c32eb60b9005401"><div class="ttname"><a href="#a5a78ce14c7ab3d5a1c32eb60b9005401">gf2::BitStore::previous_unset</a></div><div class="ttdeci">std::optional&lt; usize &gt; previous_unset(usize index) const</div><div class="ttdoc">Returns the index of the previous unset bit before index in the store or {} if no more unset bits exi...</div><div class="ttdef"><b>Definition</b> BitStore.h:901</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2129,7 +2128,7 @@ Example</h1>
 <div class="line">u.<a class="code hl_function" href="#aef01ffa3ac33bfd599ca27c82f8bc341">random_fill</a>(0.5, seed);</div>
 <div class="line">v.random_fill(0.5, seed);</div>
 <div class="line">assert(u == v);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_aef01ffa3ac33bfd599ca27c82f8bc341"><div class="ttname"><a href="#aef01ffa3ac33bfd599ca27c82f8bc341">gf2::BitStore::random_fill</a></div><div class="ttdeci">auto random_fill(double p=0.5, u64 seed=0)</div><div class="ttdoc">Fill the store with random bits and returns a reference to this for chaining.</div><div class="ttdef"><b>Definition</b> BitStore.h:558</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_aef01ffa3ac33bfd599ca27c82f8bc341"><div class="ttname"><a href="#aef01ffa3ac33bfd599ca27c82f8bc341">gf2::BitStore::random_fill</a></div><div class="ttdeci">auto random_fill(double p=0.5, u64 seed=0)</div><div class="ttdoc">Fill the store with random bits and returns a reference to this for chaining.</div><div class="ttdef"><b>Definition</b> BitStore.h:560</div></div>
 <div class="ttc" id="anamespacegf2_html_a770302128133591da0ca93ded6abf8aa"><div class="ttname"><a href="namespacegf2.html#a770302128133591da0ca93ded6abf8aa">gf2::u64</a></div><div class="ttdeci">std::uint64_t u64</div><div class="ttdoc">Word type alias for a 64-bit unsigned integer.</div><div class="ttdef"><b>Definition</b> unsigned_word.h:38</div></div>
 </div><!-- fragment --> 
 </div>
@@ -2168,7 +2167,7 @@ Example</h1>
 <div class="line"><a class="code hl_class" href="classgf2_1_1_bit_vec.html">BitVec&lt;u8&gt;</a> dst;</div>
 <div class="line">v.<a class="code hl_function" href="#afe9a833d29fe2fcef82179740e10b95f">riffle_into</a>(dst);</div>
 <div class="line">assert_eq(dst.<a class="code hl_function" href="#a9ad11ca61edfa7f331f27d835f480a19">to_string</a>(), <span class="stringliteral">&quot;1010101010101010101&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_afe9a833d29fe2fcef82179740e10b95f"><div class="ttname"><a href="#afe9a833d29fe2fcef82179740e10b95f">gf2::BitStore::riffle_into</a></div><div class="ttdeci">constexpr void riffle_into(BitVec&lt; word_type &gt; &amp;dst) const</div><div class="ttdoc">Interleaves the bits of this bit-store with zeros storing the result into the bit-vector dst.</div><div class="ttdef"><b>Definition</b> BitStore.h:1179</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_afe9a833d29fe2fcef82179740e10b95f"><div class="ttname"><a href="#afe9a833d29fe2fcef82179740e10b95f">gf2::BitStore::riffle_into</a></div><div class="ttdeci">constexpr void riffle_into(BitVec&lt; word_type &gt; &amp;dst) const</div><div class="ttdoc">Interleaves the bits of this bit-store with zeros storing the result into the bit-vector dst.</div><div class="ttdef"><b>Definition</b> BitStore.h:1181</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2524,7 +2523,7 @@ Example</h1>
 <div class="line">assert_eq(left.<a class="code hl_function" href="#a9ad11ca61edfa7f331f27d835f480a19">to_string</a>(), <span class="stringliteral">&quot;10101&quot;</span>);</div>
 <div class="line">assert_eq(right.<a class="code hl_function" href="#a9ad11ca61edfa7f331f27d835f480a19">to_string</a>(), <span class="stringliteral">&quot;01010&quot;</span>);</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_aa56c9f585b3923f15c378ed587e077e6"><div class="ttname"><a href="#aa56c9f585b3923f15c378ed587e077e6">gf2::BitStore::split_at</a></div><div class="ttdeci">constexpr void split_at(usize at, BitVec&lt; word_type &gt; &amp;left, BitVec&lt; word_type &gt; &amp;right) const</div><div class="ttdoc">Views a bit-store as two parts containing the elements [0, at) and [at, size()) respectively.</div><div class="ttdef"><b>Definition</b> BitStore.h:1130</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_aa56c9f585b3923f15c378ed587e077e6"><div class="ttname"><a href="#aa56c9f585b3923f15c378ed587e077e6">gf2::BitStore::split_at</a></div><div class="ttdeci">constexpr void split_at(usize at, BitVec&lt; word_type &gt; &amp;left, BitVec&lt; word_type &gt; &amp;right) const</div><div class="ttdoc">Views a bit-store as two parts containing the elements [0, at) and [at, size()) respectively.</div><div class="ttdef"><b>Definition</b> BitStore.h:1132</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2705,7 +2704,7 @@ Example</h1>
 <div class="line">v.<a class="code hl_function" href="#a810eb708050722edd0f5490251708ebf">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a494f57e19e6b7ab6cfe0ffbe080b4a30">to_binary_string</a>(), <span class="stringliteral">&quot;1000000000&quot;</span>);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a494f57e19e6b7ab6cfe0ffbe080b4a30">to_binary_string</a>(<span class="stringliteral">&quot;,&quot;</span>, <span class="stringliteral">&quot;[&quot;</span>, <span class="stringliteral">&quot;]&quot;</span>), <span class="stringliteral">&quot;[1,0,0,0,0,0,0,0,0,0]&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a494f57e19e6b7ab6cfe0ffbe080b4a30"><div class="ttname"><a href="#a494f57e19e6b7ab6cfe0ffbe080b4a30">gf2::BitStore::to_binary_string</a></div><div class="ttdeci">std::string to_binary_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1639</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a494f57e19e6b7ab6cfe0ffbe080b4a30"><div class="ttname"><a href="#a494f57e19e6b7ab6cfe0ffbe080b4a30">gf2::BitStore::to_binary_string</a></div><div class="ttdeci">std::string to_binary_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1641</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2758,7 +2757,7 @@ Example</h1>
 <div class="line"><span class="keyword">auto</span> v3 = <a class="code hl_function" href="classgf2_1_1_bit_vec.html#aa2a913940a592ccc49ed6754f606c411">BitVec&lt;&gt;::alternating</a>(8);</div>
 <div class="line">assert_eq(v3.to_binary_string(), <span class="stringliteral">&quot;10101010&quot;</span>);</div>
 <div class="line">assert_eq(v3.to_hex_string(), <span class="stringliteral">&quot;AA&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_af758af7e3d93500a54c951985a26d29e"><div class="ttname"><a href="#af758af7e3d93500a54c951985a26d29e">gf2::BitStore::to_hex_string</a></div><div class="ttdeci">std::string to_hex_string() const</div><div class="ttdoc">Returns the &quot;hex&quot; string representation of the bits in the bit-store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1702</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_af758af7e3d93500a54c951985a26d29e"><div class="ttname"><a href="#af758af7e3d93500a54c951985a26d29e">gf2::BitStore::to_hex_string</a></div><div class="ttdeci">std::string to_hex_string() const</div><div class="ttdoc">Returns the &quot;hex&quot; string representation of the bits in the bit-store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1704</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2795,7 +2794,7 @@ Example</h1>
 <div class="line">assert_eq(v.to_pretty_string(), <span class="stringliteral">&quot;[1,0,1,0,1,0,1,0,1,0]&quot;</span>);</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1_bit_vec.html">BitVec</a> empty;</div>
 <div class="line">assert_eq(empty.<a class="code hl_function" href="#a07fb5004c2357266fbf64871dbf5a04e">to_pretty_string</a>(), <span class="stringliteral">&quot;[]&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a07fb5004c2357266fbf64871dbf5a04e"><div class="ttname"><a href="#a07fb5004c2357266fbf64871dbf5a04e">gf2::BitStore::to_pretty_string</a></div><div class="ttdeci">std::string to_pretty_string() const</div><div class="ttdoc">Returns a &quot;pretty&quot; string representation of the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1621</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a07fb5004c2357266fbf64871dbf5a04e"><div class="ttname"><a href="#a07fb5004c2357266fbf64871dbf5a04e">gf2::BitStore::to_pretty_string</a></div><div class="ttdeci">std::string to_pretty_string() const</div><div class="ttdoc">Returns a &quot;pretty&quot; string representation of the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1623</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2885,7 +2884,7 @@ Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1_bit_vec.html#abe88a62254e18559eaa3a5bdc8eec2c7">BitVec&lt;u8&gt;::ones</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="#a0680ff4643df13d0c53c0db665d14778">words</a> = v.to_words();</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a0680ff4643df13d0c53c0db665d14778">words</a>, (std::vector&lt;u8&gt;{0b1111&#39;1111, 0b0000&#39;0011}));</div>
-<div class="ttc" id="aclassgf2_1_1_bit_store_html_a0680ff4643df13d0c53c0db665d14778"><div class="ttname"><a href="#a0680ff4643df13d0c53c0db665d14778">gf2::BitStore::words</a></div><div class="ttdeci">constexpr usize words() const</div><div class="ttdoc">Returns the fewest number of words needed to store the bits in the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:67</div></div>
+<div class="ttc" id="aclassgf2_1_1_bit_store_html_a0680ff4643df13d0c53c0db665d14778"><div class="ttname"><a href="#a0680ff4643df13d0c53c0db665d14778">gf2::BitStore::words</a></div><div class="ttdeci">constexpr usize words() const</div><div class="ttdoc">Returns the fewest number of words needed to store the bits in the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:69</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

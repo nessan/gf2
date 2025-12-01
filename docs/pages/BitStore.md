@@ -14,8 +14,9 @@ The classes have _many_ methods in common, which are implemented by this base cl
 
 The only methods _not_ in this base class are those that deal with memory management, such as constructors, and functions that grow or shrink the store.
 
-The `BitStore` class has no data members of its own.
+The `gf2::BitStore` class has no data members of its own.
 It is purely a mechanism for sharing code between its three subclasses and for allowing generic programming over all bit-store types.
+Users typically will not use this class directly -- it's an implementation detail to avoid code duplication. Instead, they will create `gf2::BitSet` and `gf2::BitVec` instances, along with `gf2::BitSpan`'s from those objects.
 
 ## Declaration
 
@@ -260,7 +261,7 @@ The following methods iterate over the bit store in various ways.
 | `gf2::BitStore::bits()`            | Returns a `gf2::BitsIter` iterator to view and possibly mutate the bits in the store. |
 | `gf2::BitStore::set_bit_indices`   | Returns a `gf2::SetBitsIter` iterator to view the indices of all the set bits.        |
 | `gf2::BitStore::unset_bit_indices` | Returns a `gf2::UnsetBitsIter` iterator to view the indices of all the unset bits.    |
-| `gf2::BitStore::words`             | Returns a `gf2::WordsIter` iterator to view the "words" underlying the store.             |
+| `gf2::BitStore::words`             | Returns a `gf2::WordsIter` iterator to view the "words" underlying the store.         |
 | `gf2::BitStore::to_words`          | Returns a copy of the words underlying the bit-store.                                 |
 
 The `gf2::BitsIter` iterator has a const and a non-const version, where the const-ness refers to the store being iterated over.
