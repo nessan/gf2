@@ -34,7 +34,7 @@ This header-only library provides the following main classes:
 | [`BitPoly`][] | For polynomials over GF(2).                          |
 | [`BitMat`][]  | For matrices of bit elements over GF(2).             |
 
-The `BitSet`, `BitVec`, and `BitSpan` classes all inherit from a common [`BitStore`][] base class, which provides a rich interface for manipulating collections of bits.
+The `BitSet`, `BitVec`, and `BitSpan` classes have _many_ methods in common and they all satisfy the [`BitStore`][] concept, which provides a rich interface for manipulating collections of bits. The functions include bit accessors, mutators, fills, queries, iterators, stringification methods, bit-wise operators, arithmetic operators, and more.
 
 There are other classes to support linear algebra operations, such as solving systems of linear equations, finding matrix inverses, and computing eigenvalues and eigenvectors. Among other things, the interface includes methods for examining the eigen-structure of large bit matrices.
 
