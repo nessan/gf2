@@ -2,14 +2,14 @@
 
 This file documents notable changes to the project.
 
-## 10-Dec-2025
+## 29-Dec-2025
 
 -   Complete rewrite --- renamed the library from `bit` to `gf2`.
 -   Classes and functions have been moved into the `gf2` namespace.
 -   A lot of the changes were inspired by the Rust version of the library: `gf2-rs`.
--   Added `gf2::BitStore` as a common interface for the vector-like classes:
+-   Added `gf2::BitStore` as a common *concept* interface for the vector-like classes:
     -   `gf2::BitSet` for fixed-size vectors of bits (backed by `std::array`).
-    -   `gf2::BitVec` for dynamic-size vectors of bits (backed by `std::vector`).
+    -   `gf2::BitVec` for dynamically-sized vectors of bits (backed by `std::vector`).
     -   `gf2::BitSpan` for non-owning views into any bit-store.
 -   Added iterators for bits, set bits, unset bits, and store words for all bit-stores.
 -   `gf2::BitRef` allows references to individual bits.
