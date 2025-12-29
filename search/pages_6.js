@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['binary_20string_20encoding_0',['Binary String Encoding',['../md_docs_2pages_2BitStore.html#binary-string-encoding',1,'']]],
+  ['bit_20access_1',['Bit Access',['../md_docs_2pages_2BitStore.html#store-bit-access',1,'Bit Access'],['../md_docs_2pages_2BitSet.html#set-bit-access',1,'Bit Access'],['../md_docs_2pages_2BitVec.html#vec-bit-access',1,'Bit Access'],['../md_docs_2pages_2BitSpan.html#span-bit-access',1,'Bit Access']]],
+  ['bit_20counts_2',['Bit Counts',['../md_docs_2pages_2BitMat.html#bit-counts',1,'Bit Counts'],['../md_docs_2pages_2Unsigned.html#bit-counts-1',1,'Bit Counts']]],
+  ['bit_20indices_3',['Bit Indices',['../md_docs_2pages_2BitStore.html#store-indices',1,'Set/Unset Bit Indices'],['../md_docs_2pages_2BitSet.html#set-indices',1,'Set/Unset Bit Indices'],['../md_docs_2pages_2BitVec.html#vec-indices',1,'Set/Unset Bit Indices'],['../md_docs_2pages_2BitSpan.html#span-indices',1,'Set/Unset Bit Indices']]],
+  ['bit_20location_4',['Bit Location',['../md_docs_2pages_2Unsigned.html#bit-location',1,'']]],
+  ['bit_20matrices_5',['Danilevsky for Bit-Matrices',['../Danilevsky.html#danilevsky-for-bit-matrices',1,'']]],
+  ['bit_20set_20fillers_6',['Bit-set Fillers',['../md_docs_2pages_2BitSet.html#set-fillers',1,'']]],
+  ['bit_20set_20mutators_7',['Bit-set Mutators',['../md_docs_2pages_2BitSet.html#set-mutators',1,'']]],
+  ['bit_20set_20queries_8',['Bit-set Queries',['../md_docs_2pages_2BitSet.html#set-queries',1,'']]],
+  ['bit_20shifts_9',['Bit Shifts',['../md_docs_2pages_2BitStore.html#bit-shifts',1,'']]],
+  ['bit_20spans_10',['Bit-spans',['../md_docs_2pages_2BitStore.html#bit-spans',1,'']]],
+  ['bit_20wise_20operators_11',['Bit-wise Operators',['../md_docs_2pages_2BitStore.html#bit-wise-operators',1,'']]],
+  ['bitgauss_20solver_12',['The &lt;span class=&quot;tt&quot;&gt;BitGauss&lt;/span&gt; Solver',['../md_docs_2pages_2BitGauss.html',1,'']]],
+  ['bitlu_20decomposition_13',['The &lt;span class=&quot;tt&quot;&gt;BitLU&lt;/span&gt; Decomposition',['../md_docs_2pages_2BitLU.html',1,'']]],
+  ['bitmat_20class_14',['The &lt;span class=&quot;tt&quot;&gt;BitMat&lt;/span&gt; Class',['../md_docs_2pages_2BitMat.html',1,'']]],
+  ['bitpoly_20class_15',['The &lt;span class=&quot;tt&quot;&gt;BitPoly&lt;/span&gt; Class',['../md_docs_2pages_2BitPoly.html',1,'']]],
+  ['bitref_20reference_16',['The &lt;span class=&quot;tt&quot;&gt;BitRef&lt;/span&gt; Reference',['../md_docs_2pages_2BitRef.html',1,'']]],
+  ['bitset_20class_17',['The &lt;span class=&quot;tt&quot;&gt;BitSet&lt;/span&gt; Class',['../md_docs_2pages_2BitSet.html',1,'']]],
+  ['bitspan_20class_18',['The &lt;span class=&quot;tt&quot;&gt;BitSpan&lt;/span&gt; Class',['../md_docs_2pages_2BitSpan.html',1,'']]],
+  ['bitstore_20concept_19',['The &lt;span class=&quot;tt&quot;&gt;BitStore&lt;/span&gt; Concept',['../md_docs_2pages_2BitStore.html',1,'']]],
+  ['bitvec_20class_20',['The &lt;span class=&quot;tt&quot;&gt;BitVec&lt;/span&gt; Class',['../md_docs_2pages_2BitVec.html',1,'']]],
+  ['boolean_20assertions_21',['Boolean Assertions',['../md_docs_2pages_2assert.html#boolean-assertions',1,'']]]
+];

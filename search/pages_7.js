@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['case_20101_0',['Case \\(N &amp;lt; n\\)',['../Reduction.html#case-fn--nf',1,'']]],
+  ['case_20104_1',['Case \\(N = n\\)',['../Reduction.html#case-fn--nf-1',1,'']]],
+  ['case_20107_2',['Case \\(N &amp;gt; n\\)',['../Reduction.html#case-fn--nf-2',1,'']]],
+  ['cases_3',['Use Cases',['../index.html#use-cases',1,'']]],
+  ['characteristic_20polynomial_4',['Characteristic Polynomial',['../md_docs_2pages_2BitMat.html#characteristic-polynomial',1,'']]],
+  ['characteristic_20polynomials_5',['Characteristic Polynomials',['../Danilevsky.html#characteristic-polynomials',1,'']]],
+  ['checks_20that_20lu_20pa_20for_20a_20random_20matrix_20a_6',['Example (checks that &lt;span class=&quot;tt&quot;&gt;LU = PA&lt;/span&gt; for a random matrix &lt;span class=&quot;tt&quot;&gt;A&lt;/span&gt;)',['../classgf2_1_1BitLU.html#example-checks-that-lu--pa-for-a-random-matrix-a',1,'']]],
+  ['class_7',['Class',['../md_docs_2pages_2BitMat.html',1,'The &lt;tt&gt;BitMat&lt;/tt&gt; Class'],['../md_docs_2pages_2BitPoly.html',1,'The &lt;tt&gt;BitPoly&lt;/tt&gt; Class'],['../md_docs_2pages_2BitSet.html',1,'The &lt;tt&gt;BitSet&lt;/tt&gt; Class'],['../md_docs_2pages_2BitSpan.html',1,'The &lt;tt&gt;BitSpan&lt;/tt&gt; Class'],['../md_docs_2pages_2BitVec.html',1,'The &lt;tt&gt;BitVec&lt;/tt&gt; Class']]],
+  ['classes_8',['Main Classes',['../index.html#main-classes',1,'']]],
+  ['coefficient_20access_9',['Coefficient Access',['../md_docs_2pages_2BitPoly.html#coefficient-access',1,'']]],
+  ['columns_10',['Appending and Removing Rows/Columns',['../md_docs_2pages_2BitMat.html#appending-and-removing-rowscolumns',1,'']]],
+  ['common_20matrices_11',['Common Matrices',['../md_docs_2pages_2BitMat.html#common-matrices',1,'']]],
+  ['companion_20matrices_12',['Companion Matrices',['../Danilevsky.html#companion-matrices',1,'']]],
+  ['concept_13',['Concept',['../md_docs_2pages_2Unsigned.html#concept',1,'Concept'],['../md_docs_2pages_2BitStore.html',1,'The &lt;tt&gt;BitStore&lt;/tt&gt; Concept']]],
+  ['concept_20methods_14',['Concept Methods',['../md_docs_2pages_2BitSet.html#set-concept',1,'Concept Methods'],['../md_docs_2pages_2BitVec.html#vec-concept',1,'Concept Methods'],['../md_docs_2pages_2BitSpan.html#span-concept',1,'Concept Methods']]],
+  ['concept_20requirements_15',['Concept Requirements',['../md_docs_2pages_2BitStore.html#concept-requirements',1,'']]],
+  ['construction_16',['Construction',['../md_docs_2pages_2BitLU.html#construction',1,'Construction'],['../md_docs_2pages_2Iterators.html#construction-1',1,'Construction']]],
+  ['construction_20from_20strings_17',['Construction from Strings',['../md_docs_2pages_2BitVec.html#vec-strings',1,'Construction from Strings'],['../md_docs_2pages_2BitMat.html#construction-from-strings',1,'Construction from Strings']]],
+  ['constructors_18',['Constructors',['../md_docs_2pages_2BitVec.html#vec-constructors',1,'Constructors'],['../md_docs_2pages_2BitSpan.html#span-constructors',1,'Constructors'],['../md_docs_2pages_2BitPoly.html#constructors',1,'Constructors'],['../md_docs_2pages_2BitMat.html#constructors-1',1,'Constructors'],['../md_docs_2pages_2BitGauss.html#constructors-2',1,'Constructors'],['../md_docs_2pages_2Unsigned.html#constructors-3',1,'Constructors'],['../md_docs_2pages_2BitVec.html#vec-factory',1,'Factory Constructors'],['../md_docs_2pages_2BitPoly.html#factory-constructors',1,'Factory Constructors'],['../md_docs_2pages_2BitMat.html#factory-constructors-1',1,'Factory Constructors']]],
+  ['copyright_20and_20license_19',['Copyright and License',['../index.html#copyright-and-license',1,'']]],
+  ['counts_20',['Counts',['../md_docs_2pages_2BitMat.html#bit-counts',1,'Bit Counts'],['../md_docs_2pages_2Unsigned.html#bit-counts-1',1,'Bit Counts']]],
+  ['creators_21',['Creators',['../md_docs_2pages_2BitStore.html#store-spans',1,'Span Creators'],['../md_docs_2pages_2BitSet.html#set-span',1,'Span Creators'],['../md_docs_2pages_2BitVec.html#vec-span',1,'Span Creators'],['../md_docs_2pages_2BitSpan.html#span-span',1,'Span Creators']]]
+];
