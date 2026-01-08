@@ -1,0 +1,7 @@
+var searchData=
+[
+  ['variables_0',['Variables',['../md_docs_2pages_2Unsigned.html#variables',1,'']]],
+  ['vectors_1',['Reshaping from Vectors',['../md_docs_2pages_2BitMat.html#reshaping-from-vectors',1,'']]],
+  ['vectors_2',['vectors',['../md_docs_2pages_2BitStore.html#store-sub-vectors',1,'Sub-vectors'],['../md_docs_2pages_2BitSet.html#set-sub-vectors',1,'Sub-vectors'],['../md_docs_2pages_2BitVec.html#vec-sub-vectors',1,'Sub-vectors'],['../md_docs_2pages_2BitSpan.html#span-sub-vectors',1,'Sub-vectors']]],
+  ['versions_3',['Versions',['../md_docs_2pages_2assert.html#the-always-versions',1,'The &quot;Always&quot; Versions'],['../md_docs_2pages_2assert.html#the-debug-versions',1,'The &quot;Debug&quot; Versions'],['../md_docs_2pages_2assert.html#the-standard-versions',1,'The &quot;Standard&quot; Versions']]]
+];
