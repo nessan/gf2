@@ -65,9 +65,9 @@ int main()
 }
 ```
 
--   This program creates a random 6 x 6 bit-matrix `M` where the entries 0 and 1 are equally likely to occur.
--   It then extracts the characteristic polynomial $c(x) = c_0 + c_1 x + c_2 x^2 + ... + c_6 x^6$.
--   Finally, it verifies that `M` satisfies its characteristic equation, $c(M) = 0$ as expected from the [Cayley-Hamilton] theorem.
+- This program creates a random 6 x 6 bit-matrix `M` where the entries 0 and 1 are equally likely to occur.
+- It then extracts the characteristic polynomial $c(x) = c_0 + c_1 x + c_2 x^2 + ... + c_6 x^6$.
+- Finally, it verifies that `M` satisfies its characteristic equation, $c(M) = 0$ as expected from the [Cayley-Hamilton] theorem.
 
 Here is the output from one run of the program:
 
@@ -124,20 +124,18 @@ Used in this manner, FetchContent will only download a minimal library version, 
 
 ## Rust Version
 
-A Rust version of this library is also available on [crates.io,](https://crates.io/crates/gf2-rs) and the source code is available on [GitHub](https://github.com/nessan/gf2_rs).
+A Rust version of this library is also available on [crates.io,](https://crates.io/crates/gf2) and the source code is available on [GitHub](https://github.com/nessan/gf2_rs).
 
-The C++ version predates the Rust crate. The port to Rust was done _manually—at least for now. LLMs cannot handle this sort of translation task and produce anything that is at all readable or verifiable.
+The C++ version predates the Rust crate. We ported to Rust _manually_, as, at least for now, LLMs cannot handle this sort of translation task and produce anything that is at all readable or verifiable.
 
 As you might expect with a rewrite, the new version considerably improved on the original. There were two beneficial factors at play:
 
 - We approached the problem anew, and fresh eyes quickly saw several areas for improvement that had nothing to do with the implementation language per se.
 - Other improvements came about _because_ we were using a different language with its own idioms, strengths, and weaknesses that forced some new thinking.
 
-The C++ version has been completely rewritten to incorporate those improvements and to backport some of the new ideas from using Rust.
+We rewrote the C++ version to incorporate those improvements and to backport some of the new ideas from using Rust.
 
-Writing solutions to the same problem in multiple languages has significant benefits, but of course, it is rather expensive and unlikely to find favour in commercial settings.
-
-Perhaps we should repeat the exercise for a third language someday!
+Writing solutions to the same problem in multiple languages has significant benefits, but of course, it is expensive and hard to justify in commercial settings. Perhaps we should repeat the exercise in a third language someday!
 
 For the most part, the two versions are feature equivalent (a few things are not possible in Rust). There are some name changes to accommodate idioms in the languages; for example, the BitSpan C++ class corresponds to the `BitSlice` type in Rust (C++ uses spans, Rust uses slices), C++ vectors have a `size()` method, Rust vectors have a `len()` method, and so on.
 
