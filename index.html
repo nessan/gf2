@@ -213,16 +213,15 @@ Installation</h1>
 <p>Used in this manner, FetchContent will only download a minimal library version, excluding redundant test code, sample programs, documentation files, and other unnecessary content.</p>
 <h1 class="doxsection"><a class="anchor" id="rust-version"></a>
 Rust Version</h1>
-<p>A Rust version of this library is also available on <a href="https://crates.io/crates/gf2-rs">crates.io,</a> and the source code is available on <a href="https://github.com/nessan/gf2_rs">GitHub</a>.</p>
-<p>The C++ version predates the Rust crate. The port to Rust was done _manually—at least for now. LLMs cannot handle this sort of translation task and produce anything that is at all readable or verifiable.</p>
+<p>A Rust version of this library is also available on <a href="https://crates.io/crates/gf2">crates.io,</a> and the source code is available on <a href="https://github.com/nessan/gf2_rs">GitHub</a>.</p>
+<p>The C++ version predates the Rust crate. We ported to Rust <em>manually</em>, as, at least for now, LLMs cannot handle this sort of translation task and produce anything that is at all readable or verifiable.</p>
 <p>As you might expect with a rewrite, the new version considerably improved on the original. There were two beneficial factors at play:</p>
 <ul>
 <li>We approached the problem anew, and fresh eyes quickly saw several areas for improvement that had nothing to do with the implementation language per se.</li>
 <li>Other improvements came about <em>because</em> we were using a different language with its own idioms, strengths, and weaknesses that forced some new thinking.</li>
 </ul>
-<p>The C++ version has been completely rewritten to incorporate those improvements and to backport some of the new ideas from using Rust.</p>
-<p>Writing solutions to the same problem in multiple languages has significant benefits, but of course, it is rather expensive and unlikely to find favour in commercial settings.</p>
-<p>Perhaps we should repeat the exercise for a third language someday!</p>
+<p>We rewrote the C++ version to incorporate those improvements and to backport some of the new ideas from using Rust.</p>
+<p>Writing solutions to the same problem in multiple languages has significant benefits, but of course, it is expensive and hard to justify in commercial settings. Perhaps we should repeat the exercise in a third language someday!</p>
 <p>For the most part, the two versions are feature equivalent (a few things are not possible in Rust). There are some name changes to accommodate idioms in the languages; for example, the BitSpan C++ class corresponds to the <span class="tt">BitSlice</span> type in Rust (C++ uses spans, Rust uses slices), C++ vectors have a <span class="tt">size()</span> method, Rust vectors have a <span class="tt">len()</span> method, and so on.</p>
 <p>The two versions have very similar performance characteristics, with neither being significantly faster than the other in most scenarios.</p>
 <h1 class="doxsection"><a class="anchor" id="useful-links"></a>
