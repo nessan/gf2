@@ -14,10 +14,10 @@ Instead, computers have memory registers for _words_ where the smallest addressa
 Other "native" word lengths vary by computer architecture, but 8, 16, 32, 64, and even 128-bit words are widely supported.
 Computers perform operations on and between those short word types optimally.
 
-Computers have lots of primitive word types --- bytes, characters, various sized integers which can be positive or negative, floating point numbers in various degrees of precision.
+Computers have many primitive data types --- bytes, characters, various-sized integers (positive or negative), and floating-point numbers with various degrees of precision.
 Blocks of zeros and ones are best modelled by the simplest _unsigned integer_ primitive types.
 
-In this library we pack contiguous bit elements into arrays of one of those unsigned word types
+In this library, we pack contiguous bit elements into arrays of one of those unsigned word types
 
 For example, if we have a bit-vector of size 200, and the underlying word is a `std::uint64_t`, the bit elements will be packed into four words (a total of 256 bits), and there will be 56 bits of unused capacity.
 The library will efficiently perform almost all operations on that vector 64 bits at a time in an inherently parallel manner.
@@ -34,7 +34,7 @@ This header-only library provides the following main classes:
 | [`BitPoly`][]  | A polynomial over GF(2).                          |
 | [`BitMat`][]   | A matrix over GF(2).                              |
 
-The `BitArray`, `BitVec`, and `BitSpan` classes have _many_ methods in common and they all satisfy the [`BitStore`][] concept, which provides a rich interface for manipulating collections of bits. The functions include bit accessors, mutators, fills, queries, iterators, stringification methods, bit-wise operators, arithmetic operators, and more.
+The `BitArray`, `BitVec`, and `BitSpan` classes share many methods, and all implement the [`BitStore`][] concept, which provides a rich interface for manipulating collections of bits. The functions include bit accessors, mutators, fills, queries, iterators, stringification methods, bit-wise operators, arithmetic operators, and more.
 
 There are other classes to support linear algebra operations, such as solving systems of linear equations, finding matrix inverses, and computing eigenvalues and eigenvectors. Among other things, the interface includes methods for examining the eigen-structure of large bit matrices.
 
@@ -46,7 +46,7 @@ There is a rich interface for setting up and manipulating these classes, as well
 > [!NOTE]
 > Operations on and between objects in the `gf2` library are implemented using bitwise operations on whole underlying words at a time.
 > This means we never have to worry about overflows or carries as we would with normal integer arithmetic.
-> Moreover, these operations are highly optimised in modern CPUs, allowing for fast computation even on large bit-matrices and bit-vectors.
+> Moreover, these operations are highly optimised in modern CPUs, enabling fast computation even on large bit matrices and bit vectors.
 
 ## A Simple Example
 
@@ -94,11 +94,11 @@ The polynomial sum c(M) gives:
 
 ## Use Cases
 
-The standard library already has [`std::bitset`][], an efficient _bitset_ class that is familiar and well thought through, so our classes replicate and extend much of that interface.
+The standard library already has [`std::bitset`][], an efficient _bitset_ class that is familiar and well-thought-out, so our classes replicate and extend much of that interface.
 
 All `std::bitset` objects have a fixed size determined at compile time. The well-known _Boost_ library introduces a dynamic version [`boost::dynamic_bitset`][] whose size can be set and changed at runtime.
 
-However, as the two names suggest, these types are aimed at sets of bits instead of _vectors_ of bits. So, for example, they print in _bit-order_ with the least significant element/bit on the right. More importantly, those classes don't have any particular methods aimed at linear algebra, and neither does the standard library's vector class `std::vector`.
+However, as the two names suggest, these types are aimed at sets of bits instead of _vectors_ of bits. So, for example, they print in _bit-order_ with the least significant element/bit on the right. More importantly, those classes don't have any particular methods for linear algebra, and neither does the standard library's vector class, `std::vector`.
 
 On the other hand, several well-known linear algebra libraries, such as [Eigen][], exist. Those packages efficiently manage all the standard _numeric_ types (floats, doubles, integers, etc.) but do not correctly handle GF(2). You can create matrices of integers whose elements are 0 or 1, but there is no built-in knowledge in those libraries that arithmetic is mod 2.
 
@@ -124,9 +124,9 @@ Used in this manner, FetchContent will only download a minimal library version, 
 
 ## Rust Version
 
-A Rust version of this library is also available on [crates.io](https://crates.io/crates/gf2-rs) and the source code can be found on [GitHub](https://github.com/nessan/gf2_rs).
+A Rust version of this library is also available on [crates.io,](https://crates.io/crates/gf2-rs) and the source code is available on [GitHub](https://github.com/nessan/gf2_rs).
 
-The C++ version predates the Rust crate. The port to Rust was done _manually_ --- at least for now, LLM's cannot handle this sort of translation task and produce anything that is at all readable or verifiable.
+The C++ version predates the Rust crate. The port to Rust was done _manually—at least for now. LLMs cannot handle this sort of translation task and produce anything that is at all readable or verifiable.
 
 As you might expect with a rewrite, the new version considerably improved on the original. There were two beneficial factors at play:
 
@@ -139,7 +139,7 @@ Writing solutions to the same problem in multiple languages has significant bene
 
 Perhaps we should repeat the exercise for a third language someday!
 
-For the most part, the two versions are feature equivalent (a few things are not possible in Rust). There are some name changes to accommodate language idioms, for example, the `BitSpan` C++ class is the `BitSlice` type in Rust (C++ uses spans, Rust uses slices), C++ vectors have a `size()` method, Rust vectors have a `len()` method, and so on.
+For the most part, the two versions are feature equivalent (a few things are not possible in Rust). There are some name changes to accommodate idioms in the languages; for example, the BitSpan C++ class corresponds to the `BitSlice` type in Rust (C++ uses spans, Rust uses slices), C++ vectors have a `size()` method, Rust vectors have a `len()` method, and so on.
 
 The two versions have very similar performance characteristics, with neither being significantly faster than the other in most scenarios.
 
