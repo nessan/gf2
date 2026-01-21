@@ -124,7 +124,7 @@ Used in this manner, FetchContent will only download a minimal library version, 
 
 ## Rust Version
 
-A Rust version of this library is also available on [crates.io](https://crates.io/crates/gf2-rs) and the source code can be found on [GitHub](https://github.com/nessan/gf2-rs).
+A Rust version of this library is also available on [crates.io](https://crates.io/crates/gf2-rs) and the source code can be found on [GitHub](https://github.com/nessan/gf2_rs).
 
 The C++ version predates the Rust crate. The port to Rust was done _manually_ --- at least for now, LLM's cannot handle this sort of translation task and produce anything that is at all readable or verifiable.
 
