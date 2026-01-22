@@ -1327,103 +1327,101 @@ $(function(){initNavTree('BitStore_8h_source.html','',''); });
 <div class="line"><a id="l02059" name="l02059"></a><span class="lineno"> 2059</span>    <span class="keyword">using </span>word_type = <span class="keyword">typename</span> Lhs::word_type;</div>
 <div class="line"><a id="l02060" name="l02060"></a><span class="lineno"> 2060</span>    <span class="keyword">auto</span> sum = word_type{0};</div>
 <div class="line"><a id="l02061" name="l02061"></a><span class="lineno"> 2061</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0uz; i &lt; lhs.words(); ++i) {</div>
-<div class="line"><a id="l02062" name="l02062"></a><span class="lineno"> 2062</span>        <span class="keyword">auto</span> tmp = lhs.word(i) &amp; rhs.word(i);</div>
-<div class="line"><a id="l02063" name="l02063"></a><span class="lineno"> 2063</span>        <span class="comment">// sum ^= static_cast&lt;word_type&gt;(tmp);</span></div>
-<div class="line"><a id="l02064" name="l02064"></a><span class="lineno"> 2064</span>        sum ^= tmp;</div>
-<div class="line"><a id="l02065" name="l02065"></a><span class="lineno"> 2065</span>    }</div>
-<div class="line"><a id="l02066" name="l02066"></a><span class="lineno"> 2066</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespacegf2.html#aa8fd09a196762464e1cffe2941779149">count_ones</a>(sum) % 2 == 1;</div>
-<div class="line"><a id="l02067" name="l02067"></a><span class="lineno"> 2067</span>}</div>
+<div class="line"><a id="l02062" name="l02062"></a><span class="lineno"> 2062</span>        sum ^= <span class="keyword">static_cast&lt;</span>word_type<span class="keyword">&gt;</span>(lhs.word(i) &amp; rhs.word(i));</div>
+<div class="line"><a id="l02063" name="l02063"></a><span class="lineno"> 2063</span>    }</div>
+<div class="line"><a id="l02064" name="l02064"></a><span class="lineno"> 2064</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespacegf2.html#aa8fd09a196762464e1cffe2941779149">count_ones</a>(sum) % 2 == 1;</div>
+<div class="line"><a id="l02065" name="l02065"></a><span class="lineno"> 2065</span>}</div>
 </div>
-<div class="line"><a id="l02068" name="l02068"></a><span class="lineno"> 2068</span></div>
-<div class="line"><a id="l02084" name="l02084"></a><span class="lineno"> 2084</span><span class="keyword">template</span>&lt;BitStore Lhs, BitStore Rhs&gt;</div>
-<div class="line"><a id="l02085" name="l02085"></a><span class="lineno"> 2085</span>    <span class="keyword">requires</span> std::same_as&lt;typename Lhs::word_type, typename Rhs::word_type&gt;</div>
-<div class="line"><a id="l02086" name="l02086"></a><span class="lineno"> 2086</span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span></div>
-<div class="foldopen" id="foldopen02087" data-start="{" data-end="}">
-<div class="line"><a id="l02087" name="l02087"></a><span class="lineno"><a class="line" href="namespacegf2.html#a20bb9b68837d5556f2f34127365679fa"> 2087</a></span><a class="code hl_function" href="namespacegf2.html#a287f8e09de01d9f8db3ad6363ee55088">operator*</a>(Lhs <span class="keyword">const</span>&amp; lhs, Rhs <span class="keyword">const</span>&amp; rhs) {</div>
-<div class="line"><a id="l02088" name="l02088"></a><span class="lineno"> 2088</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespacegf2.html#a612727967670558acfd0fd2adc99eccf">dot</a>(lhs, rhs);</div>
-<div class="line"><a id="l02089" name="l02089"></a><span class="lineno"> 2089</span>}</div>
+<div class="line"><a id="l02066" name="l02066"></a><span class="lineno"> 2066</span></div>
+<div class="line"><a id="l02082" name="l02082"></a><span class="lineno"> 2082</span><span class="keyword">template</span>&lt;BitStore Lhs, BitStore Rhs&gt;</div>
+<div class="line"><a id="l02083" name="l02083"></a><span class="lineno"> 2083</span>    <span class="keyword">requires</span> std::same_as&lt;typename Lhs::word_type, typename Rhs::word_type&gt;</div>
+<div class="line"><a id="l02084" name="l02084"></a><span class="lineno"> 2084</span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span></div>
+<div class="foldopen" id="foldopen02085" data-start="{" data-end="}">
+<div class="line"><a id="l02085" name="l02085"></a><span class="lineno"><a class="line" href="namespacegf2.html#a20bb9b68837d5556f2f34127365679fa"> 2085</a></span><a class="code hl_function" href="namespacegf2.html#a287f8e09de01d9f8db3ad6363ee55088">operator*</a>(Lhs <span class="keyword">const</span>&amp; lhs, Rhs <span class="keyword">const</span>&amp; rhs) {</div>
+<div class="line"><a id="l02086" name="l02086"></a><span class="lineno"> 2086</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespacegf2.html#a612727967670558acfd0fd2adc99eccf">dot</a>(lhs, rhs);</div>
+<div class="line"><a id="l02087" name="l02087"></a><span class="lineno"> 2087</span>}</div>
 </div>
-<div class="line"><a id="l02090" name="l02090"></a><span class="lineno"> 2090</span></div>
-<div class="line"><a id="l02094" name="l02094"></a><span class="lineno"> 2094</span></div>
-<div class="line"><a id="l02107" name="l02107"></a><span class="lineno"> 2107</span><span class="keyword">template</span>&lt;BitStore Lhs, BitStore Rhs&gt;</div>
-<div class="line"><a id="l02108" name="l02108"></a><span class="lineno"> 2108</span>    <span class="keyword">requires</span> std::same_as&lt;typename Lhs::word_type, typename Rhs::word_type&gt;</div>
-<div class="line"><a id="l02109" name="l02109"></a><span class="lineno"> 2109</span><span class="keyword">auto</span></div>
-<div class="foldopen" id="foldopen02110" data-start="{" data-end="}">
-<div class="line"><a id="l02110" name="l02110"></a><span class="lineno"><a class="line" href="namespacegf2.html#a3b0ea5c405d2ed08ce9fa5bbbb2cc169"> 2110</a></span><a class="code hl_function" href="namespacegf2.html#a3b0ea5c405d2ed08ce9fa5bbbb2cc169">convolve</a>(Lhs <span class="keyword">const</span>&amp; lhs, Rhs <span class="keyword">const</span>&amp; rhs) {</div>
-<div class="line"><a id="l02111" name="l02111"></a><span class="lineno"> 2111</span>    <span class="keyword">using </span>word_type = <span class="keyword">typename</span> Lhs::word_type;</div>
-<div class="line"><a id="l02112" name="l02112"></a><span class="lineno"> 2112</span>    <span class="keyword">auto</span> bits_per_word = <a class="code hl_variable" href="namespacegf2.html#ad1d8969ed4ed705fbc26eec1eed8b6ae">BITS&lt;word_type&gt;</a>;</div>
-<div class="line"><a id="l02113" name="l02113"></a><span class="lineno"> 2113</span> </div>
-<div class="line"><a id="l02114" name="l02114"></a><span class="lineno"> 2114</span>    <span class="comment">// Edge case: if either store is empty then the convolution is empty.</span></div>
-<div class="line"><a id="l02115" name="l02115"></a><span class="lineno"> 2115</span>    <span class="keywordflow">if</span> (lhs.is_empty() || rhs.is_empty()) <span class="keywordflow">return</span> <a class="code hl_class" href="classgf2_1_1BitVector.html">BitVector&lt;word_type&gt;</a>{};</div>
-<div class="line"><a id="l02116" name="l02116"></a><span class="lineno"> 2116</span> </div>
-<div class="line"><a id="l02117" name="l02117"></a><span class="lineno"> 2117</span>    <span class="comment">// Set up the result bit-vector.</span></div>
-<div class="line"><a id="l02118" name="l02118"></a><span class="lineno"> 2118</span>    <span class="keyword">auto</span> result = <a class="code hl_function" href="classgf2_1_1BitVector.html#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;word_type&gt;::zeros</a>(lhs.size() + rhs.size() - 1);</div>
-<div class="line"><a id="l02119" name="l02119"></a><span class="lineno"> 2119</span> </div>
-<div class="line"><a id="l02120" name="l02120"></a><span class="lineno"> 2120</span>    <span class="comment">// If either vector is all zeros then the convolution is all zeros.</span></div>
-<div class="line"><a id="l02121" name="l02121"></a><span class="lineno"> 2121</span>    <span class="keywordflow">if</span> (lhs.none() || rhs.none()) <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l02122" name="l02122"></a><span class="lineno"> 2122</span> </div>
-<div class="line"><a id="l02123" name="l02123"></a><span class="lineno"> 2123</span>    <span class="comment">// Only need to consider words in `rhs` up to and including the one holding its final set bit.</span></div>
-<div class="line"><a id="l02124" name="l02124"></a><span class="lineno"> 2124</span>    <span class="comment">// We have already checked that `rhs` is not all zeros so we know there is a last set bit!</span></div>
-<div class="line"><a id="l02125" name="l02125"></a><span class="lineno"> 2125</span>    <span class="keyword">auto</span> rhs_words_end = <a class="code hl_function" href="namespacegf2.html#aaf2ed88c6da45988348d97b3b209a210">word_index&lt;word_type&gt;</a>(rhs.last_set().value()) + 1;</div>
-<div class="line"><a id="l02126" name="l02126"></a><span class="lineno"> 2126</span> </div>
-<div class="line"><a id="l02127" name="l02127"></a><span class="lineno"> 2127</span>    <span class="comment">// Initialize `result` by copying the live words from `rhs`</span></div>
-<div class="line"><a id="l02128" name="l02128"></a><span class="lineno"> 2128</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0uz; i &lt; rhs_words_end; ++i) result.set_word(i, rhs.word(i));</div>
-<div class="line"><a id="l02129" name="l02129"></a><span class="lineno"> 2129</span> </div>
-<div class="line"><a id="l02130" name="l02130"></a><span class="lineno"> 2130</span>    <span class="comment">// Work backwards from the last set bit in `lhs` (which we know exists as we checked `lhs` is not all zeros).</span></div>
-<div class="line"><a id="l02131" name="l02131"></a><span class="lineno"> 2131</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = lhs.last_set().value(); i-- &gt; 0;) {</div>
-<div class="line"><a id="l02132" name="l02132"></a><span class="lineno"> 2132</span>        word_type prev = 0;</div>
-<div class="line"><a id="l02133" name="l02133"></a><span class="lineno"> 2133</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> j = 0uz; j &lt; result.words(); ++j) {</div>
-<div class="line"><a id="l02134" name="l02134"></a><span class="lineno"> 2134</span>            <span class="keyword">auto</span> left = <span class="keyword">static_cast&lt;</span>word_type<span class="keyword">&gt;</span>(prev &gt;&gt; (bits_per_word - 1));</div>
-<div class="line"><a id="l02135" name="l02135"></a><span class="lineno"> 2135</span>            prev = result.word(j);</div>
-<div class="line"><a id="l02136" name="l02136"></a><span class="lineno"> 2136</span>            result.set_word(j, <span class="keyword">static_cast&lt;</span>word_type<span class="keyword">&gt;</span>(prev &lt;&lt; 1) | left);</div>
-<div class="line"><a id="l02137" name="l02137"></a><span class="lineno"> 2137</span>        }</div>
-<div class="line"><a id="l02138" name="l02138"></a><span class="lineno"> 2138</span> </div>
-<div class="line"><a id="l02139" name="l02139"></a><span class="lineno"> 2139</span>        <span class="keywordflow">if</span> (lhs.get(i)) {</div>
-<div class="line"><a id="l02140" name="l02140"></a><span class="lineno"> 2140</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> j = 0uz; j &lt; rhs_words_end; ++j) result.set_word(j, result.word(j) ^ rhs.word(j));</div>
-<div class="line"><a id="l02141" name="l02141"></a><span class="lineno"> 2141</span>        }</div>
-<div class="line"><a id="l02142" name="l02142"></a><span class="lineno"> 2142</span>    }</div>
-<div class="line"><a id="l02143" name="l02143"></a><span class="lineno"> 2143</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l02144" name="l02144"></a><span class="lineno"> 2144</span>}</div>
+<div class="line"><a id="l02088" name="l02088"></a><span class="lineno"> 2088</span></div>
+<div class="line"><a id="l02092" name="l02092"></a><span class="lineno"> 2092</span></div>
+<div class="line"><a id="l02105" name="l02105"></a><span class="lineno"> 2105</span><span class="keyword">template</span>&lt;BitStore Lhs, BitStore Rhs&gt;</div>
+<div class="line"><a id="l02106" name="l02106"></a><span class="lineno"> 2106</span>    <span class="keyword">requires</span> std::same_as&lt;typename Lhs::word_type, typename Rhs::word_type&gt;</div>
+<div class="line"><a id="l02107" name="l02107"></a><span class="lineno"> 2107</span><span class="keyword">auto</span></div>
+<div class="foldopen" id="foldopen02108" data-start="{" data-end="}">
+<div class="line"><a id="l02108" name="l02108"></a><span class="lineno"><a class="line" href="namespacegf2.html#a3b0ea5c405d2ed08ce9fa5bbbb2cc169"> 2108</a></span><a class="code hl_function" href="namespacegf2.html#a3b0ea5c405d2ed08ce9fa5bbbb2cc169">convolve</a>(Lhs <span class="keyword">const</span>&amp; lhs, Rhs <span class="keyword">const</span>&amp; rhs) {</div>
+<div class="line"><a id="l02109" name="l02109"></a><span class="lineno"> 2109</span>    <span class="keyword">using </span>word_type = <span class="keyword">typename</span> Lhs::word_type;</div>
+<div class="line"><a id="l02110" name="l02110"></a><span class="lineno"> 2110</span>    <span class="keyword">auto</span> bits_per_word = <a class="code hl_variable" href="namespacegf2.html#ad1d8969ed4ed705fbc26eec1eed8b6ae">BITS&lt;word_type&gt;</a>;</div>
+<div class="line"><a id="l02111" name="l02111"></a><span class="lineno"> 2111</span> </div>
+<div class="line"><a id="l02112" name="l02112"></a><span class="lineno"> 2112</span>    <span class="comment">// Edge case: if either store is empty then the convolution is empty.</span></div>
+<div class="line"><a id="l02113" name="l02113"></a><span class="lineno"> 2113</span>    <span class="keywordflow">if</span> (lhs.is_empty() || rhs.is_empty()) <span class="keywordflow">return</span> <a class="code hl_class" href="classgf2_1_1BitVector.html">BitVector&lt;word_type&gt;</a>{};</div>
+<div class="line"><a id="l02114" name="l02114"></a><span class="lineno"> 2114</span> </div>
+<div class="line"><a id="l02115" name="l02115"></a><span class="lineno"> 2115</span>    <span class="comment">// Set up the result bit-vector.</span></div>
+<div class="line"><a id="l02116" name="l02116"></a><span class="lineno"> 2116</span>    <span class="keyword">auto</span> result = <a class="code hl_function" href="classgf2_1_1BitVector.html#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;word_type&gt;::zeros</a>(lhs.size() + rhs.size() - 1);</div>
+<div class="line"><a id="l02117" name="l02117"></a><span class="lineno"> 2117</span> </div>
+<div class="line"><a id="l02118" name="l02118"></a><span class="lineno"> 2118</span>    <span class="comment">// If either vector is all zeros then the convolution is all zeros.</span></div>
+<div class="line"><a id="l02119" name="l02119"></a><span class="lineno"> 2119</span>    <span class="keywordflow">if</span> (lhs.none() || rhs.none()) <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l02120" name="l02120"></a><span class="lineno"> 2120</span> </div>
+<div class="line"><a id="l02121" name="l02121"></a><span class="lineno"> 2121</span>    <span class="comment">// Only need to consider words in `rhs` up to and including the one holding its final set bit.</span></div>
+<div class="line"><a id="l02122" name="l02122"></a><span class="lineno"> 2122</span>    <span class="comment">// We have already checked that `rhs` is not all zeros so we know there is a last set bit!</span></div>
+<div class="line"><a id="l02123" name="l02123"></a><span class="lineno"> 2123</span>    <span class="keyword">auto</span> rhs_words_end = <a class="code hl_function" href="namespacegf2.html#aaf2ed88c6da45988348d97b3b209a210">word_index&lt;word_type&gt;</a>(rhs.last_set().value()) + 1;</div>
+<div class="line"><a id="l02124" name="l02124"></a><span class="lineno"> 2124</span> </div>
+<div class="line"><a id="l02125" name="l02125"></a><span class="lineno"> 2125</span>    <span class="comment">// Initialize `result` by copying the live words from `rhs`</span></div>
+<div class="line"><a id="l02126" name="l02126"></a><span class="lineno"> 2126</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0uz; i &lt; rhs_words_end; ++i) result.set_word(i, rhs.word(i));</div>
+<div class="line"><a id="l02127" name="l02127"></a><span class="lineno"> 2127</span> </div>
+<div class="line"><a id="l02128" name="l02128"></a><span class="lineno"> 2128</span>    <span class="comment">// Work backwards from the last set bit in `lhs` (which we know exists as we checked `lhs` is not all zeros).</span></div>
+<div class="line"><a id="l02129" name="l02129"></a><span class="lineno"> 2129</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = lhs.last_set().value(); i-- &gt; 0;) {</div>
+<div class="line"><a id="l02130" name="l02130"></a><span class="lineno"> 2130</span>        word_type prev = 0;</div>
+<div class="line"><a id="l02131" name="l02131"></a><span class="lineno"> 2131</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> j = 0uz; j &lt; result.words(); ++j) {</div>
+<div class="line"><a id="l02132" name="l02132"></a><span class="lineno"> 2132</span>            <span class="keyword">auto</span> left = <span class="keyword">static_cast&lt;</span>word_type<span class="keyword">&gt;</span>(prev &gt;&gt; (bits_per_word - 1));</div>
+<div class="line"><a id="l02133" name="l02133"></a><span class="lineno"> 2133</span>            prev = result.word(j);</div>
+<div class="line"><a id="l02134" name="l02134"></a><span class="lineno"> 2134</span>            result.set_word(j, <span class="keyword">static_cast&lt;</span>word_type<span class="keyword">&gt;</span>(prev &lt;&lt; 1) | left);</div>
+<div class="line"><a id="l02135" name="l02135"></a><span class="lineno"> 2135</span>        }</div>
+<div class="line"><a id="l02136" name="l02136"></a><span class="lineno"> 2136</span> </div>
+<div class="line"><a id="l02137" name="l02137"></a><span class="lineno"> 2137</span>        <span class="keywordflow">if</span> (lhs.get(i)) {</div>
+<div class="line"><a id="l02138" name="l02138"></a><span class="lineno"> 2138</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> j = 0uz; j &lt; rhs_words_end; ++j) result.set_word(j, result.word(j) ^ rhs.word(j));</div>
+<div class="line"><a id="l02139" name="l02139"></a><span class="lineno"> 2139</span>        }</div>
+<div class="line"><a id="l02140" name="l02140"></a><span class="lineno"> 2140</span>    }</div>
+<div class="line"><a id="l02141" name="l02141"></a><span class="lineno"> 2141</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l02142" name="l02142"></a><span class="lineno"> 2142</span>}</div>
 </div>
-<div class="line"><a id="l02145" name="l02145"></a><span class="lineno"> 2145</span></div>
-<div class="line"><a id="l02147" name="l02147"></a><span class="lineno"> 2147</span> </div>
-<div class="line"><a id="l02148" name="l02148"></a><span class="lineno"> 2148</span>} <span class="comment">// namespace gf2</span></div>
-<div class="line"><a id="l02149" name="l02149"></a><span class="lineno"> 2149</span></div>
-<div class="line"><a id="l02151" name="l02151"></a><span class="lineno"> 2151</span><span class="keyword">template</span>&lt;gf2::BitStore Store&gt;</div>
-<div class="foldopen" id="foldopen02152" data-start="{" data-end="};">
-<div class="line"><a id="l02152" name="l02152"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01Store_01_4.html"> 2152</a></span><span class="keyword">struct </span>std::formatter&lt;Store&gt; {</div>
-<div class="line"><a id="l02153" name="l02153"></a><span class="lineno"> 2153</span>    <span class="comment">// Parse a bit-store format specifier where where we recognize {:p} and {:x}</span></div>
-<div class="line"><a id="l02154" name="l02154"></a><span class="lineno"> 2154</span>    <span class="keyword">constexpr</span> <span class="keyword">auto</span> parse(std::format_parse_context <span class="keyword">const</span>&amp; ctx) {</div>
-<div class="line"><a id="l02155" name="l02155"></a><span class="lineno"> 2155</span>        <span class="keyword">auto</span> it = ctx.begin();</div>
-<div class="line"><a id="l02156" name="l02156"></a><span class="lineno"> 2156</span>        <span class="keywordflow">while</span> (it != ctx.end() &amp;&amp; *it != <span class="charliteral">&#39;}&#39;</span>) {</div>
-<div class="line"><a id="l02157" name="l02157"></a><span class="lineno"> 2157</span>            <span class="keywordflow">switch</span> (*it) {</div>
-<div class="line"><a id="l02158" name="l02158"></a><span class="lineno"> 2158</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;p&#39;</span>: m_pretty = <span class="keyword">true</span>; <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l02159" name="l02159"></a><span class="lineno"> 2159</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;x&#39;</span>: m_hex = <span class="keyword">true</span>; <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l02160" name="l02160"></a><span class="lineno"> 2160</span>                <span class="keywordflow">default</span>: m_error = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l02161" name="l02161"></a><span class="lineno"> 2161</span>            }</div>
-<div class="line"><a id="l02162" name="l02162"></a><span class="lineno"> 2162</span>            ++it;</div>
-<div class="line"><a id="l02163" name="l02163"></a><span class="lineno"> 2163</span>        }</div>
-<div class="line"><a id="l02164" name="l02164"></a><span class="lineno"> 2164</span>        <span class="keywordflow">return</span> it;</div>
-<div class="line"><a id="l02165" name="l02165"></a><span class="lineno"> 2165</span>    }</div>
-<div class="line"><a id="l02166" name="l02166"></a><span class="lineno"> 2166</span> </div>
-<div class="line"><a id="l02167" name="l02167"></a><span class="lineno"> 2167</span>    <span class="comment">// Format the bit-store according using the appropriate string conversion function.</span></div>
-<div class="line"><a id="l02168" name="l02168"></a><span class="lineno"> 2168</span>    <span class="keyword">template</span>&lt;<span class="keyword">class</span> FormatContext&gt;</div>
-<div class="line"><a id="l02169" name="l02169"></a><span class="lineno"> 2169</span>    <span class="keyword">auto</span> format(Store <span class="keyword">const</span>&amp; rhs, FormatContext&amp; ctx)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l02170" name="l02170"></a><span class="lineno"> 2170</span>        <span class="comment">// Was there a format specification error?</span></div>
-<div class="line"><a id="l02171" name="l02171"></a><span class="lineno"> 2171</span>        <span class="keywordflow">if</span> (m_error) <span class="keywordflow">return</span> std::format_to(ctx.out(), <span class="stringliteral">&quot;&#39;UNRECOGNIZED FORMAT SPECIFIER FOR BIT-STORE&#39;&quot;</span>);</div>
-<div class="line"><a id="l02172" name="l02172"></a><span class="lineno"> 2172</span> </div>
-<div class="line"><a id="l02173" name="l02173"></a><span class="lineno"> 2173</span>        <span class="comment">// Special handling requested?</span></div>
-<div class="line"><a id="l02174" name="l02174"></a><span class="lineno"> 2174</span>        <span class="keywordflow">if</span> (m_hex) <span class="keywordflow">return</span> std::format_to(ctx.out(), <span class="stringliteral">&quot;{}&quot;</span>, to_hex_string(rhs));</div>
-<div class="line"><a id="l02175" name="l02175"></a><span class="lineno"> 2175</span>        <span class="keywordflow">if</span> (m_pretty) <span class="keywordflow">return</span> std::format_to(ctx.out(), <span class="stringliteral">&quot;{}&quot;</span>, to_pretty_string(rhs));</div>
-<div class="line"><a id="l02176" name="l02176"></a><span class="lineno"> 2176</span> </div>
-<div class="line"><a id="l02177" name="l02177"></a><span class="lineno"> 2177</span>        <span class="comment">// Default</span></div>
-<div class="line"><a id="l02178" name="l02178"></a><span class="lineno"> 2178</span>        <span class="keywordflow">return</span> std::format_to(ctx.out(), <span class="stringliteral">&quot;{}&quot;</span>, to_string(rhs));</div>
-<div class="line"><a id="l02179" name="l02179"></a><span class="lineno"> 2179</span>    }</div>
-<div class="line"><a id="l02180" name="l02180"></a><span class="lineno"> 2180</span> </div>
-<div class="line"><a id="l02181" name="l02181"></a><span class="lineno"> 2181</span>    <span class="keywordtype">bool</span> m_hex = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l02182" name="l02182"></a><span class="lineno"> 2182</span>    <span class="keywordtype">bool</span> m_pretty = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l02183" name="l02183"></a><span class="lineno"> 2183</span>    <span class="keywordtype">bool</span> m_error = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l02184" name="l02184"></a><span class="lineno"> 2184</span>};</div>
+<div class="line"><a id="l02143" name="l02143"></a><span class="lineno"> 2143</span></div>
+<div class="line"><a id="l02145" name="l02145"></a><span class="lineno"> 2145</span> </div>
+<div class="line"><a id="l02146" name="l02146"></a><span class="lineno"> 2146</span>} <span class="comment">// namespace gf2</span></div>
+<div class="line"><a id="l02147" name="l02147"></a><span class="lineno"> 2147</span></div>
+<div class="line"><a id="l02149" name="l02149"></a><span class="lineno"> 2149</span><span class="keyword">template</span>&lt;gf2::BitStore Store&gt;</div>
+<div class="foldopen" id="foldopen02150" data-start="{" data-end="};">
+<div class="line"><a id="l02150" name="l02150"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01Store_01_4.html"> 2150</a></span><span class="keyword">struct </span>std::formatter&lt;Store&gt; {</div>
+<div class="line"><a id="l02151" name="l02151"></a><span class="lineno"> 2151</span>    <span class="comment">// Parse a bit-store format specifier where where we recognize {:p} and {:x}</span></div>
+<div class="line"><a id="l02152" name="l02152"></a><span class="lineno"> 2152</span>    <span class="keyword">constexpr</span> <span class="keyword">auto</span> parse(std::format_parse_context <span class="keyword">const</span>&amp; ctx) {</div>
+<div class="line"><a id="l02153" name="l02153"></a><span class="lineno"> 2153</span>        <span class="keyword">auto</span> it = ctx.begin();</div>
+<div class="line"><a id="l02154" name="l02154"></a><span class="lineno"> 2154</span>        <span class="keywordflow">while</span> (it != ctx.end() &amp;&amp; *it != <span class="charliteral">&#39;}&#39;</span>) {</div>
+<div class="line"><a id="l02155" name="l02155"></a><span class="lineno"> 2155</span>            <span class="keywordflow">switch</span> (*it) {</div>
+<div class="line"><a id="l02156" name="l02156"></a><span class="lineno"> 2156</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;p&#39;</span>: m_pretty = <span class="keyword">true</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l02157" name="l02157"></a><span class="lineno"> 2157</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;x&#39;</span>: m_hex = <span class="keyword">true</span>; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l02158" name="l02158"></a><span class="lineno"> 2158</span>                <span class="keywordflow">default</span>: m_error = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l02159" name="l02159"></a><span class="lineno"> 2159</span>            }</div>
+<div class="line"><a id="l02160" name="l02160"></a><span class="lineno"> 2160</span>            ++it;</div>
+<div class="line"><a id="l02161" name="l02161"></a><span class="lineno"> 2161</span>        }</div>
+<div class="line"><a id="l02162" name="l02162"></a><span class="lineno"> 2162</span>        <span class="keywordflow">return</span> it;</div>
+<div class="line"><a id="l02163" name="l02163"></a><span class="lineno"> 2163</span>    }</div>
+<div class="line"><a id="l02164" name="l02164"></a><span class="lineno"> 2164</span> </div>
+<div class="line"><a id="l02165" name="l02165"></a><span class="lineno"> 2165</span>    <span class="comment">// Format the bit-store according using the appropriate string conversion function.</span></div>
+<div class="line"><a id="l02166" name="l02166"></a><span class="lineno"> 2166</span>    <span class="keyword">template</span>&lt;<span class="keyword">class</span> FormatContext&gt;</div>
+<div class="line"><a id="l02167" name="l02167"></a><span class="lineno"> 2167</span>    <span class="keyword">auto</span> format(Store <span class="keyword">const</span>&amp; rhs, FormatContext&amp; ctx)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l02168" name="l02168"></a><span class="lineno"> 2168</span>        <span class="comment">// Was there a format specification error?</span></div>
+<div class="line"><a id="l02169" name="l02169"></a><span class="lineno"> 2169</span>        <span class="keywordflow">if</span> (m_error) <span class="keywordflow">return</span> std::format_to(ctx.out(), <span class="stringliteral">&quot;&#39;UNRECOGNIZED FORMAT SPECIFIER FOR BIT-STORE&#39;&quot;</span>);</div>
+<div class="line"><a id="l02170" name="l02170"></a><span class="lineno"> 2170</span> </div>
+<div class="line"><a id="l02171" name="l02171"></a><span class="lineno"> 2171</span>        <span class="comment">// Special handling requested?</span></div>
+<div class="line"><a id="l02172" name="l02172"></a><span class="lineno"> 2172</span>        <span class="keywordflow">if</span> (m_hex) <span class="keywordflow">return</span> std::format_to(ctx.out(), <span class="stringliteral">&quot;{}&quot;</span>, to_hex_string(rhs));</div>
+<div class="line"><a id="l02173" name="l02173"></a><span class="lineno"> 2173</span>        <span class="keywordflow">if</span> (m_pretty) <span class="keywordflow">return</span> std::format_to(ctx.out(), <span class="stringliteral">&quot;{}&quot;</span>, to_pretty_string(rhs));</div>
+<div class="line"><a id="l02174" name="l02174"></a><span class="lineno"> 2174</span> </div>
+<div class="line"><a id="l02175" name="l02175"></a><span class="lineno"> 2175</span>        <span class="comment">// Default</span></div>
+<div class="line"><a id="l02176" name="l02176"></a><span class="lineno"> 2176</span>        <span class="keywordflow">return</span> std::format_to(ctx.out(), <span class="stringliteral">&quot;{}&quot;</span>, to_string(rhs));</div>
+<div class="line"><a id="l02177" name="l02177"></a><span class="lineno"> 2177</span>    }</div>
+<div class="line"><a id="l02178" name="l02178"></a><span class="lineno"> 2178</span> </div>
+<div class="line"><a id="l02179" name="l02179"></a><span class="lineno"> 2179</span>    <span class="keywordtype">bool</span> m_hex = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l02180" name="l02180"></a><span class="lineno"> 2180</span>    <span class="keywordtype">bool</span> m_pretty = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l02181" name="l02181"></a><span class="lineno"> 2181</span>    <span class="keywordtype">bool</span> m_error = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l02182" name="l02182"></a><span class="lineno"> 2182</span>};</div>
 </div>
 <div class="ttc" id="aUnsigned_8h_html"><div class="ttname"><a href="Unsigned_8h.html">Unsigned.h</a></div><div class="ttdoc">Utility functions that work on primitive unsigned word types.   See the Unsigned page for more detail...</div></div>
 <div class="ttc" id="aassert_8h_html"><div class="ttname"><a href="assert_8h.html">assert.h</a></div><div class="ttdoc">Macros that improve on standard assert.   See the Assertions page for all the details.</div></div>
@@ -1469,7 +1467,7 @@ $(function(){initNavTree('BitStore_8h_source.html','',''); });
 <div class="ttc" id="anamespacegf2_html_a355af2e0599965ef8d4eada941eee8e3"><div class="ttname"><a href="namespacegf2.html#a355af2e0599965ef8d4eada941eee8e3">gf2::to_string</a></div><div class="ttdeci">static std::string to_string(Store const &amp;store, std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;)</div><div class="ttdoc">Returns a binary string representation of a store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1482</div></div>
 <div class="ttc" id="anamespacegf2_html_a37a8a98a7488d5afa9cb8c0634cb31cb"><div class="ttname"><a href="namespacegf2.html#a37a8a98a7488d5afa9cb8c0634cb31cb">gf2::operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(Store const &amp;store, std::ostream &amp;s)</div><div class="ttdoc">The usual output stream operator for a bit-store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1605</div></div>
 <div class="ttc" id="anamespacegf2_html_a39ac1c9c4e8d925816d2bc5ff12e0711"><div class="ttname"><a href="namespacegf2.html#a39ac1c9c4e8d925816d2bc5ff12e0711">gf2::operator^=</a></div><div class="ttdeci">constexpr void operator^=(Lhs &amp;lhs, Rhs const &amp;rhs)</div><div class="ttdoc">In-place XOR of one bit-store with an equal-sized bit-store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1823</div></div>
-<div class="ttc" id="anamespacegf2_html_a3b0ea5c405d2ed08ce9fa5bbbb2cc169"><div class="ttname"><a href="namespacegf2.html#a3b0ea5c405d2ed08ce9fa5bbbb2cc169">gf2::convolve</a></div><div class="ttdeci">auto convolve(Lhs const &amp;lhs, Rhs const &amp;rhs)</div><div class="ttdoc">Convolutions:</div><div class="ttdef"><b>Definition</b> BitStore.h:2110</div></div>
+<div class="ttc" id="anamespacegf2_html_a3b0ea5c405d2ed08ce9fa5bbbb2cc169"><div class="ttname"><a href="namespacegf2.html#a3b0ea5c405d2ed08ce9fa5bbbb2cc169">gf2::convolve</a></div><div class="ttdeci">auto convolve(Lhs const &amp;lhs, Rhs const &amp;rhs)</div><div class="ttdoc">Convolutions:</div><div class="ttdef"><b>Definition</b> BitStore.h:2108</div></div>
 <div class="ttc" id="anamespacegf2_html_a4139e2fe17c87caf6ed958e228b79de9"><div class="ttname"><a href="namespacegf2.html#a4139e2fe17c87caf6ed958e228b79de9">gf2::reverse_bits</a></div><div class="ttdeci">constexpr Word reverse_bits(Word word)</div><div class="ttdoc">Returns a copy of word with all its bits reversed.</div><div class="ttdef"><b>Definition</b> Unsigned.h:243</div></div>
 <div class="ttc" id="anamespacegf2_html_a44620977a1e882054ded8d0fcd19a29e"><div class="ttname"><a href="namespacegf2.html#a44620977a1e882054ded8d0fcd19a29e">gf2::flip_all</a></div><div class="ttdeci">constexpr auto &amp; flip_all(Store &amp;store)</div><div class="ttdoc">Flips the value of the bits in the store and returns the store for chaining.</div><div class="ttdef"><b>Definition</b> BitStore.h:444</div></div>
 <div class="ttc" id="anamespacegf2_html_a44a358ee6c3e8f2c57c85745d37f867f"><div class="ttname"><a href="namespacegf2.html#a44a358ee6c3e8f2c57c85745d37f867f">gf2::ref</a></div><div class="ttdeci">constexpr auto ref(Store &amp;store, usize i)</div><div class="ttdoc">Returns a &quot;reference&quot; to the bit element i in the given bit-store.</div><div class="ttdef"><b>Definition</b> BitStore.h:189</div></div>
