@@ -23,6 +23,7 @@ on:
         paths:
             - "LICENSE"
             - "CMakeLists.txt"
+            - "modules/**"
             - "include/**"
     # Any formal release
     release:
