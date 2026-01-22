@@ -308,9 +308,9 @@ $$
 i.e. the bit-vector we get by interspersing the elements of $\mathbf{q}$ with zeros.
 
 Riffling can be done very efficiently word by word.
-The `gf2::BitVec::riffle_into` method takes a bit-vector $\mathbf{q}$ and fills a destination bit-vector $\mathbf{s}$ with a _riffled_ version of $\mathbf{q}$.
+The `gf2::BitVector::riffle_into` method takes a bit-vector $\mathbf{q}$ and fills a destination bit-vector $\mathbf{s}$ with a _riffled_ version of $\mathbf{q}$.
 
-The `gf2::BitVec::split_at` method takes a bit-vector $\mathbf{s}$, a number $n$, and then fills two other bit-vectors $\mathbf{l}$ and $\mathbf{h}$ where $\mathbf{l}$ gets the first $n$ elements in $\mathbf{s}$ and $\mathbf{h}$ gets the rest.
+The `gf2::BitVector::split_at` method takes a bit-vector $\mathbf{s}$, a number $n$, and then fills two other bit-vectors $\mathbf{l}$ and $\mathbf{h}$ where $\mathbf{l}$ gets the first $n$ elements in $\mathbf{s}$ and $\mathbf{h}$ gets the rest.
 
 $$
 \begin{align}

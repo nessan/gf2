@@ -9,7 +9,7 @@
 #include <gf2/BitStore.h>
 #include <gf2/Iterators.h>
 #include <gf2/BitRef.h>
-#include <gf2/BitVec.h>
+#include <gf2/BitVector.h>
 
 namespace gf2 {
 
@@ -107,7 +107,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::ones(18);
+    /// auto v = BitVector<u8>::ones(18);
     /// assert_eq(v.words(), 3);
     /// auto s = v.span(4, 12);     // The span covers words 0 and 1 in the span underlying v.
     /// assert_eq(s.words(), 1);    // However, it can be fitted into a single synthetic word!
@@ -124,7 +124,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::from_string("0000'0000'1111'1111").value();
+    /// auto v = BitVector<u8>::from_string("0000'0000'1111'1111").value();
     /// auto s = v.span(4, 12);     // The span covers words 0 and 1 in the span underlying v.
     /// assert_eq(s.words(), 1);    // However, it can be fitted into a single synthetic word!
     /// assert_eq(s.word(0), 0b1111'0000);
@@ -159,7 +159,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::from_string("0000_0000_1111_1111").value();
+    /// auto v = BitVector<u8>::from_string("0000_0000_1111_1111").value();
     /// auto s = v.span(4, 12);     // The span covers words 0 and 1 in the span underlying v.
     /// assert_eq(s.words(), 1);    // However, it can be fitted into a single synthetic word!
     /// assert_eq(s.word(0), 0b1111'0000);
@@ -205,7 +205,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitVec u{10};
+    /// BitVector u{10};
     /// auto v = u.span(0,2);
     /// assert_eq(v.get(0), false);
     /// u.set(0);
@@ -219,7 +219,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitVec u{10};
+    /// BitVector u{10};
     /// auto v = u.span(1, 4);
     /// assert_eq(v[0], false);
     /// ```
@@ -231,7 +231,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::ones(10);
+    /// auto u = BitVector<>::ones(10);
     /// auto v = u.span(0,3);
     /// assert_eq(v.front(), true);
     /// ```
@@ -243,7 +243,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::ones(10);
+    /// auto u = BitVector<>::ones(10);
     /// auto v = u.span(0,3);
     /// assert_eq(v.back(), true);
     /// ```
@@ -260,7 +260,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::zeros(10);
+    /// auto u = BitVector<>::zeros(10);
     /// auto v = u.span(0,3);
     /// assert_eq(v.get(0), false);
     /// v.set(0);
@@ -278,12 +278,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::zeros(10);
+    /// auto u = BitVector<>::zeros(10);
     /// auto v = u.span(0,5);
     /// v[2] = true;
     /// assert_eq(v.to_string(), "00100");
     /// assert_eq(u.to_string(), "0010000000");
-    /// auto w = BitVec<>::ones(10);
+    /// auto w = BitVector<>::ones(10);
     /// v[3] = w[3];
     /// assert_eq(v.to_string(), "00110");
     /// v[4] |= w[4];
@@ -298,7 +298,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::ones(10);
+    /// auto u = BitVector<>::ones(10);
     /// auto v = u.span(1,5);
     /// assert_eq(v.to_string(), "1111");
     /// v.flip(0);
@@ -313,7 +313,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::zeros(10);
+    /// auto u = BitVector<>::zeros(10);
     /// auto v = u.span(1,5);
     /// v.set(0);
     /// assert_eq(v.to_string(), "1000");
@@ -332,7 +332,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::zeros(10);
+    /// auto u = BitVector<>::zeros(10);
     /// auto v = u.span(1,1);
     /// assert_eq(v.is_empty(), true);
     /// auto w = u.span(0,1);
@@ -346,7 +346,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::zeros(10);
+    /// auto u = BitVector<>::zeros(10);
     /// auto v = u.span(1,3);
     /// assert_eq(v.any(), false);
     /// v.set(0);
@@ -360,7 +360,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::zeros(10);
+    /// auto u = BitVector<>::zeros(10);
     /// auto v = u.span(1,3);
     /// assert_eq(v.all(), false);
     /// v.set(0);
@@ -376,7 +376,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::zeros(10);
+    /// auto u = BitVector<>::zeros(10);
     /// auto v = u.span(1,3);
     /// assert_eq(v.none(), true);
     /// v.set(0);
@@ -394,7 +394,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::zeros(10);
+    /// auto u = BitVector<>::zeros(10);
     /// auto v = u.span(5,10);
     /// v.set_all();
     /// assert_eq(v.to_string(), "11111");
@@ -406,7 +406,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::zeros(10);
+    /// auto u = BitVector<>::zeros(10);
     /// auto v = u.span(5,10);
     /// v.flip_all();
     /// assert_eq(v.to_string(), "11111");
@@ -422,18 +422,18 @@ public:
     ///
     /// # Notes:
     /// 1. The size of the span *must* match the number of bits in the source type.
-    /// 2. We allow *any* unsigned integral source, e.g. copying a single `u64` into a `BitVec<u8>` of size 64.
+    /// 2. We allow *any* unsigned integral source, e.g. copying a single `u64` into a `BitVector<u8>` of size 64.
     /// 3. The least-significant bit of the source becomes the bit at index 0 in the span.
     ///
     /// # Example
     /// ```
-    /// BitVec<u8> v{26};
+    /// BitVector<u8> v{26};
     /// auto s = v.span(3, 19);
     /// u16 src = 0b1010101010101010;
     /// s.copy(src);
     /// assert_eq(s.to_string(), "0101010101010101");
     /// assert_eq(v.to_string(), "00001010101010101010000000");
-    /// BitVec<u32> w{26};
+    /// BitVector<u32> w{26};
     /// auto t = w.span(3, 19);
     /// t.copy(src);
     /// assert_eq(t.to_string(), "0101010101010101");
@@ -447,15 +447,15 @@ public:
     /// Copies the bits from an equal-sized `src` span and returns a reference to this for chaining.
     ///
     /// @note This is one of the few methods in the library that *doesn't* require the two stores to have the same
-    /// `word_type`. You can use it to convert between different `word_type` stores (e.g., from `BitVec<u32>` to
-    /// `BitVec<u8>`) as long as the sizes match.
+    /// `word_type`. You can use it to convert between different `word_type` stores (e.g., from `BitVector<u32>` to
+    /// `BitVector<u8>`) as long as the sizes match.
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::ones(16);
+    /// auto v = BitVector<u8>::ones(16);
     /// assert_eq(v.to_string(), "1111111111111111");
     /// auto s = v.span(0,10);
-    /// s.copy(BitVec<u8>::alternating(10));
+    /// s.copy(BitVector<u8>::alternating(10));
     /// assert_eq(v.to_string(), "1010101010111111");
     /// ```
     template<BitStore Src>
@@ -470,7 +470,7 @@ public:
     /// # Example
     /// ```
     /// std::bitset<10> src{0b1010101010};
-    /// auto v = BitVec<u8>::ones(16);
+    /// auto v = BitVector<u8>::ones(16);
     /// auto s = v.span(0,10);
     /// s.copy(src);
     /// assert_eq(s.to_string(), "0101010101");
@@ -489,7 +489,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::ones(16);
+    /// auto v = BitVector<u8>::ones(16);
     /// auto s = v.span(0,10);
     /// s.copy([](usize i) { return i % 2 == 0; });
     /// assert_eq(s.to_string(), "1010101010");
@@ -508,7 +508,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitVec u{10}, v{10};
+    /// BitVector u{10}, v{10};
     /// auto s = u.span(2,10);
     /// auto t = v.span(2,10);
     /// u64 seed = 1234567890;
@@ -526,7 +526,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitVec v{10};
+    /// BitVector v{10};
     /// auto s = v.span(2,10);
     /// assert_eq(s.count_ones(), 0);
     /// v.set(2);
@@ -538,7 +538,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitVec v{10};
+    /// BitVector v{10};
     /// auto s = v.span(2,10);
     /// assert_eq(s.count_zeros(), 8);
     /// v.set(2);
@@ -550,7 +550,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitVec v{37};
+    /// BitVector v{37};
     /// auto s = v.span(2,10);
     /// assert_eq(s.leading_zeros(), 8);
     /// v.set(11);
@@ -564,7 +564,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::zeros(27);
+    /// auto v = BitVector<u8>::zeros(27);
     /// auto s = v.span(2,10);
     /// assert_eq(s.trailing_zeros(), 8);
     /// v.set(11);
@@ -582,7 +582,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::zeros(37);
+    /// auto v = BitVector<u8>::zeros(37);
     /// auto s = v.span(4,12);
     /// assert(s.first_set() == std::optional<usize>{});
     /// v.set(2);
@@ -596,7 +596,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::zeros(37);
+    /// auto v = BitVector<u8>::zeros(37);
     /// auto s = v.span(4,12);
     /// assert(s.last_set() == std::optional<usize>{});
     /// v.set(27);
@@ -611,7 +611,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::zeros(37);
+    /// auto v = BitVector<u8>::zeros(37);
     /// auto s = v.span(4,12);
     /// assert(s.next_set(0) == std::optional<usize>{});
     /// v.set(5);
@@ -625,7 +625,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::zeros(37);
+    /// auto v = BitVector<u8>::zeros(37);
     /// auto s = v.span(4,12);
     /// assert(s.previous_set(s.size()) == std::optional<usize>{});
     /// v.set(5);
@@ -643,7 +643,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::ones(37);
+    /// auto v = BitVector<u8>::ones(37);
     /// auto s = v.span(4,12);
     /// assert(s.first_unset() == std::optional<usize>{});
     /// v.set(2, false);
@@ -657,7 +657,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::ones(37);
+    /// auto v = BitVector<u8>::ones(37);
     /// auto s = v.span(4,12);
     /// assert(s.last_unset() == std::optional<usize>{});
     /// v.set(27);
@@ -672,7 +672,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::ones(37);
+    /// auto v = BitVector<u8>::ones(37);
     /// auto s = v.span(4,12);
     /// assert(s.last_unset() == std::optional<usize>{});
     /// v.set(27);
@@ -687,7 +687,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::ones(37);
+    /// auto v = BitVector<u8>::ones(37);
     /// auto s = v.span(4,12);
     /// assert(s.previous_unset(s.size()) == std::optional<usize>{});
     /// v.set(5, false);
@@ -710,7 +710,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<u8>::ones(14);
+    /// auto u = BitVector<u8>::ones(14);
     /// auto s = u.span(4,12);
     /// for (auto&& bit : s.bits()) assert_eq(bit, true);
     /// ```
@@ -725,7 +725,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<u8>::ones(14);
+    /// auto u = BitVector<u8>::ones(14);
     /// auto s = u.span(4,12);
     /// for (auto&& bit : s.bits()) bit = false;
     /// assert_eq(s.to_string(), "00000000")
@@ -739,7 +739,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::alternating(19);
+    /// auto v = BitVector<u8>::alternating(19);
     /// auto s = v.span(4,12);
     /// assert_eq(s.to_string(), "10101010");
     /// auto indices = std::ranges::to<std::vector>(s.set_bits());
@@ -753,7 +753,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::alternating(19);
+    /// auto v = BitVector<u8>::alternating(19);
     /// auto s = v.span(4,12);
     /// assert_eq(s.to_string(), "10101010");
     /// auto indices = std::ranges::to<std::vector>(s.unset_bits());
@@ -773,7 +773,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::ones(100);
+    /// auto v = BitVector<u8>::ones(100);
     /// auto s = v.span(4,14);
     /// assert_eq(s.to_string(), "1111111111");
     /// auto words = std::ranges::to<std::vector>(s.store_words());
@@ -787,7 +787,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::ones(100);
+    /// auto v = BitVector<u8>::ones(100);
     /// auto s = v.span(4,14);
     /// assert_eq(s.to_string(), "1111111111");
     /// auto words = s.to_words();
@@ -807,7 +807,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// const auto v = BitVec<u8>::alternating(14);
+    /// const auto v = BitVector<u8>::alternating(14);
     /// const auto s0 = v.span(4,12);
     /// assert_eq(s0.to_string(), "10101010");
     /// auto s1 = s0.span(4,8);
@@ -823,7 +823,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::alternating(14);
+    /// auto v = BitVector<u8>::alternating(14);
     /// auto s0 = v.span(4,12);
     /// assert_eq(s0.to_string(), "10101010");
     /// auto s1 = s0.span(4,8);
@@ -845,7 +845,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::alternating(14);
+    /// auto u = BitVector<>::alternating(14);
     /// auto s = u.span(4,12);
     /// auto v = s.sub(0,4);
     /// assert_eq(v.to_string(), "1010");
@@ -874,15 +874,15 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::alternating(14);
+    /// auto u = BitVector<>::alternating(14);
     /// auto s = u.span(4,12);
-    /// BitVec left, right;
+    /// BitVector left, right;
     /// s.split_at(5, left, right);
     /// assert_eq(left.to_string(), "10101");
     /// assert_eq(right.to_string(), "010");
     /// assert_eq(u.to_string(), "10101010101010");
     /// ```
-    constexpr void split_at(usize at, BitVec<word_type>& left, BitVec<word_type>& right) const {
+    constexpr void split_at(usize at, BitVector<word_type>& left, BitVector<word_type>& right) const {
         return gf2::split(*this, at, left, right);
     }
 
@@ -897,7 +897,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::alternating(14);
+    /// auto u = BitVector<>::alternating(14);
     /// auto s = u.span(4,12);
     /// auto [left, right] = s.split_at(5);
     /// assert_eq(left.to_string(), "10101");
@@ -919,12 +919,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::ones(20);
-    /// BitVec<u8> dst;
+    /// auto v = BitVector<u8>::ones(20);
+    /// BitVector<u8> dst;
     /// v.span(4,14).riffled(dst);
     /// assert_eq(dst.to_string(), "1010101010101010101");
     /// ```
-    constexpr void riffled(BitVec<word_type>& dst) const { return gf2::riffle(*this, dst); }
+    constexpr void riffled(BitVector<word_type>& dst) const { return gf2::riffle(*this, dst); }
 
     /// Returns a new bit-vector that is the result of riffling the bits in this bit-span with zeros.
     ///
@@ -934,7 +934,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::ones(20);
+    /// auto v = BitVector<u8>::ones(20);
     /// auto dst = v.span(4,14).riffled();
     /// assert_eq(dst.to_string(), "1010101010101010101");
     /// ```
@@ -954,7 +954,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitVec v{14};
+    /// BitVector v{14};
     /// auto s = v.span(2,12);
     /// assert_eq(s.to_binary_string(), "0000000000");
     /// s.set(0);
@@ -976,7 +976,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitVec v{14};
+    /// BitVector v{14};
     /// auto s = v.span(2,12);
     /// assert_eq(s.to_binary_string(), "0000000000");
     /// s.set(0);
@@ -994,7 +994,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::alternating(14);
+    /// auto v = BitVector<u8>::alternating(14);
     /// auto s = v.span(2,12);
     /// assert_eq(s.to_pretty_string(), "[1,0,1,0,1,0,1,0,1,0]");
     /// auto empty = v.span(3,3);
@@ -1022,7 +1022,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<u8>::ones(20);
+    /// auto v = BitVector<u8>::ones(20);
     /// assert_eq(v.span(4,4).to_hex_string(), "");
     /// assert_eq(v.span(4,8).to_hex_string(), "F");
     /// assert_eq(v.span(4,9).to_hex_string(), "F1.2");

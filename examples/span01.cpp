@@ -8,7 +8,7 @@ int
 main() {
 
     using word_type = u8;
-    using vector_type = BitVec<word_type>;
+    using vector_type = BitVector<word_type>;
 
     auto v = vector_type::ones(77);
     auto s = v.span(5, 33);

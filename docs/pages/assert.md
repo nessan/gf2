@@ -110,7 +110,7 @@ On the other hand, there are some checks where the assertion cost is slight comp
 Leaving these checks on in production will not likely impose much of a performance penalty.
 
 For example, a precondition for a matrix inversion method is that the input matrix must be square.
-Here is how you might do that check in an `invert(const gf2::BitMat& M)` function:
+Here is how you might do that check in an `invert(const gf2::BitMatrix& M)` function:
 
 ```cpp
 assert(M.is_square(), "Cannot invert a {} x {} NON-square matrix!", M.rows(), M.cols());

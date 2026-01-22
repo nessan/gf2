@@ -14,7 +14,7 @@
 // The vector-like types & the bit-store concept they all satisfy.
 #include <gf2/BitStore.h>
 #include <gf2/BitArray.h>
-#include <gf2/BitVec.h>
+#include <gf2/BitVector.h>
 #include <gf2/BitSpan.h>
 
 // The bit reference type to access individual bits
@@ -24,9 +24,9 @@
 #include <gf2/Iterators.h>
 
 // The polynomial type
-#include <gf2/BitPoly.h>
+#include <gf2/BitPolynomial.h>
 
-// tTe matrix types & helpers
-#include <gf2/BitMat.h>
+// The matrix types & helpers
+#include <gf2/BitMatrix.h>
 #include <gf2/BitLU.h>
 #include <gf2/BitGauss.h>

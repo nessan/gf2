@@ -572,7 +572,7 @@ public:
     /// ```
     /// BitArray<10, u64> v;
     /// assert_eq(v.to_string(), "0000000000");
-    /// v.copy(BitVec<u8>::alternating(10));
+    /// v.copy(BitVector<u8>::alternating(10));
     /// assert_eq(v.to_string(), "1010101010");
     /// ```
     template<BitStore Src>
@@ -981,13 +981,13 @@ public:
     /// ```
     /// BitArray<10, u8> v;
     /// v.copy([](usize i) { return i % 2 == 0; });
-    /// BitVec<u8> left, right;
+    /// BitVector<u8> left, right;
     /// v.split_at(5, left, right);
     /// assert_eq(left.to_string(), "10101");
     /// assert_eq(right.to_string(), "01010");
     /// assert_eq(v.to_string(), "1010101010");
     /// ```
-    constexpr void split_at(usize at, BitVec<word_type>& left, BitVec<word_type>& right) const {
+    constexpr void split_at(usize at, BitVector<word_type>& left, BitVector<word_type>& right) const {
         return gf2::split(*this, at, left, right);
     }
 
@@ -1025,11 +1025,11 @@ public:
     /// # Example
     /// ```
     /// BitArray<10, u8> v; v.set_all();
-    /// BitVec<u8> dst;
+    /// BitVector<u8> dst;
     /// v.riffled(dst);
     /// assert_eq(dst.to_string(), "1010101010101010101");
     /// ```
-    constexpr void riffled(BitVec<word_type>& dst) const { return gf2::riffle(*this, dst); }
+    constexpr void riffled(BitVector<word_type>& dst) const { return gf2::riffle(*this, dst); }
 
     /// Returns a new bit-array that is the result of riffling the bits in this bit-store with zeros.
     ///

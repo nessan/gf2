@@ -11,7 +11,7 @@ int
 main() {
     utilities::pretty_print_thousands();
 
-    using matrix_type = BitMat<u8>;
+    using matrix_type = BitMatrix<u8>;
 
     auto n_trials = 1'000uz;
     auto n_tick = n_trials / 20;

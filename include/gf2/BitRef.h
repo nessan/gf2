@@ -22,7 +22,7 @@ namespace gf2 {
 ///
 /// # Example
 /// ```
-/// BitVec v{3};
+/// BitVector v{3};
 /// assert_eq(v.to_string(), "000");
 /// v[1] = true;
 /// assert_eq(v.to_string(), "010");
@@ -52,7 +52,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitVec v{3};
+    /// BitVector v{3};
     /// auto bit = ref(v, 0);
     /// assert_eq(static_cast<bool>(bit), false);
     /// ```
@@ -62,7 +62,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitVec v{3};
+    /// BitVector v{3};
     /// ref(v, 0) = true;
     /// assert_eq(to_string(v), "100");
     /// ```
@@ -75,8 +75,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<>::zeros(3);
-    /// auto w = BitVec<>::ones(3);
+    /// auto v = BitVector<>::zeros(3);
+    /// auto w = BitVector<>::ones(3);
     /// ref(v, 0) = ref(w, 0);
     /// assert_eq(to_string(v), "100");
     /// ref(v, 1) = ref(w, 1);
@@ -93,7 +93,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<>::zeros(3);
+    /// auto v = BitVector<>::zeros(3);
     /// ref(v, 0).flip();
     /// assert_eq(to_string(v), "100");
     /// ```
@@ -106,7 +106,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<>::ones(3);
+    /// auto v = BitVector<>::ones(3);
     /// ref(v, 0) &= false;
     /// assert_eq(to_string(v), "011");
     /// ```
@@ -119,8 +119,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<>::ones(3);
-    /// auto w = BitVec<>::zeros(3);
+    /// auto v = BitVector<>::ones(3);
+    /// auto w = BitVector<>::zeros(3);
     /// ref(v, 0) &= ref(w, 0);
     /// assert_eq(to_string(v), "011");
     /// ```
@@ -133,7 +133,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<>::zeros(3);
+    /// auto v = BitVector<>::zeros(3);
     /// ref(v, 0) |= true;
     /// assert_eq(to_string(v), "100");
     /// ```
@@ -146,8 +146,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<>::zeros(3);
-    /// auto w = BitVec<>::ones(3);
+    /// auto v = BitVector<>::zeros(3);
+    /// auto w = BitVector<>::ones(3);
     /// ref(v, 0) |= ref(w, 0);
     /// assert_eq(to_string(v), "100");
     /// ```
@@ -160,7 +160,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<>::ones(3);
+    /// auto v = BitVector<>::ones(3);
     /// ref(v, 0) ^= true;
     /// assert_eq(to_string(v), "011");
     /// ```
@@ -173,8 +173,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<>::ones(3);
-    /// auto w = BitVec<>::ones(3);
+    /// auto v = BitVector<>::ones(3);
+    /// auto w = BitVector<>::ones(3);
     /// ref(v, 0) ^= ref(w, 0);
     /// assert_eq(to_string(v), "011");
     /// ```

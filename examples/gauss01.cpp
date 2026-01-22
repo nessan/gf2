@@ -5,8 +5,8 @@
 int
 main() {
     using word_type = std::uint64_t;
-    using vector_type = BitVec<word_type>;
-    using matrix_type = BitMat<word_type>;
+    using vector_type = BitVector<word_type>;
+    using matrix_type = BitMatrix<word_type>;
 
     auto n = 12uz;
     auto A = matrix_type::random(n, n);

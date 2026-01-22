@@ -10,7 +10,7 @@ namespace naive {
 /// Returns the index of the first set bit in the bit-vector or `{}` if no bits are set.
 template<Unsigned Word>
 std::optional<usize>
-first_set(const gf2::BitVec<Word>& bv) {
+first_set(const gf2::BitVector<Word>& bv) {
     if (bv.is_empty()) return {};
     for (auto i = 0uz; i < bv.size(); ++i)
         if (bv[i]) return i;
@@ -20,7 +20,7 @@ first_set(const gf2::BitVec<Word>& bv) {
 /// Returns the index of the first unset bit in the bit-vector or `{}` if no bits are set.
 template<Unsigned Word>
 std::optional<usize>
-first_unset(const gf2::BitVec<Word>& bv) {
+first_unset(const gf2::BitVector<Word>& bv) {
     if (bv.is_empty()) return {};
     for (auto i = 0uz; i < bv.size(); ++i)
         if (!bv[i]) return i;
@@ -30,7 +30,7 @@ first_unset(const gf2::BitVec<Word>& bv) {
 /// Returns the index of the last set bit in the bit-vector or `{}` if no bits are set.
 template<Unsigned Word>
 std::optional<usize>
-last_set(const gf2::BitVec<Word>& bv) {
+last_set(const gf2::BitVector<Word>& bv) {
     if (bv.is_empty()) return {};
     for (auto i = bv.size(); i--;)
         if (bv[i]) return i;
@@ -40,7 +40,7 @@ last_set(const gf2::BitVec<Word>& bv) {
 /// Returns the index of the last unset bit in the bit-vector or `{}` if no bits are set.
 template<Unsigned Word>
 std::optional<usize>
-last_unset(const gf2::BitVec<Word>& bv) {
+last_unset(const gf2::BitVector<Word>& bv) {
     if (bv.is_empty()) return {};
     for (auto i = bv.size(); i--;)
         if (!bv[i]) return i;
@@ -50,7 +50,7 @@ last_unset(const gf2::BitVec<Word>& bv) {
 /// Returns the index of the next set bit in the bit-vector after `index` or `{}` if no bits are set.
 template<Unsigned Word>
 std::optional<usize>
-next_set(const gf2::BitVec<Word>& bv, usize index) {
+next_set(const gf2::BitVector<Word>& bv, usize index) {
     if (bv.is_empty()) return {};
     for (auto i = index + 1; i < bv.size(); ++i)
         if (bv[i]) return i;
@@ -59,7 +59,7 @@ next_set(const gf2::BitVec<Word>& bv, usize index) {
 /// Returns the index of the next unset bit in the bit-vector after `index` or `{}` if no bits are set.
 template<Unsigned Word>
 std::optional<usize>
-next_unset(const gf2::BitVec<Word>& bv, usize index) {
+next_unset(const gf2::BitVector<Word>& bv, usize index) {
     if (bv.is_empty()) return {};
     for (auto i = index + 1; i < bv.size(); ++i)
         if (!bv[i]) return i;
@@ -69,7 +69,7 @@ next_unset(const gf2::BitVec<Word>& bv, usize index) {
 /// Returns the index of the previous set bit in the bit-vector before `index` or `{}` if no bits are set.
 template<Unsigned Word>
 std::optional<usize>
-previous_set(const gf2::BitVec<Word>& bv, usize index) {
+previous_set(const gf2::BitVector<Word>& bv, usize index) {
     if (bv.is_empty() || index == 0) return {};
     for (auto i = index; i--;)
         if (bv[i]) return i;
@@ -79,7 +79,7 @@ previous_set(const gf2::BitVec<Word>& bv, usize index) {
 /// Returns the index of the previous unset bit in the bit-vector before `index` or `{}` if no bits are set.
 template<Unsigned Word>
 std::optional<usize>
-previous_unset(const gf2::BitVec<Word>& bv, usize index) {
+previous_unset(const gf2::BitVector<Word>& bv, usize index) {
     if (bv.is_empty() || index == 0) return {};
     for (auto i = index; i--;)
         if (!bv[i]) return i;
@@ -88,13 +88,13 @@ previous_unset(const gf2::BitVec<Word>& bv, usize index) {
 
 /// Returns a new bit-vector that is a right-shifted version of the input bit-vector.
 template<Unsigned Word>
-gf2::BitVec<Word>
-shift_right(const gf2::BitVec<Word>& bv, usize shift) {
+gf2::BitVector<Word>
+shift_right(const gf2::BitVector<Word>& bv, usize shift) {
     // Edge case?
     if (bv.size() == 0 || shift == 0) return bv;
 
     // Set up the result as a zero bit-vector of the correct length.
-    auto result = gf2::BitVec<Word>::zeros(bv.size());
+    auto result = gf2::BitVector<Word>::zeros(bv.size());
 
     // Perhaps we have shifted the whole bit-vector out so the result is all zeros.
     if (shift >= bv.size()) return result;
@@ -108,13 +108,13 @@ shift_right(const gf2::BitVec<Word>& bv, usize shift) {
 
 /// Returns a new bit-vector that is a left-shifted version of the input bit-vector.
 template<Unsigned Word>
-gf2::BitVec<Word>
-shift_left(const gf2::BitVec<Word>& bv, usize shift) {
+gf2::BitVector<Word>
+shift_left(const gf2::BitVector<Word>& bv, usize shift) {
     // Edge case?
     if (bv.size() == 0 || shift == 0) return bv;
 
     // Set up the result as a zero bit-vector of the correct length.
-    auto result = gf2::BitVec<Word>::zeros(bv.size());
+    auto result = gf2::BitVector<Word>::zeros(bv.size());
 
     // Perhaps we have shifted the whole bit-vector out so the result is all zeros.
     if (shift >= bv.size()) return result;
@@ -129,7 +129,7 @@ shift_left(const gf2::BitVec<Word>& bv, usize shift) {
 /// Returns a "binary" string representation of a bit-vector.
 template<Unsigned Word>
 std::string
-to_binary_string(const gf2::BitVec<Word>& bv) {
+to_binary_string(const gf2::BitVector<Word>& bv) {
     if (bv.is_empty()) return std::string{};
     std::string result;
     result.reserve(bv.size());
@@ -143,7 +143,7 @@ to_binary_string(const gf2::BitVec<Word>& bv) {
 /// Returns a "hex" string representation of a bit-vector.
 template<Unsigned Word>
 std::string
-to_hex_string(const gf2::BitVec<Word>& bv) {
+to_hex_string(const gf2::BitVector<Word>& bv) {
     if (bv.is_empty()) return std::string{};
 
     // The number of digits in the output string. Generally hexadecimal but the last may be to a lower base.
@@ -186,15 +186,15 @@ to_hex_string(const gf2::BitVec<Word>& bv) {
 /// Returns the convolution of two bit-vectors computed in the simplest element-by-element manner.
 template<Unsigned Word>
 auto
-convolve(const gf2::BitVec<Word>& a, const gf2::BitVec<Word>& b) {
+convolve(const gf2::BitVector<Word>& a, const gf2::BitVector<Word>& b) {
     usize na = a.size();
     usize nb = b.size();
 
     // Edge case?
-    if (na == 0 || nb == 0) return gf2::BitVec<Word>();
+    if (na == 0 || nb == 0) return gf2::BitVector<Word>();
 
     // Space for the non-singular return value.
-    gf2::BitVec<Word> retval(na + nb - 1);
+    gf2::BitVector<Word> retval(na + nb - 1);
 
     // Run through all the elements
     for (usize i = 0; i < na; ++i) {
@@ -209,43 +209,43 @@ convolve(const gf2::BitVec<Word>& a, const gf2::BitVec<Word>& b) {
 /// Computes the polynomial r(x) := x^n mod p(x) for exponent n, where p(x) is a bit-polynomial.
 /// This uses the simplest (and slowest) iterative approach.
 template<Unsigned Word>
-gf2::BitPoly<Word>
-reduce_x_to_the(usize n, const gf2::BitPoly<Word>& P) {
+gf2::BitPolynomial<Word>
+reduce_x_to_the(usize n, const gf2::BitPolynomial<Word>& P) {
     // Make a copy and drop any high order zero coefficients.
     auto poly = P;
     poly.make_monic();
 
     // Edge case: the zero polynomial.
-    if (poly.is_zero()) return gf2::BitPoly<Word>::zero();
+    if (poly.is_zero()) return gf2::BitPolynomial<Word>::zero();
 
     // Edge case: the constant polynomial P(x) := 1. Anything mod 1 is 0.
-    if (poly.is_one()) return gf2::BitPoly<Word>::zero();
+    if (poly.is_one()) return gf2::BitPolynomial<Word>::zero();
 
     // Edge case: x^0 = 1 so x^n mod P(x) = 1 for any polynomial P(x) != 1 (we already handled the `P(x) = 1` case).
-    if (n == 0) return gf2::BitPoly<Word>::one();
+    if (n == 0) return gf2::BitPolynomial<Word>::one();
 
     // The polynomial P(x) is non-zero and can be written as P(x) = x^d + p(x) where degree[p] < d.
     auto d = poly.degree();
 
     // Edge case: P(x) = x + c where c is a constant => x = P(x) + c.
     // Then for any exponent e: x^e = (P(x) + c)^e = terms in powers of P(x) + c^e => x^e mod P(x) = c^e = c.
-    if (d == 1) return gf2::BitPoly<Word>::constant(poly[0]);
+    if (d == 1) return gf2::BitPolynomial<Word>::constant(poly[0]);
 
     // We can write poly(x) = p_0 + p_1 x + ... + p_{d-1} x^{d-1}. All that matters are those coefficients.
     auto p = poly.coefficients().sub(0, d);
 
     // Small powers n < d:
-    if (n < d) return gf2::BitPoly<Word>::x_to_the(n);
+    if (n < d) return gf2::BitPolynomial<Word>::x_to_the(n);
 
     // Matching power n == d: Remainder is the polynomial itself.
-    if (n == d) return gf2::BitPoly<Word>{p};
+    if (n == d) return gf2::BitPolynomial<Word>{p};
 
     // Larger powers: Use an iteration which writes x*r(x) mod p(x) in terms of r(x) mod p(x).
     auto r = p;
     for (auto i = d; i < n; ++i) r = r[d - 1] ? p ^ (r >> 1) : (r >> 1);
 
     // Done
-    return gf2::BitPoly<Word>{r};
+    return gf2::BitPolynomial<Word>{r};
 }
 
 } // namespace naive

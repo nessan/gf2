@@ -13,7 +13,7 @@
 int
 main() {
     using word_type = usize;
-    using matrix_type = BitMat<word_type>;
+    using matrix_type = BitMatrix<word_type>;
 
     // Number of trials & ticks.
     auto n_trials = 1000uz;

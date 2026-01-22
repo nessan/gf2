@@ -3,13 +3,13 @@
 ## Introduction
 
 A `gf2::BitSpan` is a non-owning _view_ of bit elements stored compactly in an array of unsigned integer words.
-Typically bit-spans are created as views into existing `gf2::BitSpan` or `gf2::BitVec` objects, but they can also be created from an existing bit-span or even from raw pointers to word arrays.
+Typically bit-spans are created as views into existing `gf2::BitSpan` or `gf2::BitVector` objects, but they can also be created from an existing bit-span or even from raw pointers to word arrays.
 
 The class satisfies the `gf2::BitStore` concept, which provides a rich API for manipulating the bits in the bit-span.
 The free functions defined for that concept are also pulled into the class as member functions.
 For example, if `s` is a `gf2::BitSpan`, you can call `s.count_ones()` to count the number of set bits in the span instead of calling the free function `gf2::count_ones(s)`, though both forms are valid.
 
-A span is a cheap way to work with a slice of a `gf2::BitSpan`, `gf2::BitVec`, or any other `gf2::BitStore`.
+A span is a cheap way to work with a slice of a `gf2::BitSpan`, `gf2::BitVector`, or any other `gf2::BitStore`.
 It never allocates or copies; it just remembers a pointer into the backing words, a bit-offset, and a length.
 
 > [!NOTE]
@@ -126,10 +126,10 @@ If the `Word` type is `const`, the span will be read-only; otherwise, it will al
 However, you don't usually construct `BitSpan` objects directly.
 Instead, you typically obtain them from existing `gf2::BitStore` objects using their `span` member functions:
 
--   `gf2::BitXXX::span(begin, end) const` creates a bit-span as a read-only view of the bits in the half open range `[begin, end)`.
--   `gf2::BitXXX::span(begin, end)` creates a bit-span as a read-write view of the bits in the half open range `[begin, end)`.
+- `gf2::BitXXX::span(begin, end) const` creates a bit-span as a read-only view of the bits in the half open range `[begin, end)`.
+- `gf2::BitXXX::span(begin, end)` creates a bit-span as a read-write view of the bits in the half open range `[begin, end)`.
 
-Here `BitXXX` can be any class that satisfies the `gf2::BitStore` concept, such as `gf2::BitVec`, `gf2::BitArray`, or even `gf2::BitSpan` as taking a span of a span is supported.
+Here `BitXXX` can be any class that satisfies the `gf2::BitStore` concept, such as `gf2::BitVector`, `gf2::BitArray`, or even `gf2::BitSpan` as taking a span of a span is supported.
 
 Those methods use the generic `gf2::span` method defined for the `gf2::BitStore` concept as described [here](BitStore.md#store-spans) documentation.
 
@@ -144,7 +144,7 @@ Spans can start in the middle of a machine word and can end part-way through ano
 ### Example
 
 ```cpp
-auto v = gf2::BitVec<u8>::from_string("1111'1111'1111").value();
+auto v = gf2::BitVector<u8>::from_string("1111'1111'1111").value();
 v.span(2, 6).flip_all();
 assert_eq(v.to_string(), "110000111111");
 ```
@@ -214,10 +214,10 @@ The following methods let you populate the entire bit-span in a single call.
 
 The `gf2::BitSpan::copy` methods support copying bits from:
 
--   Another bit-store of the same size but possibly a different underlying word type.
--   A [`std::bitset`] of the same size as the bit-span.
--   An unsigned integer that has the same number of bits as the span. The integer type need not be the same as the underlying `Word` used by the bit-span.
--   A function or callable object that takes a single `usize` index argument and returns a boolean value for that index.
+- Another bit-store of the same size but possibly a different underlying word type.
+- A [`std::bitset`] of the same size as the bit-span.
+- An unsigned integer that has the same number of bits as the span. The integer type need not be the same as the underlying `Word` used by the bit-span.
+- A function or callable object that takes a single `usize` index argument and returns a boolean value for that index.
 
 > [!NOTE]
 > In each case, the size of the source and destinations must match exactly and that condition is always checked unless the `NDEBUG` flag is set at compile time. You can always use a `gf2::BitSpan` sub-span to copy a subset of bits if needed.
@@ -261,10 +261,10 @@ This is similar to the C++20 [`std::span`] class for regular data collection typ
 
 The following methods create or fill _independent_ bit-vectors with copies of some contiguous subset of the bits in the vector.
 
-| Function                 | Description                                                                            |
-| ------------------------ | -------------------------------------------------------------------------------------- |
-| `gf2::BitSpan::sub`      | Returns a new `gf2::BitVec` encompassing the bits in a half-open range `[begin, end)`. |
-| `gf2::BitSpan::split_at` | Fills two bit-vectors with the bits in the ranges `[0, at)` and `[at, size())`.        |
+| Function                 | Description                                                                               |
+| ------------------------ | ----------------------------------------------------------------------------------------- |
+| `gf2::BitSpan::sub`      | Returns a new `gf2::BitVector` encompassing the bits in a half-open range `[begin, end)`. |
+| `gf2::BitSpan::split_at` | Fills two bit-vectors with the bits in the ranges `[0, at)` and `[at, size())`.           |
 
 The `gf2::BitSpan::split_at` method can optionally take two pre-existing bit-vectors to fill, thereby avoiding unnecessary allocations in some iterative algorithms that repeatedly use this method.
 
@@ -282,7 +282,7 @@ We have methods that can interleave (_riffle_) the bits in a span with zeros.
 
 If the bit-span looks like $v_0 v_1 v_2 \ldots v_n$, then the riffling operation produces the vector $v_0 0 v_1 0 v_2 0 \ldots v_n$ where a zero is interleaved _between_ every bit in the original bit-span (there is no trailing zero at the end).
 
-If you think of a bit-span as representing the coefficients of a polynomial over GF(2), then riffling corresponds to squaring that polynomial. See the documentation for `gf2::BitPoly::squared` for more information.
+If you think of a bit-span as representing the coefficients of a polynomial over GF(2), then riffling corresponds to squaring that polynomial. See the documentation for `gf2::BitPolynomial::squared` for more information.
 
 ## Set/Unset Bit Indices {#span-indices}
 
@@ -303,11 +303,11 @@ The following methods find the indices of set or unset bits in the vector.
 
 The following methods create iterators for traversing the bits or underlying words in the bit-span:
 
--   Read-only iteration through the individual bits.
--   Read-write iteration through the individual bits.
--   Read-only iteration through the indices of the set bits.
--   Read-only iteration through the indices of the unset bits.
--   Read-write iteration through the underlying vector words.
+- Read-only iteration through the individual bits.
+- Read-write iteration through the individual bits.
+- Read-only iteration through the indices of the set bits.
+- Read-only iteration through the indices of the unset bits.
+- Read-write iteration through the underlying vector words.
 
 | Function                    | Description                                                                    |
 | --------------------------- | ------------------------------------------------------------------------------ |
@@ -353,12 +353,12 @@ There are many operators and free functions defined for any `gf2::BitStore` comp
 
 ## See Also
 
--   `gf2::BitSpan` for detailed documentation of all class methods.
--   [`BitStore`](BitStore.md) for the common API shared by all bit-stores.
--   [`BitArray`](BitArray.md) for fixed-size vectors of bits.
--   [`BitVec`](BitVec.md) for dynamically-sized vectors of bits.
--   [`BitMat`](BitMat.md) for matrices of bits.
--   [`BitPoly`](BitPoly.md) for polynomials over GF(2).
+- `gf2::BitSpan` for detailed documentation of all class methods.
+- [`BitStore`](BitStore.md) for the common API shared by all bit-stores.
+- [`BitArray`](BitArray.md) for fixed-size vectors of bits.
+- [`BitVector`](BitVector.md) for dynamically-sized vectors of bits.
+- [`BitMatrix`](BitMatrix.md) for matrices of bits.
+- [`BitPolynomial`](BitPolynomial.md) for polynomials over GF(2).
 
 <!-- Reference Links -->
 

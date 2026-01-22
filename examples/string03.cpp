@@ -7,7 +7,7 @@
 #include <gf2/namespace.h>
 
 using word_type = usize;
-using vector_type = BitVec<word_type>;
+using vector_type = BitVector<word_type>;
 
 void
 test_binary_string(std::size_t size, std::size_t n_trials) {

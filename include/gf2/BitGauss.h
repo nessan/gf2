@@ -6,7 +6,7 @@
 /// A Gaussian elimination solver for systems of linear equations over GF(2). <br>
 /// See the [BitGauss](docs/pages/BitGauss.md) page for more details.
 
-#include <gf2/BitMat.h>
+#include <gf2/BitMatrix.h>
 
 namespace gf2 {
 
@@ -31,8 +31,8 @@ namespace gf2 {
 ///
 /// # Example
 /// ```
-/// auto A = BitMat<>::ones(3, 3);
-/// auto b = BitVec<>::ones(3);
+/// auto A = BitMatrix<>::ones(3, 3);
+/// auto b = BitVector<>::ones(3);
 /// auto solver = A.solver_for(b);
 /// assert_eq(solver.rank(), 1);
 /// assert_eq(solver.free_count(), 2);
@@ -43,8 +43,8 @@ namespace gf2 {
 template<Unsigned Word>
 class BitGauss {
 private:
-    BitMat<Word>       m_A;         // The reduced row echelon form of the matrix `A`.
-    BitVec<Word>       m_b;         // The equivalent reduced row echelon form of the vector `b`.
+    BitMatrix<Word>    m_A;         // The reduced row echelon form of the matrix `A`.
+    BitVector<Word>    m_b;         // The equivalent reduced row echelon form of the vector `b`.
     usize              m_rank;      // The rank of the matrix `A`.
     usize              m_solutions; // The number of solutions to the system.
     std::vector<usize> m_free;      // The indices of the free variables in the system.
@@ -56,8 +56,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::ones(3, 3);
-    /// auto b = BitVec<>::ones(3);
+    /// auto A = BitMatrix<>::ones(3, 3);
+    /// auto b = BitVector<>::ones(3);
     /// BitGauss solver{A, b};
     /// assert_eq(solver.rank(), 1);
     /// assert_eq(solver.is_underdetermined(), true);
@@ -66,7 +66,7 @@ public:
     /// assert_eq(solver.solution_count(), 4);
     /// ```
     template<BitStore Rhs>
-    BitGauss(BitMat<Word> const& A, Rhs const& b)
+    BitGauss(BitMatrix<Word> const& A, Rhs const& b)
         requires std::same_as<typename Rhs::word_type, Word>
     {
         gf2_assert(A.is_square(), "Matrix is {} x {} but it should be square!", A.rows(), A.cols());
@@ -119,8 +119,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::ones(3, 3);
-    /// auto b = BitVec<>::ones(3);
+    /// auto A = BitMatrix<>::ones(3, 3);
+    /// auto b = BitVector<>::ones(3);
     /// auto solver = A.solver_for(b);
     /// assert_eq(solver.rank(), 1);
     /// ```
@@ -130,8 +130,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::ones(3, 3);
-    /// auto b = BitVec<>::ones(3);
+    /// auto A = BitMatrix<>::ones(3, 3);
+    /// auto b = BitVector<>::ones(3);
     /// auto solver = A.solver_for(b);
     /// assert_eq(solver.free_count(), 2);
     /// ```
@@ -141,8 +141,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::ones(3, 3);
-    /// auto b = BitVec<>::ones(3);
+    /// auto A = BitMatrix<>::ones(3, 3);
+    /// auto b = BitVector<>::ones(3);
     /// auto solver = A.solver_for(b);
     /// assert_eq(solver.is_underdetermined(), true);
     /// ```
@@ -154,8 +154,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::ones(3, 3);
-    /// auto b = BitVec<>::ones(3);
+    /// auto A = BitMatrix<>::ones(3, 3);
+    /// auto b = BitVector<>::ones(3);
     /// auto solver = A.solver_for(b);
     /// assert_eq(solver.is_consistent(), true);
     /// ```
@@ -170,8 +170,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::ones(3, 3);
-    /// auto b = BitVec<>::ones(3);
+    /// auto A = BitMatrix<>::ones(3, 3);
+    /// auto b = BitVector<>::ones(3);
     /// auto solver = A.solver_for(b);
     /// assert_eq(solver.solution_count(), 4);
     /// ```
@@ -185,16 +185,16 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::identity(3);
-    /// auto b = BitVec<>::ones(3);
+    /// auto A = BitMatrix<>::identity(3);
+    /// auto b = BitVector<>::ones(3);
     /// auto solver = A.solver_for(b);
     /// assert_eq(solver().value().to_string(), "111");
     /// ```
-    std::optional<BitVec<Word>> operator()() const {
+    std::optional<BitVector<Word>> operator()() const {
         if (!is_consistent()) return std::nullopt;
 
         // Create a random starting point.
-        auto x = BitVec<Word>::random(m_b.size());
+        auto x = BitVector<Word>::random(m_b.size());
 
         // All non-free variables will be overwritten by back substitution.
         back_substitute_into(x);
@@ -214,8 +214,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::ones(3, 3);
-    /// auto b = BitVec<>::ones(3);
+    /// auto A = BitMatrix<>::ones(3, 3);
+    /// auto b = BitVector<>::ones(3);
     /// auto solver = A.solver_for(b);
     /// assert_eq(solver.solution_count(), 4);
     /// assert_eq(solver(0).value().to_string(), "100");
@@ -223,12 +223,12 @@ public:
     /// assert_eq(solver(2).value().to_string(), "001");
     /// assert_eq(solver(3).value().to_string(), "111");
     /// ```
-    std::optional<BitVec<Word>> operator()(usize i_solution) const {
+    std::optional<BitVector<Word>> operator()(usize i_solution) const {
         if (!is_consistent()) { return std::nullopt; }
         if (i_solution > solution_count()) { return std::nullopt; }
 
         // We start with a zero vector and then set the free variable slots to the fixed bit pattern for `i`.
-        auto x = BitVec<Word>::zeros(m_b.size());
+        auto x = BitVector<Word>::zeros(m_b.size());
         for (auto f = 0uz; f < m_free.size(); ++f) {
             x[m_free[f]] = (i_solution & 1);
             i_solution >>= 1;
@@ -241,7 +241,7 @@ public:
 
 private:
     // Helper function that performs back substitution to solve for the non-free variables in `x`.
-    void back_substitute_into(BitVec<Word>& x) const {
+    void back_substitute_into(BitVector<Word>& x) const {
         // Iterate from the bottom up, starting at the first non-zero row, solving for the non-free variables in `x`.
         for (auto i = m_rank; i--;) {
             auto j = m_A[i].first_set().value();

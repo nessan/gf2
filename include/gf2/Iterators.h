@@ -29,7 +29,7 @@ namespace gf2 {
 ///
 /// # Example
 /// ```
-/// BitVec v{10};
+/// BitVector v{10};
 /// assert_eq(v.to_string(), "0000000000");
 /// for (auto&& bit : v.bits()) bit = true;
 /// assert_eq(v.to_string(), "1111111111");
@@ -112,7 +112,7 @@ public:
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::alternating(10);
+/// auto v = BitVector<u8>::alternating(10);
 /// assert_eq(v.to_string(), "1010101010");
 /// auto indices = std::ranges::to<std::vector>(v.set_bits());
 /// assert_eq(indices, (std::vector<usize>{0, 2, 4, 6, 8}));
@@ -194,7 +194,7 @@ public:
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::alternating(10);
+/// auto v = BitVector<u8>::alternating(10);
 /// assert_eq(v.to_string(), "1010101010");
 /// auto indices = std::ranges::to<std::vector>(v.unset_bits());
 /// assert_eq(indices, (std::vector<usize>{1, 3, 5, 7, 9}));
@@ -276,7 +276,7 @@ public:
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(10);
+/// auto v = BitVector<u8>::ones(10);
 /// assert_eq(v.to_string(), "1111111111");
 /// auto words = std::ranges::to<std::vector>(v.store_words());
 /// assert_eq(words, (std::vector<std::uint8_t>{0b1111'1111, 0b0000'0011}));

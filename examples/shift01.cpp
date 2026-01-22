@@ -9,7 +9,7 @@
 int
 main() {
     using word_type = usize;
-    using vector_type = BitVec<word_type>;
+    using vector_type = BitVector<word_type>;
 
     // Number of trials & a tick size
     auto n_trials = 1'000uz;

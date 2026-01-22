@@ -13,7 +13,7 @@ main() {
     utilities::pretty_print_thousands();
 
     using word_type = usize;
-    using poly_type = BitPoly<word_type>;
+    using poly_type = BitPolynomial<word_type>;
 
     // The polynomial for the trials.
     auto degree = 17uz;

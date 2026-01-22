@@ -6,7 +6,7 @@
 /// The LU decomposition for square bit-matrices. <br>
 /// See the [BitLU](docs/pages/BitLU.md) page for more details.
 
-#include <gf2/BitMat.h>
+#include <gf2/BitMatrix.h>
 
 namespace gf2 {
 
@@ -28,7 +28,7 @@ namespace gf2 {
 template<Unsigned Word>
 class BitLU {
 private:
-    BitMat<Word>       m_lu;    // The LU decomposition stored in a single bit-matrix.
+    BitMatrix<Word>    m_lu;    // The LU decomposition stored in a single bit-matrix.
     std::vector<usize> m_swaps; // The list of row swap instructions (a permutation in LAPACK format).
     usize              m_rank;  // The rank of the underlying matrix.
 
@@ -50,14 +50,14 @@ public:
     ///
     /// # Example (checks that `LU = PA` for a random matrix `A`)
     /// ```
-    /// auto A = BitMat<u8>::random(100, 100);
+    /// auto A = BitMatrix<u8>::random(100, 100);
     /// auto lu = A.LU();
     /// auto LU = lu.L() * lu.U();
     /// auto PA = A;
     /// lu.permute(PA);
     /// assert_eq(PA, LU);
     /// ```
-    BitLU(BitMat<Word> const& A) : m_lu(A), m_swaps(A.rows(), 0uz), m_rank(A.rows()) {
+    BitLU(BitMatrix<Word> const& A) : m_lu(A), m_swaps(A.rows(), 0uz), m_rank(A.rows()) {
         // Only handle square matrices
         gf2_assert(A.is_square(), "Matrix is {} x {} but it should be square!", A.rows(), A.cols());
 
@@ -101,7 +101,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::left_rotation(100, 1);
+    /// auto A = BitMatrix<>::left_rotation(100, 1);
     /// auto lu = A.LU();
     /// assert_eq(lu.rank(), 100);
     /// ```
@@ -114,13 +114,13 @@ public:
     constexpr bool determinant() const { return !is_singular(); }
 
     /// Read-only access to the LU form of the bit-matrix where A -> [L\\U]
-    constexpr const BitMat<Word>& LU() const { return m_lu; }
+    constexpr const BitMatrix<Word>& LU() const { return m_lu; }
 
     /// Returns the unit lower triangular matrix `L` in the LU decomposition.
-    constexpr BitMat<Word> L() const { return m_lu.unit_lower(); }
+    constexpr BitMatrix<Word> L() const { return m_lu.unit_lower(); }
 
     /// Returns the upper triangular matrix `U` in the LU decomposition.
-    constexpr BitMat<Word> U() const { return m_lu.upper(); }
+    constexpr BitMatrix<Word> U() const { return m_lu.upper(); }
 
     /// Returns a reference to the row swap instructions in [`LAPACK`] form.
     ///
@@ -167,7 +167,7 @@ public:
     /// Permutes the rows of the input matrix `B` in-place using our row-swap instruction vector.
     ///
     /// @note This method panics if the dimensions of `B` and the row-swap instruction vector do not match.
-    constexpr void permute(BitMat<Word>& B) const {
+    constexpr void permute(BitMatrix<Word>& B) const {
         auto n = m_swaps.size();
         gf2_assert(B.rows() == n, "Matrix has {} rows but the row-swap instruction vector has {}.", B.rows(), n);
         for (auto i = 0uz; i < n; ++i)
@@ -196,15 +196,15 @@ public:
     /// # Example
     /// ```
     /// auto n = 100uz;
-    /// auto A = BitMat<>::left_rotation(n, 1);
+    /// auto A = BitMatrix<>::left_rotation(n, 1);
     /// auto lu = A.LU();
-    /// auto b = BitVec<>::random(n);
+    /// auto b = BitVector<>::random(n);
     /// auto x = lu(b).value();
     /// assert_eq(A * x, b);
     /// ```
     template<BitStore Store>
         requires(std::same_as<typename Store::word_type, Word>)
-    std::optional<BitVec<Word>> operator()(Store const& b) const {
+    std::optional<BitVector<Word>> operator()(Store const& b) const {
         auto n = m_lu.rows();
         gf2_assert(b.size() == n, "RHS b has {} elements but the LHS matrix has {} rows.", b.size(), n);
 
@@ -242,13 +242,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::left_rotation(100, 5);
-    /// auto B = BitMat<>::random(100, 12);
+    /// auto A = BitMatrix<>::left_rotation(100, 5);
+    /// auto B = BitMatrix<>::random(100, 12);
     /// auto lu = A.LU();
     /// auto X = lu(B).value();
     /// assert_eq(A * X, B);
     /// ```
-    std::optional<BitMat<Word>> operator()(BitMat<Word> const& B) const {
+    std::optional<BitMatrix<Word>> operator()(BitMatrix<Word> const& B) const {
         auto n = m_lu.rows();
         gf2_assert(B.rows() == n, "RHS B has {} rows but the LHS matrix has {} rows.", B.rows(), n);
 
@@ -283,14 +283,14 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::left_rotation(100, 1);
+    /// auto A = BitMatrix<>::left_rotation(100, 1);
     /// BitLU lu{A};
     /// auto A_inv = lu.inverse().value();
-    /// assert_eq(A_inv, BitMat<>::right_rotation(100, 1));
+    /// assert_eq(A_inv, BitMatrix<>::right_rotation(100, 1));
     /// ```
-    std::optional<BitMat<Word>> inverse() const {
+    std::optional<BitMatrix<Word>> inverse() const {
         // We just solve the system A.A_inv = I for A_inv
-        return operator()(BitMat<Word>::identity(m_lu.rows()));
+        return operator()(BitMatrix<Word>::identity(m_lu.rows()));
     }
 };
 } // namespace gf2

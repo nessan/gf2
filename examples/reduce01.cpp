@@ -10,7 +10,7 @@
 int
 main() {
     using word_type = usize;
-    using poly_type = BitPoly<word_type>;
+    using poly_type = BitPolynomial<word_type>;
 
     // Number of trials & a tick size
     auto n_trials = 1'000uz;

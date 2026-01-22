@@ -7,7 +7,7 @@
 #include <gf2/namespace.h>
 
 // A store type to use for the iterator concept checks.
-using store_type = BitVec<std::size_t>;
+using store_type = BitVector<std::size_t>;
 
 // Check that we covered all the necessary bases for the `SetBits` iterators to be bidirectional.
 static_assert(std::bidirectional_iterator<SetBits<store_type>>);
@@ -18,7 +18,7 @@ static_assert(std::bidirectional_iterator<UnsetBits<store_type>>);
 // Check that we covered all the necessary bases for the const and non-const `Bits` iterators to be bidirectional.
 // Note that the specific bit-store type and specific unsigned are both irrelevant but need to be specified for the
 // test.
-using store_type = BitVec<std::size_t>;
+using store_type = BitVector<std::size_t>;
 static_assert(std::bidirectional_iterator<Bits<store_type, false>>);
 static_assert(std::bidirectional_iterator<Bits<store_type, true>>);
 

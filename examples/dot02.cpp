@@ -24,8 +24,8 @@ main() {
 
     // Random vector & matrix
     using Word = usize;
-    auto u = BitVec<Word>::random(N);
-    auto mat = BitMat<Word>::random(N, N);
+    auto u = BitVector<Word>::random(N);
+    auto mat = BitMatrix<Word>::random(N, N);
 
     // To do something in the loop, we count how often the first element from the dot product is 1.
     auto count = 0uz;

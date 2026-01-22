@@ -4,11 +4,11 @@
 
 The library's vector-like types satisfy the `BitStore` [concept]:
 
-| Type            | Description                                                                       |
-| --------------- | --------------------------------------------------------------------------------- |
-| `gf2::BitArray` | A fixed-size array of bits packed into a `std::array` of unsigned words.          |
-| `gf2::BitVec`   | A dynamically sized vector of bits packed into a `std::vector` of unsigned words. |
-| `gf2::BitSpan`  | A non-owning _view_ of some span of bits held by one of the two previous types.   |
+| Type             | Description                                                                       |
+| ---------------- | --------------------------------------------------------------------------------- |
+| `gf2::BitArray`  | A fixed-size array of bits packed into a `std::array` of unsigned words.          |
+| `gf2::BitVector` | A dynamically sized vector of bits packed into a `std::vector` of unsigned words. |
+| `gf2::BitSpan`   | A non-owning _view_ of some span of bits held by one of the two previous types.   |
 
 These types own or view individual bit elements packed into some underlying "store" of `Unsigned` words.
 The particular choice of `Word` is generic and user selectable from one of the primitive unsigned integer types.
@@ -55,20 +55,20 @@ To satisfy the `gf2::BitStore` concept, a class should also define the following
 
 ### Other Notes
 
--   The underlying store must contain enough words of storage to accommodate `size` bits.
--   The `words` method always returns the same number as `words_needed<Word>(size())` but cached as this value is in constant use.
--   The store's final word can have extra unused bits, but the `word` method should always set those unused bits to zero.
--   The `set_word` method sets a "word" to a passed value, being careful to only have an effect on _accessible_ bits in the store.
+- The underlying store must contain enough words of storage to accommodate `size` bits.
+- The `words` method always returns the same number as `words_needed<Word>(size())` but cached as this value is in constant use.
+- The store's final word can have extra unused bits, but the `word` method should always set those unused bits to zero.
+- The `set_word` method sets a "word" to a passed value, being careful to only have an effect on _accessible_ bits in the store.
 
 ### Example
 
-The methods are trivial to implement for `gf2::BitArray` and `gf2::BitVec`.
+The methods are trivial to implement for `gf2::BitArray` and `gf2::BitVector`.
 
-Here is a sketch of how they might work for the `gf2::BitVec` class which stores `m_size` bits in a `std::vector<Word>` called `m_store`:
+Here is a sketch of how they might work for the `gf2::BitVector` class which stores `m_size` bits in a `std::vector<Word>` called `m_store`:
 
 ```c++
 template <Unsigned Word = usize>                                    // <1>
-class BitVec {
+class BitVector {
 private:
     usize m_size;
     std::vector<Word> m_store;
@@ -226,13 +226,13 @@ The following functions let you populate the entire store from multiple sources 
 
 The `copy` functions support copying bit values from:
 
--   Another bit-store of the same size but possibly a different underlying word type.
--   A [`std::bitset`] of the same size as the store.
--   An unsigned integer that has the same number of bits as the store. The integer type need not be the same as the underlying `Word` used by the bit-vector.
--   A function or callable object that takes a single `usize` index argument and returns a boolean value for that index.
+- Another bit-store of the same size but possibly a different underlying word type.
+- A [`std::bitset`] of the same size as the store.
+- An unsigned integer that has the same number of bits as the store. The integer type need not be the same as the underlying `Word` used by the bit-vector.
+- A function or callable object that takes a single `usize` index argument and returns a boolean value for that index.
 
 > [!NOTE]
-> In each case, the _size_ of the source and destinations must match exactly and that condition is always checked unless the `NDEBUG` flag is set at compile time. You can always use a `gf2::BitSpan` to copy a subset of bits if needed. However, the underlying _word types_ need **not** match, so you can copy between bit-stores that use different underlying word types. You can use the `gf2::copy` method to convert between different `Word` type stores (e.g., from `BitVec<u32>` to `BitVec<u8>`) as long as the size of the source and destinations match.
+> In each case, the _size_ of the source and destinations must match exactly and that condition is always checked unless the `NDEBUG` flag is set at compile time. You can always use a `gf2::BitSpan` to copy a subset of bits if needed. However, the underlying _word types_ need **not** match, so you can copy between bit-stores that use different underlying word types. You can use the `gf2::copy` method to convert between different `Word` type stores (e.g., from `BitVector<u32>` to `BitVector<u8>`) as long as the size of the source and destinations match.
 
 ### Random Fills
 
@@ -276,10 +276,10 @@ This is similar to the C++20 [`std::span`] class for regular data collection typ
 
 The following functions create or fill _independent_ bit-vectors with copies of some contiguous subset of the bits in the store.
 
-| Function     | Description                                                                            |
-| ------------ | -------------------------------------------------------------------------------------- |
-| `gf2::sub`   | Returns a new `gf2::BitVec` encompassing the bits in a half-open range `[begin, end)`. |
-| `gf2::split` | Fills two bit-vectors with the bits in the ranges `[0, at)` and `[at, size())`.        |
+| Function     | Description                                                                               |
+| ------------ | ----------------------------------------------------------------------------------------- |
+| `gf2::sub`   | Returns a new `gf2::BitVector` encompassing the bits in a half-open range `[begin, end)`. |
+| `gf2::split` | Fills two bit-vectors with the bits in the ranges `[0, at)` and `[at, size())`.           |
 
 The `split_` method can optionally take two pre-existing bit-vectors to fill, thereby avoiding unnecessary allocations in some iterative algorithms that repeatedly use this method.
 
@@ -297,7 +297,7 @@ We have functions that can interleave (_riffle_) the bits in a store with zeros.
 
 If the store looks like $v_0 v_1 v_2 \ldots v_n$, then the riffling operation produces the vector $v_0 0 v_1 0 v_2 0 \ldots v_n$ where a zero is interleaved _between_ every bit in the original store (there is no trailing zero at the end).
 
-If you think of a bit-store as representing the coefficients of a polynomial over GF(2), then riffling corresponds to squaring that polynomial. See the documentation for `gf2::BitPoly::squared` for more information.
+If you think of a bit-store as representing the coefficients of a polynomial over GF(2), then riffling corresponds to squaring that polynomial. See the documentation for `gf2::BitPolynomial::squared` for more information.
 
 ## Set/Unset Bit Indices {#store-indices}
 
@@ -318,11 +318,11 @@ The following functions find the indices of set or unset bits in the store.
 
 The following functions create iterators for traversing the bits or underlying words in the store:
 
--   Read-only iteration through the individual bits.
--   Read-write iteration through the individual bits.
--   Read-only iteration through the indices of the set bits.
--   Read-only iteration through the indices of the unset bits.
--   Read-write iteration through the underlying store words.
+- Read-only iteration through the individual bits.
+- Read-write iteration through the individual bits.
+- Read-only iteration through the indices of the set bits.
+- Read-only iteration through the indices of the unset bits.
+- Read-write iteration through the underlying store words.
 
 | Function           | Description                                                                    |
 | ------------------ | ------------------------------------------------------------------------------ |
@@ -494,15 +494,15 @@ We have overloaded the `*` operator for pairs of bit-stores to compute the dot p
 
 ## See Also
 
--   The `gf2::BitStore` reference for detailed documentation with examples for each function.
--   [`BitArray`](BitArray.md) for fixed-size vectors of bits.
--   [`BitVec`](BitVec.md) for dynamically-sized vectors of bits.
--   [`BitSpan`](BitSpan.md) for non-owning views into any bit-store.
--   [`BitRef`](BitRef.md) for read-write references to individual bits in a bit-store.
--   [`Bits`](Iterators.md) for iterators over the bits in a bit-store.
--   [`SetBits`](Iterators.md) for iterators over the indices of set bits in a bit-store.
--   [`UnsetBits`](Iterators.md) for iterators over the indices of unset bits in a bit-store.
--   [`Words`](Iterators.md) for iterators over the underlying "words" in a bit-store.
+- The `gf2::BitStore` reference for detailed documentation with examples for each function.
+- [`BitArray`](BitArray.md) for fixed-size vectors of bits.
+- [`BitVector`](BitVector.md) for dynamically-sized vectors of bits.
+- [`BitSpan`](BitSpan.md) for non-owning views into any bit-store.
+- [`BitRef`](BitRef.md) for read-write references to individual bits in a bit-store.
+- [`Bits`](Iterators.md) for iterators over the bits in a bit-store.
+- [`SetBits`](Iterators.md) for iterators over the indices of set bits in a bit-store.
+- [`UnsetBits`](Iterators.md) for iterators over the indices of unset bits in a bit-store.
+- [`Words`](Iterators.md) for iterators over the underlying "words" in a bit-store.
 
 <!-- Reference Links -->
 

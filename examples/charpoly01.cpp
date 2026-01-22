@@ -12,9 +12,9 @@
 int
 main() {
     using word_type = usize;
-    using matrix_type = BitMat<word_type>;
-    using coeff_type = BitVec<word_type>;
-    using poly_type = BitPoly<word_type>;
+    using matrix_type = BitMatrix<word_type>;
+    using coeff_type = BitVector<word_type>;
+    using poly_type = BitPolynomial<word_type>;
 
     // A timer
     utilities::stopwatch sw;

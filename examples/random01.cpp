@@ -15,7 +15,7 @@ using namespace gf2;
 double
 error_for(std::size_t len, double p) {
     if (p < 0 || p > 1) throw std::invalid_argument("probability p must be between 0 and 1");
-    auto   v = BitVec<>::biased_random(len, p);
+    auto   v = BitVector<>::biased_random(len, p);
     double n_ones = static_cast<double>(v.count_ones());
     double expected = static_cast<double>(len) * p;
     return std::abs(n_ones - expected) / expected;

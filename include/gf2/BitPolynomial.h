@@ -4,36 +4,36 @@
 
 /// @file
 /// Polynomials over GF(2). <br>
-/// See the [BitPoly](docs/pages/BitPoly.md) page for more details.
+/// See the [BitPolynomial](docs/pages/BitPolynomial.md) page for more details.
 
-#include <gf2/BitVec.h>
+#include <gf2/BitVector.h>
 #include <sstream>
 
 namespace gf2 {
 
 // Forward declarations to avoid recursive inclusion issues when we define polynomial evaluation for bit-matrices.
 template<Unsigned Word>
-class BitMat;
+class BitMatrix;
 
-/// A `BitPoly` represents a polynomial over GF(2) where we store the polynomial coefficients in a bit-vector. <br>
-/// The template parameter `Word` sets the unsigned word type used by the `BitVec` that stores the coefficients.
+/// A `BitPolynomial` represents a polynomial over GF(2) where we store the polynomial coefficients in a bit-vector.
+/// <br> The template parameter `Word` sets the unsigned word type used by the `BitVector` that stores the coefficients.
 ///
 /// # Example
 /// ```
-/// auto p = BitPoly<>::zeros(3);
+/// auto p = BitPolynomial<>::zeros(3);
 /// p[0] = true;
 /// p[1] = false;
 /// p[2] = true;
 /// assert_eq(p.to_string(), "1 + x^2");
 /// ```
 template<Unsigned Word = usize>
-class BitPoly {
+class BitPolynomial {
 private:
-    BitVec<Word> m_coeffs;
+    BitVector<Word> m_coeffs;
 
 public:
     /// The type used to store the bit-polynomial coefficients.
-    using coeffs_type = BitVec<Word>;
+    using coeffs_type = BitVector<Word>;
 
     /// The underlying unsigned word type used to store the bits.
     using word_type = Word;
@@ -43,14 +43,14 @@ public:
 
     /// The default constructor creates an empty bit-polynomial with no coefficients.
     ///
-    /// This is one possible form of the zero BitPoly.
+    /// This is one possible form of the zero BitPolynomial.
     ///
     /// # Example
     /// ```
-    /// BitPoly p;
+    /// BitPolynomial p;
     /// assert_eq(p.to_string(), "0");
     /// ```
-    constexpr BitPoly() : m_coeffs{} {}
+    constexpr BitPolynomial() : m_coeffs{} {}
 
     /// Constructs a bit-polynomial with the given coefficients by copying them from any bit-store.
     ///
@@ -58,11 +58,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitPoly p{BitVec<>::ones(10)};
+    /// BitPolynomial p{BitVector<>::ones(10)};
     /// assert_eq(p.to_string(), "1 + x + x^2 + x^3 + x^4 + x^5 + x^6 + x^7 + x^8 + x^9");
     /// ```
     template<BitStore Src>
-    constexpr BitPoly(Src const& coeffs) : m_coeffs{coeffs.size()} {
+    constexpr BitPolynomial(Src const& coeffs) : m_coeffs{coeffs.size()} {
         m_coeffs.copy(coeffs);
     }
 
@@ -75,11 +75,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto coeffs = BitVec<>::ones(10);
-    /// BitPoly p{std::move(coeffs)};
+    /// auto coeffs = BitVector<>::ones(10);
+    /// BitPolynomial p{std::move(coeffs)};
     /// assert_eq(p.to_string(), "1 + x + x^2 + x^3 + x^4 + x^5 + x^6 + x^7 + x^8 + x^9");
     /// ```
-    constexpr BitPoly(BitVec<Word>&& coeffs) : m_coeffs{std::move(coeffs)} {}
+    constexpr BitPolynomial(BitVector<Word>&& coeffs) : m_coeffs{std::move(coeffs)} {}
 
     /// @}
     /// @name Factory constructors:
@@ -89,70 +89,74 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::zero();
+    /// auto p = BitPolynomial<>::zero();
     /// assert_eq(p.to_string(), "0");
     /// ```
-    static constexpr BitPoly zero() { return BitPoly<Word>{}; }
+    static constexpr BitPolynomial zero() { return BitPolynomial<Word>{}; }
 
     /// Factory method to return the "one" bit-polynomial p(x) := 1.
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::one();
+    /// auto p = BitPolynomial<>::one();
     /// assert_eq(p.to_string(), "1");
     /// ```
-    static constexpr BitPoly one() { return BitPoly<Word>{std::move(coeffs_type::ones(1))}; }
+    static constexpr BitPolynomial one() { return BitPolynomial<Word>{std::move(coeffs_type::ones(1))}; }
 
     /// Factory method to return the constant bit-polynomial p(x) := val where val is a boolean.
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::constant(true);
+    /// auto p = BitPolynomial<>::constant(true);
     /// assert_eq(p.to_string(), "1");
     /// ```
-    static constexpr BitPoly constant(bool val) { return BitPoly<Word>{std::move(coeffs_type::constant(val, 1))}; }
+    static constexpr BitPolynomial constant(bool val) {
+        return BitPolynomial<Word>{std::move(coeffs_type::constant(val, 1))};
+    }
 
     /// Factory method to return a bit-polynomial with `n + 1` coefficients, all initialized to zero.
     ///
-    /// This is the BitPoly 0*x^n + 0*x^(n-1) + ... + 0*x + 0.
+    /// This is the BitPolynomial 0*x^n + 0*x^(n-1) + ... + 0*x + 0.
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::zeros(3);
+    /// auto p = BitPolynomial<>::zeros(3);
     /// assert_eq(p.to_full_string(), "0 + 0x + 0x^2 + 0x^3");
     /// ```
-    static constexpr BitPoly zeros(usize n) { return BitPoly<Word>{std::move(coeffs_type::zeros(n + 1))}; }
+    static constexpr BitPolynomial zeros(usize n) { return BitPolynomial<Word>{std::move(coeffs_type::zeros(n + 1))}; }
 
     /// Factory method to return a monic bit-polynomial of degree `n` with `n + 1` coefficients, all ones.
     ///
-    /// This is the BitPoly x^n + x^(n-1) + ... + x + 1.
+    /// This is the BitPolynomial x^n + x^(n-1) + ... + x + 1.
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::ones(4);
+    /// auto p = BitPolynomial<>::ones(4);
     /// assert_eq(p.to_string(), "1 + x + x^2 + x^3 + x^4");
     /// ```
-    static constexpr BitPoly ones(usize n) { return BitPoly<Word>{std::move(coeffs_type::ones(n + 1))}; }
+    static constexpr BitPolynomial ones(usize n) { return BitPolynomial<Word>{std::move(coeffs_type::ones(n + 1))}; }
 
     /// Factory method to return the bit-polynomial p(x) := x^n.
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(3);
+    /// auto p = BitPolynomial<>::x_to_the(3);
     /// assert_eq(p.to_string(), "x^3");
     /// ```
-    static constexpr BitPoly x_to_the(usize n) { return BitPoly<Word>{std::move(coeffs_type::unit(n + 1, n))}; }
+    static constexpr BitPolynomial x_to_the(usize n) {
+        return BitPolynomial<Word>{std::move(coeffs_type::unit(n + 1, n))};
+    }
 
     /// Factory method to return a new bit-polynomial of *degree* `n` with coefficients set by calling the
     /// function `f` to set each coefficient to either 0 or 1.
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::from(10, [](usize i) { return i % 2 == 0; });
+    /// auto p = BitPolynomial<>::from(10, [](usize i) { return i % 2 == 0; });
     /// assert_eq(p.to_string(), "1 + x^2 + x^4 + x^6 + x^8 + x^10");
     /// ```
-    static constexpr BitPoly from(usize n, std::invocable<usize> auto f) {
-        return BitPoly<Word>{std::move(coeffs_type::from(n + 1, f))};
+    static constexpr BitPolynomial from(usize n, std::invocable<usize> auto f) {
+        return BitPolynomial<Word>{std::move(coeffs_type::from(n + 1, f))};
     }
 
     /// @}
@@ -164,14 +168,14 @@ public:
     ///
     /// The random coefficients are from independent fair coin flips seeded with entropy.
     ///
-    /// @note If `n > 0` then the returned BitPoly is monic.
-    static constexpr BitPoly random(usize n) {
-        // BitPoly of degree `n` has `n + 1` coefficients.
+    /// @note If `n > 0` then the returned BitPolynomial is monic.
+    static constexpr BitPolynomial random(usize n) {
+        // BitPolynomial of degree `n` has `n + 1` coefficients.
         auto coeffs = coeffs_type::random(n + 1);
 
         // If `n > 0` we want the coefficient of `x^n` to be one for sure. If `n == 0` then a random 0/1 is fine.
         if (n > 0) coeffs.set(n);
-        return BitPoly{std::move(coeffs)};
+        return BitPolynomial{std::move(coeffs)};
     }
 
     /// Factory method to return a new bit-polynomial of *degree* `n` with `n + 1` coefficients picked uniformly
@@ -182,17 +186,17 @@ public:
     /// # Example
     /// ```
     /// std::uint64_t seed = 42;
-    /// auto p1 = BitPoly<>::seeded_random(3311, seed);
-    /// auto p2 = BitPoly<>::seeded_random(3311, seed);
+    /// auto p1 = BitPolynomial<>::seeded_random(3311, seed);
+    /// auto p2 = BitPolynomial<>::seeded_random(3311, seed);
     /// assert_eq(p1, p2, "BitPolys with the same seed should be equal");
     /// ```
-    static constexpr BitPoly seeded_random(usize n, std::uint64_t seed) {
-        // BitPoly of degree `n` has `n + 1` coefficients.
+    static constexpr BitPolynomial seeded_random(usize n, std::uint64_t seed) {
+        // BitPolynomial of degree `n` has `n + 1` coefficients.
         auto coeffs = coeffs_type::seeded_random(n + 1, seed);
 
         // If `n > 0` we want the coefficient of `x^n` to be one for sure. If `n == 0` then a random 0/1 is fine.
         if (n > 0) coeffs.set(n);
-        return BitPoly{std::move(coeffs)};
+        return BitPolynomial{std::move(coeffs)};
     }
 
     /// @}
@@ -207,8 +211,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto coeffs = BitVec<>::from_string("10101000").value();
-    /// BitPoly p{coeffs};
+    /// auto coeffs = BitVector<>::from_string("10101000").value();
+    /// BitPolynomial p{coeffs};
     /// assert_eq(p.degree(), 4);
     /// assert_eq(p.size(), 8);
     /// ```
@@ -220,14 +224,14 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto coeffs = BitVec<>::from_string("10101000").value();
-    /// BitPoly p{coeffs};
+    /// auto coeffs = BitVector<>::from_string("10101000").value();
+    /// BitPolynomial p{coeffs};
     /// assert_eq(p.degree(), 4);
     /// assert_eq(p.size(), 8);
     /// ```
     constexpr usize size() const { return m_coeffs.size(); }
 
-    /// Returns `true` if the bit-polynomial is some form of the zero BitPoly p(x) := 0
+    /// Returns `true` if the bit-polynomial is some form of the zero BitPolynomial p(x) := 0
     constexpr bool is_zero() const { return m_coeffs.none(); }
 
     /// Returns `true` if the bit-polynomial is non-zero.
@@ -255,7 +259,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::zeros(3);
+    /// auto p = BitPolynomial<>::zeros(3);
     /// assert_eq(p[2], false);
     /// ```
     constexpr auto operator[](usize i) const { return m_coeffs[i]; }
@@ -266,7 +270,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::zeros(3);
+    /// auto p = BitPolynomial<>::zeros(3);
     /// assert_eq(p.to_string(), "0");
     /// p[2] = true;
     /// assert_eq(p.to_string(), "x^2");
@@ -279,7 +283,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::ones(3);
+    /// auto p = BitPolynomial<>::ones(3);
     /// auto c = p.coefficients();
     /// assert_eq(c.to_string(), "1111");
     /// ```
@@ -291,7 +295,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::zeros(3);
+    /// auto p = BitPolynomial<>::zeros(3);
     /// assert_eq(p.to_string(), "0");
     /// auto& c = p.coefficients();
     /// c.set_all();
@@ -305,9 +309,9 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitPoly p;
+    /// BitPolynomial p;
     /// assert_eq(p.to_string(), "0");
-    /// auto c = BitVec<u8>::ones(3);
+    /// auto c = BitVector<u8>::ones(3);
     /// p.copy_coefficients(c);
     /// assert_eq(c.to_string(), "111");
     /// assert_eq(p.to_string(), "1 + x + x^2");
@@ -318,7 +322,7 @@ public:
         m_coeffs.copy(coeffs);
     }
 
-    /// Set the BitPoly coefficients by *moving* a bit-vector of coefficients into place.
+    /// Set the BitPolynomial coefficients by *moving* a bit-vector of coefficients into place.
     ///
     /// Use `std::move(coeffs)` in the argument to get this version of `copy_coefficients`.
     ///
@@ -326,9 +330,9 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitPoly p;
+    /// BitPolynomial p;
     /// assert_eq(p.to_string(), "0");
-    /// auto coeffs = BitVec<>::ones(3);
+    /// auto coeffs = BitVector<>::ones(3);
     /// p.copy_coefficients(std::move(coeffs));
     /// assert_eq(p.to_string(), "1 + x + x^2");
     /// ```
@@ -338,31 +342,31 @@ public:
     /// @name Resizing:
     /// @{
 
-    /// Clears the BitPoly, i.e., sets it to the zero BitPoly & returns `self`.
+    /// Clears the BitPolynomial, i.e., sets it to the zero BitPolynomial & returns `self`.
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(3);
+    /// auto p = BitPolynomial<>::x_to_the(3);
     /// assert_eq(p.to_string(), "x^3");
     /// p.clear();
     /// assert_eq(p.to_string(), "0");
     /// ```
-    constexpr BitPoly& clear() {
+    constexpr BitPolynomial& clear() {
         m_coeffs.clear();
         return *this;
     }
 
-    /// Resizes the BitPoly to have the `n` coefficients and returns `self`.
+    /// Resizes the BitPolynomial to have the `n` coefficients and returns `self`.
     ///
     /// # Note
-    /// If `n` > `self.size()` then the BitPoly is padded with zero coefficients.
-    /// If `n` < `self.size()` then the BitPoly is truncated which can change the degree of the BitPoly.
+    /// If `n` > `self.size()` then the BitPolynomial is padded with zero coefficients.
+    /// If `n` < `self.size()` then the BitPolynomial is truncated which can change the degree of the BitPolynomial.
     ///
     /// # Example
     /// ```
-    /// auto coeffs = BitVec<>::from_string("111010").value();
+    /// auto coeffs = BitVector<>::from_string("111010").value();
     /// assert_eq(coeffs.to_string(), "111010");
-    /// BitPoly p{coeffs};
+    /// BitPolynomial p{coeffs};
     /// assert_eq(p.to_string(), "1 + x + x^2 + x^4");
     /// assert_eq(p.to_full_string(), "1 + x + x^2 + 0x^3 + x^4 + 0x^5");
     /// p.resize(2);
@@ -370,21 +374,21 @@ public:
     /// p.resize(4);
     /// assert_eq(p.to_full_string(), "1 + x + 0x^2 + 0x^3");
     /// ```
-    constexpr BitPoly& resize(usize n) {
+    constexpr BitPolynomial& resize(usize n) {
         m_coeffs.resize(n);
         return *this;
     }
 
-    /// Shrinks the BitPoly to have the minimum number of coefficients and returns `self`.
+    /// Shrinks the BitPolynomial to have the minimum number of coefficients and returns `self`.
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(3);
+    /// auto p = BitPolynomial<>::x_to_the(3);
     /// assert_eq(p.to_string(), "x^3");
     /// p.shrink_to_fit();
     /// assert_eq(p.to_string(), "x^3");
     /// ```
-    constexpr BitPoly& shrink_to_fit() {
+    constexpr BitPolynomial& shrink_to_fit() {
         m_coeffs.shrink_to_fit();
         return *this;
     }
@@ -392,17 +396,17 @@ public:
     /// Kills any trailing zero coefficients, so e.g. p(x) := 0*x^4 + x^2 + x becomes p(x) := x^2 + x.
     ///
     /// # Note
-    /// Does nothing to any form of the zero BitPoly.
+    /// Does nothing to any form of the zero BitPolynomial.
     ///
     /// # Example
     /// ```
-    /// auto coeffs = BitVec<>::from_string("101010").value();
-    /// BitPoly p{coeffs};
+    /// auto coeffs = BitVector<>::from_string("101010").value();
+    /// BitPolynomial p{coeffs};
     /// assert_eq(p.is_monic(), false);
     /// p.make_monic();
     /// assert_eq(p.is_monic(), true);
     /// ```
-    constexpr BitPoly& make_monic() {
+    constexpr BitPolynomial& make_monic() {
         if (is_non_zero()) m_coeffs.resize(degree() + 1);
         return *this;
     }
@@ -415,12 +419,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(2);
-    /// auto q = BitPoly<>::x_to_the(3);
+    /// auto p = BitPolynomial<>::x_to_the(2);
+    /// auto q = BitPolynomial<>::x_to_the(3);
     /// p += q;
     /// assert_eq(p.to_string(), "x^2 + x^3");
     /// ```
-    constexpr BitPoly& operator+=(BitPoly const& rhs) {
+    constexpr BitPolynomial& operator+=(BitPolynomial const& rhs) {
         // Edge case.
         if (rhs.is_zero()) return *this;
 
@@ -447,12 +451,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(2);
-    /// auto q = BitPoly<>::x_to_the(3);
+    /// auto p = BitPolynomial<>::x_to_the(2);
+    /// auto q = BitPolynomial<>::x_to_the(3);
     /// p -= q;
     /// assert_eq(p.to_string(), "x^2 + x^3");
     /// ```
-    constexpr BitPoly& operator-=(BitPoly const& rhs) { return operator+=(rhs); }
+    constexpr BitPolynomial& operator-=(BitPolynomial const& rhs) { return operator+=(rhs); }
 
     /// In-place multiplication with another bit-polynomial, returning a reference to the result.
     ///
@@ -460,19 +464,19 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::ones(1);
+    /// auto p = BitPolynomial<>::ones(1);
     /// assert_eq(p.to_string(), "1 + x");
-    /// auto q = BitPoly<>::ones(2);
+    /// auto q = BitPolynomial<>::ones(2);
     /// assert_eq(q.to_string(), "1 + x + x^2");
     /// p *= q;
     /// assert_eq(p.to_string(), "1 + x^3");
     /// ```
-    constexpr BitPoly& operator*=(BitPoly const& rhs) {
+    constexpr BitPolynomial& operator*=(BitPolynomial const& rhs) {
         // Edge cases: zero BitPolys.
         if (rhs.is_zero()) return clear();
         if (is_zero()) return *this;
 
-        // Edge cases: either BitPoly is one.
+        // Edge cases: either BitPolynomial is one.
         if (rhs.is_one()) return *this;
         if (is_one()) {
             *this = rhs;
@@ -480,7 +484,7 @@ public:
         }
 
         // Generally we pass the work to the convolution method for bit-vectors.
-        *this = BitPoly{std::move(convolve(m_coeffs, rhs.m_coeffs))};
+        *this = BitPolynomial{std::move(convolve(m_coeffs, rhs.m_coeffs))};
         return *this;
     }
 
@@ -488,19 +492,19 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(3);
-    /// auto q = BitPoly<>::x_to_the(2);
+    /// auto p = BitPolynomial<>::x_to_the(3);
+    /// auto q = BitPolynomial<>::x_to_the(2);
     /// auto r = p + q;
     /// assert_eq(r.to_string(), "x^2 + x^3");
     /// ```
-    constexpr auto operator+(BitPoly<Word> const& rhs) const {
-        // Avoid unnecessary resizing by adding the smaller degree BitPoly to the larger one ...
+    constexpr auto operator+(BitPolynomial<Word> const& rhs) const {
+        // Avoid unnecessary resizing by adding the smaller degree BitPolynomial to the larger one ...
         if (degree() >= rhs.degree()) {
-            BitPoly<Word> result{*this};
+            BitPolynomial<Word> result{*this};
             result += rhs;
             return result;
         } else {
-            BitPoly<Word> result{rhs};
+            BitPolynomial<Word> result{rhs};
             result += *this;
             return result;
         }
@@ -512,12 +516,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(3);
-    /// auto q = BitPoly<>::x_to_the(2);
+    /// auto p = BitPolynomial<>::x_to_the(3);
+    /// auto q = BitPolynomial<>::x_to_the(2);
     /// auto r = p - q;
     /// assert_eq(r.to_string(), "x^2 + x^3");
     /// ```
-    constexpr auto operator-(BitPoly<Word> const& rhs) const {
+    constexpr auto operator-(BitPolynomial<Word> const& rhs) const {
         // Subtraction is identical to addition in GF(2).
         return operator+(rhs);
     }
@@ -526,13 +530,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(3);
-    /// auto q = BitPoly<>::x_to_the(2);
+    /// auto p = BitPolynomial<>::x_to_the(3);
+    /// auto q = BitPolynomial<>::x_to_the(2);
     /// auto r = p * q;
     /// assert_eq(r.to_string(), "x^5");
     /// ```
-    constexpr auto operator*(BitPoly<Word> const& rhs) const {
-        BitPoly<Word> result{*this};
+    constexpr auto operator*(BitPolynomial<Word> const& rhs) const {
+        BitPolynomial<Word> result{*this};
         result *= rhs;
         return result;
     }
@@ -543,58 +547,58 @@ public:
 
     /// Fills `dst` with the square of this bit-polynomial.
     ///
-    /// @note This is more efficient than multiplying two `BitPoly`s for this special case.
+    /// @note This is more efficient than multiplying two `BitPolynomial`s for this special case.
     ///
     /// # Example
     /// ```
-    /// auto coeffs = BitVec<>::from_string("111").value();
-    /// BitPoly p{coeffs};
+    /// auto coeffs = BitVector<>::from_string("111").value();
+    /// BitPolynomial p{coeffs};
     /// assert_eq(p.to_string(), "1 + x + x^2");
-    /// BitPoly q;
+    /// BitPolynomial q;
     /// p.squared(q);
     /// assert_eq(q.to_string(), "1 + x^2 + x^4");
     /// ```
-    constexpr void squared(BitPoly& dst) const {
-        // Edge case: any constant BitPoly.
+    constexpr void squared(BitPolynomial& dst) const {
+        // Edge case: any constant BitPolynomial.
         if (is_constant()) {
             dst = *this;
             return;
         }
 
         // In GF(2) if p(x) = a + bx + cx^2 + ... then p(x)^2 = a^2 + b^2x^2 + c^2x^4 + ...
-        // This identity means we can use the `riffle` method to square the BitPoly.
+        // This identity means we can use the `riffle` method to square the BitPolynomial.
         m_coeffs.riffled(dst.m_coeffs);
     }
 
-    /// Returns a new BitPoly that is the square of this BitPoly.
+    /// Returns a new BitPolynomial that is the square of this BitPolynomial.
     ///
-    /// @note This is more efficient than multiplying two `BitPoly`s for this special case.
+    /// @note This is more efficient than multiplying two `BitPolynomial`s for this special case.
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(3);
+    /// auto p = BitPolynomial<>::x_to_the(3);
     /// assert_eq(p.to_string(), "x^3");
     /// auto q = p.squared();
     /// assert_eq(q.to_string(), "x^6");
     /// ```
-    constexpr BitPoly squared() const {
-        BitPoly dst;
+    constexpr BitPolynomial squared() const {
+        BitPolynomial dst;
         squared(dst);
         return dst;
     }
 
-    /// Multiplies the BitPoly by `x^n` and returns `self`.
+    /// Multiplies the BitPolynomial by `x^n` and returns `self`.
     ///
     /// @note This is faster than general multiplication for this special, common case.
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(3);
+    /// auto p = BitPolynomial<>::x_to_the(3);
     /// assert_eq(p.to_string(), "x^3");
     /// p.times_x_to_the(2);
     /// assert_eq(p.to_string(), "x^5");
     /// ```
-    constexpr BitPoly& times_x_to_the(usize n) {
+    constexpr BitPolynomial& times_x_to_the(usize n) {
         auto new_degree = degree() + n;
         auto new_size = new_degree + 1;
         if (m_coeffs.size() < new_size) { m_coeffs.resize(new_size); }
@@ -606,28 +610,28 @@ public:
     /// @name Polynomial Evaluation:
     /// @{
 
-    /// Evaluates the BitPoly at the boolean scalar point `x` and returns the result.
+    /// Evaluates the BitPolynomial at the boolean scalar point `x` and returns the result.
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(3);
+    /// auto p = BitPolynomial<>::x_to_the(3);
     /// assert_eq(p(true), true);
     /// assert_eq(p(false), false);
     /// ```
     constexpr bool operator()(bool x) const {
-        // Edge case: the zero BitPoly.
+        // Edge case: the zero BitPolynomial.
         if (is_zero()) { return false; }
 
         // Edge case: `x = false` which is the same as `x = 0` & we always have p(0) = p_0.
         if (!x) { return m_coeffs.get(0); }
 
-        // We are evaluating the BitPoly at `x = true` which is the same as `x = 1`: p(1) = p_0 + p_1 + p_2 + ...
+        // We are evaluating the BitPolynomial at `x = true` which is the same as `x = 1`: p(1) = p_0 + p_1 + p_2 + ...
         Word sum = 0;
         for (auto i = 0uz; i < m_coeffs.words(); ++i) sum ^= m_coeffs.word(i);
         return gf2::count_ones(sum) % 2 == 1;
     }
 
-    /// Evaluates the bit-polynomial for a *square* `gf2::BitMat` argument `M`.
+    /// Evaluates the bit-polynomial for a *square* `gf2::BitMatrix` argument `M`.
     ///
     /// Uses Horner's method to evaluate `p(M)` where `M` is a square matrix and returns the result as a new bit-matrix.
     ///
@@ -635,13 +639,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(6);
-    /// BitPoly p1{BitVec<>::alternating(12)};
-    /// assert_eq(p1(m), BitMat<>::zeros(6, 6));
-    /// BitPoly p2{BitVec<>::alternating(6)};
-    /// assert_eq(p2(m), BitMat<>::identity(6));
+    /// auto m = BitMatrix<>::identity(6);
+    /// BitPolynomial p1{BitVector<>::alternating(12)};
+    /// assert_eq(p1(m), BitMatrix<>::zeros(6, 6));
+    /// BitPolynomial p2{BitVector<>::alternating(6)};
+    /// assert_eq(p2(m), BitMatrix<>::identity(6));
     /// ```
-    constexpr auto operator()(BitMat<Word> const& M) const {
+    constexpr auto operator()(BitMatrix<Word> const& M) const {
         // The bit-matrix argument must be square.
         gf2_assert(M.is_square(), "Matrix must be square -- not {} x {}!", M.rows(), M.cols());
 
@@ -649,10 +653,10 @@ public:
         auto n = M.rows();
 
         // Edge case: If the polynomial is zero then the return value is the n x n zero matrix.
-        if (is_zero()) return BitMat<Word>{n, n};
+        if (is_zero()) return BitMatrix<Word>{n, n};
 
         // Otherwise we start with the polynomial sum being the n x n identity matrix.
-        auto result = BitMat<Word>::identity(n);
+        auto result = BitMatrix<Word>::identity(n);
 
         // Work backwards a la Horner ...
         auto d = degree();
@@ -688,26 +692,26 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(3);
+    /// auto p = BitPolynomial<>::x_to_the(3);
     /// auto r = p.reduce_x_to_the(2);
     /// assert_eq(r.to_string(), "x^2");
     /// ```
-    BitPoly reduce_x_to_the(usize n, bool n_is_log2 = false) const {
+    BitPolynomial reduce_x_to_the(usize n, bool n_is_log2 = false) const {
         // Error check: anything mod 0 is not defined.
         if (is_zero()) throw std::invalid_argument("... mod P(x) is not defined for P(x) := 0.");
 
         // Edge case: anything mod 1 = 0.
-        if (is_one()) return BitPoly<Word>::zero();
+        if (is_one()) return BitPolynomial<Word>::zero();
 
         // Edge case: x^0 = 1 and 1 mod P(x) = 1 for any P(x) != 1 (we already handled the case where P(x) := 1).
-        if (n == 0 && !n_is_log2) return BitPoly<Word>::one();
+        if (n == 0 && !n_is_log2) return BitPolynomial<Word>::one();
 
-        // The BitPoly P(x) is non-zero so can be written as P(x) = x^d + p(x) where degree(p) < d.
+        // The BitPolynomial P(x) is non-zero so can be written as P(x) = x^d + p(x) where degree(p) < d.
         auto d = degree();
 
         // Edge case: P(x) = x + c where c is a constant so x = P(x) + c (subtraction in GF(2) is the same as addition).
         // Then x^e = (P(x) + c)^e = terms in powers of P(x) + c^e. Hence, x^e mod P(x) = c^e = c.
-        if (d == 1) return BitPoly<Word>::constant(m_coeffs.get(1));
+        if (d == 1) return BitPolynomial<Word>::constant(m_coeffs.get(1));
 
         // We can write p(x) = p_0 + p_1 x + ... + p_{d-1} x^{d-1}. All that matters are those coefficients.
         auto p = m_coeffs.sub(0, d);
@@ -743,7 +747,7 @@ public:
             s.split_at(d, q, h);
 
             // s(x) = q(x) + h(x) so s(x) mod P(x) = q(x) + h(x) mod P(x) which we handle term by term.
-            // If h(x) != 0 then at most every second term in h(x) is 1 (nature of BitPoly squares in GF(2)).
+            // If h(x) != 0 then at most every second term in h(x) is 1 (nature of BitPolynomial squares in GF(2)).
             if (auto h_first = h.first_set()) {
                 auto h_last = h.last_set();
                 for (auto i = *h_first; i <= *h_last; i += 2)
@@ -760,14 +764,14 @@ public:
             // Start with r(x) = x mod P(x) -> x^2 mod P(x) -> x^4 mod P(x) ...
             r[1] = true;
             for (auto i = 0uz; i < n; ++i) square_step(r);
-            return BitPoly{std::move(r)};
+            return BitPolynomial{std::move(r)};
         }
 
         // Small exponent case: n < d => x^n mod P(x) = x^n.
-        if (n < d) return BitPoly::x_to_the(n);
+        if (n < d) return BitPolynomial::x_to_the(n);
 
         // Matching exponent case: n = d => x^n mod P(x) = x^d mod P(x) = p(x).
-        if (n == d) return BitPoly{std::move(p)};
+        if (n == d) return BitPolynomial{std::move(p)};
 
         // General case: n > d is handled by a square & multiply algorithm.
         usize n_bit = std::bit_floor(n);
@@ -789,7 +793,7 @@ public:
         }
 
         // Made it.
-        return BitPoly{std::move(r)};
+        return BitPolynomial{std::move(r)};
     }
 
     /// @}
@@ -804,12 +808,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto coeffs = BitVec<>::from_string("101010").value();
-    /// BitPoly p{coeffs};
+    /// auto coeffs = BitVector<>::from_string("101010").value();
+    /// BitPolynomial p{coeffs};
     /// assert_eq(p.to_string("M"), "1 + M^2 + M^4");
     /// ```
     std::string to_string(std::string_view var = "x") const {
-        // Edge case: the zero BitPoly.
+        // Edge case: the zero BitPolynomial.
         if (is_zero()) return "0";
 
         // Otherwise we construct the string ...
@@ -842,12 +846,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto coeffs = BitVec<>::from_string("101010").value();
-    /// BitPoly p{coeffs};
+    /// auto coeffs = BitVector<>::from_string("101010").value();
+    /// BitPolynomial p{coeffs};
     /// assert_eq(p.to_full_string("M"), "1 + 0M + M^2 + 0M^3 + M^4 + 0M^5");
     /// ```
     std::string to_full_string(std::string_view var = "x") const {
-        // Edge case: the zero BitPoly.
+        // Edge case: the zero BitPolynomial.
         if (is_empty()) return "0";
 
         // Otherwise we construct the string ...
@@ -884,12 +888,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitPoly<>::x_to_the(3);
-    /// auto q = BitPoly<>::zeros(1000);
+    /// auto p = BitPolynomial<>::x_to_the(3);
+    /// auto q = BitPolynomial<>::zeros(1000);
     /// q[3] = true;
     /// assert(p == q);
     /// ```
-    friend constexpr bool operator==(BitPoly const& lhs, BitPoly const& rhs) {
+    friend constexpr bool operator==(BitPolynomial const& lhs, BitPolynomial const& rhs) {
         // Edge case.
         if (&lhs == &rhs) return true;
 
@@ -921,21 +925,21 @@ private:
 // Specialises `std::formatter` to handle bit-polynomials ...
 // -------------------------------------------------------------------------------------------------------------------
 
-/// Specialise `std::formatter` for our `gf2::BitPoly<Word>` type.
+/// Specialise `std::formatter` for our `gf2::BitPolynomial<Word>` type.
 ///
 /// You can use the format specifier to set the variable symbol (the default is "x").
 /// For example, `std::format("{:mat}", p)` ->  "p0 + p1*mat + p2*mat^2 + ...".
 ///
 /// # Example
 /// ```
-/// auto p = BitPoly<>::ones(2);
+/// auto p = BitPolynomial<>::ones(2);
 /// auto px = std::format("{}", p);
 /// auto py = std::format("{:y}", p);
 /// assert_eq(px, "1 + x + x^2");
 /// assert_eq(py, "1 + y + y^2");
 /// ```
 template<gf2::Unsigned Word>
-struct std::formatter<gf2::BitPoly<Word>> {
+struct std::formatter<gf2::BitPolynomial<Word>> {
 
     /// Parse a bit-polynomial format specifier for a variable name (default is "x").
     constexpr auto parse(std::format_parse_context const& ctx) {
@@ -950,7 +954,7 @@ struct std::formatter<gf2::BitPoly<Word>> {
 
     /// Defer the work to the `to_string(...)` method in the class.
     template<class FormatContext>
-    auto format(gf2::BitPoly<Word> const& rhs, FormatContext& ctx) const {
+    auto format(gf2::BitPolynomial<Word> const& rhs, FormatContext& ctx) const {
         return std::format_to(ctx.out(), "{}", rhs.to_string(m_var));
     }
 

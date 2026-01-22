@@ -128,7 +128,7 @@ namespace gf2 {
 
 // clang-format off
 template<usize N, Unsigned Word> class BitArray;
-template<Unsigned Word> class BitVec;
+template<Unsigned Word> class BitVector;
 template<Unsigned Word> class BitSpan;
 template<BitStore Store> class BitRef;
 template<BitStore Store, bool is_const> class Bits;
@@ -153,7 +153,7 @@ namespace gf2 {
 ///
 /// # Example
 /// ```
-/// BitVec v{10};
+/// BitVector v{10};
 /// assert_eq(get(v, 0), false);
 /// set(v, 0);
 /// assert_eq(get(v, 0), true);
@@ -175,10 +175,10 @@ get(Store const& store, usize i) {
 ///
 /// # Example
 /// ```
-/// BitVec v{10};
+/// BitVector v{10};
 /// ref(v, 2) = true;
 /// assert(to_string(v) == "0010000000");
-/// auto w = BitVec<>::ones(10);
+/// auto w = BitVector<>::ones(10);
 /// ref(v, 3) = get(w, 3);
 /// assert(to_string(v) == "0011000000");
 /// ref(v, 4) |= get(w, 4);
@@ -197,7 +197,7 @@ ref(Store& store, usize i) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<>::ones(10);
+/// auto v = BitVector<>::ones(10);
 /// assert_eq(front(v), true);
 /// set_all(v, false);
 /// assert_eq(front(v), false);
@@ -215,7 +215,7 @@ front(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<>::ones(10);
+/// auto v = BitVector<>::ones(10);
 /// assert_eq(back(v), true);
 /// set_all(v, false);
 /// assert_eq(back(v), false);
@@ -234,7 +234,7 @@ back(Store const& store) {
 ///
 /// # Example
 /// ```
-/// BitVec v{10};
+/// BitVector v{10};
 /// assert_eq(get(v, 0), false);
 /// set(v, 0);
 /// assert_eq(get(v, 0), true);
@@ -256,7 +256,7 @@ set(Store& store, usize i, bool value = true) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(10);
+/// auto v = BitVector<u8>::ones(10);
 /// flip(v, 0);
 /// assert_eq(to_string(v), "0111111111");
 /// flip(v, 1);
@@ -280,7 +280,7 @@ flip(Store& store, usize i) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<>::zeros(10);
+/// auto v = BitVector<>::zeros(10);
 /// set(v, 0);
 /// assert_eq(to_string(v), "1000000000");
 /// swap(v, 0, 1);
@@ -326,9 +326,9 @@ swap(Store& store, usize i0, usize i1) {
 ///
 /// # Example
 /// ```
-/// BitVec v;
+/// BitVector v;
 /// assert_eq(is_empty(v), true);
-/// BitVec u{10};
+/// BitVector u{10};
 /// assert_eq(is_empty(u), false);
 /// ```
 template<BitStore Store>
@@ -343,7 +343,7 @@ is_empty(Store const& store) {
 ///
 /// # Example
 /// ```
-/// BitVec v{10};
+/// BitVector v{10};
 /// assert_eq(any(v), false);
 /// set(v, 0);
 /// assert_eq(any(v), true);
@@ -362,7 +362,7 @@ any(Store const& store) {
 ///
 /// # Example
 /// ```
-/// BitVec v{3};
+/// BitVector v{3};
 /// assert_eq(all(v), false);
 /// set(v, 0);
 /// set(v, 1);
@@ -397,7 +397,7 @@ all(Store const& store) {
 ///
 /// # Example
 /// ```
-/// BitVec v{10};
+/// BitVector v{10};
 /// assert_eq(none(v), true);
 /// set(v,0);
 /// assert_eq(none(v), false);
@@ -418,7 +418,7 @@ none(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::zeros(10);
+/// auto v = BitVector<u8>::zeros(10);
 /// set_all(v);
 /// assert_eq(to_string(v), "1111111111");
 /// ```
@@ -435,7 +435,7 @@ set_all(Store& store, bool value = true) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::zeros(10);
+/// auto v = BitVector<u8>::zeros(10);
 /// flip_all(v);
 /// assert_eq(to_string(v), "1111111111");
 /// ```
@@ -455,16 +455,16 @@ flip_all(Store& store) {
 ///
 /// # Notes:
 /// 1. The size of the store *must* match the number of bits in the source integer type.
-/// 2. We allow *any* unsigned integral source, e.g. copying a single `u64` into a `BitVec<u8>` of size 64.
+/// 2. We allow *any* unsigned integral source, e.g. copying a single `u64` into a `BitVector<u8>` of size 64.
 /// 3. The least-significant bit of the source becomes the bit at index 0 in the store.
 ///
 /// # Example
 /// ```
-/// BitVec<u8> v{16};
+/// BitVector<u8> v{16};
 /// u16 src = 0b1010101010101010;
 /// copy(src, v);
 /// assert_eq(to_string(v), "0101010101010101");
-/// BitVec<u32> w{16};
+/// BitVector<u32> w{16};
 /// copy(src, w);
 /// assert_eq(to_string(w), "0101010101010101");
 /// ```
@@ -495,14 +495,14 @@ copy(Src src, Store& store) {
 ///
 /// # Note:
 /// This is one of the few methods in the library that *doesn't* require the two stores to have the same
-/// `word_type`. You can use it to convert between different `word_type` stores (e.g., from `BitVec<u32>` to
-/// `BitVec<u8>`) as long as the sizes match.
+/// `word_type`. You can use it to convert between different `word_type` stores (e.g., from `BitVector<u32>` to
+/// `BitVector<u8>`) as long as the sizes match.
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u64>::ones(10);
+/// auto v = BitVector<u64>::ones(10);
 /// assert_eq(to_string(v), "1111111111");
-/// copy(BitVec<u8>::alternating(10), v);
+/// copy(BitVector<u8>::alternating(10), v);
 /// assert_eq(to_string(v), "1010101010");
 /// ```
 template<BitStore Src, BitStore Store>
@@ -573,7 +573,7 @@ copy(Src const& src, Store& store) {
 /// # Example
 /// ```
 /// std::bitset<10> src{0b1010101010};
-/// BitVec v{10};
+/// BitVector v{10};
 /// copy(src, v);
 /// assert_eq(to_string(v), "0101010101");
 /// ```
@@ -594,7 +594,7 @@ copy(std::bitset<N> const& src, Store& store) {
 ///
 /// # Example
 /// ```
-/// BitVec v{10};
+/// BitVector v{10};
 /// copy(v, [](usize i) { return i % 2 == 0; });
 /// assert_eq(v.size(), 10);
 /// assert_eq(to_string(v), "1010101010");
@@ -619,7 +619,7 @@ copy(Store& store, std::invocable<usize> auto f) {
 ///
 /// # Example
 /// ```
-/// BitVec u{10}, v{10};
+/// BitVector u{10}, v{10};
 /// u64 seed = 1234567890;
 /// fill_random(u, 0.5, seed);
 /// fill_random(v, 0.5, seed);
@@ -663,7 +663,7 @@ fill_random(Store& store, double p = 0.5, u64 seed = 0) {
 ///
 /// # Example
 /// ```
-/// BitVec v{10};
+/// BitVector v{10};
 /// assert_eq(count_ones(v), 0);
 /// set(v, 0);
 /// assert_eq(count_ones(v), 1);
@@ -680,7 +680,7 @@ count_ones(Store const& store) {
 ///
 /// # Example
 /// ```
-/// BitVec v{10};
+/// BitVector v{10};
 /// assert_eq(count_zeros(v), 10);
 /// set(v, 0);
 /// assert_eq(count_zeros(v), 9);
@@ -695,11 +695,11 @@ count_zeros(Store const& store) {
 ///
 /// # Example
 /// ```
-/// BitVec v{37};
+/// BitVector v{37};
 /// assert_eq(leading_zeros(v), 37);
 /// set(v, 27);
 /// assert_eq(leading_zeros(v), 27);
-/// auto w = BitVec<u8>::ones(10);
+/// auto w = BitVector<u8>::ones(10);
 /// assert_eq(leading_zeros(w), 0);
 /// ```
 template<BitStore Store>
@@ -718,7 +718,7 @@ leading_zeros(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::zeros(27);
+/// auto v = BitVector<u8>::zeros(27);
 /// assert_eq(trailing_zeros(v), 27);
 /// set(v, 0);
 /// assert_eq(trailing_zeros(v), 26);
@@ -753,7 +753,7 @@ trailing_zeros(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::zeros(37);
+/// auto v = BitVector<u8>::zeros(37);
 /// assert(first_set(v) == std::optional<usize>{});
 /// set(v, 2);
 /// assert(first_set(v) == std::optional<usize>{2});
@@ -761,7 +761,7 @@ trailing_zeros(Store const& store) {
 /// assert(first_set(v) == std::optional<usize>{});
 /// set(v, 27);
 /// assert(first_set(v) == std::optional<usize>{27});
-/// BitVec empty;
+/// BitVector empty;
 /// assert(first_set(empty) == std::optional<usize>{});
 /// ```
 template<BitStore Store>
@@ -780,13 +780,13 @@ first_set(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::zeros(37);
+/// auto v = BitVector<u8>::zeros(37);
 /// assert(last_set(v) == std::optional<usize>{});
 /// set(v, 2);
 /// assert(last_set(v) == std::optional<usize>{2});
 /// set(v, 27);
 /// assert(last_set(v) == std::optional<usize>{27});
-/// BitVec empty;
+/// BitVector empty;
 /// assert(last_set(empty) == std::optional<usize>{});
 /// ```
 template<BitStore Store>
@@ -805,7 +805,7 @@ last_set(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::zeros(37);
+/// auto v = BitVector<u8>::zeros(37);
 /// assert(next_set(v,0) == std::optional<usize>{});
 /// set(v,2);
 /// set(v,27);
@@ -843,7 +843,7 @@ next_set(Store const& store, usize index) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::zeros(37);
+/// auto v = BitVector<u8>::zeros(37);
 /// assert(previous_set(v,36) == std::optional<usize>{});
 /// set(v,2);
 /// set(v,27);
@@ -886,7 +886,7 @@ previous_set(Store const& store, usize index) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(37);
+/// auto v = BitVector<u8>::ones(37);
 /// assert(first_unset(v) == std::optional<usize>{});
 /// set(v,2,false);
 /// assert(first_unset(v) == std::optional<usize>{2});
@@ -894,7 +894,7 @@ previous_set(Store const& store, usize index) {
 /// assert(first_unset(v) == std::optional<usize>{});
 /// set(v,27,false);
 /// assert(first_unset(v) == std::optional<usize>{27});
-/// BitVec empty;
+/// BitVector empty;
 /// assert(empty.first_unset() == std::optional<usize>{});
 /// ```
 template<BitStore Store>
@@ -919,7 +919,7 @@ first_unset(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(37);
+/// auto v = BitVector<u8>::ones(37);
 /// assert(last_unset(v) == std::optional<usize>{});
 /// set(v,2, false);
 /// assert(last_unset(v) == std::optional<usize>{2});
@@ -927,7 +927,7 @@ first_unset(Store const& store) {
 /// assert(last_unset(v) == std::optional<usize>{});
 /// set(v,27, false);
 /// assert(last_unset(v) == std::optional<usize>{27});
-/// BitVec empty;
+/// BitVector empty;
 /// assert(empty.last_unset() == std::optional<usize>{});
 /// ```
 template<BitStore Store>
@@ -952,14 +952,14 @@ last_unset(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(37);
+/// auto v = BitVector<u8>::ones(37);
 /// assert(v.next_unset(0) == std::optional<usize>{});
 /// set(v,2, false);
 /// set(v,27, false);
 /// assert(v.next_unset(0) == std::optional<usize>{2});
 /// assert(v.next_unset(2) == std::optional<usize>{27});
 /// assert(v.next_unset(27) == std::optional<usize>{});
-/// BitVec empty;
+/// BitVector empty;
 /// assert(empty.next_unset(0) == std::optional<usize>{});
 /// ```
 template<BitStore Store>
@@ -997,14 +997,14 @@ next_unset(Store const& store, usize index) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(37);
+/// auto v = BitVector<u8>::ones(37);
 /// assert(v.previous_unset(0) == std::optional<usize>{});
 /// set(v,2, false);
 /// set(v,27, false);
 /// assert(v.previous_unset(36) == std::optional<usize>{27});
 /// assert(v.previous_unset(27) == std::optional<usize>{2});
 /// assert(v.previous_unset(2) == std::optional<usize>{});
-/// BitVec empty;
+/// BitVector empty;
 /// assert(empty.previous_unset(0) == std::optional<usize>{});
 /// ```
 template<BitStore Store>
@@ -1052,7 +1052,7 @@ previous_unset(Store const& store, usize index) {
 ///
 /// # Example
 /// ```
-/// auto u = BitVec<u8>::ones(10);
+/// auto u = BitVector<u8>::ones(10);
 /// for (auto&& bit : bits(u)) assert_eq(bit, true);
 /// ```
 template<BitStore Store>
@@ -1070,7 +1070,7 @@ bits(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::zeros(10);
+/// auto v = BitVector<u8>::zeros(10);
 /// for (auto&& bit : bits(v)) bit = true;
 /// assert_eq(to_string(v), "1111111111");
 /// ```
@@ -1086,7 +1086,7 @@ bits(Store& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::alternating(10);
+/// auto v = BitVector<u8>::alternating(10);
 /// assert_eq(to_string(v), "1010101010");
 /// auto indices = std::ranges::to<std::vector>(set_bits(v));
 /// assert_eq(indices, (std::vector<usize>{0, 2, 4, 6, 8}));
@@ -1103,7 +1103,7 @@ set_bits(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::alternating(10);
+/// auto v = BitVector<u8>::alternating(10);
 /// assert_eq(to_string(v), "1010101010");
 /// auto indices = std::ranges::to<std::vector>(unset_bits(v));
 /// assert_eq(indices, (std::vector<usize>{1, 3, 5, 7, 9}));
@@ -1126,7 +1126,7 @@ unset_bits(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(10);
+/// auto v = BitVector<u8>::ones(10);
 /// assert_eq(to_string(v), "1111111111");
 /// auto words = std::ranges::to<std::vector>(store_words(v));
 /// assert_eq(words, (std::vector<u8>{0b1111'1111, 0b0000'0011}));
@@ -1143,7 +1143,7 @@ store_words(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(10);
+/// auto v = BitVector<u8>::ones(10);
 /// auto words = to_words(v);
 /// assert_eq(words, (std::vector<u8>{0b1111'1111, 0b0000'0011}));
 /// ```
@@ -1166,7 +1166,7 @@ to_words(Store const& store) {
 ///
 /// # Example
 /// ```
-/// const auto v = BitVec<>::alternating(10);
+/// const auto v = BitVector<>::alternating(10);
 /// auto s = span(v, 1, 5);
 /// assert_eq(to_string(s), "0101");
 /// ```
@@ -1203,7 +1203,7 @@ span(Store const& store, usize begin, usize end) {
 ///
 /// # Example
 /// ```
-/// const auto v = BitVec<>::alternating(10);
+/// const auto v = BitVector<>::alternating(10);
 /// auto s = span(v, 1, 5);
 /// assert_eq(to_string(s), "0101");
 /// ```
@@ -1240,7 +1240,7 @@ span(Store& store, usize begin, usize end) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<>::alternating(10);
+/// auto v = BitVector<>::alternating(10);
 /// auto s = sub(v,1,5);
 /// assert_eq(to_string(s), "0101");
 /// s.set_all();
@@ -1250,7 +1250,7 @@ span(Store& store, usize begin, usize end) {
 template<BitStore Store>
 constexpr auto
 sub(Store const& store, usize begin, usize end) {
-    return BitVec<typename Store::word_type>::from(gf2::span(store, begin, end));
+    return BitVector<typename Store::word_type>::from(gf2::span(store, begin, end));
 }
 
 /// @}
@@ -1270,8 +1270,8 @@ sub(Store const& store, usize begin, usize end) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<>::alternating(10);
-/// BitVec left, right;
+/// auto v = BitVector<>::alternating(10);
+/// BitVector left, right;
 /// split(v, 5, left, right);
 /// assert_eq(to_string(left), "10101");
 /// assert_eq(to_string(right), "01010");
@@ -1279,7 +1279,8 @@ sub(Store const& store, usize begin, usize end) {
 /// ```
 template<BitStore Store>
 constexpr void
-split(Store const& store, usize at, BitVec<typename Store::word_type>& left, BitVec<typename Store::word_type>& right) {
+split(Store const& store, usize at, BitVector<typename Store::word_type>& left,
+      BitVector<typename Store::word_type>& right) {
     auto sz = store.size();
     gf2_assert(at <= sz, "Oops, split point {} is beyond the end of the bit-store {}", at, sz);
     left.clear();
@@ -1298,7 +1299,7 @@ split(Store const& store, usize at, BitVec<typename Store::word_type>& left, Bit
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<>::alternating(10);
+/// auto v = BitVector<>::alternating(10);
 /// auto [left, right] = split(v, 5);
 /// assert_eq(to_string(left), "10101");
 /// assert_eq(to_string(right), "01010");
@@ -1307,7 +1308,7 @@ split(Store const& store, usize at, BitVec<typename Store::word_type>& left, Bit
 template<BitStore Store>
 constexpr auto
 split(Store const& store, usize at) {
-    BitVec<typename Store::word_type> left, right;
+    BitVector<typename Store::word_type> left, right;
     split(store, at, left, right);
     return std::pair{left, right};
 }
@@ -1319,8 +1320,8 @@ split(Store const& store, usize at) {
 ///
 /// # Example
 /// ```
-/// auto lhs = BitVec<u16>::zeros(12);
-/// auto rhs = BitVec<u8>::ones(12);
+/// auto lhs = BitVector<u16>::zeros(12);
+/// auto rhs = BitVector<u8>::ones(12);
 /// auto v = join(lhs, rhs);
 /// assert_eq(to_string(v), "000000000000111111111111");
 /// ```
@@ -1331,7 +1332,7 @@ join(Lhs const& lhs, Rhs const& rhs) {
     auto rhs_size = rhs.size();
 
     using word_type = typename Lhs::word_type;
-    BitVec<word_type> result(lhs_size + rhs_size);
+    BitVector<word_type> result(lhs_size + rhs_size);
 
     result.span(0, lhs_size).copy(lhs);
     result.span(lhs_size, lhs_size + rhs_size).copy(rhs);
@@ -1351,14 +1352,14 @@ join(Lhs const& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(10);
-/// BitVec<u8> dst;
+/// auto v = BitVector<u8>::ones(10);
+/// BitVector<u8> dst;
 /// riffle(v, dst);
 /// assert_eq(to_string(dst), "1010101010101010101");
 /// ```
 template<BitStore Store>
 constexpr void
-riffle(Store const& store, BitVec<typename Store::word_type>& dst) {
+riffle(Store const& store, BitVector<typename Store::word_type>& dst) {
     // Nothing to do if the store is empty or has just one element. With two bits `ab` we fill `dst` with `a0b`.
     auto sz = store.size();
     if (sz < 2) {
@@ -1392,14 +1393,14 @@ riffle(Store const& store, BitVec<typename Store::word_type>& dst) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(10);
+/// auto v = BitVector<u8>::ones(10);
 /// auto dst = riffle(v);
 /// assert_eq(to_string(dst), "1010101010101010101");
 /// ```
 template<BitStore Store>
 constexpr auto
 riffle(Store const& store) {
-    BitVec<typename Store::word_type> result;
+    BitVector<typename Store::word_type> result;
     riffle(store, result);
     return result;
 }
@@ -1419,7 +1420,7 @@ riffle(Store const& store) {
 ///
 /// # Example
 /// ```
-/// BitVec v{10};
+/// BitVector v{10};
 /// assert_eq(to_binary_string(v), "0000000000");
 /// set(v, 0);
 /// assert_eq(to_binary_string(v), "1000000000");
@@ -1470,7 +1471,7 @@ to_binary_string(Store const& store, std::string_view sep = "", std::string_view
 ///
 /// # Example
 /// ```
-/// BitVec v{10};
+/// BitVector v{10};
 /// assert_eq(to_string(v), "0000000000");
 /// set(v, 0);
 /// assert_eq(to_string(v), "1000000000");
@@ -1489,9 +1490,9 @@ to_string(Store const& store, std::string_view sep = "", std::string_view pre = 
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<>::alternating(10);
+/// auto v = BitVector<>::alternating(10);
 /// assert_eq(to_pretty_string(v), "[1,0,1,0,1,0,1,0,1,0]");
-/// BitVec empty;
+/// BitVector empty;
 /// assert_eq(to_pretty_string(empty), "[]");
 /// ```
 template<BitStore Store>
@@ -1520,13 +1521,13 @@ to_pretty_string(Store const& store) {
 ///
 /// # Example
 /// ```
-/// BitVec v0;
+/// BitVector v0;
 /// assert_eq(to_hex_string(v0), "");
-/// auto v1 = BitVec<>::ones(4);
+/// auto v1 = BitVector<>::ones(4);
 /// assert_eq(to_hex_string(v1), "F");
-/// auto v2 = BitVec<>::ones(5);
+/// auto v2 = BitVector<>::ones(5);
 /// assert_eq(to_hex_string(v2), "F1.2");
-/// auto v3 = BitVec<>::alternating(8);
+/// auto v3 = BitVector<>::alternating(8);
 /// assert_eq(to_binary_string(v3), "10101010");
 /// assert_eq(to_hex_string(v3), "AA");
 /// ```
@@ -1615,8 +1616,8 @@ operator<<(Store const& store, std::ostream& s) {
 ///
 // # Example
 /// ```
-/// auto u = BitVec<u8>::ones(55);
-/// auto v = BitVec<u8>::ones(55);
+/// auto u = BitVector<u8>::ones(55);
+/// auto v = BitVector<u8>::ones(55);
 /// assert(u == v);
 /// v.set(23, false);
 /// assert(u != v);
@@ -1646,7 +1647,7 @@ operator==(Lhs const& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(20);
+/// auto v = BitVector<u8>::ones(20);
 /// v <<= 8;
 /// assert_eq(to_string(v), "11111111111100000000");
 /// ```
@@ -1707,7 +1708,7 @@ operator<<=(Store& store, usize shift) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(20);
+/// auto v = BitVector<u8>::ones(20);
 /// v >>= 8;
 /// assert_eq(to_string(v), "00000000111111111111");
 /// ```
@@ -1769,14 +1770,14 @@ operator>>=(Store& store, usize shift) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(20);
+/// auto v = BitVector<u8>::ones(20);
 /// auto w = v << 8;
 /// assert_eq(to_string(w), "11111111111100000000");
 /// ```
 template<BitStore Store>
 constexpr auto
 operator<<(Store const& store, usize shift) {
-    auto result = BitVec<typename Store::word_type>::from(store);
+    auto result = BitVector<typename Store::word_type>::from(store);
     result <<= shift;
     return result;
 }
@@ -1790,14 +1791,14 @@ operator<<(Store const& store, usize shift) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::ones(20);
+/// auto v = BitVector<u8>::ones(20);
 /// auto w = v >> 8;
 /// assert_eq(to_string(w), "00000000111111111111");
 /// ```
 template<BitStore Store>
 constexpr auto
 operator>>(Store const& store, usize shift) {
-    auto result = BitVec<typename Store::word_type>::from(store);
+    auto result = BitVector<typename Store::word_type>::from(store);
     result >>= shift;
     return result;
 }
@@ -1812,7 +1813,7 @@ operator>>(Store const& store, usize shift) {
 ///
 /// # Example
 /// ```
-/// auto v1 = BitVec<u8>::alternating(10);
+/// auto v1 = BitVector<u8>::alternating(10);
 /// v1 ^= ~v1;
 /// assert_eq(to_string(v1), "1111111111");
 /// ```
@@ -1830,7 +1831,7 @@ operator^=(Lhs& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v1 = BitVec<u8>::alternating(10);
+/// auto v1 = BitVector<u8>::alternating(10);
 /// v1 &= ~v1;
 /// assert_eq(to_string(v1), "0000000000");
 /// ```
@@ -1848,7 +1849,7 @@ operator&=(Lhs& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v1 = BitVec<u8>::alternating(10);
+/// auto v1 = BitVector<u8>::alternating(10);
 /// v1 |= ~v1;
 /// assert_eq(to_string(v1), "1111111111");
 /// ```
@@ -1868,7 +1869,7 @@ operator|=(Lhs& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v = BitVec<u8>::alternating(10);
+/// auto v = BitVector<u8>::alternating(10);
 /// assert_eq(to_string(v), "1010101010");
 /// auto w = ~v;
 /// assert_eq(to_string(w), "0101010101");
@@ -1876,7 +1877,7 @@ operator|=(Lhs& lhs, Rhs const& rhs) {
 template<BitStore Store>
 constexpr auto
 operator~(Store const& store) {
-    auto result = BitVec<typename Store::word_type>::from(store);
+    auto result = BitVector<typename Store::word_type>::from(store);
     result.flip_all();
     return result;
 }
@@ -1887,7 +1888,7 @@ operator~(Store const& store) {
 ///
 /// # Example
 /// ```
-/// auto v1 = BitVec<u8>::alternating(10);
+/// auto v1 = BitVector<u8>::alternating(10);
 /// auto v2 = ~v1;
 /// auto v3 = v1 ^ v2;
 /// assert_eq(to_string(v3), "1111111111");
@@ -1896,7 +1897,7 @@ template<BitStore Lhs, BitStore Rhs>
     requires std::same_as<typename Lhs::word_type, typename Rhs::word_type>
 constexpr auto
 operator^(Lhs const& lhs, Rhs const& rhs) {
-    auto result = BitVec<typename Lhs::word_type>::from(lhs);
+    auto result = BitVector<typename Lhs::word_type>::from(lhs);
     result ^= rhs;
     return result;
 }
@@ -1907,7 +1908,7 @@ operator^(Lhs const& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v1 = BitVec<u8>::alternating(10);
+/// auto v1 = BitVector<u8>::alternating(10);
 /// auto v2 = ~v1;
 /// auto v3 = v1 & v2;
 /// assert_eq(to_string(v3), "0000000000");
@@ -1916,7 +1917,7 @@ template<BitStore Lhs, BitStore Rhs>
     requires std::same_as<typename Lhs::word_type, typename Rhs::word_type>
 constexpr auto
 operator&(Lhs const& lhs, Rhs const& rhs) {
-    auto result = BitVec<typename Lhs::word_type>::from(lhs);
+    auto result = BitVector<typename Lhs::word_type>::from(lhs);
     result &= rhs;
     return result;
 }
@@ -1927,7 +1928,7 @@ operator&(Lhs const& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v1 = BitVec<u8>::alternating(10);
+/// auto v1 = BitVector<u8>::alternating(10);
 /// auto v2 = ~v1;
 /// auto v3 = v1 | v2;
 /// assert_eq(to_string(v3), "1111111111");
@@ -1936,7 +1937,7 @@ template<BitStore Lhs, BitStore Rhs>
     requires std::same_as<typename Lhs::word_type, typename Rhs::word_type>
 constexpr auto
 operator|(Lhs const& lhs, Rhs const& rhs) {
-    auto result = BitVec<typename Lhs::word_type>::from(lhs);
+    auto result = BitVector<typename Lhs::word_type>::from(lhs);
     result |= rhs;
     return result;
 }
@@ -1953,7 +1954,7 @@ operator|(Lhs const& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v1 = BitVec<u8>::alternating(10);
+/// auto v1 = BitVector<u8>::alternating(10);
 /// v1 += ~v1;
 /// assert_eq(to_string(v1), "1111111111");
 /// ```
@@ -1972,7 +1973,7 @@ operator+=(Lhs& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v1 = BitVec<u8>::alternating(10);
+/// auto v1 = BitVector<u8>::alternating(10);
 /// v1 -= ~v1;
 /// assert_eq(to_string(v1), "1111111111");
 /// ```
@@ -1995,7 +1996,7 @@ operator-=(Lhs& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v1 = BitVec<u8>::alternating(10);
+/// auto v1 = BitVector<u8>::alternating(10);
 /// auto v2 = ~v1;
 /// auto v3 = v1 + v2;
 /// assert_eq(to_string(v3), "1111111111");
@@ -2004,7 +2005,7 @@ template<BitStore Lhs, BitStore Rhs>
     requires std::same_as<typename Lhs::word_type, typename Rhs::word_type>
 constexpr auto
 operator+(Lhs const& lhs, Rhs const& rhs) {
-    auto result = BitVec<typename Lhs::word_type>::from(lhs);
+    auto result = BitVector<typename Lhs::word_type>::from(lhs);
     result += rhs;
     return result;
 }
@@ -2017,7 +2018,7 @@ operator+(Lhs const& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v1 = BitVec<u8>::alternating(10);
+/// auto v1 = BitVector<u8>::alternating(10);
 /// auto v2 = ~v1;
 /// auto v3 = v1 - v2;
 /// assert_eq(to_string(v3), "1111111111");
@@ -2026,7 +2027,7 @@ template<BitStore Lhs, BitStore Rhs>
     requires std::same_as<typename Lhs::word_type, typename Rhs::word_type>
 constexpr auto
 operator-(Lhs const& lhs, Rhs const& rhs) {
-    auto result = BitVec<typename Lhs::word_type>::from(lhs);
+    auto result = BitVector<typename Lhs::word_type>::from(lhs);
     result -= rhs;
     return result;
 }
@@ -2045,7 +2046,7 @@ operator-(Lhs const& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v1 = BitVec<u8>::alternating(10);
+/// auto v1 = BitVector<u8>::alternating(10);
 /// auto v2 = ~v1;
 /// assert_eq(dot(v1, v1), true);
 /// assert_eq(dot(v1, v2), false);
@@ -2059,7 +2060,7 @@ dot(Lhs const& lhs, Rhs const& rhs) {
     auto sum = word_type{0};
     for (auto i = 0uz; i < lhs.words(); ++i) {
         auto tmp = lhs.word(i) & rhs.word(i);
-        //sum ^= static_cast<word_type>(tmp);
+        // sum ^= static_cast<word_type>(tmp);
         sum ^= tmp;
     }
     return count_ones(sum) % 2 == 1;
@@ -2075,7 +2076,7 @@ dot(Lhs const& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto v1 = BitVec<u8>::alternating(10);
+/// auto v1 = BitVector<u8>::alternating(10);
 /// auto v2 = ~v1;
 /// assert_eq(v1*v1, true);
 /// assert_eq(v1*v2, false);
@@ -2098,8 +2099,8 @@ operator*(Lhs const& lhs, Rhs const& rhs) {
 ///
 /// # Example
 /// ```
-/// auto lhs = BitVec<>::ones(3);
-/// auto rhs = BitVec<>::ones(2);
+/// auto lhs = BitVector<>::ones(3);
+/// auto rhs = BitVector<>::ones(2);
 /// auto result = convolve(lhs, rhs);
 /// assert_eq(to_string(result), "1001");
 /// ```
@@ -2111,10 +2112,10 @@ convolve(Lhs const& lhs, Rhs const& rhs) {
     auto bits_per_word = BITS<word_type>;
 
     // Edge case: if either store is empty then the convolution is empty.
-    if (lhs.is_empty() || rhs.is_empty()) return BitVec<word_type>{};
+    if (lhs.is_empty() || rhs.is_empty()) return BitVector<word_type>{};
 
     // Set up the result bit-vector.
-    auto result = BitVec<word_type>::zeros(lhs.size() + rhs.size() - 1);
+    auto result = BitVector<word_type>::zeros(lhs.size() + rhs.size() - 1);
 
     // If either vector is all zeros then the convolution is all zeros.
     if (lhs.none() || rhs.none()) return result;

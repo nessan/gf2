@@ -7,9 +7,9 @@
 
 int
 main() {
-    auto u = BitVec<>::ones(19);
-    auto v = BitVec<>::ones(23);
-    v.append(BitVec<>::zeros(8));
+    auto u = BitVector<>::ones(19);
+    auto v = BitVector<>::ones(23);
+    v.append(BitVector<>::zeros(8));
     v.set(8, true);
 
     std::println("Convolving {} and {}.", u, v);

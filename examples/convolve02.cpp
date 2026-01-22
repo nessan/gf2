@@ -12,7 +12,7 @@
 
 int
 main() {
-    using vector_type = BitVec<u8>;
+    using vector_type = BitVector<u8>;
 
     // A simple Knuth style linear congruential generator seeded to a clock dependent state.
     using lcg = std::linear_congruential_engine<uint64_t, 6364136223846793005U, 1442695040888963407U, 0U>;

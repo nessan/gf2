@@ -17,7 +17,7 @@ main() {
     std::println("Running trials of forward search on bit-vectors of length {:L}.", N);
     for (auto i = 0uz; i < n_trials; ++i) {
         std::print("Trial {:3} of {:L}: ", i + 1, n_trials);
-        auto bv = BitVec<>::biased_random(N, p);
+        auto bv = BitVector<>::biased_random(N, p);
 
         // Naive count of the number of set & unset bits.
         auto n_set = 0uz;
@@ -64,7 +64,7 @@ main() {
     std::println("Running trials of reverse search on bit-vectors of length {:L}.", N);
     for (auto i = 0uz; i < n_trials; ++i) {
         std::print("Trial {:3} of {:L}: ", i + 1, n_trials);
-        auto bv = BitVec<>::biased_random(N, p);
+        auto bv = BitVector<>::biased_random(N, p);
 
         // Naive count of the number of set & unset bits.
         auto n_set = 0uz;

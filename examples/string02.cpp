@@ -9,7 +9,7 @@
 #include "naive.h"
 
 using word_type = usize;
-using vector_type = BitVec<word_type>;
+using vector_type = BitVector<word_type>;
 
 void
 compare_bin(std::size_t size, std::size_t n_trials) {

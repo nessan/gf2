@@ -26,19 +26,19 @@ The library will efficiently perform almost all operations on that vector 64 bit
 
 This header-only library provides the following main classes:
 
-| Class Name     | Description                                       |
-| -------------- | ------------------------------------------------- |
-| [`BitArray`][] | A fixed-size vector of bits.                      |
-| [`BitVec`][]   | A dynamically-sized vector of bits.               |
-| [`BitSpan`][]  | A non-owning view into contiguous ranges of bits. |
-| [`BitPoly`][]  | A polynomial over GF(2).                          |
-| [`BitMat`][]   | A matrix over GF(2).                              |
+| Class Name          | Description                                       |
+| ------------------- | ------------------------------------------------- |
+| [`BitArray`][]      | A fixed-size vector of bits.                      |
+| [`BitVector`][]     | A dynamically-sized vector of bits.               |
+| [`BitSpan`][]       | A non-owning view into contiguous ranges of bits. |
+| [`BitPolynomial`][] | A polynomial over GF(2).                          |
+| [`BitMatrix`][]     | A matrix over GF(2).                              |
 
-The `BitArray`, `BitVec`, and `BitSpan` classes share many methods, and all implement the [`BitStore`][] concept, which provides a rich interface for manipulating collections of bits. The functions include bit accessors, mutators, fills, queries, iterators, stringification methods, bit-wise operators, arithmetic operators, and more.
+The `BitArray`, `BitVector`, and `BitSpan` classes share many methods, and all implement the [`BitStore`][] concept, which provides a rich interface for manipulating collections of bits. The functions include bit accessors, mutators, fills, queries, iterators, stringification methods, bit-wise operators, arithmetic operators, and more.
 
 There are other classes to support linear algebra operations, such as solving systems of linear equations, finding matrix inverses, and computing eigenvalues and eigenvectors. Among other things, the interface includes methods for examining the eigen-structure of large bit matrices.
 
-The `BitPoly` class has methods to compute $x^N\bmod{p(x)}$ where $p(x)$ is a polynomial over $\mathbb{F}_2$ and $N$ is a potentially huge integer.
+The `BitPolynomial` class has methods to compute $x^N\bmod{p(x)}$ where $p(x)$ is a polynomial over $\mathbb{F}_2$ and $N$ is a potentially huge integer.
 
 The classes are efficient and pack the individual bit elements into natural unsigned word blocks.
 There is a rich interface for setting up and manipulating these classes, as well as allowing them to interact with each other.
@@ -56,7 +56,7 @@ Here is a simple example of a program that uses `gf2`:
 #include <gf2/namespace.h>
 int main()
 {
-    auto M = BitMat<>::random(6, 6);
+    auto M = BitMatrix<>::random(6, 6);
     auto c = M.characteristic_polynomial();
     std::println("The bit-matrix M:\n{}", M);
     std::println("has characteristic polynomial c(x) = {}", c);
@@ -169,7 +169,7 @@ You can use this software under the [MIT license][].
 [`boost::dynamic_bitset`]: https://www.boost.org/doc/libs/1_80_0/libs/dynamic_bitset/dynamic_bitset.html
 [`BitStore`]: docs/pages/BitStore.md
 [`BitArray`]: docs/pages/BitArray.md
-[`BitVec`]: docs/pages/BitVec.md
+[`BitVector`]: docs/pages/BitVector.md
 [`BitSpan`]: docs/pages/BitSpan.md
-[`BitPoly`]: docs/pages/BitPoly.md
-[`BitMat`]: docs/pages/BitMat.md
+[`BitPolynomial`]: docs/pages/BitPolynomial.md
+[`BitMatrix`]: docs/pages/BitMatrix.md

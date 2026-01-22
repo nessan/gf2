@@ -25,8 +25,8 @@ main() {
 
     // Random vector & matrix
     using Word = usize;
-    auto p = BitPoly<Word>::random(d);
-    auto mat = BitMat<Word>::random(N, N);
+    auto p = BitPolynomial<Word>::random(d);
+    auto mat = BitMatrix<Word>::random(N, N);
 
     // To do something in the loop, we count how often the top right element from the polynomial evaluation is 1.
     auto count = 0uz;

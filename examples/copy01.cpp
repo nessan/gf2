@@ -8,7 +8,7 @@
 template<typename Dst>
 void
 test_copy_to(std::string_view label, auto& src) {
-    BitVec<Dst> dst(src.size());
+    BitVector<Dst> dst(src.size());
     dst.copy(src);
     auto src_str = src.to_string();
     auto dst_str = dst.to_string();
@@ -21,9 +21,9 @@ test_copy_to(std::string_view label, auto& src) {
 
 int
 main() {
-    auto u8_src = BitVec<u8>::random(1011);
-    auto u16_src = BitVec<u16>::random(1111);
-    auto u32_src = BitVec<u32>::random(991);
+    auto u8_src = BitVector<u8>::random(1011);
+    auto u16_src = BitVector<u16>::random(1111);
+    auto u32_src = BitVector<u32>::random(991);
 
     test_copy_to<u8>("u8 -> u8", u8_src);
     test_copy_to<u32>("u8 -> u32", u8_src);

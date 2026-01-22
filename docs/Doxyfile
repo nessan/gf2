@@ -1009,11 +1009,11 @@ WARN_LOGFILE           = doxygen.out
 INPUT                  = README.md \
                          docs/pages/BitStore.md \
                          docs/pages/BitArray.md \
-                         docs/pages/BitVec.md \
+                         docs/pages/BitVector.md \
                          docs/pages/BitSpan.md \
                          docs/pages/BitRef.md \
-                         docs/pages/BitPoly.md \
-                         docs/pages/BitMat.md \
+                         docs/pages/BitPolynomial.md \
+                         docs/pages/BitMatrix.md \
                          docs/pages/BitGauss.md \
                          docs/pages/BitLU.md \
                          docs/pages/Iterators.md \

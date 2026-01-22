@@ -7,7 +7,7 @@
 #include <gf2/namespace.h>
 
 using word_type = usize;
-using matrix_type = BitMat<word_type>;
+using matrix_type = BitMatrix<word_type>;
 
 void
 test_binary_string(std::size_t rows, std::size_t cols, std::size_t n_trials) {

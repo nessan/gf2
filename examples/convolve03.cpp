@@ -11,7 +11,7 @@
 
 int
 main() {
-    using vector_type = BitVec<u8>;
+    using vector_type = BitVector<u8>;
 
     // Convolving bit-vectors u and v with the following sizes.
     auto nu = 5000uz;

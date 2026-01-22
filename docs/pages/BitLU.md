@@ -14,10 +14,10 @@ In practice, $L$ and $U$ are packed compactly into an $n \times n$ bit-matrix, a
 
 ## Construction
 
-If `A` is a square `gf2::BitMat` you can create a `gf2::BitLU` object either by
+If `A` is a square `gf2::BitMatrix` you can create a `gf2::BitLU` object either by
 
 - A direct call to the class constructor `gf2::BitLU(A)`, or
-- Using the factory method `gf2::BitMat::LU` on the matrix object by a call like `auto LU = A.LU();` on the matrix object `A`.
+- Using the factory method `gf2::BitMatrix::LU` on the matrix object by a call like `auto LU = A.LU();` on the matrix object `A`.
 
 The decomposition always works even if $A$ is singular, but other class methods will not.
 
@@ -45,12 +45,12 @@ After that, the following query methods are available:
 
 You can access permutation information using the following methods:
 
-| Method                               | Description                                                                                        |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| `gf2::BitLU::swaps()`                | Returns a reference to the row swap instructions in [`LAPACK`] form.                               |
-| `gf2::BitLU::permutation_vector()`   | Returns the permutation matrix as a vector of showing the index positions of the non-zero entries. |
-| `gf2::BitLU::permute(BitMat<Word>&)` | Permutes the rows of the input matrix in-place using our row-swap instruction vector.              |
-| `gf2::BitLU::permute(BitVec<Word>&)` | Permute the rows of the input vector in-place using our row-swap instruction vector.               |
+| Method                                  | Description                                                                                        |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `gf2::BitLU::swaps()`                   | Returns a reference to the row swap instructions in [`LAPACK`] form.                               |
+| `gf2::BitLU::permutation_vector()`      | Returns the permutation matrix as a vector of showing the index positions of the non-zero entries. |
+| `gf2::BitLU::permute(BitMatrix<Word>&)` | Permutes the rows of the input matrix in-place using our row-swap instruction vector.              |
+| `gf2::BitLU::permute(BitVector<Word>&)` | Permute the rows of the input vector in-place using our row-swap instruction vector.               |
 
 A permutation matrix is just some row permutation of the identity matrix, so it has a single non-zero, 1, entry in each row or column.
 You don't need to store the entire matrix but instead store the locations of those 1's.
@@ -71,17 +71,17 @@ This is interpreted as follows:
 
 ## Linear System Solving
 
-| Method                                  | Description                                                        |
-| --------------------------------------- | ------------------------------------------------------------------ |
-| `gf2::BitLU::operator()(const BitVec&)` | Returns a solution to the equation $A \cdot x = b$.                |
-| `gf2::BitLU::operator()(const BitMat&)` | Returns a solution to the collection of equations $A \cdot X = B$. |
+| Method                                     | Description                                                        |
+| ------------------------------------------ | ------------------------------------------------------------------ |
+| `gf2::BitLU::operator()(const BitVector&)` | Returns a solution to the equation $A \cdot x = b$.                |
+| `gf2::BitLU::operator()(const BitMatrix&)` | Returns a solution to the collection of equations $A \cdot X = B$. |
 
 In the second case, each column of the bit-matrix `B` is considered a separate right-hand side, and the corresponding column of $X$ is the solution vector.
 
 Once you have the [LU decomposition] of $A$, it is easy to solve systems like these.
 If $A$ is $n \times n$ each system solution takes just $\mathcal{O}(n^2)$ operations.
 
-These methods return a [`std::optional`] wrapping a `gf2::BitVec` or a `gf2::BitMat` or [`std::nullopt`] if $A$ is singular.
+These methods return a [`std::optional`] wrapping a `gf2::BitVector` or a `gf2::BitMatrix` or [`std::nullopt`] if $A$ is singular.
 You can avoid that by first calling the `gf2::BitLU::is_singular` method.
 
 > [!WARNING]
@@ -115,7 +115,7 @@ main() {
     for (usize n = 0; n < trials; ++n) {
 
         // Create a random matrix & decompose it
-        auto A = gf2::BitMat<>::random(N, N);
+        auto A = gf2::BitMatrix<>::random(N, N);
         auto LU = A.LU();
 
         // Is the matrix singular?
@@ -130,7 +130,7 @@ main() {
     }
 
     // Stats
-    auto p = BitMat<>::probability_singular(N);     // <1>
+    auto p = BitMatrix<>::probability_singular(N);     // <1>
     std::println();
     std::println("Singularity stats ...");
     std::println("bit::matrix size: {} x {}", N, N);
@@ -142,7 +142,7 @@ main() {
 }
 ```
 
-1. See `BitMat::probability_singular` for details.
+1. See `BitMatrix::probability_singular` for details.
 
 **Sample output:**
 
@@ -191,7 +191,7 @@ Expected:    71 times
 ## See Also
 
 - `gf2::BitLU` for detailed documentation of all class methods.
-- [`BitMat`](BitMat.md) for creating and manipulating bit-matrices.
+- [`BitMatrix`](BitMatrix.md) for creating and manipulating bit-matrices.
 - [`BitGauss`](BitGauss.md) for a Gaussian elimination solver for $A \cdot x = b$.
 
 <!-- Reference Links -->

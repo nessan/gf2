@@ -134,10 +134,10 @@ There are also many static factory construction functions.
 | `gf2::BitArray::seeded_random` | Returns a `BitVSet` with a reproducible random fill.                            |
 | `gf2::BitArray::biased_random` | Returns a random `BitArray` where you set the probability of bits being 1.      |
 
-The `gf2::BitVec::from` factory method is overloaded to allow construction from:
+The `gf2::BitVector::from` factory method is overloaded to allow construction from:
 
--   A [`std::bitset`] where we copy the bits over.
--   A callable object (a function of some sort) that generates bits on demand when passed an index.
+- A [`std::bitset`] where we copy the bits over.
+- A callable object (a function of some sort) that generates bits on demand when passed an index.
 
 ## Bit Access {#set-bit-access}
 
@@ -186,7 +186,7 @@ The following methods let you mutate the entire bit-array in a single call.
 
 | Function                  | Description                                                                       |
 | ------------------------- | --------------------------------------------------------------------------------- |
-| `gf2::BitVec::set_all`    | Sets all the bits in the bit-array to the passed value, which defaults to `true`. |
+| `gf2::BitVector::set_all` | Sets all the bits in the bit-array to the passed value, which defaults to `true`. |
 | `gf2::BitArray::flip_all` | Flips the values of all the bits in the bit-array.                                |
 
 The methods operate on words at a time, so are inherently parallel.
@@ -204,10 +204,10 @@ The following methods let you populate the entire bit-array in a single call.
 
 The `gf2::BitArray::copy` methods support copying bits from:
 
--   Another bit-store of the same size but possibly a different underlying word type.
--   A [`std::bitset`] of the same size as the bit-array.
--   An unsigned integer that has the same number of bits as the bit-array. The integer type need not be the same as the underlying `Word` used by the bit-array.
--   A function or callable object that takes a single `usize` index argument and returns a boolean value for that index.
+- Another bit-store of the same size but possibly a different underlying word type.
+- A [`std::bitset`] of the same size as the bit-array.
+- An unsigned integer that has the same number of bits as the bit-array. The integer type need not be the same as the underlying `Word` used by the bit-array.
+- A function or callable object that takes a single `usize` index argument and returns a boolean value for that index.
 
 > [!NOTE]
 > In each case, the size of the source and destinations must match exactly and that condition is always checked unless the `NDEBUG` flag is set at compile time. You can always use a `gf2::BitSpan` to copy a subset of bits if needed.
@@ -251,10 +251,10 @@ This is similar to the C++20 [`std::span`] class for regular data collection typ
 
 The following methods create or fill _independent_ bit-vectors with copies of some contiguous subset of the bits in the vector.
 
-| Function                  | Description                                                                            |
-| ------------------------- | -------------------------------------------------------------------------------------- |
-| `gf2::BitArray::sub`      | Returns a new `gf2::BitVec` encompassing the bits in a half-open range `[begin, end)`. |
-| `gf2::BitArray::split_at` | Fills two bit-vectors with the bits in the ranges `[0, at)` and `[at, size())`.        |
+| Function                  | Description                                                                               |
+| ------------------------- | ----------------------------------------------------------------------------------------- |
+| `gf2::BitArray::sub`      | Returns a new `gf2::BitVector` encompassing the bits in a half-open range `[begin, end)`. |
+| `gf2::BitArray::split_at` | Fills two bit-vectors with the bits in the ranges `[0, at)` and `[at, size())`.           |
 
 The `gf2::BitArray::split_at` method can optionally take two pre-existing bit-vectors to fill, thereby avoiding unnecessary allocations in some iterative algorithms that repeatedly use this method.
 
@@ -272,7 +272,7 @@ We have methods that can interleave (_riffle_) the bits in a bit-array with zero
 
 If the bit-array looks like $v_0 v_1 v_2 \ldots v_n$, then the riffling operation produces the vector $v_0 0 v_1 0 v_2 0 \ldots v_n$ where a zero is interleaved _between_ every bit in the original bit-array (there is no trailing zero at the end).
 
-If you think of a bit-array as representing the coefficients of a polynomial over GF(2), then riffling corresponds to squaring that polynomial. See the documentation for `gf2::BitPoly::squared` for more information.
+If you think of a bit-array as representing the coefficients of a polynomial over GF(2), then riffling corresponds to squaring that polynomial. See the documentation for `gf2::BitPolynomial::squared` for more information.
 
 ## Set/Unset Bit Indices {#set-indices}
 
@@ -293,11 +293,11 @@ The following methods find the indices of set or unset bits in the vector.
 
 The following methods create iterators for traversing the bits or underlying words in the bit-array:
 
--   Read-only iteration through the individual bits.
--   Read-write iteration through the individual bits.
--   Read-only iteration through the indices of the set bits.
--   Read-only iteration through the indices of the unset bits.
--   Read-write iteration through the underlying vector words.
+- Read-only iteration through the individual bits.
+- Read-write iteration through the individual bits.
+- Read-only iteration through the indices of the set bits.
+- Read-only iteration through the indices of the unset bits.
+- Read-write iteration through the underlying vector words.
 
 | Function                     | Description                                                                    |
 | ---------------------------- | ------------------------------------------------------------------------------ |
@@ -343,12 +343,12 @@ There are many operators and free functions defined for any `gf2::BitStore` comp
 
 ## See Also
 
--   `gf2::BitArray` reference for detailed documentation with examples for each method.
--   [`BitStore`](BitStore.md) for the concept API shared by all bit-stores.
--   [`BitVec`](BitVec.md) for dynamically-sized vectors of bits.
--   [`BitSpan`](BitSpan.md) for non-owning views of some of the bits in a bit-array.
--   [`BitMat`](BitMat.md) for matrices of bits.
--   [`BitPoly`](BitPoly.md) for polynomials over GF(2).
+- `gf2::BitArray` reference for detailed documentation with examples for each method.
+- [`BitStore`](BitStore.md) for the concept API shared by all bit-stores.
+- [`BitVector`](BitVector.md) for dynamically-sized vectors of bits.
+- [`BitSpan`](BitSpan.md) for non-owning views of some of the bits in a bit-array.
+- [`BitMatrix`](BitMatrix.md) for matrices of bits.
+- [`BitPolynomial`](BitPolynomial.md) for polynomials over GF(2).
 
 <!-- Reference Links -->
 

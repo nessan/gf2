@@ -24,8 +24,8 @@ main() {
 
     // Random matrices
     using Word = usize;
-    auto m0 = BitMat<Word>::random(N, N);
-    auto m1 = BitMat<Word>::random(N, N);
+    auto m0 = BitMatrix<Word>::random(N, N);
+    auto m1 = BitMatrix<Word>::random(N, N);
 
     // To do something in the loop, we count how often the top-right element from the product is 1.
     auto count = 0uz;
@@ -35,7 +35,7 @@ main() {
     utilities::stopwatch sw;
     for (auto trial = 0uz; trial < n_trials; ++trial) {
         if (trial % n_tick == 0) std::cout << '.' << std::flush;
-        if (dot(m0, m1).get(0,0)) count++;
+        if (dot(m0, m1).get(0, 0)) count++;
 
         // Change the input a bit for the next trial.
         auto i = trial % N;

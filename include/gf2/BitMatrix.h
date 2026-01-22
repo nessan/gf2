@@ -4,10 +4,10 @@
 
 /// @file
 /// Matrices over over GF(2) -- *bit-matrices*. <br>
-/// See the [BitMat](docs/pages/BitMat.md) page for more details.
+/// See the [BitMatrix](docs/pages/BitMatrix.md) page for more details.
 
-#include <gf2/BitPoly.h>
-#include <gf2/BitVec.h>
+#include <gf2/BitPolynomial.h>
+#include <gf2/BitVector.h>
 #include <gf2/RNG.h>
 
 #include <string>
@@ -29,14 +29,14 @@ template<Unsigned Word> class BitLU;
 /// @note These matrices are stored by row, so it is always more efficient to arrange computations to operate on rows
 /// instead of columns. The high-level methods in this library take care of this for you.
 template<Unsigned Word = usize>
-class BitMat {
+class BitMatrix {
 private:
     /// We store each *row* in a bit-matrix as a bit-vector.
-    std::vector<BitVec<Word>> m_rows;
+    std::vector<BitVector<Word>> m_rows;
 
 public:
-    // The row type is a `BitVec` ...
-    using row_type = BitVec<Word>;
+    // The row type is a `BitVector` ...
+    using row_type = BitVector<Word>;
 
     /// The underlying unsigned word type used to store the bits.
     using word_type = Word;
@@ -48,10 +48,10 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitMat m;
+    /// BitMatrix m;
     /// assert_eq(m.to_compact_binary_string(), "");
     /// ```
-    constexpr BitMat() : m_rows{} {}
+    constexpr BitMatrix() : m_rows{} {}
 
     /// Constructs the `n x n` square bit-matrix with all the elements set to 0.
     ///
@@ -59,10 +59,10 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitMat m{3};
+    /// BitMatrix m{3};
     /// assert_eq(m.to_compact_binary_string(), "000 000 000");
     /// ```
-    constexpr BitMat(usize n) : m_rows{} {
+    constexpr BitMatrix(usize n) : m_rows{} {
         if (n > 0) resize(n, n);
     }
 
@@ -72,10 +72,10 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitMat m{3, 4};
+    /// BitMatrix m{3, 4};
     /// assert_eq(m.to_compact_binary_string(), "0000 0000 0000");
     /// ```
-    constexpr BitMat(usize m, usize n) : m_rows{} {
+    constexpr BitMatrix(usize m, usize n) : m_rows{} {
         if (m > 0 && n > 0) resize(m, n);
     }
 
@@ -85,11 +85,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto rows = std::vector{BitVec<>::zeros(3), BitVec<>::ones(3)};
-    /// BitMat m{rows};
+    /// auto rows = std::vector{BitVector<>::zeros(3), BitVector<>::ones(3)};
+    /// BitMatrix m{rows};
     /// assert_eq(m.to_compact_binary_string(), "000 111");
     /// ```
-    constexpr BitMat(std::vector<row_type> const& rows) : m_rows{rows} {
+    constexpr BitMatrix(std::vector<row_type> const& rows) : m_rows{rows} {
         gf2_assert(check_rows(m_rows), "Not all rows have the same size!");
     }
 
@@ -102,11 +102,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto rows = std::vector{BitVec<>::zeros(3), BitVec<>::ones(3)};
-    /// BitMat m{std::move(rows)};
+    /// auto rows = std::vector{BitVector<>::zeros(3), BitVector<>::ones(3)};
+    /// BitMatrix m{std::move(rows)};
     /// assert_eq(m.to_compact_binary_string(), "000 111");
     /// ```
-    constexpr BitMat(std::vector<BitVec<Word>>&& rows) : m_rows{std::move(rows)} {
+    constexpr BitMatrix(std::vector<BitVector<Word>>&& rows) : m_rows{std::move(rows)} {
         gf2_assert(check_rows(m_rows), "Not all rows have the same size!");
     }
 
@@ -118,77 +118,77 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zeros(3, 4);
+    /// auto m = BitMatrix<>::zeros(3, 4);
     /// assert_eq(m.to_compact_binary_string(), "0000 0000 0000");
     /// ```
-    static constexpr BitMat zeros(usize m, usize n) { return BitMat{m, n}; }
+    static constexpr BitMatrix zeros(usize m, usize n) { return BitMatrix{m, n}; }
 
     /// Factory method to create the `m x m` square bit-matrix with all the elements set to 0.
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zeros(3);
+    /// auto m = BitMatrix<>::zeros(3);
     /// assert_eq(m.to_compact_binary_string(), "000 000 000");
     /// ```
-    static constexpr BitMat zeros(usize m) { return BitMat{m, m}; }
+    static constexpr BitMatrix zeros(usize m) { return BitMatrix{m, m}; }
 
     /// Factory method to create the `m x n` bit-matrix with all the elements set to 1.
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::ones(3, 4);
+    /// auto m = BitMatrix<>::ones(3, 4);
     /// assert_eq(m.to_compact_binary_string(), "1111 1111 1111");
     /// ```
-    static constexpr BitMat ones(usize m, usize n) {
-        auto rows = std::vector{m, BitVec<Word>::ones(n)};
-        return BitMat{std::move(rows)};
+    static constexpr BitMatrix ones(usize m, usize n) {
+        auto rows = std::vector{m, BitVector<Word>::ones(n)};
+        return BitMatrix{std::move(rows)};
     }
 
     /// Factory method to create the `m x m` square bit-matrix with all the elements set to 1.
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::ones(3);
+    /// auto m = BitMatrix<>::ones(3);
     /// assert_eq(m.to_compact_binary_string(), "111 111 111");
     /// ```
-    static constexpr BitMat ones(usize m) { return BitMat::ones(m, m); }
+    static constexpr BitMatrix ones(usize m) { return BitMatrix::ones(m, m); }
 
     /// Factory method to create the `m x n` bit-matrix with alternating elements.
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::alternating(3, 4);
+    /// auto m = BitMatrix<>::alternating(3, 4);
     /// assert_eq(m.to_compact_binary_string(), "1010 0101 1010");
     /// ```
-    static constexpr BitMat alternating(usize m, usize n) {
-        auto rows = std::vector{m, BitVec<Word>::alternating(n)};
+    static constexpr BitMatrix alternating(usize m, usize n) {
+        auto rows = std::vector{m, BitVector<Word>::alternating(n)};
         // Flip every other row.
         for (auto i = 1uz; i < m; i += 2) rows[i].flip_all();
-        return BitMat{std::move(rows)};
+        return BitMatrix{std::move(rows)};
     }
 
     /// Factory method to create the `m x m` square bit-matrix with alternating elements.
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::alternating(3);
+    /// auto m = BitMatrix<>::alternating(3);
     /// assert_eq(m.to_compact_binary_string(), "101 010 101");
     /// ```
-    static constexpr BitMat alternating(usize m) { return BitMat::alternating(m, m); }
+    static constexpr BitMatrix alternating(usize m) { return BitMatrix::alternating(m, m); }
 
     /// Factory method to create the `m x n` bit-matrix from the outer product of the given bit-stores.
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::from_string("101").value();
-    /// auto v = BitVec<>::from_string("110").value();
-    /// auto m = BitMat<>::from_outer_product(u, v);
+    /// auto u = BitVector<>::from_string("101").value();
+    /// auto v = BitVector<>::from_string("110").value();
+    /// auto m = BitMatrix<>::from_outer_product(u, v);
     /// assert_eq(m.to_compact_binary_string(), "110 000 110");
     /// ```
     template<BitStore Lhs, BitStore Rhs>
         requires std::same_as<typename Lhs::word_type, Word> && std::same_as<typename Rhs::word_type, Word>
-    static constexpr BitMat from_outer_product(Lhs const& u, Rhs const& v) {
-        BitMat result;
+    static constexpr BitMatrix from_outer_product(Lhs const& u, Rhs const& v) {
+        BitMatrix result;
         for (auto i = 0uz; i < u.size(); ++i) {
             row_type row = u.get(i) ? row_type(v) : row_type(v.size());
             result.m_rows.push_back(std::move(row));
@@ -200,15 +200,15 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitVec<>::from_string("101").value();
-    /// auto v = BitVec<>::from_string("110").value();
-    /// auto m = BitMat<>::from_outer_sum(u, v);
+    /// auto u = BitVector<>::from_string("101").value();
+    /// auto v = BitVector<>::from_string("110").value();
+    /// auto m = BitMatrix<>::from_outer_sum(u, v);
     /// assert_eq(m.to_compact_binary_string(), "001 110 001");
     /// ```
     template<BitStore Lhs, BitStore Rhs>
         requires std::same_as<typename Lhs::word_type, Word> && std::same_as<typename Rhs::word_type, Word>
-    static constexpr BitMat from_outer_sum(Lhs const& u, Rhs const& v) {
-        BitMat result;
+    static constexpr BitMatrix from_outer_sum(Lhs const& u, Rhs const& v) {
+        BitMatrix result;
         for (auto i = 0uz; i < u.size(); ++i) {
             result.m_rows.push_back(v);
             if (u.get(i)) result.m_rows.back().flip_all();
@@ -220,11 +220,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::from(3, 2, [](usize i, usize) { return i % 2 == 0; });
+    /// auto m = BitMatrix<>::from(3, 2, [](usize i, usize) { return i % 2 == 0; });
     /// assert_eq(m.to_compact_binary_string(), "11 00 11");
     /// ```
-    static constexpr BitMat from(usize m, usize n, std::invocable<usize, usize> auto f) {
-        BitMat result{m, n};
+    static constexpr BitMatrix from(usize m, usize n, std::invocable<usize, usize> auto f) {
+        BitMatrix result{m, n};
         for (auto i = 0uz; i < m; ++i)
             for (auto j = 0uz; j < n; ++j)
                 if (f(i, j)) result.set(i, j, true);
@@ -241,7 +241,7 @@ public:
     /// each bit being 1, and also a seed for the random number generator for reproducibility. If you set the seed
     /// to 0 then computer entropy is used to seed the RNG.
     ///
-    /// The default call `BitMat<>::random(m, n)` produces a random bit-matrix with each bit being 1 with probability
+    /// The default call `BitMatrix<>::random(m, n)` produces a random bit-matrix with each bit being 1 with probability
     /// 0.5 and where the RNG is seeded from entropy.
     ///
     /// @param m The number of rows in the bit-matrix to generate.
@@ -254,21 +254,21 @@ public:
     /// # Example
     /// ```
     /// std::uint64_t seed = 1234567890;
-    /// auto u = BitMat<>::random(3, 2, 0.5, seed);
-    /// auto v = BitMat<>::random(3, 2, 0.5, seed);
+    /// auto u = BitMatrix<>::random(3, 2, 0.5, seed);
+    /// auto v = BitMatrix<>::random(3, 2, 0.5, seed);
     /// assert(u == v);
     /// ```
-    static BitMat random(usize m, usize n, double p = 0.5, std::uint64_t seed = 0) {
+    static BitMatrix random(usize m, usize n, double p = 0.5, std::uint64_t seed = 0) {
         // Keep a single static RNG per thread for all calls to this method, seeded with entropy on the first call.
         thread_local RNG rng;
 
         // Edge case handling ...
-        if (p < 0) return BitMat::zeros(m, n);
+        if (p < 0) return BitMatrix::zeros(m, n);
 
         // Scale p by 2^64 to remove floating point arithmetic from the main loop below.
         // If we determine p rounds to 1 then we can just set all elements to 1 and return early.
         p = p * 0x1p64 + 0.5;
-        if (p >= 0x1p64) return BitMat::ones(m, n);
+        if (p >= 0x1p64) return BitMatrix::ones(m, n);
 
         // p does not round to 1 so we use a 64-bit URNG and check each draw against the 64-bit scaled p.
         auto scaled_p = static_cast<std::uint64_t>(p);
@@ -277,7 +277,7 @@ public:
         std::uint64_t old_seed = rng.seed();
         if (seed != 0) rng.set_seed(seed);
 
-        auto result = BitMat::zeros(m, n);
+        auto result = BitMatrix::zeros(m, n);
         for (auto i = 0uz; i < m; ++i) {
             for (auto j = 0uz; j < n; ++j) {
                 if (rng.u64() < scaled_p) result.set(i, j, true);
@@ -304,11 +304,11 @@ public:
     /// # Example
     /// ```
     /// std::uint64_t seed = 1234567890;
-    /// auto u = BitMat<>::seeded_random(3, 2, seed);
-    /// auto v = BitMat<>::seeded_random(3, 2, seed);
+    /// auto u = BitMatrix<>::seeded_random(3, 2, seed);
+    /// auto v = BitMatrix<>::seeded_random(3, 2, seed);
     /// assert(u == v);
     /// ```
-    static BitMat seeded_random(usize m, usize n, std::uint64_t seed) { return random(m, n, 0.5, seed); }
+    static BitMatrix seeded_random(usize m, usize n, std::uint64_t seed) { return random(m, n, 0.5, seed); }
 
     /// Factory method to generate a square bit-matrix of size `m x m` where the elements are from independent
     /// fair coin flips generated from an RNG seeded with the given `seed`.
@@ -323,11 +323,11 @@ public:
     /// # Example
     /// ```
     /// std::uint64_t seed = 1234567890;
-    /// auto u = BitMat<>::seeded_random(3, seed);
-    /// auto v = BitMat<>::seeded_random(3, seed);
+    /// auto u = BitMatrix<>::seeded_random(3, seed);
+    /// auto v = BitMatrix<>::seeded_random(3, seed);
     /// assert(u == v);
     /// ```
-    static BitMat seeded_random(usize m, std::uint64_t seed) { return random(m, m, 0.5, seed); }
+    static BitMatrix seeded_random(usize m, std::uint64_t seed) { return random(m, m, 0.5, seed); }
 
     /// Factory method to generate a bit-matrix of size `m x n` where the elements are from independent fair
     /// coin flips and where each bit is 1 with probability `p`.
@@ -338,11 +338,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitMat<>::biased_random(10, 7, 0.3);
-    /// auto v = BitMat<>::biased_random(10, 7, 0.3);
+    /// auto u = BitMatrix<>::biased_random(10, 7, 0.3);
+    /// auto v = BitMatrix<>::biased_random(10, 7, 0.3);
     /// assert_eq(u.size(), v.size());
     /// ```
-    static BitMat biased_random(usize m, usize n, double p) { return random(m, n, p, 0); }
+    static BitMatrix biased_random(usize m, usize n, double p) { return random(m, n, p, 0); }
 
     /// Factory method to generate a square bit-matrix of size `m x m` where the elements are from independent
     /// fair coin flips and where each bit is 1 with probability `p`.
@@ -352,10 +352,10 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto u = BitMat<>::biased_random(10, 0.3);
+    /// auto u = BitMatrix<>::biased_random(10, 0.3);
     /// assert_eq(u.size(), 100);
     /// ```
-    static BitMat biased_random(usize m, double p) { return random(m, m, p, 0); }
+    static BitMatrix biased_random(usize m, double p) { return random(m, m, p, 0); }
 
     /// @}
     /// @name Constructors for Special Matrices
@@ -365,74 +365,74 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// assert_eq(m.to_compact_binary_string(), "000 000 000");
     /// ```
-    static constexpr BitMat zero(usize m) { return BitMat{m, m}; }
+    static constexpr BitMatrix zero(usize m) { return BitMatrix{m, m}; }
 
     /// Factory method to create the `m x m` identity bit-matrix.
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// assert_eq(m.to_compact_binary_string(), "100 010 001");
     /// ```
-    static constexpr BitMat identity(usize m) {
-        BitMat result{m, m};
+    static constexpr BitMatrix identity(usize m) {
+        BitMatrix result{m, m};
         for (auto i = 0uz; i < m; ++i) result.set(i, i, true);
         return result;
     }
 
-    /// Constructs a square *companion BitMat* with a copy of the given top row and a sub-diagonal of `1`s.
+    /// Constructs a square *companion BitMatrix* with a copy of the given top row and a sub-diagonal of `1`s.
     ///
-    /// The top row should be passed as a bit-store and is copied to the first row of the BitMat.
-    /// The rest of the BitMat is initialized to zero and the sub-diagonal is set to `1`s.
+    /// The top row should be passed as a bit-store and is copied to the first row of the BitMatrix.
+    /// The rest of the BitMatrix is initialized to zero and the sub-diagonal is set to `1`s.
     ///
     /// # Example
     /// ```
-    /// auto top_row = BitVec<>::ones(5);
-    /// auto m = BitMat<>::companion(top_row);
+    /// auto top_row = BitVector<>::ones(5);
+    /// auto m = BitMatrix<>::companion(top_row);
     /// assert_eq(m.to_compact_binary_string(), "11111 10000 01000 00100 00010");
     /// ```
     template<BitStore Store>
         requires std::same_as<typename Store::word_type, Word>
-    static constexpr BitMat companion(Store const& top_row) {
+    static constexpr BitMatrix companion(Store const& top_row) {
         // Edge case:
-        if (top_row.size() == 0) return BitMat{};
-        auto result = BitMat::zero(top_row.size());
+        if (top_row.size() == 0) return BitMatrix{};
+        auto result = BitMatrix::zero(top_row.size());
         result.m_rows[0].copy(top_row);
         result.set_sub_diagonal(1);
         return result;
     }
 
-    /// Constructs the `n x n` shift-left by `p` places BitMat.
+    /// Constructs the `n x n` shift-left by `p` places BitMatrix.
     ///
     /// If the bit-matrix is multiplied by a bit-vector, the result is the bit-vector shifted left by `p` places.
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::left_shift(5, 2);
-    /// auto v = BitVec<>::ones(5);
+    /// auto m = BitMatrix<>::left_shift(5, 2);
+    /// auto v = BitVector<>::ones(5);
     /// assert_eq(dot(m, v).to_string(), "11100");
     /// ```
-    static constexpr BitMat left_shift(usize n, usize p) {
-        auto result = BitMat::zeros(n, n);
+    static constexpr BitMatrix left_shift(usize n, usize p) {
+        auto result = BitMatrix::zeros(n, n);
         result.set_super_diagonal(p);
         return result;
     }
 
-    /// Constructs the `n x n` shift-right by `p` places BitMat.
+    /// Constructs the `n x n` shift-right by `p` places BitMatrix.
     ///
     /// If the bit-matrix is multiplied by a bit-vector, the result is the bit-vector shifted right by `p` places.
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::right_shift(5, 2);
-    /// auto v = BitVec<>::ones(5);
+    /// auto m = BitMatrix<>::right_shift(5, 2);
+    /// auto v = BitVector<>::ones(5);
     /// assert_eq(dot(m, v).to_string(), "00111");
     /// ```
-    static BitMat right_shift(usize n, usize p) {
-        auto result = BitMat::zeros(n, n);
+    static BitMatrix right_shift(usize n, usize p) {
+        auto result = BitMatrix::zeros(n, n);
         result.set_sub_diagonal(p);
         return result;
     }
@@ -443,12 +443,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::left_rotation(5, 2);
-    /// auto v = BitVec<>::from_binary_string("11100").value();
+    /// auto m = BitMatrix<>::left_rotation(5, 2);
+    /// auto v = BitVector<>::from_binary_string("11100").value();
     /// assert_eq(dot(m, v).to_string(), "00111");
     /// ```
-    static BitMat left_rotation(usize n, usize p) {
-        auto result = BitMat::zeros(n, n);
+    static BitMatrix left_rotation(usize n, usize p) {
+        auto result = BitMatrix::zeros(n, n);
         for (auto i = 0uz; i < n; ++i) {
             auto j = (i + n - p) % n;
             result.set(i, j, true);
@@ -462,12 +462,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::right_rotation(5, 2);
-    /// auto v = BitVec<>::from_binary_string("11100").value();
+    /// auto m = BitMatrix<>::right_rotation(5, 2);
+    /// auto v = BitVector<>::from_binary_string("11100").value();
     /// assert_eq(dot(m, v).to_string(), "10011");
     /// ```
-    static BitMat right_rotation(usize n, usize p) {
-        auto result = BitMat::zeros(n, n);
+    static BitMatrix right_rotation(usize n, usize p) {
+        auto result = BitMatrix::zeros(n, n);
         for (auto i = 0uz; i < n; ++i) {
             auto j = (i + p) % n;
             result.set(i, j, true);
@@ -483,19 +483,19 @@ public:
     //
     /// # Example
     /// ```
-    /// auto v = BitVec<>::ones(15);
-    /// auto m1 = BitMat<>::from_row_store(v, 3).value();
+    /// auto v = BitVector<>::ones(15);
+    /// auto m1 = BitMatrix<>::from_row_store(v, 3).value();
     /// assert_eq(m1.to_compact_binary_string(), "11111 11111 11111");
-    /// auto m2 = BitMat<>::from_row_store(v, 5).value();
+    /// auto m2 = BitMatrix<>::from_row_store(v, 5).value();
     /// assert_eq(m2.to_compact_binary_string(), "111 111 111 111 111");
-    /// auto m3 = BitMat<>::from_row_store(v, 15).value();
+    /// auto m3 = BitMatrix<>::from_row_store(v, 15).value();
     /// assert_eq(m3.to_compact_binary_string(), "1 1 1 1 1 1 1 1 1 1 1 1 1 1 1");
     /// ```
     template<BitStore Store>
         requires std::same_as<typename Store::word_type, Word>
-    static std::optional<BitMat> from_row_store(Store const& v, usize r) {
+    static std::optional<BitMatrix> from_row_store(Store const& v, usize r) {
         // Edge case?
-        if (v.size() == 0) return BitMat{};
+        if (v.size() == 0) return BitMatrix{};
 
         // Error handling ...
         if (r == 0 || v.size() % r != 0) return std::nullopt;
@@ -504,7 +504,7 @@ public:
         usize c = v.size() / r;
 
         // Create the bit-matrix and copy the rows.
-        BitMat result{r, c};
+        BitMatrix result{r, c};
         for (auto i = 0uz; i < r; ++i) {
             auto begin = i * c;
             auto end = begin + c;
@@ -520,19 +520,19 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto v = BitVec<>::ones(15);
-    /// auto m1 = BitMat<>::from_col_store(v, 3).value();
+    /// auto v = BitVector<>::ones(15);
+    /// auto m1 = BitMatrix<>::from_col_store(v, 3).value();
     /// assert_eq(m1.to_compact_binary_string(), "111 111 111 111 111");
-    /// auto m2 = BitMat<>::from_col_store(v, 5).value();
+    /// auto m2 = BitMatrix<>::from_col_store(v, 5).value();
     /// assert_eq(m2.to_compact_binary_string(), "11111 11111 11111");
-    /// auto m3 = BitMat<>::from_col_store(v, 15).value();
+    /// auto m3 = BitMatrix<>::from_col_store(v, 15).value();
     /// assert_eq(m3.to_compact_binary_string(), "111111111111111");
     /// ```
     template<BitStore Store>
         requires std::same_as<typename Store::word_type, Word>
-    static std::optional<BitMat> from_col_store(Store const& v, usize c) {
+    static std::optional<BitMatrix> from_col_store(Store const& v, usize c) {
         // Edge case?
-        if (v.size() == 0) return BitMat{};
+        if (v.size() == 0) return BitMatrix{};
 
         // Error handling ...
         if (c == 0 || v.size() % c != 0) return std::nullopt;
@@ -541,8 +541,8 @@ public:
         usize r = v.size() / c;
 
         // Create the bit-matrix and copy the rows.
-        BitMat result{r, c};
-        usize  iv = 0;
+        BitMatrix result{r, c};
+        usize     iv = 0;
         for (auto j = 0uz; j < c; ++j) {
             for (auto i = 0uz; i < r; ++i) {
                 if (v.get(iv)) result.m_rows[i].set(j);
@@ -569,16 +569,16 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m1 = BitMat<>::from_string("111   111\n111").value();
+    /// auto m1 = BitMatrix<>::from_string("111   111\n111").value();
     /// assert_eq(m1.to_compact_binary_string(), "111 111 111");
-    /// auto m2 = BitMat<>::from_string("0XAA; 0b1111_0000").value();
+    /// auto m2 = BitMatrix<>::from_string("0XAA; 0b1111_0000").value();
     /// assert_eq(m2.to_compact_binary_string(), "10101010 11110000");
-    /// auto m3 = BitMat<>::from_string("0x7.8 000").value();
+    /// auto m3 = BitMatrix<>::from_string("0x7.8 000").value();
     /// assert_eq(m3.to_compact_binary_string(), "111 000");
     /// ```
-    static std::optional<BitMat> from_string(std::string_view s) {
+    static std::optional<BitMatrix> from_string(std::string_view s) {
         // Edge case
-        if (s.empty()) return BitMat{};
+        if (s.empty()) return BitMatrix{};
 
         // We split the string into tokens using the standard regex library.
         std::string                src(s);
@@ -589,10 +589,10 @@ public:
         // Zap any empty tokens & check there is something to do
         tokens.erase(std::remove_if(tokens.begin(), tokens.end(), [](std::string_view x) { return x.empty(); }),
                      tokens.end());
-        if (tokens.empty()) return BitMat{};
+        if (tokens.empty()) return BitMatrix{};
 
-        // We hope to fill a BitMat.
-        BitMat result;
+        // We hope to fill a BitMatrix.
+        BitMatrix result;
 
         // Iterate through the possible rows
         usize n_rows = tokens.size();
@@ -604,7 +604,7 @@ public:
             // Parse failure?
             if (!r) return std::nullopt;
 
-            // We've read a potentially valid BitMat row.
+            // We've read a potentially valid BitMatrix row.
             if (i == 0) {
                 // First row sets the number of columns
                 n_cols = r->size();
@@ -642,7 +642,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitMat m;
+    /// BitMatrix m;
     /// assert_eq(m.is_square(), false);
     /// m.resize(3, 3);
     /// assert_eq(m.is_square(), true);
@@ -655,7 +655,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitMat m;
+    /// BitMatrix m;
     /// assert_eq(m.is_zero(), false);
     /// m.resize(3, 3);
     /// assert_eq(m.is_zero(), true);
@@ -668,7 +668,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// assert_eq(m.is_identity(), true);
     /// assert_eq(m.to_compact_binary_string(), "100 010 001");
     /// ```
@@ -686,7 +686,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// assert_eq(m.is_symmetric(), true);
     /// m.row(0).set_all();
     /// assert_eq(m.is_symmetric(), false);
@@ -709,7 +709,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// assert_eq(m.count_ones(), 0);
     /// m.set_all();
     /// assert_eq(m.count_ones(), 9);
@@ -724,7 +724,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// assert_eq(m.count_zeros(), 6);
     /// ```
     constexpr usize count_zeros() const { return size() - count_ones(); }
@@ -735,11 +735,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// assert_eq(m.count_ones_on_diagonal(), 3);
     /// ```
     constexpr usize count_ones_on_diagonal() const {
-        gf2_debug_assert(is_square(), "BitMat is {} x {} but it should be square!", rows(), cols());
+        gf2_debug_assert(is_square(), "BitMatrix is {} x {} but it should be square!", rows(), cols());
         usize result = 0;
         for (auto i = 0uz; i < rows(); ++i)
             if (get(i, i)) ++result;
@@ -754,9 +754,9 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m1 = BitMat<>::identity(3);
+    /// auto m1 = BitMatrix<>::identity(3);
     /// assert_eq(m1.trace(), true);
-    /// auto m2 = BitMat<>::zero(4);
+    /// auto m2 = BitMatrix<>::zero(4);
     /// assert_eq(m2.trace(), false);
     /// ```
     constexpr bool trace() const { return count_ones_on_diagonal() % 2 == 1; }
@@ -771,7 +771,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// assert_eq(m.any(), false);
     /// m.set(0, 0);
     /// assert_eq(m.any(), true);
@@ -790,7 +790,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// assert_eq(m.all(), false);
     /// m.set_all();
     /// assert_eq(m.all(), true);
@@ -809,7 +809,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// assert_eq(m.none(), true);
     /// m.set_all();
     /// assert_eq(m.none(), false);
@@ -832,7 +832,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// assert_eq(m.get(0, 0), false);
     /// m.set(0, 0);
     /// assert_eq(m.get(0, 0), true);
@@ -849,7 +849,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// assert_eq(m(0, 0), false);
     /// m.set(0, 0);
     /// assert_eq(m(0, 0), true);
@@ -867,7 +867,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// m.set(0, 0);
     /// assert_eq(m.get(0, 0), true);
     /// ```
@@ -883,7 +883,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// assert_eq(m(0,0), false);
     /// m(0,0) = true;
     /// assert_eq(m(0,0), true);
@@ -900,7 +900,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// m.flip(0, 0);
     /// assert_eq(m.get(0, 0), true);
     /// ```
@@ -920,7 +920,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// assert_eq(m.row(0).to_binary_string(), "100");
     /// assert_eq(m.row(1).to_binary_string(), "010");
     /// assert_eq(m.row(2).to_binary_string(), "001");
@@ -936,7 +936,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// m.row(0).set(1);
     /// assert_eq(m.row(0).to_binary_string(), "110");
     /// assert_eq(m.row(1).to_binary_string(), "010");
@@ -953,7 +953,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// assert_eq(m[0].to_binary_string(), "100");
     /// assert_eq(m[1].to_binary_string(), "010");
     /// assert_eq(m[2].to_binary_string(), "001");
@@ -969,7 +969,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// m[0].set(1);
     /// assert_eq(m[0].to_binary_string(), "110");
     /// assert_eq(m[1].to_binary_string(), "010");
@@ -986,13 +986,13 @@ public:
 
     /// Returns a **clone** of the elements in column `c` from the bit-matrix as an independent bit-vector.
     ///
-    /// Matrices are stored by rows and there is no cheap reference style access to the BitMat columns!
+    /// Matrices are stored by rows and there is no cheap reference style access to the BitMatrix columns!
     ///
     /// @note In debug mode, this method will panic if `c` is out of bounds.
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// auto col = m.col(1);
     /// assert_eq(col.to_string(), "010");
     /// col.set(0);
@@ -1000,9 +1000,9 @@ public:
     /// assert_eq(col.to_string(), "111");
     /// assert_eq(m.to_compact_binary_string(), "100 010 001");
     /// ```
-    constexpr BitVec<Word> col(usize c) const {
+    constexpr BitVector<Word> col(usize c) const {
         gf2_debug_assert(c < cols(), "Column {} out of bounds [0, {})", c, cols());
-        auto result = BitVec<Word>::zeros(rows());
+        auto result = BitVector<Word>::zeros(rows());
         for (auto r = 0uz; r < rows(); ++r) {
             if (get(r, c)) { result.set(r); }
         }
@@ -1019,7 +1019,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// m.set_all();
     /// assert_eq(m.to_compact_binary_string(), "111 111 111");
     /// ```
@@ -1031,7 +1031,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// m.flip_all();
     /// assert_eq(m.to_compact_binary_string(), "111 111 111");
     /// ```
@@ -1049,12 +1049,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// m.set_diagonal();
     /// assert_eq(m.to_compact_binary_string(), "100 010 001");
     /// ```
     constexpr void set_diagonal(bool val = true) {
-        gf2_debug_assert(is_square(), "BitMat is {} x {} but it should be square!", rows(), cols());
+        gf2_debug_assert(is_square(), "BitMatrix is {} x {} but it should be square!", rows(), cols());
         for (auto i = 0uz; i < rows(); ++i) { set(i, i, val); }
     }
 
@@ -1064,12 +1064,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// m.flip_diagonal();
     /// assert_eq(m.to_compact_binary_string(), "100 010 001");
     /// ```
     constexpr void flip_diagonal() {
-        gf2_debug_assert(is_square(), "BitMat is {} x {} but it should be square!", rows(), cols());
+        gf2_debug_assert(is_square(), "BitMatrix is {} x {} but it should be square!", rows(), cols());
         for (auto i = 0uz; i < rows(); ++i) { flip(i, i); }
     }
 
@@ -1081,12 +1081,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(5);
+    /// auto m = BitMatrix<>::zero(5);
     /// m.set_super_diagonal(1);
     /// assert_eq(m.to_compact_binary_string(), "01000 00100 00010 00001 00000");
     /// ```
     constexpr void set_super_diagonal(usize d, bool val = true) {
-        gf2_debug_assert(is_square(), "BitMat is {} x {} but it should be square!", rows(), cols());
+        gf2_debug_assert(is_square(), "BitMatrix is {} x {} but it should be square!", rows(), cols());
         for (auto i = 0uz; i < rows() - d; ++i) { set(i, i + d, val); }
     }
 
@@ -1098,12 +1098,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(5);
+    /// auto m = BitMatrix<>::zero(5);
     /// m.flip_super_diagonal(1);
     /// assert_eq(m.to_compact_binary_string(), "01000 00100 00010 00001 00000");
     /// ```
     constexpr void flip_super_diagonal(usize d) {
-        gf2_debug_assert(is_square(), "BitMat is {} x {} but it should be square!", rows(), cols());
+        gf2_debug_assert(is_square(), "BitMatrix is {} x {} but it should be square!", rows(), cols());
         for (auto i = 0uz; i < rows() - d; ++i) { flip(i, i + d); }
     }
 
@@ -1115,12 +1115,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(5);
+    /// auto m = BitMatrix<>::zero(5);
     /// m.set_sub_diagonal(1);
     /// assert_eq(m.to_compact_binary_string(), "00000 10000 01000 00100 00010");
     /// ```
     constexpr void set_sub_diagonal(usize d, bool val = true) {
-        gf2_debug_assert(is_square(), "BitMat is {} x {} but it should be square!", rows(), cols());
+        gf2_debug_assert(is_square(), "BitMatrix is {} x {} but it should be square!", rows(), cols());
         for (auto i = 0uz; i < rows() - d; ++i) { set(i + d, i, val); }
     }
 
@@ -1132,12 +1132,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(5);
+    /// auto m = BitMatrix<>::zero(5);
     /// m.flip_sub_diagonal(1);
     /// assert_eq(m.to_compact_binary_string(), "00000 10000 01000 00100 00010");
     /// ```
     constexpr void flip_sub_diagonal(usize d) {
-        gf2_debug_assert(is_square(), "BitMat is {} x {} but it should be square!", rows(), cols());
+        gf2_debug_assert(is_square(), "BitMatrix is {} x {} but it should be square!", rows(), cols());
         for (auto i = 0uz; i < rows() - d; ++i) { flip(i + d, i); }
     }
 
@@ -1154,7 +1154,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitMat m;
+    /// BitMatrix m;
     /// m.resize(10, 10);
     /// assert_eq(m.rows(), 10);
     /// assert_eq(m.cols(), 10);
@@ -1181,20 +1181,20 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// m.clear();
     /// assert_eq(m.rows(), 0);
     /// assert_eq(m.cols(), 0);
     /// ```
     constexpr void clear() { resize(0, 0); }
 
-    /// Makes an arbitrary rectangular bit-matrix into a square `BitMat`.
+    /// Makes an arbitrary rectangular bit-matrix into a square `BitMatrix`.
     ///
     /// Existing elements are preserved. Any added elements are initialized to zero.
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::from_string("111 111 111 111").value();
+    /// auto m = BitMatrix<>::from_string("111 111 111 111").value();
     /// m.make_square(3);
     /// assert_eq(m.to_compact_binary_string(), "111 111 111");
     /// ```
@@ -1211,14 +1211,14 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
-    /// auto row = BitVec<>::ones(3);
+    /// auto m = BitMatrix<>::zero(3);
+    /// auto row = BitVector<>::ones(3);
     /// m.append_row(row);
     /// assert_eq(m.to_compact_binary_string(), "000 000 000 111");
     /// ```
     template<BitStore Store>
         requires std::same_as<typename Store::word_type, Word>
-    constexpr BitMat& append_row(Store const& row) {
+    constexpr BitMatrix& append_row(Store const& row) {
         gf2_assert_eq(row.size(), cols(), "Row has {} elements but bit-matrix has {} columns!", row.size(), cols());
         m_rows.push_back(row);
         return *this;
@@ -1234,13 +1234,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
-    /// m.append_row(BitVec<>::ones(3));
+    /// auto m = BitMatrix<>::zero(3);
+    /// m.append_row(BitVector<>::ones(3));
     /// assert_eq(m.to_compact_binary_string(), "000 000 000 111");
     /// ```
     template<BitStore Store>
         requires std::same_as<typename Store::word_type, Word>
-    constexpr BitMat& append_row(Store&& row) {
+    constexpr BitMatrix& append_row(Store&& row) {
         gf2_assert_eq(row.size(), cols(), "Row has {} elements but bit-matrix has {} columns!", row.size(), cols());
         m_rows.push_back(std::move(row));
         return *this;
@@ -1253,12 +1253,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
-    /// auto src = BitMat<>::ones(3, 3);
+    /// auto m = BitMatrix<>::zero(3);
+    /// auto src = BitMatrix<>::ones(3, 3);
     /// m.append_rows(src);
     /// assert_eq(m.to_compact_binary_string(), "000 000 000 111 111 111");
     /// ```
-    constexpr BitMat& append_rows(BitMat<Word> const& src) {
+    constexpr BitMatrix& append_rows(BitMatrix<Word> const& src) {
         gf2_assert_eq(src.cols(), cols(), "Source has {} columns but bit-matrix has {} columns!", src.cols(), cols());
         m_rows.insert(m_rows.end(), src.m_rows.begin(), src.m_rows.end());
         return *this;
@@ -1274,11 +1274,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
-    /// m.append_rows(BitMat<>::ones(3, 3));
+    /// auto m = BitMatrix<>::zero(3);
+    /// m.append_rows(BitMatrix<>::ones(3, 3));
     /// assert_eq(m.to_compact_binary_string(), "000 000 000 111 111 111");
     /// ```
-    constexpr BitMat& append_rows(BitMat<Word>&& src) {
+    constexpr BitMatrix& append_rows(BitMatrix<Word>&& src) {
         gf2_assert_eq(src.cols(), cols(), "Source has {} columns but bit-matrix has {} columns!", src.cols(), cols());
         m_rows.insert(m_rows.end(), std::make_move_iterator(src.m_rows.begin()),
                       std::make_move_iterator(src.m_rows.end()));
@@ -1292,14 +1292,14 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
-    /// auto col = BitVec<>::ones(3);
+    /// auto m = BitMatrix<>::zero(3);
+    /// auto col = BitVector<>::ones(3);
     /// m.append_col(col);
     /// assert_eq(m.to_compact_binary_string(), "0001 0001 0001");
     /// ```
     template<BitStore Store>
         requires std::same_as<typename Store::word_type, Word>
-    constexpr BitMat& append_col(Store const& col) {
+    constexpr BitMatrix& append_col(Store const& col) {
         gf2_assert_eq(col.size(), rows(), "Column has {} elements but bit-matrix has {} rows!", col.size(), rows());
         for (auto i = 0uz; i < rows(); ++i) m_rows[i].push(col.get(i));
         return *this;
@@ -1312,12 +1312,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
-    /// auto src = BitMat<>::ones(3, 2);
+    /// auto m = BitMatrix<>::zero(3);
+    /// auto src = BitMatrix<>::ones(3, 2);
     /// m.append_cols(src);
     /// assert_eq(m.to_compact_binary_string(), "00011 00011 00011");
     /// ```
-    constexpr BitMat& append_cols(BitMat<Word> const& src) {
+    constexpr BitMatrix& append_cols(BitMatrix<Word> const& src) {
         gf2_assert_eq(src.rows(), rows(), "Source has {} rows but bit-matrix has {} rows!", src.rows(), rows());
         for (auto i = 0uz; i < rows(); ++i) m_rows[i].append(src.m_rows[i]);
         return *this;
@@ -1331,12 +1331,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::ones(3, 3);
+    /// auto m = BitMatrix<>::ones(3, 3);
     /// auto row = m.remove_row();
     /// assert_eq(row->to_string(), "111");
     /// assert_eq(m.to_compact_binary_string(), "111 111");
     /// ```
-    constexpr std::optional<BitVec<Word>> remove_row() {
+    constexpr std::optional<BitVector<Word>> remove_row() {
         if (rows() == 0) return std::nullopt;
         auto row = std::move(m_rows.back());
         m_rows.pop_back();
@@ -1348,16 +1348,16 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::ones(3, 3);
+    /// auto m = BitMatrix<>::ones(3, 3);
     /// auto popped = m.remove_rows(2);
     /// assert_eq(popped->to_compact_binary_string(), "111 111");
     /// assert_eq(m.to_compact_binary_string(), "111");
     /// ```
-    constexpr std::optional<BitMat<Word>> remove_rows(usize k) {
+    constexpr std::optional<BitMatrix<Word>> remove_rows(usize k) {
         if (rows() < k) return std::nullopt;
         auto begin = m_rows.end() - static_cast<std::ptrdiff_t>(k);
         auto end = m_rows.end();
-        auto result = BitMat<Word>(std::vector<row_type>(begin, end));
+        auto result = BitMatrix<Word>(std::vector<row_type>(begin, end));
         m_rows.erase(begin, end);
         return result;
     }
@@ -1367,12 +1367,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::ones(3, 3);
+    /// auto m = BitMatrix<>::ones(3, 3);
     /// auto col = m.remove_col();
     /// assert_eq(col->to_string(), "111");
     /// assert_eq(m.to_compact_binary_string(), "11 11 11");
     /// ```
-    constexpr std::optional<BitVec<Word>> remove_col() {
+    constexpr std::optional<BitVector<Word>> remove_col() {
         if (cols() == 0) return std::nullopt;
         auto result = col(cols() - 1);
         for (auto i = 0uz; i < rows(); ++i) m_rows[i].pop();
@@ -1391,13 +1391,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(5);
+    /// auto m = BitMatrix<>::identity(5);
     /// auto sub1 = m.sub_matrix(1, 4, 1, 4);
     /// assert_eq(sub1.to_compact_binary_string(), "100 010 001");
     /// auto sub2 = m.sub_matrix(1, 1, 1, 1);
     /// assert_eq(sub2.to_compact_binary_string(), "");
     /// ```
-    constexpr BitMat sub_matrix(usize r_start, usize r_end, usize c_start, usize c_end) const {
+    constexpr BitMatrix sub_matrix(usize r_start, usize r_end, usize c_start, usize c_end) const {
 
         // Check that the row range is valid.
         gf2_assert(r_start <= r_end, "Invalid row range");
@@ -1412,7 +1412,7 @@ public:
         auto c = c_end - c_start;
 
         // Create the sub-matrix.
-        BitMat result{r, c};
+        BitMatrix result{r, c};
         for (auto i = 0uz; i < r; ++i) result.m_rows[i].copy(m_rows[i + r_start].span(c_start, c_end));
 
         return result;
@@ -1424,11 +1424,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(5);
-    /// m.replace_sub_matrix(1, 1, BitMat<>::ones(3, 3));
+    /// auto m = BitMatrix<>::identity(5);
+    /// m.replace_sub_matrix(1, 1, BitMatrix<>::ones(3, 3));
     /// assert_eq(m.to_compact_binary_string(), "10000 01110 01110 01110 00001");
     /// ```
-    constexpr void replace_sub_matrix(usize top, usize left, BitMat<Word> const& src) {
+    constexpr void replace_sub_matrix(usize top, usize left, BitMatrix<Word> const& src) {
         auto r = src.rows();
         auto c = src.cols();
         gf2_assert(top + r <= rows(), "Too many rows for the replacement sub-matrix to fit");
@@ -1444,16 +1444,16 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::ones(3, 3);
+    /// auto m = BitMatrix<>::ones(3, 3);
     /// auto sub_m = m.lower();
     /// assert_eq(sub_m.to_compact_binary_string(), "100 110 111");
     /// ```
-    constexpr BitMat lower() const {
+    constexpr BitMatrix lower() const {
         // Edge case:
-        if (is_empty()) return BitMat{};
+        if (is_empty()) return BitMatrix{};
 
         // Start with a copy of the bit-matrix.
-        BitMat result = *this;
+        BitMatrix result = *this;
 
         // Set the upper triangular part to zero.
         auto nc = cols();
@@ -1468,13 +1468,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::ones(3, 3);
+    /// auto m = BitMatrix<>::ones(3, 3);
     /// auto sub_m = m.upper();
     /// assert_eq(sub_m.to_compact_binary_string(), "111 011 001");
     /// ```
-    constexpr BitMat upper() const {
+    constexpr BitMatrix upper() const {
         // Edge case:
-        if (is_empty()) return BitMat{};
+        if (is_empty()) return BitMatrix{};
 
         // Start with a copy of the bit-matrix.
         auto result = *this;
@@ -1494,11 +1494,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::ones(3, 3);
+    /// auto m = BitMatrix<>::ones(3, 3);
     /// auto sub_m = m.strictly_lower();
     /// assert_eq(sub_m.to_compact_binary_string(), "000 100 110");
     /// ```
-    constexpr BitMat strictly_lower() const {
+    constexpr BitMatrix strictly_lower() const {
         auto result = lower();
         result.set_diagonal(false);
         return result;
@@ -1510,11 +1510,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::ones(3, 3);
+    /// auto m = BitMatrix<>::ones(3, 3);
     /// auto sub_m = m.strictly_upper();
     /// assert_eq(sub_m.to_compact_binary_string(), "011 001 000");
     /// ```
-    constexpr BitMat strictly_upper() const {
+    constexpr BitMatrix strictly_upper() const {
         auto result = upper();
         result.set_diagonal(false);
         return result;
@@ -1526,11 +1526,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zeros(3, 3);
+    /// auto m = BitMatrix<>::zeros(3, 3);
     /// auto sub_m = m.unit_lower();
     /// assert_eq(sub_m.to_compact_binary_string(), "100 010 001");
     /// ```
-    constexpr BitMat unit_lower() const {
+    constexpr BitMatrix unit_lower() const {
         auto result = lower();
         result.set_diagonal(true);
         return result;
@@ -1542,11 +1542,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zeros(3, 3);
+    /// auto m = BitMatrix<>::zeros(3, 3);
     /// auto sub_m = m.unit_upper();
     /// assert_eq(sub_m.to_compact_binary_string(), "100 010 001");
     /// ```
-    constexpr BitMat unit_upper() const {
+    constexpr BitMatrix unit_upper() const {
         auto result = upper();
         result.set_diagonal(true);
         return result;
@@ -1562,7 +1562,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// m.swap_rows(0, 1);
     /// assert_eq(m.to_compact_binary_string(), "010 100 001");
     /// ```
@@ -1578,7 +1578,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// m.swap_cols(0, 1);
     /// assert_eq(m.to_compact_binary_string(), "010 100 001");
     /// ```
@@ -1594,7 +1594,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// m.add_identity();
     /// assert_eq(m.to_compact_binary_string(), "100 010 001");
     /// ```
@@ -1613,16 +1613,16 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zeros(3, 2);
+    /// auto m = BitMatrix<>::zeros(3, 2);
     /// m.row(0).set_all();
     /// assert_eq(m.to_compact_binary_string(), "11 00 00");
     /// auto n = m.transposed();
     /// assert_eq(n.to_compact_binary_string(), "100 100");
     /// ```
-    constexpr BitMat transposed() const {
-        auto   r = rows();
-        auto   c = cols();
-        BitMat result{c, r};
+    constexpr BitMatrix transposed() const {
+        auto      r = rows();
+        auto      c = cols();
+        BitMatrix result{c, r};
         for (auto i = 0uz; i < r; ++i) {
             for (auto j = 0uz; j < c; ++j) {
                 if (get(i, j)) { result.set(j, i); }
@@ -1637,7 +1637,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::zero(3);
+    /// auto m = BitMatrix<>::zero(3);
     /// m.row(0).set_all();
     /// assert_eq(m.to_compact_binary_string(), "111 000 000");
     /// m.transpose();
@@ -1668,7 +1668,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::random(100, 100);
+    /// auto m = BitMatrix<>::random(100, 100);
     /// auto p1 = m.to_the(3);
     /// auto o1 = m * m * m;
     /// assert_eq(p1, o1);
@@ -1676,7 +1676,7 @@ public:
     /// auto o2 = m * o1;
     /// assert_eq(p2, o2);
     /// ```
-    constexpr BitMat to_the(usize n, bool n_is_log2 = false) const {
+    constexpr BitMatrix to_the(usize n, bool n_is_log2 = false) const {
         gf2_assert(is_square(), "Bit-matrix is {} x {} but it should be square!", rows(), cols());
 
         // Perhaps we just need lots of square steps?  Note that 2^0 = 1 so M^(2^0) = M.
@@ -1687,7 +1687,7 @@ public:
         }
 
         // Otherwise we need square & multiply steps but we first handle the edge case:
-        if (n == 0) return BitMat::identity(rows());
+        if (n == 0) return BitMatrix::identity(rows());
 
         // OK n != 0: Note that if e.g. n = 0b00010111 then std::bit_floor(n) = 0b00010000.
         usize n_bit = std::bit_floor(n);
@@ -1728,17 +1728,17 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// m.set(2, 1, false);
     /// auto has_pivot = m.to_echelon_form();
     /// assert_eq(has_pivot.to_string(), "111");
     /// assert_eq(m.to_compact_binary_string(), "100 010 001");
     /// ```
-    BitVec<Word> to_echelon_form() {
+    BitVector<Word> to_echelon_form() {
         gf2_assert(!is_empty(), "Bit-matrix must not be empty");
 
         // We return a bit-vector that shows which columns have a pivot -- start by assuming none.
-        auto has_pivot = BitVec<Word>::zeros(cols());
+        auto has_pivot = BitVector<Word>::zeros(cols());
 
         // The current row of the echelon form we are working on.
         auto r = 0uz;
@@ -1785,13 +1785,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// m.set(2, 1, false);
     /// auto pivots = m.to_reduced_echelon_form();
     /// assert_eq(pivots.to_string(), "111");
     /// assert_eq(m.to_compact_binary_string(), "100 010 001");
     /// ```
-    BitVec<Word> to_reduced_echelon_form() {
+    BitVector<Word> to_reduced_echelon_form() {
         // Start with the echelon form.
         auto has_pivot = to_echelon_form();
 
@@ -1818,10 +1818,10 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// assert_eq(m.inverse().value().to_compact_binary_string(), "100 010 001");
     /// ```
-    std::optional<BitMat> inverse() const {
+    std::optional<BitMatrix> inverse() const {
         // The bit-matrix must be square & non-empty.
         if (is_empty() || !is_square()) return std::nullopt;
 
@@ -1829,7 +1829,7 @@ public:
         auto matrix = *this;
         auto nr = rows();
         auto nc = cols();
-        matrix.append_cols(BitMat::identity(nr));
+        matrix.append_cols(BitMatrix::identity(nr));
 
         // Transform the augmented matrix to reduced row-echelon form.
         matrix.to_reduced_echelon_form();
@@ -1850,7 +1850,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitMat<>::probability_invertible(10);
+    /// auto p = BitMatrix<>::probability_invertible(10);
     /// assert(abs(p - 0.289) < 1e-3);
     /// ```
     static constexpr double probability_invertible(usize n) {
@@ -1880,7 +1880,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitMat<>::probability_singular(10);
+    /// auto p = BitMatrix<>::probability_singular(10);
     /// assert(abs(p - 0.711) < 1e-3);
     /// ```
     static constexpr double probability_singular(usize n) { return 1 - probability_invertible(n); }
@@ -1893,7 +1893,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// auto lu = m.LU();
     /// assert_eq(lu.LU().to_compact_binary_string(), "100 010 001");
     /// ```
@@ -1907,8 +1907,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::ones(3, 3);
-    /// auto b = BitVec<>::ones(3);
+    /// auto A = BitMatrix<>::ones(3, 3);
+    /// auto b = BitVector<>::ones(3);
     /// auto solver = A.solver_for(b);
     /// assert_eq(solver.rank(), 1);
     /// assert_eq(solver.free_count(), 2);
@@ -1926,8 +1926,8 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto A = BitMat<>::identity(3);
-    /// auto b = BitVec<>::ones(3);
+    /// auto A = BitMatrix<>::identity(3);
+    /// auto b = BitVector<>::ones(3);
     /// auto x = A.x_for(b).value();
     /// assert_eq(x.to_string(), "111");
     /// ```
@@ -1941,7 +1941,7 @@ public:
     /// @name Characteristic Polynomial
     /// @{
 
-    /// Returns the characteristic polynomial of any square bit-matrix as a `gf2::BitPoly`.
+    /// Returns the characteristic polynomial of any square bit-matrix as a `gf2::BitPolynomial`.
     ///
     /// The method uses similarity transformations to convert the bit-matrix to *Frobenius form* which has a readily
     /// computable characteristic polynomial. Similarity transformations preserve eigen-structure, and in particular
@@ -1951,20 +1951,20 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m2 = BitMat<>::identity(2);
+    /// auto m2 = BitMatrix<>::identity(2);
     /// assert_eq(m2.characteristic_polynomial().to_string(), "1 + x^2");
-    /// auto m3 = BitMat<>::identity(3);
+    /// auto m3 = BitMatrix<>::identity(3);
     /// assert_eq(m3.characteristic_polynomial().to_string(), "1 + x + x^2 + x^3");
-    /// auto m100 = BitMat<>::random(100, 100);
+    /// auto m100 = BitMatrix<>::random(100, 100);
     /// auto p = m100.characteristic_polynomial();
     /// assert_eq(p(m100).is_zero(), true);
     /// ```
-    BitPoly<Word> characteristic_polynomial() const {
+    BitPolynomial<Word> characteristic_polynomial() const {
         gf2_assert(is_square(), "Bit-matrix must be square not {} x {}", rows(), cols());
         return frobenius_matrix_characteristic_polynomial(frobenius_form());
     }
 
-    /// Class method that returns the characteristic polynomial of a *Frobenius matrix* as a `gf2::BitPoly`.
+    /// Class method that returns the characteristic polynomial of a *Frobenius matrix* as a `gf2::BitPolynomial`.
     ///
     /// A Frobenius matrix is a square matrix that consists of blocks of *companion matrices* along the diagonal.
     /// Each companion matrix is a square matrix that is all zeros except for an arbitrary top row and a principal
@@ -1973,9 +1973,10 @@ public:
     /// This associated function expects to be passed the top rows of the companion matrices as an array of bit-vectors.
     /// The characteristic polynomial of a Frobenius matrix is the product of the characteristic polynomials of its
     /// block companion matrices which are readily computed.
-    static BitPoly<Word> frobenius_matrix_characteristic_polynomial(std::vector<BitVec<Word>> const& top_rows) {
+    static BitPolynomial<Word>
+    frobenius_matrix_characteristic_polynomial(std::vector<BitVector<Word>> const& top_rows) {
         auto n_companions = top_rows.size();
-        if (n_companions == 0) return BitPoly<Word>::zero();
+        if (n_companions == 0) return BitPolynomial<Word>::zero();
 
         // Compute the product of the characteristic polynomials of the companion matrices.
         auto result = companion_matrix_characteristic_polynomial(top_rows[0]);
@@ -1983,7 +1984,7 @@ public:
         return result;
     }
 
-    /// Class method to return the characteristic polynomial of a *companion matrix* as a `gf2::BitPoly`.
+    /// Class method to return the characteristic polynomial of a *companion matrix* as a `gf2::BitPolynomial`.
     ///
     /// The function expects to be passed the top row of the companion matrix as a bit-vector.
     ///
@@ -1994,18 +1995,18 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto top_row = BitVec<>::from_binary_string("101").value();
-    /// assert_eq(BitMat<>::companion_matrix_characteristic_polynomial(top_row).to_string(), "1 + x^2 + x^3");
+    /// auto top_row = BitVector<>::from_binary_string("101").value();
+    /// assert_eq(BitMatrix<>::companion_matrix_characteristic_polynomial(top_row).to_string(), "1 + x^2 + x^3");
     /// ```
-    static BitPoly<Word> companion_matrix_characteristic_polynomial(BitVec<Word> const& top_row) {
+    static BitPolynomial<Word> companion_matrix_characteristic_polynomial(BitVector<Word> const& top_row) {
         auto n = top_row.size();
 
         // The characteristic polynomial is degree n with n + 1 coefficients (leading coefficient is 1).
-        auto coeffs = BitVec<Word>::ones(n + 1);
+        auto coeffs = BitVector<Word>::ones(n + 1);
 
         // The lower order coefficients are the top row of the companion matrix in reverse order.
         for (auto j = 0uz; j < n; ++j) { coeffs.set(n - j - 1, top_row.get(j)); }
-        return BitPoly<Word>{std::move(coeffs)};
+        return BitPolynomial<Word>{std::move(coeffs)};
     }
 
     /// Returns the *Frobenius form* of this bit-matrix in compact top-row only form.
@@ -2021,13 +2022,13 @@ public:
     /// We return the Frobenius companion matrices in a compact form as a `Vec` of their top rows as bit-vectors.
     ///
     /// @note This method panics if the bit-matrix is not square.
-    std::vector<BitVec<Word>> frobenius_form() const {
+    std::vector<BitVector<Word>> frobenius_form() const {
         // The bit-matrix must be square.
         gf2_assert(is_square(), "Bit-matrix must be square not {} x {}", rows(), cols());
 
         // Space for the top rows of the companion matrices which we will return.
         auto nr = rows();
-        auto top_rows = std::vector<BitVec<Word>>{};
+        auto top_rows = std::vector<BitVector<Word>>{};
         top_rows.reserve(nr);
 
         // Make a working copy of the bit-matrix to work through using Danilevsky's algorithm.
@@ -2050,13 +2051,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto lhs = BitMat<>::identity(3);
-    /// auto rhs = BitMat<>::identity(3);
+    /// auto lhs = BitMatrix<>::identity(3);
+    /// auto rhs = BitMatrix<>::identity(3);
     /// rhs.flip_all();
     /// lhs ^= rhs;
     /// assert_eq(lhs.to_compact_binary_string(), "111 111 111");
     /// ```
-    constexpr void operator^=(BitMat<Word> const& rhs) {
+    constexpr void operator^=(BitMatrix<Word> const& rhs) {
         gf2_assert(rows() == rhs.rows(), "Row dimensions do not match: {} != {}.", rows(), rhs.rows());
         gf2_assert(cols() == rhs.cols(), "Column dimensions do not match: {} != {}.", cols(), rhs.cols());
         for (auto i = 0uz; i < rows(); ++i) row(i) ^= rhs.row(i);
@@ -2068,13 +2069,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto lhs = BitMat<>::identity(3);
-    /// auto rhs = BitMat<>::identity(3);
+    /// auto lhs = BitMatrix<>::identity(3);
+    /// auto rhs = BitMatrix<>::identity(3);
     /// rhs.flip_all();
     /// lhs &= rhs;
     /// assert_eq(lhs.to_compact_binary_string(), "000 000 000");
     /// ```
-    constexpr void operator&=(BitMat<Word> const& rhs) {
+    constexpr void operator&=(BitMatrix<Word> const& rhs) {
         gf2_assert(rows() == rhs.rows(), "Row dimensions do not match: {} != {}.", rows(), rhs.rows());
         gf2_assert(cols() == rhs.cols(), "Column dimensions do not match: {} != {}.", cols(), rhs.cols());
         for (auto i = 0uz; i < rows(); ++i) row(i) &= rhs.row(i);
@@ -2086,13 +2087,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto lhs = BitMat<>::identity(3);
-    /// auto rhs = BitMat<>::identity(3);
+    /// auto lhs = BitMatrix<>::identity(3);
+    /// auto rhs = BitMatrix<>::identity(3);
     /// rhs.flip_all();
     /// lhs |= rhs;
     /// assert_eq(lhs.to_compact_binary_string(), "111 111 111");
     /// ```
-    constexpr void operator|=(BitMat<Word> const& rhs) {
+    constexpr void operator|=(BitMatrix<Word> const& rhs) {
         gf2_assert(rows() == rhs.rows(), "Row dimensions do not match: {} != {}.", rows(), rhs.rows());
         gf2_assert(cols() == rhs.cols(), "Column dimensions do not match: {} != {}.", cols(), rhs.cols());
         for (auto i = 0uz; i < rows(); ++i) row(i) |= rhs.row(i);
@@ -2104,13 +2105,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto lhs = BitMat<>::identity(3);
-    /// auto rhs = BitMat<>::identity(3);
+    /// auto lhs = BitMatrix<>::identity(3);
+    /// auto rhs = BitMatrix<>::identity(3);
     /// rhs.flip_all();
     /// auto result = lhs ^ rhs;
     /// assert_eq(result.to_compact_binary_string(), "111 111 111");
     /// ```
-    constexpr auto operator^(BitMat<Word> const& rhs) const {
+    constexpr auto operator^(BitMatrix<Word> const& rhs) const {
         gf2_assert(rows() == rhs.rows(), "Row dimensions do not match: {} != {}.", rows(), rhs.rows());
         gf2_assert(cols() == rhs.cols(), "Column dimensions do not match: {} != {}.", cols(), rhs.cols());
         auto result = *this;
@@ -2124,13 +2125,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto lhs = BitMat<>::identity(3);
-    /// auto rhs = BitMat<>::identity(3);
+    /// auto lhs = BitMatrix<>::identity(3);
+    /// auto rhs = BitMatrix<>::identity(3);
     /// rhs.flip_all();
     /// auto result = lhs & rhs;
     /// assert_eq(result.to_compact_binary_string(), "000 000 000");
     /// ```
-    constexpr auto operator&(BitMat<Word> const& rhs) const {
+    constexpr auto operator&(BitMatrix<Word> const& rhs) const {
         gf2_assert(rows() == rhs.rows(), "Row dimensions do not match: {} != {}.", rows(), rhs.rows());
         gf2_assert(cols() == rhs.cols(), "Column dimensions do not match: {} != {}.", cols(), rhs.cols());
         auto result = *this;
@@ -2144,13 +2145,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto lhs = BitMat<>::identity(3);
-    /// auto rhs = BitMat<>::identity(3);
+    /// auto lhs = BitMatrix<>::identity(3);
+    /// auto rhs = BitMatrix<>::identity(3);
     /// rhs.flip_all();
     /// auto result = lhs | rhs;
     /// assert_eq(result.to_compact_binary_string(), "111 111 111");
     /// ```
-    constexpr auto operator|(BitMat<Word> const& rhs) const {
+    constexpr auto operator|(BitMatrix<Word> const& rhs) const {
         gf2_assert(rows() == rhs.rows(), "Row dimensions do not match: {} != {}.", rows(), rhs.rows());
         gf2_assert(cols() == rhs.cols(), "Column dimensions do not match: {} != {}.", cols(), rhs.cols());
         auto result = *this;
@@ -2162,7 +2163,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto m = BitMat<>::identity(3);
+    /// auto m = BitMatrix<>::identity(3);
     /// auto result = ~m;
     /// assert_eq(result.to_compact_binary_string(), "011 101 110");
     /// ```
@@ -2182,13 +2183,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto lhs = BitMat<>::identity(3);
-    /// auto rhs = BitMat<>::identity(3);
+    /// auto lhs = BitMatrix<>::identity(3);
+    /// auto rhs = BitMatrix<>::identity(3);
     /// rhs.flip_all();
     /// lhs += rhs;
     /// assert_eq(lhs.to_compact_binary_string(), "111 111 111");
     /// ```
-    constexpr void operator+=(BitMat<Word> const& rhs) { operator^=(rhs); }
+    constexpr void operator+=(BitMatrix<Word> const& rhs) { operator^=(rhs); }
 
     /// In-place difference with a bit-matrix `rhs` -- in GF(2) subtraction is the same as `XOR`.
     ///
@@ -2196,13 +2197,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto lhs = BitMat<>::identity(3);
-    /// auto rhs = BitMat<>::identity(3);
+    /// auto lhs = BitMatrix<>::identity(3);
+    /// auto rhs = BitMatrix<>::identity(3);
     /// rhs.flip_all();
     /// lhs -= rhs;
     /// assert_eq(lhs.to_compact_binary_string(), "111 111 111");
     /// ```
-    constexpr void operator-=(BitMat<Word> const& rhs) { operator^=(rhs); }
+    constexpr void operator-=(BitMatrix<Word> const& rhs) { operator^=(rhs); }
 
     /// Returns a new bit-matrix that is `*this + rhs` which is `*this ^ rhs` in GF(2).
     ///
@@ -2210,13 +2211,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto lhs = BitMat<>::identity(3);
-    /// auto rhs = BitMat<>::identity(3);
+    /// auto lhs = BitMatrix<>::identity(3);
+    /// auto rhs = BitMatrix<>::identity(3);
     /// rhs.flip_all();
     /// auto result = lhs - rhs;
     /// assert_eq(result.to_compact_binary_string(), "111 111 111");
     /// ```
-    constexpr auto operator+(BitMat<Word> const& rhs) const {
+    constexpr auto operator+(BitMatrix<Word> const& rhs) const {
         auto result = *this;
         result += rhs;
         return result;
@@ -2228,13 +2229,13 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto lhs = BitMat<>::identity(3);
-    /// auto rhs = BitMat<>::identity(3);
+    /// auto lhs = BitMatrix<>::identity(3);
+    /// auto rhs = BitMatrix<>::identity(3);
     /// rhs.flip_all();
     /// auto result = lhs + rhs;
     /// assert_eq(result.to_compact_binary_string(), "111 111 111");
     /// ```
-    constexpr auto operator-(BitMat<Word> const& rhs) const {
+    constexpr auto operator-(BitMatrix<Word> const& rhs) const {
         auto result = *this;
         result -= rhs;
         return result;
@@ -2255,7 +2256,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto I = BitMat<>::identity(4);
+    /// auto I = BitMatrix<>::identity(4);
     /// assert_eq(I.to_binary_string(), "1000\n0100\n0010\n0001");
     /// ```
     std::string to_binary_string(std::string_view row_sep = "\n", std::string_view bit_sep = "",
@@ -2283,7 +2284,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto I = BitMat<>::identity(4);
+    /// auto I = BitMatrix<>::identity(4);
     /// assert_eq(I.to_compact_binary_string(), "1000 0100 0010 0001");
     /// ```
     std::string to_compact_binary_string() const { return to_binary_string(" "); }
@@ -2294,7 +2295,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto I = BitMat<>::identity(4);
+    /// auto I = BitMatrix<>::identity(4);
     /// assert_eq(I.to_string(), "1000\n0100\n0010\n0001");
     /// ```
     std::string to_string() const { return to_binary_string("\n"); }
@@ -2307,7 +2308,7 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto I = BitMat<>::identity(3);
+    /// auto I = BitMatrix<>::identity(3);
     /// auto bar = "\u2502";
     /// auto expected = std::format("{0}1 0 0{0}\n{0}0 1 0{0}\n{0}0 0 1{0}", bar);
     /// assert_eq(I.to_pretty_string(), expected);
@@ -2332,12 +2333,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitMat m0;
+    /// BitMatrix m0;
     /// assert_eq(m0.to_hex_string(), "");
-    /// auto m1 = BitMat<>::zero(4);
+    /// auto m1 = BitMatrix<>::zero(4);
     /// m1.set_all();
     /// assert_eq(m1.to_hex_string(), "F\nF\nF\nF");
-    /// auto m2 = BitMat<>::zero(5);
+    /// auto m2 = BitMatrix<>::zero(5);
     /// m2.flip_all();
     /// assert_eq(m2.to_hex_string(), "F1.2\nF1.2\nF1.2\nF1.2\nF1.2");
     /// ```
@@ -2377,12 +2378,12 @@ public:
     ///
     /// # Example
     /// ```
-    /// BitMat m0;
+    /// BitMatrix m0;
     /// assert_eq(m0.to_compact_hex_string(), "");
-    /// auto m1 = BitMat<>::zero(4);
+    /// auto m1 = BitMatrix<>::zero(4);
     /// m1.set_all();
     /// assert_eq(m1.to_compact_hex_string(), "F F F F");
-    /// auto m2 = BitMat<>::zero(5);
+    /// auto m2 = BitMatrix<>::zero(5);
     /// m2.flip_all();
     /// assert_eq(m2.to_compact_hex_string(), "F1.2 F1.2 F1.2 F1.2 F1.2");
     /// ```
@@ -2399,11 +2400,11 @@ public:
     ///
     /// # Example
     /// ```
-    /// auto p = BitMat<>::identity(3);
-    /// auto q = BitMat<>::identity(3);
+    /// auto p = BitMatrix<>::identity(3);
+    /// auto q = BitMatrix<>::identity(3);
     /// assert(p == q);
     /// ```
-    friend constexpr bool operator==(BitMat const& lhs, BitMat const& rhs) {
+    friend constexpr bool operator==(BitMatrix const& lhs, BitMatrix const& rhs) {
         // Edge case.
         if (&lhs == &rhs) return true;
 
@@ -2446,11 +2447,11 @@ private:
     // the smaller top-left sub-matrix.
     //
     // NOTE: This method panics if the bit-matrix is not square.
-    BitVec<Word> danilevsky_step(usize n) {
+    BitVector<Word> danilevsky_step(usize n) {
         gf2_assert(n <= rows(), "No top-left {} x {} sub-matrix in a matrix with {} rows", n, n, rows());
 
         // Edge case: A 1 x 1 matrix is already in companion form.
-        if (n == 1) return BitVec<Word>::constant(1, get(0, 0));
+        if (n == 1) return BitVector<Word>::constant(1, get(0, 0));
 
         // Step k of algorithm attempts to reduce row k to companion form.
         // By construction, rows k+1 or later are already in companion form.
@@ -2503,7 +2504,7 @@ private:
         // At this point, k == 0 OR the bit-matrix has non-removable zero on the sub-diagonal of row k.
         // Either way, the bottom-right (n-k) x (n-k) sub-matrix, starting at self[k][k], is in companion form.
         // We return the top row of that companion sub-matrix.
-        auto top_row = BitVec<Word>::zeros(n - k);
+        auto top_row = BitVector<Word>::zeros(n - k);
         for (auto j = 0uz; j < n - k; ++j) top_row.set(j, get(k, k + j));
 
         // Done
@@ -2519,10 +2520,10 @@ private:
 template<Unsigned Word, BitStore Rhs>
     requires std::same_as<typename Rhs::word_type, Word>
 constexpr auto
-dot(BitMat<Word> const& lhs, Rhs const& rhs) {
+dot(BitMatrix<Word> const& lhs, Rhs const& rhs) {
     gf2_assert_eq(lhs.cols(), rhs.size(), "Incompatible dimensions: {} != {}", lhs.cols(), rhs.size());
     auto n_rows = lhs.rows();
-    auto result = BitVec<Word>::zeros(n_rows);
+    auto result = BitVector<Word>::zeros(n_rows);
     for (auto i = 0uz; i < n_rows; ++i) {
         if (dot(lhs.row(i), rhs)) result.set(i, true);
     }
@@ -2533,20 +2534,20 @@ dot(BitMat<Word> const& lhs, Rhs const& rhs) {
 template<Unsigned Word, BitStore Rhs>
     requires std::same_as<typename Rhs::word_type, Word>
 constexpr auto
-operator*(BitMat<Word> const& lhs, Rhs const& rhs) {
+operator*(BitMatrix<Word> const& lhs, Rhs const& rhs) {
     return dot(lhs, rhs);
 }
 
 /// `Bit-vector, bit-matrix multiplication, `v * M`, returning a new bit-vector.
 ///
-/// @note We store bit-matrices by rows so `dot(BitMat, BitVec)` will always be faster than this.
+/// @note We store bit-matrices by rows so `dot(BitMatrix, BitVector)` will always be faster than this.
 template<Unsigned Word, BitStore Lhs>
     requires std::same_as<typename Lhs::word_type, Word>
 constexpr auto
-dot(Lhs const& lhs, BitMat<Word> const& rhs) {
+dot(Lhs const& lhs, BitMatrix<Word> const& rhs) {
     gf2_assert_eq(lhs.size(), rhs.rows(), "Incompatible dimensions: {} != {}", lhs.size(), rhs.rows());
     auto n_cols = rhs.cols();
-    auto result = BitVec<Word>::zeros(n_cols);
+    auto result = BitVector<Word>::zeros(n_cols);
     for (auto j = 0uz; j < n_cols; ++j) {
         if (dot(lhs, rhs.col(j))) result.set(j, true);
     }
@@ -2555,23 +2556,23 @@ dot(Lhs const& lhs, BitMat<Word> const& rhs) {
 
 /// Operator form for bit-vector, bit-matrix multiplication, `v * M`, returning a new bit-vector.
 ///
-/// @note We store bit-matrices by rows so `dot(BitMat, BitVec)` will always be faster than this.
+/// @note We store bit-matrices by rows so `dot(BitMatrix, BitVector)` will always be faster than this.
 template<Unsigned Word, BitStore Lhs>
     requires std::same_as<typename Lhs::word_type, Word>
 constexpr auto
-operator*(Lhs const& lhs, BitMat<Word> const& rhs) {
+operator*(Lhs const& lhs, BitMatrix<Word> const& rhs) {
     return dot(lhs, rhs);
 }
 
 /// Bit-matrix, bit-matrix multiplication, `M * N`, returning a new bit-matrix.
 template<Unsigned Word>
 constexpr auto
-dot(BitMat<Word> const& lhs, BitMat<Word> const& rhs) {
+dot(BitMatrix<Word> const& lhs, BitMatrix<Word> const& rhs) {
     gf2_assert_eq(lhs.cols(), rhs.rows(), "Incompatible dimensions: {} != {}", lhs.cols(), rhs.rows());
 
     auto n_rows = lhs.rows();
     auto n_cols = rhs.cols();
-    auto result = BitMat<Word>::zeros(n_rows, n_cols);
+    auto result = BitMatrix<Word>::zeros(n_rows, n_cols);
 
     // Row access is cheap, columns expensive, so arrange things to pull out columns as few times as possible.
     for (auto j = 0uz; j < n_cols; ++j) {
@@ -2586,7 +2587,7 @@ dot(BitMat<Word> const& lhs, BitMat<Word> const& rhs) {
 /// Operator form for bit-matrix, bit-matrix multiplication, `M * N`, returning a new bit-matrix.
 template<Unsigned Word>
 constexpr auto
-operator*(BitMat<Word> const& lhs, BitMat<Word> const& rhs) {
+operator*(BitMatrix<Word> const& lhs, BitMatrix<Word> const& rhs) {
     return dot(lhs, rhs);
 }
 
@@ -2598,7 +2599,7 @@ operator*(BitMat<Word> const& lhs, BitMat<Word> const& rhs) {
 template<Unsigned Word, BitStore Rhs>
     requires std::same_as<typename Rhs::word_type, Word>
 std::string
-string_for(BitMat<Word> const& A, Rhs const& b) {
+string_for(BitMatrix<Word> const& A, Rhs const& b) {
 
     // If either is empty there was likely a bug somewhere!
     gf2_assert(!A.is_empty(), "Matrix A is empty which is likely an error!");
@@ -2629,7 +2630,7 @@ string_for(BitMat<Word> const& A, Rhs const& b) {
 template<Unsigned Word, BitStore Rhs>
     requires std::same_as<typename Rhs::word_type, Word>
 std::string
-string_for(BitMat<Word> const& A, Rhs const& b, Rhs const& c) {
+string_for(BitMatrix<Word> const& A, Rhs const& b, Rhs const& c) {
 
     // If either is empty there was likely a bug somewhere!
     gf2_assert(!A.is_empty(), "Matrix A is empty which is likely an error!");
@@ -2662,7 +2663,7 @@ string_for(BitMat<Word> const& A, Rhs const& b, Rhs const& c) {
 template<Unsigned Word, BitStore Rhs>
     requires std::same_as<typename Rhs::word_type, Word>
 std::string
-string_for(BitMat<Word> const& A, Rhs const& b, Rhs const& c, Rhs const& d) {
+string_for(BitMatrix<Word> const& A, Rhs const& b, Rhs const& c, Rhs const& d) {
 
     // If either is empty there was likely a bug somewhere!
     gf2_assert(!A.is_empty(), "Matrix A is empty which is likely an error!");
@@ -2696,7 +2697,7 @@ string_for(BitMat<Word> const& A, Rhs const& b, Rhs const& c, Rhs const& d) {
 /// Returns a string that shows two bit-matrices side-by-side.
 template<Unsigned Word>
 std::string
-string_for(BitMat<Word> const& A, BitMat<Word> const& B) {
+string_for(BitMatrix<Word> const& A, BitMatrix<Word> const& B) {
 
     // If either is empty there was likely a bug somewhere!
     gf2_assert(!A.is_empty(), "Matrix A is empty which is likely an error!");
@@ -2724,7 +2725,7 @@ string_for(BitMat<Word> const& A, BitMat<Word> const& B) {
 /// Returns a string that shows three bit-matrices side-by-side.
 template<Unsigned Word>
 std::string
-string_for(BitMat<Word> const& A, BitMat<Word> const& B, BitMat<Word> const& C) {
+string_for(BitMatrix<Word> const& A, BitMatrix<Word> const& B, BitMatrix<Word> const& C) {
 
     // If either is empty there was likely a bug somewhere!
     gf2_assert(!A.is_empty(), "Matrix A is empty which is likely an error!");
@@ -2758,7 +2759,7 @@ string_for(BitMat<Word> const& A, BitMat<Word> const& B, BitMat<Word> const& C) 
 // Specialises `std::formatter` to handle bit-matrices ...
 // -------------------------------------------------------------------------------------------------------------------
 
-/// Specialise `std::formatter` for the `gf2::BitMat<Word>` type.
+/// Specialise `std::formatter` for the `gf2::BitMatrix<Word>` type.
 ///
 /// You can use the format specifier to alter the output:
 /// - `{}` -> binary string (no formatting)
@@ -2767,7 +2768,7 @@ string_for(BitMat<Word> const& A, BitMat<Word> const& B, BitMat<Word> const& C) 
 ///
 /// # Example
 /// ```
-/// auto m = BitMat<u8>::zero(4);
+/// auto m = BitMatrix<u8>::zero(4);
 /// m.set_all();
 /// auto ms = std::format("{}", m);
 /// auto mp = std::format("{:p}", m);
@@ -2777,7 +2778,7 @@ string_for(BitMat<Word> const& A, BitMat<Word> const& B, BitMat<Word> const& C) 
 /// assert_eq(mx, "F\nF\nF\nF");
 /// ```
 template<gf2::Unsigned Word>
-struct std::formatter<gf2::BitMat<Word>> {
+struct std::formatter<gf2::BitMatrix<Word>> {
 
     /// Parse a bit-store format specifier where where we recognize {:p} and {:x}
     constexpr auto parse(std::format_parse_context const& ctx) {
@@ -2795,7 +2796,7 @@ struct std::formatter<gf2::BitMat<Word>> {
 
     /// Push out a formatted bit-matrix using the various @c to_string(...) methods in the class.
     template<class FormatContext>
-    auto format(gf2::BitMat<Word> const& rhs, FormatContext& ctx) const {
+    auto format(gf2::BitMatrix<Word> const& rhs, FormatContext& ctx) const {
         // Was there a format specification error?
         if (m_error) return std::format_to(ctx.out(), "'UNRECOGNIZED FORMAT SPECIFIER FOR BIT-MATRIX'");
 

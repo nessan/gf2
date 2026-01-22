@@ -6,9 +6,9 @@
 
 int
 main() {
-    auto v0 = BitVec<>::alternating(77);
+    auto v0 = BitVector<>::alternating(77);
     std::println("{}", v0.describe());
     std::println();
-    auto v1 = BitVec<u8>::alternating(77);
+    auto v1 = BitVector<u8>::alternating(77);
     std::println("{}", v1.describe());
 }

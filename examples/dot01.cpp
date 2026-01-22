@@ -24,8 +24,8 @@ main() {
 
     // Two random vectors
     using Word = usize;
-    auto u = BitVec<Word>::random(N);
-    auto v = BitVec<Word>::random(N);
+    auto u = BitVector<Word>::random(N);
+    auto v = BitVector<Word>::random(N);
 
     // To do something in the loop, we count how often the dot product is 1.
     auto count = 0uz;

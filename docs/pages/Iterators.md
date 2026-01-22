@@ -21,7 +21,7 @@ The `value_type` of the non-const version is `gf2::BitRef` that allows modificat
 
 ## Construction
 
-You can create these iterators for any type that implements the `gf2::BitStore` interface, such as `gf2::BitVec`, `gf2::BitArray`, and `gf2::BitSpan` by using free functions or member functions.
+You can create these iterators for any type that implements the `gf2::BitStore` interface, such as `gf2::BitVector`, `gf2::BitArray`, and `gf2::BitSpan` by using free functions or member functions.
 
 The free functions are defined in the `gf2` namespace as follows:
 
@@ -46,16 +46,16 @@ auto bits(Store const& store); // <2>
 1. Returns a mutable `gf2::Bits` that allows modification of the bits in the store.
 2. Returns an immutable `gf2::Bits` that only allows one to view the bits in the store.
 
-More commonly you create the iterators by calling member functions defined in `gf2::BitVec`, `gf2::BitArray`, and `gf2::BitSpan`.
-For example, `gf2::BitVec` defines the following member functions:
+More commonly you create the iterators by calling member functions defined in `gf2::BitVector`, `gf2::BitArray`, and `gf2::BitSpan`.
+For example, `gf2::BitVector` defines the following member functions:
 
-| Method                           | Description                                                       |
-| -------------------------------- | ----------------------------------------------------------------- |
-| `gf2::BitVec::bits const`        | Returns the **const** version of `gf2::Bits` for this vector.     |
-| `gf2::BitVec::bits`              | Returns the **non-const** version of `gf2::Bits` for this vector. |
-| `gf2::BitVec::set_bit_indices`   | Returns a `gf2::SetBits` for this vector.                         |
-| `gf2::BitVec::unset_bit_indices` | Returns a `gf2::UnsetBits` for this vector.                       |
-| `gf2::BitVec::store_words`       | Returns `gf2::Words` for this vector.                             |
+| Method                              | Description                                                       |
+| ----------------------------------- | ----------------------------------------------------------------- |
+| `gf2::BitVector::bits const`        | Returns the **const** version of `gf2::Bits` for this vector.     |
+| `gf2::BitVector::bits`              | Returns the **non-const** version of `gf2::Bits` for this vector. |
+| `gf2::BitVector::set_bit_indices`   | Returns a `gf2::SetBits` for this vector.                         |
+| `gf2::BitVector::unset_bit_indices` | Returns a `gf2::UnsetBits` for this vector.                       |
+| `gf2::BitVector::store_words`       | Returns `gf2::Words` for this vector.                             |
 
 ### Example
 
@@ -64,19 +64,19 @@ For example, `gf2::BitVec` defines the following member functions:
 int main() {
 
     // Use the non-const `Bits` to set all the bits in a bit-vector
-    auto v0 = BitVec<>::zeros(10);
+    auto v0 = BitVector<>::zeros(10);
     for (auto&& bit : v0.bits()) bit = true;
     std::println("v0: {}", v0);                             // "v0: 1111111111"
 
     // Exercise the `SetBits` & the `UnsetBitIter` to get indices of set and unset bits
-    auto v1 = BitVec<u8>::alternating(10);
+    auto v1 = BitVector<u8>::alternating(10);
     auto set_locations = std::ranges::to<std::vector>(v1.set_bit_indices());
     auto unset_locations = std::ranges::to<std::vector>(v1.unset_bit_indices());
     std::println("Set indices:   {}", set_locations);       // "Set indices:   [0, 2, 4, 6, 8]"
     std::println("Unset indices: {}", unset_locations);     // "Unset indices: [1, 3, 5, 7, 9]"
 
     // Look at the underlying store words of a bit-vector
-    auto v2 = BitVec<u8>::ones(10);
+    auto v2 = BitVector<u8>::ones(10);
     auto words = std::ranges::to<std::vector>(v2.store_words());
     std::println("Store words: {::08b}", words);             // "Store words: [11111111, 00000011]"
 }
@@ -84,12 +84,12 @@ int main() {
 
 ## See Also
 
--   `gf2::Bits` for detailed documentation on the bits iterator.
--   `gf2::SetBits` for detailed documentation on the set-bits iterator.
--   `gf2::UnsetBits` for detailed documentation on the unset-bits iterator.
--   `gf2::Words` for detailed documentation on the words iterator.
--   [`BitStore`](BitStore.md) for the concept API shared by all bit-stores.
--   [`BitArray`](BitArray.md) for fixed-size vectors of bits.
--   [`BitVec`](BitVec.md) for dynamically-sized vectors of bits.
--   [`BitSpan`](BitSpan.md) for non-owning views into any bit-store.
--   [`BitRef`](BitRef.md) for the proxy class that represents a single bit in a bit-store.
+- `gf2::Bits` for detailed documentation on the bits iterator.
+- `gf2::SetBits` for detailed documentation on the set-bits iterator.
+- `gf2::UnsetBits` for detailed documentation on the unset-bits iterator.
+- `gf2::Words` for detailed documentation on the words iterator.
+- [`BitStore`](BitStore.md) for the concept API shared by all bit-stores.
+- [`BitArray`](BitArray.md) for fixed-size vectors of bits.
+- [`BitVector`](BitVector.md) for dynamically-sized vectors of bits.
+- [`BitSpan`](BitSpan.md) for non-owning views into any bit-store.
+- [`BitRef`](BitRef.md) for the proxy class that represents a single bit in a bit-store.
