@@ -1,11 +1,10 @@
 cmake_minimum_required(VERSION 3.31)
 
+# C++ module target for gf2
 add_library(${PROJECT_NAME}_module)
 
 target_sources(${PROJECT_NAME}_module
-    PUBLIC
-        FILE_SET CXX_MODULES FILES
-            gf2.cppm
+    PUBLIC FILE_SET CXX_MODULES FILES  gf2.cppm
 )
 
 target_compile_features(${PROJECT_NAME}_module PUBLIC cxx_std_20)

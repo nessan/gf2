@@ -17,8 +17,12 @@ target_sources(${PROJECT_NAME} INTERFACE
     TYPE        HEADERS
     BASE_DIRS   include/)
 
-# Options for enabling modules
+# Set the GF2_BUILD_MODULES flag to enable building the library as a C++ module.
+# This is off by default since not all compilers support C++ modules yet.
 option(GF2_BUILD_MODULES "Build gf2 as a C++ module" OFF)
+if (GF2_BUILD_MODULES)
+    add_subdirectory(modules)
+endif()
 
 # That's it unless we are developing the library instead of just using it ...
 if (PROJECT_IS_TOP_LEVEL)
@@ -67,8 +71,4 @@ if (PROJECT_IS_TOP_LEVEL)
     doxytest(${CMAKE_SOURCE_DIR}/include/gf2
         INCLUDES "<gf2/namespace.h>" LIBRARIES ${PROJECT_NAME}::${PROJECT_NAME})
 
-endif()
-
-if (GF2_BUILD_MODULES)
-    add_subdirectory(modules)
 endif()
