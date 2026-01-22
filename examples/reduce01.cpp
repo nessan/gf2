@@ -5,6 +5,7 @@
 #include <print>
 #include <utilities/thousands.h>
 #include <gf2/namespace.h>
+#include <chrono>
 #include "naive.h"
 
 int

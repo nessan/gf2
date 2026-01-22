@@ -3,6 +3,8 @@
 // SPDX-License-Identifier: MIT
 #include <print>
 #include <utilities/thousands.h>
+#include <chrono>
+#include <random>
 #include <gf2/namespace.h>
 #include "naive.h"
 

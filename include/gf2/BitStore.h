@@ -2059,9 +2059,7 @@ dot(Lhs const& lhs, Rhs const& rhs) {
     using word_type = typename Lhs::word_type;
     auto sum = word_type{0};
     for (auto i = 0uz; i < lhs.words(); ++i) {
-        auto tmp = lhs.word(i) & rhs.word(i);
-        // sum ^= static_cast<word_type>(tmp);
-        sum ^= tmp;
+        sum ^= static_cast<word_type>(lhs.word(i) & rhs.word(i));
     }
     return count_ones(sum) % 2 == 1;
 }
