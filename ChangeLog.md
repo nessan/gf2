@@ -2,10 +2,10 @@
 
 This file documents notable changes to the project.
 
-## 08-Jan-2026
+## Jan-2026
 
-- Complete rewrite --- lot of the changes were inspired by the Rust version of the library: `gf2-rs`.
-- Renamed the library from `bit` to `gf2`.
+- Complete rewrite --- lot of the changes were inspired by the Rust version of the library: `gf2_rs`.
+- Renamed the library from `bit` to `gf2` (someone had already taken the name `bit` on crates.io).
 - Classes and functions have been moved into the `gf2` namespace.
 - Added `gf2::BitStore` as a common _concept_ interface for the vector-like classes:
     - `gf2::BitArray` for fixed-size vectors of bits (backed by `std::array`).
@@ -18,7 +18,7 @@ This file documents notable changes to the project.
 - Documentation now uses Doxygen and published via GitHub Actions to GitHub Pages.
 - The project uses [`Doxytest`](https://nessan.github.io/doxytest/) to extract and run tests from code examples in header comments.
 
-## 30-Apr-2024
+## Apr-2024
 
 - Moved the repo to github.
 - The documentation/site-builder was moved from AsciiDoc/Antora to Markdown/Quarto.
