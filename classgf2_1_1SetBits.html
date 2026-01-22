@@ -138,11 +138,11 @@ class gf2::SetBits&lt; Store &gt;</div><p>An iterator over the <em>index locatio
 <p>This is a constant iterator that returns the indices of the set bits in the store as successive <span class="tt"><a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8" title="Word type alias for the platform&#39;s &quot;native&quot;-sized unsigned integer.">usize</a></span>s.</p>
 <h1 class="doxsection"><a class="anchor" id="example-458"></a>
 Example</h1>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVec.html#aa2a913940a592ccc49ed6754f606c411">BitVec&lt;u8&gt;::alternating</a>(10);</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;u8&gt;::alternating</a>(10);</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
 <div class="line"><span class="keyword">auto</span> indices = std::ranges::to&lt;std::vector&gt;(v.set_bits());</div>
 <div class="line">assert_eq(indices, (std::vector&lt;usize&gt;{0, 2, 4, 6, 8}));</div>
-<div class="ttc" id="aclassgf2_1_1BitVec_html_aa2a913940a592ccc49ed6754f606c411"><div class="ttname"><a href="classgf2_1_1BitVec.html#aa2a913940a592ccc49ed6754f606c411">gf2::BitVec::alternating</a></div><div class="ttdeci">static constexpr BitVec alternating(usize n)</div><div class="ttdoc">Factory method to generate a bit-vector of length n looking like 101010....</div><div class="ttdef"><b>Definition</b> BitVec.h:237</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_aeed3a5c646dbc7c38b4298574734ae4a"><div class="ttname"><a href="classgf2_1_1BitVector.html#aeed3a5c646dbc7c38b4298574734ae4a">gf2::BitVector::alternating</a></div><div class="ttdeci">static constexpr BitVector alternating(usize n)</div><div class="ttdoc">Factory method to generate a bit-vector of length n looking like 101010....</div><div class="ttdef"><b>Definition</b> BitVector.h:237</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

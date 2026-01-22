@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=11" />
         <meta name="generator" content="Doxygen 1.15.0" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>GF2++: std::formatter&lt; gf2::BitPoly&lt; Word &gt; &gt;</title>
+        <title>GF2++: Member List</title>
         <link href="tabs.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structstd_1_1formatter_3_01gf2_1_1BitPoly_3_01Word_01_4_01_4.html','','structstd_1_1formatter_3_01gf2_1_1BitPoly_3_01Word_01_4_01_4-members'); });
+$(function(){initNavTree('structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -122,51 +122,21 @@ $(function(){initNavTree('structstd_1_1formatter_3_01gf2_1_1BitPoly_3_01Word_01_
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">std::formatter&lt; gf2::BitPoly&lt; Word &gt; &gt;</div></div>
+  <div class="headertitle"><div class="title">std::formatter&lt; gf2::BitPolynomial&lt; Word &gt; &gt; Member List</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Specialise <span class="tt">std::formatter</span> for our <span class="tt"><a class="el" href="classgf2_1_1BitPoly.html" title="A BitPoly represents a polynomial over GF(2) where we store the polynomial coefficients in a bit-vect...">gf2::BitPoly</a>&lt;Word&gt;</span> type.  
- <a href="#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="BitPoly_8h_source.html">BitPoly.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:ae9c66da7782f0427d5effcb535bf67ce" id="r_ae9c66da7782f0427d5effcb535bf67ce"><td class="memItemLeft" align="right" valign="top"><a id="ae9c66da7782f0427d5effcb535bf67ce" name="ae9c66da7782f0427d5effcb535bf67ce"></a>
-constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><b>parse</b> (std::format_parse_context const &amp;ctx)</td></tr>
-<tr class="memdesc:ae9c66da7782f0427d5effcb535bf67ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse a bit-polynomial format specifier for a variable name (default is "x"). <br /></td></tr>
-<tr class="memitem:afdcb1131be992d7209d7923cf3db6383" id="r_afdcb1131be992d7209d7923cf3db6383"><td class="memTemplParams" colspan="2"><a id="afdcb1131be992d7209d7923cf3db6383" name="afdcb1131be992d7209d7923cf3db6383"></a>
-template&lt;class FormatContext&gt; </td></tr>
-<tr class="memitem:afdcb1131be992d7209d7923cf3db6383 template"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><b>format</b> (<a class="el" href="classgf2_1_1BitPoly.html">gf2::BitPoly</a>&lt; Word &gt; const &amp;rhs, FormatContext &amp;ctx) const</td></tr>
-<tr class="memdesc:afdcb1131be992d7209d7923cf3db6383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defer the work to the <span class="tt">to_string(...)</span> method in the class. <br /></td></tr>
-</table>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="conceptgf2_1_1Unsigned.html">gf2::Unsigned</a> Word&gt;<br />
-struct std::formatter&lt; gf2::BitPoly&lt; Word &gt; &gt;</div><p>Specialise <span class="tt">std::formatter</span> for our <span class="tt"><a class="el" href="classgf2_1_1BitPoly.html" title="A BitPoly represents a polynomial over GF(2) where we store the polynomial coefficients in a bit-vect...">gf2::BitPoly</a>&lt;Word&gt;</span> type. </p>
-<p>You can use the format specifier to set the variable symbol (the default is "x"). For example, <span class="tt">std::format("{:mat}", p)</span> -&gt; "p0 + p1*mat + p2*mat^2 + ...".</p>
-<h1 class="doxsection"><a class="anchor" id="example-202"></a>
-Example</h1>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> p = BitPoly&lt;&gt;::ones(2);</div>
-<div class="line"><span class="keyword">auto</span> px = std::format(<span class="stringliteral">&quot;{}&quot;</span>, p);</div>
-<div class="line"><span class="keyword">auto</span> py = std::format(<span class="stringliteral">&quot;{:y}&quot;</span>, p);</div>
-<div class="line">assert_eq(px, <span class="stringliteral">&quot;1 + x + x^2&quot;</span>);</div>
-<div class="line">assert_eq(py, <span class="stringliteral">&quot;1 + y + y^2&quot;</span>);</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+<p>This is the complete list of members for <a class="el" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html">std::formatter&lt; gf2::BitPolynomial&lt; Word &gt; &gt;</a>, including all inherited members.</p>
+<table class="directory">
+  <tr class="even"><td class="entry"><a class="el" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a72a41ba96322d8f46df574879d7ce305">format</a>(gf2::BitPolynomial&lt; Word &gt; const &amp;rhs, FormatContext &amp;ctx) const</td><td class="entry"><a class="el" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html">std::formatter&lt; gf2::BitPolynomial&lt; Word &gt; &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a2c24db03a37b3a69b2d8b3afe18fecd6">parse</a>(std::format_parse_context const &amp;ctx)</td><td class="entry"><a class="el" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html">std::formatter&lt; gf2::BitPolynomial&lt; Word &gt; &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+</table></div><!-- contents -->
 </div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
 </div><!-- container -->
 <!-- HTML footer for doxygen 1.15.0-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacestd.html">std</a></li><li class="navelem"><a href="structstd_1_1formatter_3_01gf2_1_1BitPoly_3_01Word_01_4_01_4.html">formatter&lt; gf2::BitPoly&lt; Word &gt; &gt;</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

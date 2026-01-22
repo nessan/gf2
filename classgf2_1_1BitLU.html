@@ -126,15 +126,15 @@ $(function(){initNavTree('classgf2_1_1BitLU.html','','classgf2_1_1BitLU-members'
 </div><!--header-->
 <div class="contents">
 
-<p>The <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> class provides the <span class="tt"><a class="el" href="#a890e8e18141b984e99d1da412ab0554f" title="Read-only access to the LU form of the bit-matrix where A -&gt; [L\U].">LU</a></span> decomposition for bit-matrices.  
+<p>The <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> class provides the <span class="tt"><a class="el" href="#a70b65617eea5d01c4e061069eb9ebddd" title="Read-only access to the LU form of the bit-matrix where A -&gt; [L\U].">LU</a></span> decomposition for bit-matrices.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="BitLU_8h_source.html">BitLU.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acbef40c16cd95e73cca6151f0e5792a0" id="r_acbef40c16cd95e73cca6151f0e5792a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbef40c16cd95e73cca6151f0e5792a0">BitLU</a> (<a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt; const &amp;A)</td></tr>
-<tr class="memdesc:acbef40c16cd95e73cca6151f0e5792a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the LU decomposition object for a square matrix <span class="tt">A</span>.  <br /></td></tr>
+<tr class="memitem:a92c7094a721d3bbfa9503612f7585866" id="r_a92c7094a721d3bbfa9503612f7585866"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92c7094a721d3bbfa9503612f7585866">BitLU</a> (<a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt; const &amp;A)</td></tr>
+<tr class="memdesc:a92c7094a721d3bbfa9503612f7585866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the LU decomposition object for a square matrix <span class="tt">A</span>.  <br /></td></tr>
 <tr class="memitem:a7e8d5f21a8b7b0d5daedead86523152b" id="r_a7e8d5f21a8b7b0d5daedead86523152b"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e8d5f21a8b7b0d5daedead86523152b">rank</a> () const</td></tr>
 <tr class="memdesc:a7e8d5f21a8b7b0d5daedead86523152b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the rank of the matrix.  <br /></td></tr>
 <tr class="memitem:aa6eadf85c7d39dac296bc13d481e625b" id="r_aa6eadf85c7d39dac296bc13d481e625b"><td class="memItemLeft" align="right" valign="top"><a id="aa6eadf85c7d39dac296bc13d481e625b" name="aa6eadf85c7d39dac296bc13d481e625b"></a>
@@ -143,46 +143,46 @@ constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_singular
 <tr class="memitem:a604b3e230fc09d6fa1ac3c916bc5110b" id="r_a604b3e230fc09d6fa1ac3c916bc5110b"><td class="memItemLeft" align="right" valign="top"><a id="a604b3e230fc09d6fa1ac3c916bc5110b" name="a604b3e230fc09d6fa1ac3c916bc5110b"></a>
 constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>determinant</b> () const</td></tr>
 <tr class="memdesc:a604b3e230fc09d6fa1ac3c916bc5110b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value of the determinant of the underlying matrix as <span class="tt">true</span> or <span class="tt">false</span> for 1 or 0. <br /></td></tr>
-<tr class="memitem:a890e8e18141b984e99d1da412ab0554f" id="r_a890e8e18141b984e99d1da412ab0554f"><td class="memItemLeft" align="right" valign="top"><a id="a890e8e18141b984e99d1da412ab0554f" name="a890e8e18141b984e99d1da412ab0554f"></a>
-constexpr const <a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>LU</b> () const</td></tr>
-<tr class="memdesc:a890e8e18141b984e99d1da412ab0554f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-only access to the LU form of the bit-matrix where A -&gt; [L\U]. <br /></td></tr>
-<tr class="memitem:abadbedaef443792b5b62dcec0128d8e9" id="r_abadbedaef443792b5b62dcec0128d8e9"><td class="memItemLeft" align="right" valign="top"><a id="abadbedaef443792b5b62dcec0128d8e9" name="abadbedaef443792b5b62dcec0128d8e9"></a>
-constexpr <a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>L</b> () const</td></tr>
-<tr class="memdesc:abadbedaef443792b5b62dcec0128d8e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the unit lower triangular matrix <span class="tt"><a class="el" href="#abadbedaef443792b5b62dcec0128d8e9" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span> in the LU decomposition. <br /></td></tr>
-<tr class="memitem:a8dca16ce7a87211a7a9a0cfc09a627a3" id="r_a8dca16ce7a87211a7a9a0cfc09a627a3"><td class="memItemLeft" align="right" valign="top"><a id="a8dca16ce7a87211a7a9a0cfc09a627a3" name="a8dca16ce7a87211a7a9a0cfc09a627a3"></a>
-constexpr <a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>U</b> () const</td></tr>
-<tr class="memdesc:a8dca16ce7a87211a7a9a0cfc09a627a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the upper triangular matrix <span class="tt"><a class="el" href="#a8dca16ce7a87211a7a9a0cfc09a627a3" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span> in the LU decomposition. <br /></td></tr>
+<tr class="memitem:a70b65617eea5d01c4e061069eb9ebddd" id="r_a70b65617eea5d01c4e061069eb9ebddd"><td class="memItemLeft" align="right" valign="top"><a id="a70b65617eea5d01c4e061069eb9ebddd" name="a70b65617eea5d01c4e061069eb9ebddd"></a>
+constexpr const <a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>LU</b> () const</td></tr>
+<tr class="memdesc:a70b65617eea5d01c4e061069eb9ebddd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-only access to the LU form of the bit-matrix where A -&gt; [L\U]. <br /></td></tr>
+<tr class="memitem:ab46e29baf332eea2bbc3296d55ae08f7" id="r_ab46e29baf332eea2bbc3296d55ae08f7"><td class="memItemLeft" align="right" valign="top"><a id="ab46e29baf332eea2bbc3296d55ae08f7" name="ab46e29baf332eea2bbc3296d55ae08f7"></a>
+constexpr <a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>L</b> () const</td></tr>
+<tr class="memdesc:ab46e29baf332eea2bbc3296d55ae08f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the unit lower triangular matrix <span class="tt"><a class="el" href="#ab46e29baf332eea2bbc3296d55ae08f7" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span> in the LU decomposition. <br /></td></tr>
+<tr class="memitem:a9ccba9d92861785aa4ed7aef1592d37f" id="r_a9ccba9d92861785aa4ed7aef1592d37f"><td class="memItemLeft" align="right" valign="top"><a id="a9ccba9d92861785aa4ed7aef1592d37f" name="a9ccba9d92861785aa4ed7aef1592d37f"></a>
+constexpr <a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>U</b> () const</td></tr>
+<tr class="memdesc:a9ccba9d92861785aa4ed7aef1592d37f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the upper triangular matrix <span class="tt"><a class="el" href="#a9ccba9d92861785aa4ed7aef1592d37f" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span> in the LU decomposition. <br /></td></tr>
 <tr class="memitem:a948aa259cb7aa563f0fc0daff914fc5c" id="r_a948aa259cb7aa563f0fc0daff914fc5c"><td class="memItemLeft" align="right" valign="top">constexpr const std::vector&lt; <a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a948aa259cb7aa563f0fc0daff914fc5c">swaps</a> () const</td></tr>
 <tr class="memdesc:a948aa259cb7aa563f0fc0daff914fc5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a reference to the row swap instructions in <a href="https://en.wikipedia.org/wiki/LAPACK"><span class="tt">LAPACK</span></a> form.  <br /></td></tr>
 <tr class="memitem:a63728f5e57f796f304a950f83b42ecd5" id="r_a63728f5e57f796f304a950f83b42ecd5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63728f5e57f796f304a950f83b42ecd5">permutation_vector</a> () const</td></tr>
 <tr class="memdesc:a63728f5e57f796f304a950f83b42ecd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the permutation matrix as a vector of showing the index positions of the non-zero entries.  <br /></td></tr>
-<tr class="memitem:a36dfccacabf8937863685c6c47e4d875" id="r_a36dfccacabf8937863685c6c47e4d875"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36dfccacabf8937863685c6c47e4d875">permute</a> (<a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt; &amp;B) const</td></tr>
-<tr class="memdesc:a36dfccacabf8937863685c6c47e4d875"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permutes the rows of the input matrix <span class="tt">B</span> in-place using our row-swap instruction vector.  <br /></td></tr>
+<tr class="memitem:a7416f4c8d9067044a968c057ed9aed0a" id="r_a7416f4c8d9067044a968c057ed9aed0a"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7416f4c8d9067044a968c057ed9aed0a">permute</a> (<a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt; &amp;B) const</td></tr>
+<tr class="memdesc:a7416f4c8d9067044a968c057ed9aed0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permutes the rows of the input matrix <span class="tt">B</span> in-place using our row-swap instruction vector.  <br /></td></tr>
 <tr class="memitem:a76c6104824f5bdb8eaf2e2e5f06890f8" id="r_a76c6104824f5bdb8eaf2e2e5f06890f8"><td class="memTemplParams" colspan="2">template&lt;BitStore Store&gt; <br />
 requires (std::same_as&lt;typename Store::word_type, Word&gt;)</td></tr>
 <tr class="memitem:a76c6104824f5bdb8eaf2e2e5f06890f8 template"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76c6104824f5bdb8eaf2e2e5f06890f8">permute</a> (Store &amp;b) const</td></tr>
 <tr class="memdesc:a76c6104824f5bdb8eaf2e2e5f06890f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permute the rows of the input vector <span class="tt">b</span> in-place using our row-swap instruction vector.  <br /></td></tr>
-<tr class="memitem:a9502464ab5ce9b6d7ae38a4127c8a328" id="r_a9502464ab5ce9b6d7ae38a4127c8a328"><td class="memTemplParams" colspan="2">template&lt;BitStore Store&gt; <br />
+<tr class="memitem:a33ba228e0d7500d4bde0d6d8a5c6b202" id="r_a33ba228e0d7500d4bde0d6d8a5c6b202"><td class="memTemplParams" colspan="2">template&lt;BitStore Store&gt; <br />
 requires (std::same_as&lt;typename Store::word_type, Word&gt;)</td></tr>
-<tr class="memitem:a9502464ab5ce9b6d7ae38a4127c8a328 template"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classgf2_1_1BitVec.html">BitVec</a>&lt; Word &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9502464ab5ce9b6d7ae38a4127c8a328">operator()</a> (Store const &amp;b) const</td></tr>
-<tr class="memdesc:a9502464ab5ce9b6d7ae38a4127c8a328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the linear system <span class="tt">A.x_for = b</span> for any <span class="tt">b</span> where <span class="tt">A</span> is the matrix used to construct the <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> object.  <br /></td></tr>
-<tr class="memitem:a6ea6e1f38f9f05e3139613219262df31" id="r_a6ea6e1f38f9f05e3139613219262df31"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ea6e1f38f9f05e3139613219262df31">operator()</a> (<a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt; const &amp;B) const</td></tr>
-<tr class="memdesc:a6ea6e1f38f9f05e3139613219262df31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the linear system <span class="tt">A.X_for = B</span> for any <span class="tt">B</span> where <span class="tt">A</span> is the matrix used to construct the <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> object.  <br /></td></tr>
-<tr class="memitem:ab0e404d0e7763d230d1f244e397e92f5" id="r_ab0e404d0e7763d230d1f244e397e92f5"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0e404d0e7763d230d1f244e397e92f5">inverse</a> () const</td></tr>
-<tr class="memdesc:ab0e404d0e7763d230d1f244e397e92f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the inverse of the matrix <span class="tt">A</span> as a full independent bit-matrix or <span class="tt">std::nullopt</span> if the matrix is singular.  <br /></td></tr>
+<tr class="memitem:a33ba228e0d7500d4bde0d6d8a5c6b202 template"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classgf2_1_1BitVector.html">BitVector</a>&lt; Word &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a33ba228e0d7500d4bde0d6d8a5c6b202">operator()</a> (Store const &amp;b) const</td></tr>
+<tr class="memdesc:a33ba228e0d7500d4bde0d6d8a5c6b202"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the linear system <span class="tt">A.x_for = b</span> for any <span class="tt">b</span> where <span class="tt">A</span> is the matrix used to construct the <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> object.  <br /></td></tr>
+<tr class="memitem:ad574b61e458a5f6f87220627a7e1df5e" id="r_ad574b61e458a5f6f87220627a7e1df5e"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad574b61e458a5f6f87220627a7e1df5e">operator()</a> (<a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt; const &amp;B) const</td></tr>
+<tr class="memdesc:ad574b61e458a5f6f87220627a7e1df5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the linear system <span class="tt">A.X_for = B</span> for any <span class="tt">B</span> where <span class="tt">A</span> is the matrix used to construct the <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> object.  <br /></td></tr>
+<tr class="memitem:a79cdebce01c27f3d9f3c2136a6b77d71" id="r_a79cdebce01c27f3d9f3c2136a6b77d71"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79cdebce01c27f3d9f3c2136a6b77d71">inverse</a> () const</td></tr>
+<tr class="memdesc:a79cdebce01c27f3d9f3c2136a6b77d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the inverse of the matrix <span class="tt">A</span> as a full independent bit-matrix or <span class="tt">std::nullopt</span> if the matrix is singular.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;Unsigned Word&gt;<br />
-class gf2::BitLU&lt; Word &gt;</div><p>The <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> class provides the <span class="tt"><a class="el" href="#a890e8e18141b984e99d1da412ab0554f" title="Read-only access to the LU form of the bit-matrix where A -&gt; [L\U].">LU</a></span> decomposition for bit-matrices. </p>
+class gf2::BitLU&lt; Word &gt;</div><p>The <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> class provides the <span class="tt"><a class="el" href="#a70b65617eea5d01c4e061069eb9ebddd" title="Read-only access to the LU form of the bit-matrix where A -&gt; [L\U].">LU</a></span> decomposition for bit-matrices. </p>
 <p>The class also has methods for solving systems of linear equations over GF(2) and for inverting square bit-matrices.</p>
 <p>Formally, <em>LU</em> decomposition of <span class="tt">A</span> is \(P \cdot A = L \cdot U\) where \(P\) is a permutation matrix, \(L\) is a unit lower triangular matrix and \(U\) is an upper triangular matrix.</p>
-<p>The <span class="tt"><a class="el" href="#abadbedaef443792b5b62dcec0128d8e9" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span> and <span class="tt"><a class="el" href="#a8dca16ce7a87211a7a9a0cfc09a627a3" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span> triangles can be efficiently packed into a single bit-matrix of the same size as <span class="tt">A</span></p>
+<p>The <span class="tt"><a class="el" href="#ab46e29baf332eea2bbc3296d55ae08f7" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span> and <span class="tt"><a class="el" href="#a9ccba9d92861785aa4ed7aef1592d37f" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span> triangles can be efficiently packed into a single bit-matrix of the same size as <span class="tt">A</span></p>
 <p><span class="tt">P</span> is a permutation of the identity matrix with one non-zero entry per row. In practice, we just need to store the locations of those entries as some form of vector.</p>
 <dl class="section note"><dt>Note</dt><dd>There are generalisations of the LU decomposition for non-square matrices but those are not considered yet.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a href="https://en.wikipedia.org/wiki/Finite_field_arithmetic">Finite field arithmetic</a> </dd></dl>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="acbef40c16cd95e73cca6151f0e5792a0" name="acbef40c16cd95e73cca6151f0e5792a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbef40c16cd95e73cca6151f0e5792a0">&#9670;&#160;</a></span>BitLU()</h2>
+<a id="a92c7094a721d3bbfa9503612f7585866" name="a92c7094a721d3bbfa9503612f7585866"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92c7094a721d3bbfa9503612f7585866">&#9670;&#160;</a></span>BitLU()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,7 +195,7 @@ template&lt;Unsigned Word&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classgf2_1_1BitLU.html">gf2::BitLU</a>&lt; Word &gt;::BitLU </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>A</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>A</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -207,26 +207,26 @@ template&lt;Unsigned Word&gt; </div>
 </div><div class="memdoc">
 
 <p>Constructs the LU decomposition object for a square matrix <span class="tt">A</span>. </p>
-<p>On construction, this method computes a unit lower triangular matrix <span class="tt"><a class="el" href="#abadbedaef443792b5b62dcec0128d8e9" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span>, an upper triangular matrix <span class="tt"><a class="el" href="#a8dca16ce7a87211a7a9a0cfc09a627a3" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span>, and a permutation matrix <span class="tt">P</span> such that <span class="tt">P.A = L.U</span>. The <span class="tt"><a class="el" href="#abadbedaef443792b5b62dcec0128d8e9" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span> and <span class="tt"><a class="el" href="#a8dca16ce7a87211a7a9a0cfc09a627a3" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span> triangles are efficiently packed into a single matrix and <span class="tt">P</span> is stored as a vector of row swap instructions.</p>
+<p>On construction, this method computes a unit lower triangular matrix <span class="tt"><a class="el" href="#ab46e29baf332eea2bbc3296d55ae08f7" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span>, an upper triangular matrix <span class="tt"><a class="el" href="#a9ccba9d92861785aa4ed7aef1592d37f" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span>, and a permutation matrix <span class="tt">P</span> such that <span class="tt">P.A = L.U</span>. The <span class="tt"><a class="el" href="#ab46e29baf332eea2bbc3296d55ae08f7" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span> and <span class="tt"><a class="el" href="#a9ccba9d92861785aa4ed7aef1592d37f" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span> triangles are efficiently packed into a single matrix and <span class="tt">P</span> is stored as a vector of row swap instructions.</p>
 <p>The construction works even if <span class="tt">A</span> is singular, though the solver methods will not.</p>
 <p>If <span class="tt">A</span> is <span class="tt">n x n</span>, then the construction takes O(n^3) operations. There are block iterative methods that can reduce that to a sub-cubic count but they are not implemented here. Of course, the method works on whole words or bit elements at a time so is very efficient even without those enhancements.</p>
 <dl class="section note"><dt>Note</dt><dd>Panics if the <span class="tt">A</span> matrix is not square. There are generalisations of the LU decomposition for non-square matrices but those are not considered yet.</dd></dl>
 <h1 class="doxsection"><a class="anchor" id="example-checks-that-lu--pa-for-a-random-matrix-a"></a>
 Example (checks that <span class="tt">LU = PA</span> for a random matrix <span class="tt">A</span>)</h1>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMat.html#ab960f06474a7dcce924632e50dcc376b">BitMat&lt;u8&gt;::random</a>(100, 100);</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a47a029b47df5b3641f6f06483b549ce6">BitMatrix&lt;u8&gt;::random</a>(100, 100);</div>
 <div class="line"><span class="keyword">auto</span> lu = A.LU();</div>
-<div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="#a890e8e18141b984e99d1da412ab0554f">LU</a> = lu.L() * lu.U();</div>
+<div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="#a70b65617eea5d01c4e061069eb9ebddd">LU</a> = lu.L() * lu.U();</div>
 <div class="line"><span class="keyword">auto</span> PA = A;</div>
 <div class="line">lu.permute(PA);</div>
-<div class="line">assert_eq(PA, <a class="code hl_function" href="#a890e8e18141b984e99d1da412ab0554f">LU</a>);</div>
-<div class="ttc" id="aclassgf2_1_1BitLU_html_a890e8e18141b984e99d1da412ab0554f"><div class="ttname"><a href="#a890e8e18141b984e99d1da412ab0554f">gf2::BitLU::LU</a></div><div class="ttdeci">constexpr const BitMat&lt; Word &gt; &amp; LU() const</div><div class="ttdoc">Read-only access to the LU form of the bit-matrix where A -&gt; [L\U].</div><div class="ttdef"><b>Definition</b> BitLU.h:117</div></div>
-<div class="ttc" id="aclassgf2_1_1BitMat_html_ab960f06474a7dcce924632e50dcc376b"><div class="ttname"><a href="classgf2_1_1BitMat.html#ab960f06474a7dcce924632e50dcc376b">gf2::BitMat::random</a></div><div class="ttdeci">static BitMat random(usize m, usize n, double p=0.5, std::uint64_t seed=0)</div><div class="ttdoc">Factory method to generate a bit-matrix of size m x n where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitMat.h:261</div></div>
+<div class="line">assert_eq(PA, <a class="code hl_function" href="#a70b65617eea5d01c4e061069eb9ebddd">LU</a>);</div>
+<div class="ttc" id="aclassgf2_1_1BitLU_html_a70b65617eea5d01c4e061069eb9ebddd"><div class="ttname"><a href="#a70b65617eea5d01c4e061069eb9ebddd">gf2::BitLU::LU</a></div><div class="ttdeci">constexpr const BitMatrix&lt; Word &gt; &amp; LU() const</div><div class="ttdoc">Read-only access to the LU form of the bit-matrix where A -&gt; [L\U].</div><div class="ttdef"><b>Definition</b> BitLU.h:117</div></div>
+<div class="ttc" id="aclassgf2_1_1BitMatrix_html_a47a029b47df5b3641f6f06483b549ce6"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#a47a029b47df5b3641f6f06483b549ce6">gf2::BitMatrix::random</a></div><div class="ttdeci">static BitMatrix random(usize m, usize n, double p=0.5, std::uint64_t seed=0)</div><div class="ttdoc">Factory method to generate a bit-matrix of size m x n where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:261</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="ab0e404d0e7763d230d1f244e397e92f5" name="ab0e404d0e7763d230d1f244e397e92f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0e404d0e7763d230d1f244e397e92f5">&#9670;&#160;</a></span>inverse()</h2>
+<a id="a79cdebce01c27f3d9f3c2136a6b77d71" name="a79cdebce01c27f3d9f3c2136a6b77d71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79cdebce01c27f3d9f3c2136a6b77d71">&#9670;&#160;</a></span>inverse()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,7 +237,7 @@ template&lt;Unsigned Word&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt; <a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt; &gt; <a class="el" href="classgf2_1_1BitLU.html">gf2::BitLU</a>&lt; Word &gt;::inverse </td>
+          <td class="memname">std::optional&lt; <a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt; &gt; <a class="el" href="classgf2_1_1BitLU.html">gf2::BitLU</a>&lt; Word &gt;::inverse </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -253,19 +253,19 @@ template&lt;Unsigned Word&gt; </div>
 <p>Returns the inverse of the matrix <span class="tt">A</span> as a full independent bit-matrix or <span class="tt">std::nullopt</span> if the matrix is singular. </p>
 <h1 class="doxsection"><a class="anchor" id="example-88"></a>
 Example</h1>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMat.html#ab0adf92ca051399749f63c431f40e419">BitMat&lt;&gt;::left_rotation</a>(100, 1);</div>
-<div class="line"><a class="code hl_function" href="#acbef40c16cd95e73cca6151f0e5792a0">BitLU</a> lu{A};</div>
-<div class="line"><span class="keyword">auto</span> A_inv = lu.<a class="code hl_function" href="#ab0e404d0e7763d230d1f244e397e92f5">inverse</a>().value();</div>
-<div class="line">assert_eq(A_inv, <a class="code hl_function" href="classgf2_1_1BitMat.html#a2ad1f5eed64497f9e7f3121d4e971454">BitMat&lt;&gt;::right_rotation</a>(100, 1));</div>
-<div class="ttc" id="aclassgf2_1_1BitLU_html_ab0e404d0e7763d230d1f244e397e92f5"><div class="ttname"><a href="#ab0e404d0e7763d230d1f244e397e92f5">gf2::BitLU::inverse</a></div><div class="ttdeci">std::optional&lt; BitMat&lt; Word &gt; &gt; inverse() const</div><div class="ttdoc">Returns the inverse of the matrix A as a full independent bit-matrix or std::nullopt if the matrix is...</div><div class="ttdef"><b>Definition</b> BitLU.h:291</div></div>
-<div class="ttc" id="aclassgf2_1_1BitLU_html_acbef40c16cd95e73cca6151f0e5792a0"><div class="ttname"><a href="#acbef40c16cd95e73cca6151f0e5792a0">gf2::BitLU::BitLU</a></div><div class="ttdeci">BitLU(BitMat&lt; Word &gt; const &amp;A)</div><div class="ttdoc">Constructs the LU decomposition object for a square matrix A.</div><div class="ttdef"><b>Definition</b> BitLU.h:60</div></div>
-<div class="ttc" id="aclassgf2_1_1BitMat_html_a2ad1f5eed64497f9e7f3121d4e971454"><div class="ttname"><a href="classgf2_1_1BitMat.html#a2ad1f5eed64497f9e7f3121d4e971454">gf2::BitMat::right_rotation</a></div><div class="ttdeci">static BitMat right_rotation(usize n, usize p)</div><div class="ttdoc">Constructs the n x n rotate-right by p places matrix.</div><div class="ttdef"><b>Definition</b> BitMat.h:469</div></div>
-<div class="ttc" id="aclassgf2_1_1BitMat_html_ab0adf92ca051399749f63c431f40e419"><div class="ttname"><a href="classgf2_1_1BitMat.html#ab0adf92ca051399749f63c431f40e419">gf2::BitMat::left_rotation</a></div><div class="ttdeci">static BitMat left_rotation(usize n, usize p)</div><div class="ttdoc">Constructs the n x n rotate-left by p places matrix.</div><div class="ttdef"><b>Definition</b> BitMat.h:450</div></div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">BitMatrix&lt;&gt;::left_rotation</a>(100, 1);</div>
+<div class="line"><a class="code hl_function" href="#a92c7094a721d3bbfa9503612f7585866">BitLU</a> lu{A};</div>
+<div class="line"><span class="keyword">auto</span> A_inv = lu.<a class="code hl_function" href="#a79cdebce01c27f3d9f3c2136a6b77d71">inverse</a>().value();</div>
+<div class="line">assert_eq(A_inv, <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a6fefecbb0bd5f81e499abeec66751e60">BitMatrix&lt;&gt;::right_rotation</a>(100, 1));</div>
+<div class="ttc" id="aclassgf2_1_1BitLU_html_a79cdebce01c27f3d9f3c2136a6b77d71"><div class="ttname"><a href="#a79cdebce01c27f3d9f3c2136a6b77d71">gf2::BitLU::inverse</a></div><div class="ttdeci">std::optional&lt; BitMatrix&lt; Word &gt; &gt; inverse() const</div><div class="ttdoc">Returns the inverse of the matrix A as a full independent bit-matrix or std::nullopt if the matrix is...</div><div class="ttdef"><b>Definition</b> BitLU.h:291</div></div>
+<div class="ttc" id="aclassgf2_1_1BitLU_html_a92c7094a721d3bbfa9503612f7585866"><div class="ttname"><a href="#a92c7094a721d3bbfa9503612f7585866">gf2::BitLU::BitLU</a></div><div class="ttdeci">BitLU(BitMatrix&lt; Word &gt; const &amp;A)</div><div class="ttdoc">Constructs the LU decomposition object for a square matrix A.</div><div class="ttdef"><b>Definition</b> BitLU.h:60</div></div>
+<div class="ttc" id="aclassgf2_1_1BitMatrix_html_a6fefecbb0bd5f81e499abeec66751e60"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#a6fefecbb0bd5f81e499abeec66751e60">gf2::BitMatrix::right_rotation</a></div><div class="ttdeci">static BitMatrix right_rotation(usize n, usize p)</div><div class="ttdoc">Constructs the n x n rotate-right by p places matrix.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:469</div></div>
+<div class="ttc" id="aclassgf2_1_1BitMatrix_html_a8b23de84fa10d85060a045c3c4058242"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">gf2::BitMatrix::left_rotation</a></div><div class="ttdeci">static BitMatrix left_rotation(usize n, usize p)</div><div class="ttdoc">Constructs the n x n rotate-left by p places matrix.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:450</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="a6ea6e1f38f9f05e3139613219262df31" name="a6ea6e1f38f9f05e3139613219262df31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ea6e1f38f9f05e3139613219262df31">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="ad574b61e458a5f6f87220627a7e1df5e" name="ad574b61e458a5f6f87220627a7e1df5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad574b61e458a5f6f87220627a7e1df5e">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -276,9 +276,9 @@ template&lt;Unsigned Word&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt; <a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt; &gt; <a class="el" href="classgf2_1_1BitLU.html">gf2::BitLU</a>&lt; Word &gt;::operator() </td>
+          <td class="memname">std::optional&lt; <a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt; &gt; <a class="el" href="classgf2_1_1BitLU.html">gf2::BitLU</a>&lt; Word &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>B</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>B</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -295,16 +295,16 @@ template&lt;Unsigned Word&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>This method panics if the bit-matrix <span class="tt">B</span> has a different number of rows than the number of row swap instructions.</dd></dl>
 <h1 class="doxsection"><a class="anchor" id="example-87"></a>
 Example</h1>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMat.html#ab0adf92ca051399749f63c431f40e419">BitMat&lt;&gt;::left_rotation</a>(100, 5);</div>
-<div class="line"><span class="keyword">auto</span> B = <a class="code hl_function" href="classgf2_1_1BitMat.html#ab960f06474a7dcce924632e50dcc376b">BitMat&lt;&gt;::random</a>(100, 12);</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">BitMatrix&lt;&gt;::left_rotation</a>(100, 5);</div>
+<div class="line"><span class="keyword">auto</span> B = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a47a029b47df5b3641f6f06483b549ce6">BitMatrix&lt;&gt;::random</a>(100, 12);</div>
 <div class="line"><span class="keyword">auto</span> lu = A.LU();</div>
 <div class="line"><span class="keyword">auto</span> X = lu(B).value();</div>
 <div class="line">assert_eq(A * X, B);</div>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="a9502464ab5ce9b6d7ae38a4127c8a328" name="a9502464ab5ce9b6d7ae38a4127c8a328"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9502464ab5ce9b6d7ae38a4127c8a328">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a33ba228e0d7500d4bde0d6d8a5c6b202" name="a33ba228e0d7500d4bde0d6d8a5c6b202"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33ba228e0d7500d4bde0d6d8a5c6b202">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -318,7 +318,7 @@ requires (std::same_as&lt;typename Store::word_type, Word&gt;)</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt; <a class="el" href="classgf2_1_1BitVec.html">BitVec</a>&lt; Word &gt; &gt; <a class="el" href="classgf2_1_1BitLU.html">gf2::BitLU</a>&lt; Word &gt;::operator() </td>
+          <td class="memname">std::optional&lt; <a class="el" href="classgf2_1_1BitVector.html">BitVector</a>&lt; Word &gt; &gt; <a class="el" href="classgf2_1_1BitLU.html">gf2::BitLU</a>&lt; Word &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">Store const &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span></td><td>)</td>
           <td> const</td>
@@ -337,12 +337,12 @@ requires (std::same_as&lt;typename Store::word_type, Word&gt;)</div>
 <h1 class="doxsection"><a class="anchor" id="example-86"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> n = 100uz;</div>
-<div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMat.html#ab0adf92ca051399749f63c431f40e419">BitMat&lt;&gt;::left_rotation</a>(n, 1);</div>
+<div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">BitMatrix&lt;&gt;::left_rotation</a>(n, 1);</div>
 <div class="line"><span class="keyword">auto</span> lu = A.LU();</div>
-<div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVec.html#ab57ee9beea8e50d4671758c20e544215">BitVec&lt;&gt;::random</a>(n);</div>
+<div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#ade5751f621f74291115c14ca08549e5e">BitVector&lt;&gt;::random</a>(n);</div>
 <div class="line"><span class="keyword">auto</span> x = lu(b).value();</div>
 <div class="line">assert_eq(A * x, b);</div>
-<div class="ttc" id="aclassgf2_1_1BitVec_html_ab57ee9beea8e50d4671758c20e544215"><div class="ttname"><a href="classgf2_1_1BitVec.html#ab57ee9beea8e50d4671758c20e544215">gf2::BitVec::random</a></div><div class="ttdeci">static BitVec random(usize len, double p=0.5, u64 seed=0)</div><div class="ttdoc">Factory method to generate a bit-vector of size len where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitVec.h:345</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_ade5751f621f74291115c14ca08549e5e"><div class="ttname"><a href="classgf2_1_1BitVector.html#ade5751f621f74291115c14ca08549e5e">gf2::BitVector::random</a></div><div class="ttdeci">static BitVector random(usize len, double p=0.5, u64 seed=0)</div><div class="ttdoc">Factory method to generate a bit-vector of size len where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitVector.h:345</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -378,8 +378,8 @@ template&lt;Unsigned Word&gt; </div>
 
 </div>
 </div>
-<a id="a36dfccacabf8937863685c6c47e4d875" name="a36dfccacabf8937863685c6c47e4d875"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36dfccacabf8937863685c6c47e4d875">&#9670;&#160;</a></span>permute() <span class="overload">[1/2]</span></h2>
+<a id="a7416f4c8d9067044a968c057ed9aed0a" name="a7416f4c8d9067044a968c057ed9aed0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7416f4c8d9067044a968c057ed9aed0a">&#9670;&#160;</a></span>permute() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -392,7 +392,7 @@ template&lt;Unsigned Word&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classgf2_1_1BitLU.html">gf2::BitLU</a>&lt; Word &gt;::permute </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classgf2_1_1BitMat.html">BitMat</a>&lt; Word &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>B</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>B</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -469,7 +469,7 @@ template&lt;Unsigned Word&gt; </div>
 <p>Returns the rank of the matrix. </p>
 <h1 class="doxsection"><a class="anchor" id="example-85"></a>
 Example</h1>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMat.html#ab0adf92ca051399749f63c431f40e419">BitMat&lt;&gt;::left_rotation</a>(100, 1);</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">BitMatrix&lt;&gt;::left_rotation</a>(100, 1);</div>
 <div class="line"><span class="keyword">auto</span> lu = A.LU();</div>
 <div class="line">assert_eq(lu.rank(), 100);</div>
 </div><!-- fragment --> 

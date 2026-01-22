@@ -254,7 +254,7 @@ Factory Constructors</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a76cc891c25b8b9da8fcb9a07e2d2cbda" title="Factory method to generate a bit-array of size N where the elements are from independent fair coin fl...">gf2::BitArray::biased_random</a></span>  </td><td class="markdownTableBodyNone">Returns a random <span class="tt">BitArray</span> where you set the probability of bits being 1.  </td></tr>
 </table>
-<p>The <span class="tt"><a class="el" href="classgf2_1_1BitVec.html#adff516a657e2c3f2c703fbf778572148" title="Factory method to construct a bit-vector by copying all the bits from any Unsigned instance....">gf2::BitVec::from</a></span> factory method is overloaded to allow construction from:</p>
+<p>The <span class="tt"><a class="el" href="classgf2_1_1BitVector.html#a3f33e12942bab8d475697297db924cb0" title="Factory method to construct a bit-vector by copying all the bits from any Unsigned instance....">gf2::BitVector::from</a></span> factory method is overloaded to allow construction from:</p>
 <ul>
 <li>A <a href="https://en.cppreference.com/w/cpp/utility/bitset"><span class="tt">std::bitset</span></a> where we copy the bits over.</li>
 <li>A callable object (a function of some sort) that generates bits on demand when passed an index.</li>
@@ -314,7 +314,7 @@ Mutators</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVec.html#a188e583de62ec470801b098249a044a0" title="Sets the bits in the store to the boolean value and returns a reference to this for chaining.">gf2::BitVec::set_all</a></span>  </td><td class="markdownTableBodyNone">Sets all the bits in the bit-array to the passed value, which defaults to <span class="tt">true</span>.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVector.html#aca70c54c7a95407c27f4db5856a30993" title="Sets the bits in the store to the boolean value and returns a reference to this for chaining.">gf2::BitVector::set_all</a></span>  </td><td class="markdownTableBodyNone">Sets all the bits in the bit-array to the passed value, which defaults to <span class="tt">true</span>.  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a75ef63973a6fe29859cf9dc989d38228" title="Flips the value of the bits in the store and returns a reference to this for chaining.">gf2::BitArray::flip_all</a></span>  </td><td class="markdownTableBodyNone">Flips the values of all the bits in the bit-array.  </td></tr>
 </table>
@@ -371,11 +371,11 @@ Sub-vectors</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a1487ea33eae413fc582a77fb16e62fa7" title="Returns a clone of the elements in the half-open range [begin, end) as a new bit-array.">gf2::BitArray::sub</a></span>  </td><td class="markdownTableBodyNone">Returns a new <span class="tt"><a class="el" href="classgf2_1_1BitVec.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVec</a></span> encompassing the bits in a half-open range <span class="tt">[begin, end)</span>.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a1487ea33eae413fc582a77fb16e62fa7" title="Returns a clone of the elements in the half-open range [begin, end) as a new bit-array.">gf2::BitArray::sub</a></span>  </td><td class="markdownTableBodyNone">Returns a new <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVector</a></span> encompassing the bits in a half-open range <span class="tt">[begin, end)</span>.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a0deddf769bb0be4869b63ab57ab5e267" title="Views a bit-store as two parts containing the elements [0, at) and [at, size()) respectively.">gf2::BitArray::split_at</a></span>  </td><td class="markdownTableBodyNone">Fills two bit-vectors with the bits in the ranges <span class="tt">[0, at)</span> and <span class="tt">[at, size())</span>.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#ad780efa43f9e461bb5dd7bfda85529bc" title="Views a bit-store as two parts containing the elements [0, at) and [at, size()) respectively.">gf2::BitArray::split_at</a></span>  </td><td class="markdownTableBodyNone">Fills two bit-vectors with the bits in the ranges <span class="tt">[0, at)</span> and <span class="tt">[at, size())</span>.  </td></tr>
 </table>
-<p>The <span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a0deddf769bb0be4869b63ab57ab5e267" title="Views a bit-store as two parts containing the elements [0, at) and [at, size()) respectively.">gf2::BitArray::split_at</a></span> method can optionally take two pre-existing bit-vectors to fill, thereby avoiding unnecessary allocations in some iterative algorithms that repeatedly use this method.</p>
+<p>The <span class="tt"><a class="el" href="classgf2_1_1BitArray.html#ad780efa43f9e461bb5dd7bfda85529bc" title="Views a bit-store as two parts containing the elements [0, at) and [at, size()) respectively.">gf2::BitArray::split_at</a></span> method can optionally take two pre-existing bit-vectors to fill, thereby avoiding unnecessary allocations in some iterative algorithms that repeatedly use this method.</p>
 <dl class="section note"><dt>Note</dt><dd>These methods do not alter the underlying vector.</dd></dl>
 <h1 class="doxsection"><a class="anchor" id="set-riffling"></a>
 Riffling</h1>
@@ -384,12 +384,12 @@ Riffling</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a011a507e57834b724eac3ad01ca474db" title="Interleaves the bits of this bit-store with zeros storing the result into the bit-array dst.">gf2::BitArray::riffled</a></span>  </td><td class="markdownTableBodyNone">Fills a pre-existing bit-vector with the result of riffling this bit-array.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a23cc27cefe65bd9b7459b564cd007534" title="Interleaves the bits of this bit-store with zeros storing the result into the bit-array dst.">gf2::BitArray::riffled</a></span>  </td><td class="markdownTableBodyNone">Fills a pre-existing bit-vector with the result of riffling this bit-array.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a011a507e57834b724eac3ad01ca474db" title="Interleaves the bits of this bit-store with zeros storing the result into the bit-array dst.">gf2::BitArray::riffled</a></span>  </td><td class="markdownTableBodyNone">Returns a new bit-vector that is this bit-array with its bits interleaved with zeros.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a23cc27cefe65bd9b7459b564cd007534" title="Interleaves the bits of this bit-store with zeros storing the result into the bit-array dst.">gf2::BitArray::riffled</a></span>  </td><td class="markdownTableBodyNone">Returns a new bit-vector that is this bit-array with its bits interleaved with zeros.  </td></tr>
 </table>
 <p>If the bit-array looks like \(v_0 v_1 v_2 \ldots v_n\), then the riffling operation produces the vector \(v_0 0 v_1 0 v_2 0 \ldots v_n\) where a zero is interleaved <em>between</em> every bit in the original bit-array (there is no trailing zero at the end).</p>
-<p>If you think of a bit-array as representing the coefficients of a polynomial over GF(2), then riffling corresponds to squaring that polynomial. See the documentation for <span class="tt"><a class="el" href="classgf2_1_1BitPoly.html#abfa3f15a7f16328bd2f6a4f7a770e7fd" title="Fills dst with the square of this bit-polynomial.">gf2::BitPoly::squared</a></span> for more information.</p>
+<p>If you think of a bit-array as representing the coefficients of a polynomial over GF(2), then riffling corresponds to squaring that polynomial. See the documentation for <span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#a30309419a9ed46754fc450052ef19bfb" title="Fills dst with the square of this bit-polynomial.">gf2::BitPolynomial::squared</a></span> for more information.</p>
 <h1 class="doxsection"><a class="anchor" id="set-indices"></a>
 Set/Unset Bit Indices</h1>
 <p>The following methods find the indices of set or unset bits in the vector.</p>
@@ -481,10 +481,10 @@ See Also</h1>
 <ul>
 <li><span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size vector over GF(2) with N bit elements compactly stored in a standard array of primitive ...">gf2::BitArray</a></span> reference for detailed documentation with examples for each method.</li>
 <li><a class="el" href="md_docs_2pages_2BitStore.html"><span class="tt">BitStore</span></a> for the concept API shared by all bit-stores.</li>
-<li><a class="el" href="md_docs_2pages_2BitVec.html"><span class="tt">BitVec</span></a> for dynamically-sized vectors of bits.</li>
+<li><a class="el" href="md_docs_2pages_2BitVector.html"><span class="tt">BitVector</span></a> for dynamically-sized vectors of bits.</li>
 <li><a class="el" href="md_docs_2pages_2BitSpan.html"><span class="tt">BitSpan</span></a> for non-owning views of some of the bits in a bit-array.</li>
-<li><a class="el" href="md_docs_2pages_2BitMat.html"><span class="tt">BitMat</span></a> for matrices of bits.</li>
-<li><a class="el" href="md_docs_2pages_2BitPoly.html"><span class="tt">BitPoly</span></a> for polynomials over GF(2). </li>
+<li><a class="el" href="md_docs_2pages_2BitMatrix.html"><span class="tt">BitMatrix</span></a> for matrices of bits.</li>
+<li><a class="el" href="md_docs_2pages_2BitPolynomial.html"><span class="tt">BitPolynomial</span></a> for polynomials over GF(2). </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

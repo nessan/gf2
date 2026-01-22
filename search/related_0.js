@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_3d_3d_0',['operator==',['../classgf2_1_1BitMat.html#a29b24e1c82eae445aac3e0a11dccd446',1,'gf2::BitMat::operator==()'],['../classgf2_1_1BitPoly.html#af3e1795b84d1240020eafc979bc0ae2d',1,'gf2::BitPoly::operator==()']]]
+  ['operator_3d_3d_0',['operator==',['../classgf2_1_1BitMatrix.html#aa07d8f45bfb2a64685f2bee65a0792c3',1,'gf2::BitMatrix::operator==()'],['../classgf2_1_1BitPolynomial.html#ae29df06811167f533e342c9c2157a845',1,'gf2::BitPolynomial::operator==()']]]
 ];

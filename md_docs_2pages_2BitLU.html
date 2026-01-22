@@ -134,10 +134,10 @@ Introduction</h1>
 <p>In practice, \(L\) and \(U\) are packed compactly into an \(n \times n\) bit-matrix, and the permutation "matrix" is stored as a vector.</p>
 <h1 class="doxsection"><a class="anchor" id="construction"></a>
 Construction</h1>
-<p>If <span class="tt">A</span> is a square <span class="tt"><a class="el" href="classgf2_1_1BitMat.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">gf2::BitMat</a></span> you can create a <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">gf2::BitLU</a></span> object either by</p>
+<p>If <span class="tt">A</span> is a square <span class="tt"><a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">gf2::BitMatrix</a></span> you can create a <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">gf2::BitLU</a></span> object either by</p>
 <ul>
 <li>A direct call to the class constructor <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">gf2::BitLU(A)</a></span>, or</li>
-<li>Using the factory method <span class="tt"><a class="el" href="classgf2_1_1BitMat.html#a84e53cded14276bb661c2ed6639c7bdb" title="Returns the LU decomposition of the bit-matrix.">gf2::BitMat::LU</a></span> on the matrix object by a call like <span class="tt">auto LU = A.LU();</span> on the matrix object <span class="tt">A</span>.</li>
+<li>Using the factory method <span class="tt"><a class="el" href="classgf2_1_1BitMatrix.html#a31496c74a8fb2a4a2407e558db90e29f" title="Returns the LU decomposition of the bit-matrix.">gf2::BitMatrix::LU</a></span> on the matrix object by a call like <span class="tt">auto LU = A.LU();</span> on the matrix object <span class="tt">A</span>.</li>
 </ul>
 <p>The decomposition always works even if \(A\) is singular, but other class methods will not.</p>
 <p>If \(A\) is \(n \times n\), then construction is an \(\mathcal{O}(n^3)\) operation (though due to the nature of \(\mathbf{F}_2\), things are done in words at a time). There are sub-cubic ways of doing this work using various block-iterative methods, but those methods have not been implemented here yet.</p>
@@ -155,11 +155,11 @@ Queries</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#a604b3e230fc09d6fa1ac3c916bc5110b" title="Returns the value of the determinant of the underlying matrix as true or false for 1 or 0.">gf2::BitLU::determinant()</a></span>  </td><td class="markdownTableBodyNone">Returns the scalar boolean that is the determinant of \(A\).  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#abadbedaef443792b5b62dcec0128d8e9" title="Returns the unit lower triangular matrix L in the LU decomposition.">gf2::BitLU::L()</a></span>  </td><td class="markdownTableBodyNone">Returns the unit lower triangular matrix <span class="tt">L</span> in the LU decomposition.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#ab46e29baf332eea2bbc3296d55ae08f7" title="Returns the unit lower triangular matrix L in the LU decomposition.">gf2::BitLU::L()</a></span>  </td><td class="markdownTableBodyNone">Returns the unit lower triangular matrix <span class="tt">L</span> in the LU decomposition.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#a8dca16ce7a87211a7a9a0cfc09a627a3" title="Returns the upper triangular matrix U in the LU decomposition.">gf2::BitLU::U()</a></span>  </td><td class="markdownTableBodyNone">Returns the upper triangular matrix <span class="tt">U</span> in the LU decomposition.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#a9ccba9d92861785aa4ed7aef1592d37f" title="Returns the upper triangular matrix U in the LU decomposition.">gf2::BitLU::U()</a></span>  </td><td class="markdownTableBodyNone">Returns the upper triangular matrix <span class="tt">U</span> in the LU decomposition.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#a890e8e18141b984e99d1da412ab0554f" title="Read-only access to the LU form of the bit-matrix where A -&gt; [L\U].">gf2::BitLU::LU()</a></span>  </td><td class="markdownTableBodyNone">Read-only access to the packed <span class="tt">LU</span> form of the bit-matrix where <span class="tt">[L\U]</span>  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#a70b65617eea5d01c4e061069eb9ebddd" title="Read-only access to the LU form of the bit-matrix where A -&gt; [L\U].">gf2::BitLU::LU()</a></span>  </td><td class="markdownTableBodyNone">Read-only access to the packed <span class="tt">LU</span> form of the bit-matrix where <span class="tt">[L\U]</span>  </td></tr>
 </table>
 <h1 class="doxsection"><a class="anchor" id="permutations"></a>
 Permutations</h1>
@@ -172,9 +172,9 @@ Permutations</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#a63728f5e57f796f304a950f83b42ecd5" title="Returns the permutation matrix as a vector of showing the index positions of the non-zero entries.">gf2::BitLU::permutation_vector()</a></span>  </td><td class="markdownTableBodyNone">Returns the permutation matrix as a vector of showing the index positions of the non-zero entries.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#a36dfccacabf8937863685c6c47e4d875" title="Permutes the rows of the input matrix B in-place using our row-swap instruction vector.">gf2::BitLU::permute</a>(BitMat&lt;Word&gt;&amp;)</span>  </td><td class="markdownTableBodyNone">Permutes the rows of the input matrix in-place using our row-swap instruction vector.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#a7416f4c8d9067044a968c057ed9aed0a" title="Permutes the rows of the input matrix B in-place using our row-swap instruction vector.">gf2::BitLU::permute</a>(BitMatrix&lt;Word&gt;&amp;)</span>  </td><td class="markdownTableBodyNone">Permutes the rows of the input matrix in-place using our row-swap instruction vector.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#a36dfccacabf8937863685c6c47e4d875" title="Permutes the rows of the input matrix B in-place using our row-swap instruction vector.">gf2::BitLU::permute</a>(BitVec&lt;Word&gt;&amp;)</span>  </td><td class="markdownTableBodyNone">Permute the rows of the input vector in-place using our row-swap instruction vector.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#a7416f4c8d9067044a968c057ed9aed0a" title="Permutes the rows of the input matrix B in-place using our row-swap instruction vector.">gf2::BitLU::permute</a>(BitVector&lt;Word&gt;&amp;)</span>  </td><td class="markdownTableBodyNone">Permute the rows of the input vector in-place using our row-swap instruction vector.  </td></tr>
 </table>
 <p>A permutation matrix is just some row permutation of the identity matrix, so it has a single non-zero, 1, entry in each row or column. You don't need to store the entire matrix but instead store the locations of those 1's.</p>
 <p>In the literature, the permutation vector is often given as a permutation of the index vector. For example, the permutation vector <span class="tt">[0,2,1,4,3]</span> tells you that elements/rows 1 and 2 are swapped, as are elements/rows 3 and 4. This form is easy to interpret at a glance. However, it is tedious to use as a guide to actually executing the permutations in place.</p>
@@ -192,13 +192,13 @@ Linear System Solving</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Method  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">gf2::BitLU::operator()(const BitVec&amp;)</span>  </td><td class="markdownTableBodyNone">Returns a solution to the equation \(A \cdot x = b\).  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">gf2::BitLU::operator()(const BitVector&amp;)</span>  </td><td class="markdownTableBodyNone">Returns a solution to the equation \(A \cdot x = b\).  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">gf2::BitLU::operator()(const BitMat&amp;)</span>  </td><td class="markdownTableBodyNone">Returns a solution to the collection of equations \(A \cdot X = B\).  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">gf2::BitLU::operator()(const BitMatrix&amp;)</span>  </td><td class="markdownTableBodyNone">Returns a solution to the collection of equations \(A \cdot X = B\).  </td></tr>
 </table>
 <p>In the second case, each column of the bit-matrix <span class="tt">B</span> is considered a separate right-hand side, and the corresponding column of \(X\) is the solution vector.</p>
 <p>Once you have the <a href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a> of \(A\), it is easy to solve systems like these. If \(A\) is \(n \times n\) each system solution takes just \(\mathcal{O}(n^2)\) operations.</p>
-<p>These methods return a <a href="https://en.cppreference.com/w/cpp/utility/optional"><span class="tt">std::optional</span></a> wrapping a <span class="tt"><a class="el" href="classgf2_1_1BitVec.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVec</a></span> or a <span class="tt"><a class="el" href="classgf2_1_1BitMat.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">gf2::BitMat</a></span> or <a href="https://en.cppreference.com/w/cpp/utility/optional/nullopt"><span class="tt">std::nullopt</span></a> if \(A\) is singular. You can avoid that by first calling the <span class="tt"><a class="el" href="classgf2_1_1BitLU.html#aa6eadf85c7d39dac296bc13d481e625b" title="Returns true if the underlying matrix is singular (i.e. rank deficient).">gf2::BitLU::is_singular</a></span> method.</p>
+<p>These methods return a <a href="https://en.cppreference.com/w/cpp/utility/optional"><span class="tt">std::optional</span></a> wrapping a <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVector</a></span> or a <span class="tt"><a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">gf2::BitMatrix</a></span> or <a href="https://en.cppreference.com/w/cpp/utility/optional/nullopt"><span class="tt">std::nullopt</span></a> if \(A\) is singular. You can avoid that by first calling the <span class="tt"><a class="el" href="classgf2_1_1BitLU.html#aa6eadf85c7d39dac296bc13d481e625b" title="Returns true if the underlying matrix is singular (i.e. rank deficient).">gf2::BitLU::is_singular</a></span> method.</p>
 <dl class="section warning"><dt>Warning</dt><dd>Both methods throw an exception if the number of elements in \(b\) or rows in \(B\) does not match the number of rows in \(A\). They could instead return a <a href="https://en.cppreference.com/w/cpp/utility/optional/nullopt"><span class="tt">std::nullopt</span></a>, but a dimension mismatch is likely an indication of a coding error somewhere.</dd></dl>
 <h1 class="doxsection"><a class="anchor" id="matrix-inversion-1"></a>
 Matrix Inversion</h1>
@@ -206,7 +206,7 @@ Matrix Inversion</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Method  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#ab0e404d0e7763d230d1f244e397e92f5" title="Returns the inverse of the matrix A as a full independent bit-matrix or std::nullopt if the matrix is...">gf2::BitLU::inverse()</a></span>  </td><td class="markdownTableBodyNone">Returns the inverse of the matrix \(A\) or <a href="https://en.cppreference.com/w/cpp/utility/optional/nullopt"><span class="tt">std::nullopt</span></a> if \(A\) is singular.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitLU.html#a79cdebce01c27f3d9f3c2136a6b77d71" title="Returns the inverse of the matrix A as a full independent bit-matrix or std::nullopt if the matrix is...">gf2::BitLU::inverse()</a></span>  </td><td class="markdownTableBodyNone">Returns the inverse of the matrix \(A\) or <a href="https://en.cppreference.com/w/cpp/utility/optional/nullopt"><span class="tt">std::nullopt</span></a> if \(A\) is singular.  </td></tr>
 </table>
 <h2 class="doxsection"><a class="anchor" id="example-4"></a>
 Example</h2>
@@ -227,7 +227,7 @@ Example</h2>
 <div class="line">    <span class="keywordflow">for</span> (usize n = 0; n &lt; trials; ++n) {</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Create a random matrix &amp; decompose it</span></div>
-<div class="line">        <span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMat.html#ab960f06474a7dcce924632e50dcc376b">gf2::BitMat&lt;&gt;::random</a>(N, N);</div>
+<div class="line">        <span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a47a029b47df5b3641f6f06483b549ce6">gf2::BitMatrix&lt;&gt;::random</a>(N, N);</div>
 <div class="line">        <span class="keyword">auto</span> LU = A.LU();</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Is the matrix singular?</span></div>
@@ -242,7 +242,7 @@ Example</h2>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Stats</span></div>
-<div class="line">    <span class="keyword">auto</span> p = BitMat&lt;&gt;::probability_singular(N);     <span class="comment">// &lt;1&gt;</span></div>
+<div class="line">    <span class="keyword">auto</span> p = BitMatrix&lt;&gt;::probability_singular(N);     <span class="comment">// &lt;1&gt;</span></div>
 <div class="line">    std::println();</div>
 <div class="line">    std::println(<span class="stringliteral">&quot;Singularity stats ...&quot;</span>);</div>
 <div class="line">    std::println(<span class="stringliteral">&quot;bit::matrix size: {} x {}&quot;</span>, N, N);</div>
@@ -252,10 +252,10 @@ Example</h2>
 <div class="line">    std::println(<span class="stringliteral">&quot;Expected:    {} times&quot;</span>, <span class="keywordtype">int</span>(p * <span class="keywordtype">double</span>(trials)));</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassgf2_1_1BitMat_html_ab960f06474a7dcce924632e50dcc376b"><div class="ttname"><a href="classgf2_1_1BitMat.html#ab960f06474a7dcce924632e50dcc376b">gf2::BitMat::random</a></div><div class="ttdeci">static BitMat random(usize m, usize n, double p=0.5, std::uint64_t seed=0)</div><div class="ttdoc">Factory method to generate a bit-matrix of size m x n where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitMat.h:261</div></div>
+<div class="ttc" id="aclassgf2_1_1BitMatrix_html_a47a029b47df5b3641f6f06483b549ce6"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#a47a029b47df5b3641f6f06483b549ce6">gf2::BitMatrix::random</a></div><div class="ttdeci">static BitMatrix random(usize m, usize n, double p=0.5, std::uint64_t seed=0)</div><div class="ttdoc">Factory method to generate a bit-matrix of size m x n where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:261</div></div>
 <div class="ttc" id="anamespace_8h_html"><div class="ttname"><a href="namespace_8h.html">namespace.h</a></div><div class="ttdoc">An &quot;include everything&quot; header for the gf2 library that also exposes the namespace gf2.</div></div>
 </div><!-- fragment --><ol type="1">
-<li>See <span class="tt">BitMat::probability_singular</span> for details.</li>
+<li>See <span class="tt">BitMatrix::probability_singular</span> for details.</li>
 </ol>
 <p><b>Sample output:</b></p>
 <div class="fragment"><div class="line">A.Inverse[A] == I? YES</div>
@@ -301,7 +301,7 @@ Example</h2>
 See Also</h1>
 <ul>
 <li><span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">gf2::BitLU</a></span> for detailed documentation of all class methods.</li>
-<li><a class="el" href="md_docs_2pages_2BitMat.html"><span class="tt">BitMat</span></a> for creating and manipulating bit-matrices.</li>
+<li><a class="el" href="md_docs_2pages_2BitMatrix.html"><span class="tt">BitMatrix</span></a> for creating and manipulating bit-matrices.</li>
 <li><a class="el" href="md_docs_2pages_2BitGauss.html"><span class="tt">BitGauss</span></a> for a Gaussian elimination solver for \(A \cdot x = b\). </li>
 </ul>
 </div></div><!-- contents -->

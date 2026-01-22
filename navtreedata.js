@@ -83,32 +83,32 @@ var NAVTREE =
       [ "Other Operators and Functions", "md_docs_2pages_2BitArray.html#other-operators-and-functions", null ],
       [ "See Also", "md_docs_2pages_2BitArray.html#see-also-1", null ]
     ] ],
-    [ "The <span class=\"tt\">BitVec</span> Class", "md_docs_2pages_2BitVec.html", [
-      [ "Introduction", "md_docs_2pages_2BitVec.html#introduction-2", null ],
-      [ "Declaration", "md_docs_2pages_2BitVec.html#declaration-1", null ],
-      [ "Methods Overview", "md_docs_2pages_2BitVec.html#methods-overview-1", null ],
-      [ "Concept Methods", "md_docs_2pages_2BitVec.html#vec-concept", null ],
-      [ "Constructors", "md_docs_2pages_2BitVec.html#vec-constructors", null ],
-      [ "Factory Constructors", "md_docs_2pages_2BitVec.html#vec-factory", null ],
-      [ "Construction from Strings", "md_docs_2pages_2BitVec.html#vec-strings", null ],
-      [ "Resizing", "md_docs_2pages_2BitVec.html#vec-resizing", null ],
-      [ "Appending Elements", "md_docs_2pages_2BitVec.html#vec-append", null ],
-      [ "Removing Elements", "md_docs_2pages_2BitVec.html#vec-remove", null ],
-      [ "Bit Access", "md_docs_2pages_2BitVec.html#vec-bit-access", null ],
-      [ "Queries", "md_docs_2pages_2BitVec.html#vec-queries", null ],
-      [ "Mutators", "md_docs_2pages_2BitVec.html#vec-mutators", null ],
-      [ "Copies &amp; Fills", "md_docs_2pages_2BitVec.html#vec-fills", [
-        [ "Copies", "md_docs_2pages_2BitVec.html#copies-2", null ],
-        [ "Random Fills", "md_docs_2pages_2BitVec.html#random-fills-2", null ]
+    [ "The <span class=\"tt\">BitVector</span> Class", "md_docs_2pages_2BitVector.html", [
+      [ "Introduction", "md_docs_2pages_2BitVector.html#introduction-2", null ],
+      [ "Declaration", "md_docs_2pages_2BitVector.html#declaration-1", null ],
+      [ "Methods Overview", "md_docs_2pages_2BitVector.html#methods-overview-1", null ],
+      [ "Concept Methods", "md_docs_2pages_2BitVector.html#vec-concept", null ],
+      [ "Constructors", "md_docs_2pages_2BitVector.html#vec-constructors", null ],
+      [ "Factory Constructors", "md_docs_2pages_2BitVector.html#vec-factory", null ],
+      [ "Construction from Strings", "md_docs_2pages_2BitVector.html#vec-strings", null ],
+      [ "Resizing", "md_docs_2pages_2BitVector.html#vec-resizing", null ],
+      [ "Appending Elements", "md_docs_2pages_2BitVector.html#vec-append", null ],
+      [ "Removing Elements", "md_docs_2pages_2BitVector.html#vec-remove", null ],
+      [ "Bit Access", "md_docs_2pages_2BitVector.html#vec-bit-access", null ],
+      [ "Queries", "md_docs_2pages_2BitVector.html#vec-queries", null ],
+      [ "Mutators", "md_docs_2pages_2BitVector.html#vec-mutators", null ],
+      [ "Copies &amp; Fills", "md_docs_2pages_2BitVector.html#vec-fills", [
+        [ "Copies", "md_docs_2pages_2BitVector.html#copies-2", null ],
+        [ "Random Fills", "md_docs_2pages_2BitVector.html#random-fills-2", null ]
       ] ],
-      [ "Spans", "md_docs_2pages_2BitVec.html#vec-span", null ],
-      [ "Sub-vectors", "md_docs_2pages_2BitVec.html#vec-sub-vectors", null ],
-      [ "Riffling", "md_docs_2pages_2BitVec.html#vec-riffling", null ],
-      [ "Set/Unset Bit Indices", "md_docs_2pages_2BitVec.html#vec-indices", null ],
-      [ "Iterators", "md_docs_2pages_2BitVec.html#vec-iterators", null ],
-      [ "Stringification", "md_docs_2pages_2BitVec.html#vec-stringification", null ],
-      [ "Other Operators and Functions", "md_docs_2pages_2BitVec.html#other-operators-and-functions-1", null ],
-      [ "See Also", "md_docs_2pages_2BitVec.html#see-also-2", null ]
+      [ "Spans", "md_docs_2pages_2BitVector.html#vec-span", null ],
+      [ "Sub-vectors", "md_docs_2pages_2BitVector.html#vec-sub-vectors", null ],
+      [ "Riffling", "md_docs_2pages_2BitVector.html#vec-riffling", null ],
+      [ "Set/Unset Bit Indices", "md_docs_2pages_2BitVector.html#vec-indices", null ],
+      [ "Iterators", "md_docs_2pages_2BitVector.html#vec-iterators", null ],
+      [ "Stringification", "md_docs_2pages_2BitVector.html#vec-stringification", null ],
+      [ "Other Operators and Functions", "md_docs_2pages_2BitVector.html#other-operators-and-functions-1", null ],
+      [ "See Also", "md_docs_2pages_2BitVector.html#see-also-2", null ]
     ] ],
     [ "The <span class=\"tt\">BitSpan</span> Class", "md_docs_2pages_2BitSpan.html", [
       [ "Introduction", "md_docs_2pages_2BitSpan.html#introduction-3", null ],
@@ -139,52 +139,52 @@ var NAVTREE =
       [ "Example", "md_docs_2pages_2BitRef.html#example-2", null ],
       [ "See Also", "md_docs_2pages_2BitRef.html#see-also-4", null ]
     ] ],
-    [ "The <span class=\"tt\">BitPoly</span> Class", "md_docs_2pages_2BitPoly.html", [
-      [ "Introduction", "md_docs_2pages_2BitPoly.html#introduction-5", null ],
-      [ "Declaration", "md_docs_2pages_2BitPoly.html#declaration-3", null ],
-      [ "Constructors", "md_docs_2pages_2BitPoly.html#constructors", [
-        [ "Factory Constructors", "md_docs_2pages_2BitPoly.html#factory-constructors", null ]
+    [ "The <span class=\"tt\">BitPolynomial</span> Class", "md_docs_2pages_2BitPolynomial.html", [
+      [ "Introduction", "md_docs_2pages_2BitPolynomial.html#introduction-5", null ],
+      [ "Declaration", "md_docs_2pages_2BitPolynomial.html#declaration-3", null ],
+      [ "Constructors", "md_docs_2pages_2BitPolynomial.html#constructors", [
+        [ "Factory Constructors", "md_docs_2pages_2BitPolynomial.html#factory-constructors", null ]
       ] ],
-      [ "Queries", "md_docs_2pages_2BitPoly.html#queries", null ],
-      [ "Coefficient Access", "md_docs_2pages_2BitPoly.html#coefficient-access", null ],
-      [ "Arithmetic Operations", "md_docs_2pages_2BitPoly.html#arithmetic-operations", null ],
-      [ "Polynomial Evaluation", "md_docs_2pages_2BitPoly.html#polynomial-evaluation", null ],
-      [ "Modular Reduction", "md_docs_2pages_2BitPoly.html#modular-reduction", null ],
-      [ "Stringification", "md_docs_2pages_2BitPoly.html#stringification", null ],
-      [ "See Also", "md_docs_2pages_2BitPoly.html#see-also-5", null ]
+      [ "Queries", "md_docs_2pages_2BitPolynomial.html#queries", null ],
+      [ "Coefficient Access", "md_docs_2pages_2BitPolynomial.html#coefficient-access", null ],
+      [ "Arithmetic Operations", "md_docs_2pages_2BitPolynomial.html#arithmetic-operations", null ],
+      [ "Polynomial Evaluation", "md_docs_2pages_2BitPolynomial.html#polynomial-evaluation", null ],
+      [ "Modular Reduction", "md_docs_2pages_2BitPolynomial.html#modular-reduction", null ],
+      [ "Stringification", "md_docs_2pages_2BitPolynomial.html#stringification", null ],
+      [ "See Also", "md_docs_2pages_2BitPolynomial.html#see-also-5", null ]
     ] ],
-    [ "The <span class=\"tt\">BitMat</span> Class", "md_docs_2pages_2BitMat.html", [
-      [ "Introduction", "md_docs_2pages_2BitMat.html#introduction-6", null ],
-      [ "Declaration", "md_docs_2pages_2BitMat.html#declaration-4", null ],
-      [ "Constructors", "md_docs_2pages_2BitMat.html#constructors-1", null ],
-      [ "Factory Constructors", "md_docs_2pages_2BitMat.html#factory-constructors-1", [
-        [ "Common Matrices", "md_docs_2pages_2BitMat.html#common-matrices", null ],
-        [ "Special Matrices", "md_docs_2pages_2BitMat.html#special-matrices", null ],
-        [ "Reshaping from Vectors", "md_docs_2pages_2BitMat.html#reshaping-from-vectors", null ],
-        [ "From Strings", "md_docs_2pages_2BitMat.html#from-strings", null ]
+    [ "The <span class=\"tt\">BitMatrix</span> Class", "md_docs_2pages_2BitMatrix.html", [
+      [ "Introduction", "md_docs_2pages_2BitMatrix.html#introduction-6", null ],
+      [ "Declaration", "md_docs_2pages_2BitMatrix.html#declaration-4", null ],
+      [ "Constructors", "md_docs_2pages_2BitMatrix.html#constructors-1", null ],
+      [ "Factory Constructors", "md_docs_2pages_2BitMatrix.html#factory-constructors-1", [
+        [ "Common Matrices", "md_docs_2pages_2BitMatrix.html#common-matrices", null ],
+        [ "Special Matrices", "md_docs_2pages_2BitMatrix.html#special-matrices", null ],
+        [ "Reshaping from Vectors", "md_docs_2pages_2BitMatrix.html#reshaping-from-vectors", null ],
+        [ "From Strings", "md_docs_2pages_2BitMatrix.html#from-strings", null ]
       ] ],
-      [ "Resizing and Reshaping", "md_docs_2pages_2BitMat.html#resizing-and-reshaping", null ],
-      [ "Appending and Removing Rows/Columns", "md_docs_2pages_2BitMat.html#appending-and-removing-rowscolumns", null ],
-      [ "Size and Type Queries", "md_docs_2pages_2BitMat.html#size-and-type-queries", null ],
-      [ "Bit Counts", "md_docs_2pages_2BitMat.html#bit-counts", null ],
-      [ "General Access", "md_docs_2pages_2BitMat.html#general-access", [
-        [ "Diagonal Access", "md_docs_2pages_2BitMat.html#diagonal-access", null ]
+      [ "Resizing and Reshaping", "md_docs_2pages_2BitMatrix.html#resizing-and-reshaping", null ],
+      [ "Appending and Removing Rows/Columns", "md_docs_2pages_2BitMatrix.html#appending-and-removing-rowscolumns", null ],
+      [ "Size and Type Queries", "md_docs_2pages_2BitMatrix.html#size-and-type-queries", null ],
+      [ "Bit Counts", "md_docs_2pages_2BitMatrix.html#bit-counts", null ],
+      [ "General Access", "md_docs_2pages_2BitMatrix.html#general-access", [
+        [ "Diagonal Access", "md_docs_2pages_2BitMatrix.html#diagonal-access", null ]
       ] ],
-      [ "Sub-Matrices", "md_docs_2pages_2BitMat.html#sub-matrices", [
-        [ "Triangular Sub-Matrices", "md_docs_2pages_2BitMat.html#triangular-sub-matrices", null ]
+      [ "Sub-Matrices", "md_docs_2pages_2BitMatrix.html#sub-matrices", [
+        [ "Triangular Sub-Matrices", "md_docs_2pages_2BitMatrix.html#triangular-sub-matrices", null ]
       ] ],
-      [ "Elementary Operations", "md_docs_2pages_2BitMat.html#elementary-operations", null ],
-      [ "Transposition", "md_docs_2pages_2BitMat.html#transposition", null ],
-      [ "Exponentiation", "md_docs_2pages_2BitMat.html#exponentiation", null ],
-      [ "Matrix Inversion", "md_docs_2pages_2BitMat.html#matrix-inversion", null ],
-      [ "Bitwise &amp; Arithmetic Operations", "md_docs_2pages_2BitMat.html#bitwise--arithmetic-operations", null ],
-      [ "Linear System Solvers", "md_docs_2pages_2BitMat.html#linear-system-solvers", null ],
-      [ "Characteristic Polynomials", "md_docs_2pages_2BitMat.html#characteristic-polynomials", null ],
-      [ "Stringification", "md_docs_2pages_2BitMat.html#stringification-1", [
-        [ "Example", "md_docs_2pages_2BitMat.html#example-3", null ]
+      [ "Elementary Operations", "md_docs_2pages_2BitMatrix.html#elementary-operations", null ],
+      [ "Transposition", "md_docs_2pages_2BitMatrix.html#transposition", null ],
+      [ "Exponentiation", "md_docs_2pages_2BitMatrix.html#exponentiation", null ],
+      [ "Matrix Inversion", "md_docs_2pages_2BitMatrix.html#matrix-inversion", null ],
+      [ "Bitwise &amp; Arithmetic Operations", "md_docs_2pages_2BitMatrix.html#bitwise--arithmetic-operations", null ],
+      [ "Linear System Solvers", "md_docs_2pages_2BitMatrix.html#linear-system-solvers", null ],
+      [ "Characteristic Polynomials", "md_docs_2pages_2BitMatrix.html#characteristic-polynomials", null ],
+      [ "Stringification", "md_docs_2pages_2BitMatrix.html#stringification-1", [
+        [ "Example", "md_docs_2pages_2BitMatrix.html#example-3", null ]
       ] ],
-      [ "Utility String Functions", "md_docs_2pages_2BitMat.html#utility-string-functions", null ],
-      [ "See Also", "md_docs_2pages_2BitMat.html#see-also-6", null ]
+      [ "Utility String Functions", "md_docs_2pages_2BitMatrix.html#utility-string-functions", null ],
+      [ "See Also", "md_docs_2pages_2BitMatrix.html#see-also-6", null ]
     ] ],
     [ "The <span class=\"tt\">BitGauss</span> Solver", "md_docs_2pages_2BitGauss.html", [
       [ "Introduction", "md_docs_2pages_2BitGauss.html#introduction-7", null ],
@@ -279,11 +279,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "BitArray_8h.html",
-"classgf2_1_1BitMat.html",
-"classgf2_1_1BitPoly.html#a0a5b48de5ad0557457d50fe46d5b672b",
-"classgf2_1_1BitVec.html#a19b6684f4fa06d3f003029850da307f1",
+"classgf2_1_1BitMatrix.html",
+"classgf2_1_1BitPolynomial.html#a27afefe457918a27afde17fa3c233ad4",
+"classgf2_1_1BitVector.html#a193a2ffb36fa664bbdbfe057f4f491d2",
 "md_docs_2pages_2BitArray.html#set-indices",
-"namespacegf2.html#a9a81b88db4554b65bcdd1ea0aa62e4ea"
+"namespacegf2.html#aa074227777980943f4e0a52c2abb2e3e"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

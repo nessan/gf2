@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=11" />
         <meta name="generator" content="Doxygen 1.15.0" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>GF2++: BitVec.h</title>
+        <title>GF2++: std::formatter&lt; gf2::BitMatrix&lt; Word &gt; &gt;</title>
         <link href="tabs.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('BitVec_8h.html','',''); });
+$(function(){initNavTree('structstd_1_1formatter_3_01gf2_1_1BitMatrix_3_01Word_01_4_01_4.html','','structstd_1_1formatter_3_01gf2_1_1BitMatrix_3_01Word_01_4_01_4-members'); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -122,30 +122,44 @@ $(function(){initNavTree('BitVec_8h.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">BitVec.h</div></div>
+  <div class="headertitle"><div class="title">std::formatter&lt; gf2::BitMatrix&lt; Word &gt; &gt;</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Vectors over GF(2) with compactly stored bit-elements in a standard vector of primitive unsigned words. <br  />
- See the <a class="el" href="md_docs_2pages_2BitVec.html">BitVec</a> page for more details.  
-<a href="#details">More...</a></p>
+<p>Specialise <span class="tt">std::formatter</span> for the <span class="tt"><a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">gf2::BitMatrix</a>&lt;Word&gt;</span> type.  
+ <a href="#details">More...</a></p>
 
-<p><a href="BitVec_8h_source.html">Go to the source code of this file.</a></p>
+<p><code>#include &lt;<a class="el" href="BitMatrix_8h_source.html">BitMatrix.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:gf2_3A_3ABitVec_3C_20Word_20_3E" id="r_gf2_3A_3ABitVec_3C_20Word_20_3E"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgf2_1_1BitVec.html">gf2::BitVec&lt; Word &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of primitive unsigned words whose type is given by the template parameter <span class="tt">Word</span>.  <a href="classgf2_1_1BitVec.html#details">More...</a><br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:gf2" id="r_gf2"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegf2.html">gf2</a></td></tr>
-<tr class="memdesc:namespacegf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The namespace for the <span class="tt"><a class="el" href="namespacegf2.html" title="The namespace for the gf2 library.">gf2</a></span> library. <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2043a064f213f786cef8df7541ae4156" id="r_a2043a064f213f786cef8df7541ae4156"><td class="memItemLeft" align="right" valign="top"><a id="a2043a064f213f786cef8df7541ae4156" name="a2043a064f213f786cef8df7541ae4156"></a>
+constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><b>parse</b> (std::format_parse_context const &amp;ctx)</td></tr>
+<tr class="memdesc:a2043a064f213f786cef8df7541ae4156"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse a bit-store format specifier where where we recognize {:p} and {:x}. <br /></td></tr>
+<tr class="memitem:aa4be8e5700dd30c9c42848a48f4f683f" id="r_aa4be8e5700dd30c9c42848a48f4f683f"><td class="memTemplParams" colspan="2"><a id="aa4be8e5700dd30c9c42848a48f4f683f" name="aa4be8e5700dd30c9c42848a48f4f683f"></a>
+template&lt;class FormatContext&gt; </td></tr>
+<tr class="memitem:aa4be8e5700dd30c9c42848a48f4f683f template"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><b>format</b> (<a class="el" href="classgf2_1_1BitMatrix.html">gf2::BitMatrix</a>&lt; Word &gt; const &amp;rhs, FormatContext &amp;ctx) const</td></tr>
+<tr class="memdesc:aa4be8e5700dd30c9c42848a48f4f683f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Push out a formatted bit-matrix using the various <code>to_string(...)</code> methods in the class. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Vectors over GF(2) with compactly stored bit-elements in a standard vector of primitive unsigned words. <br  />
- See the <a class="el" href="md_docs_2pages_2BitVec.html">BitVec</a> page for more details. </p>
-</div></div><!-- contents -->
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="conceptgf2_1_1Unsigned.html">gf2::Unsigned</a> Word&gt;<br />
+struct std::formatter&lt; gf2::BitMatrix&lt; Word &gt; &gt;</div><p>Specialise <span class="tt">std::formatter</span> for the <span class="tt"><a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">gf2::BitMatrix</a>&lt;Word&gt;</span> type. </p>
+<p>You can use the format specifier to alter the output:</p><ul>
+<li><span class="tt">{}</span> -&gt; binary string (no formatting)</li>
+<li><span class="tt">{:p}</span> -&gt; pretty-string (with square brackets)</li>
+<li><span class="tt">{:x}</span> -&gt; hex string</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="example-89"></a>
+Example</h1>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> m = BitMatrix&lt;u8&gt;::zero(4);</div>
+<div class="line">m.set_all();</div>
+<div class="line"><span class="keyword">auto</span> ms = std::format(<span class="stringliteral">&quot;{}&quot;</span>, m);</div>
+<div class="line"><span class="keyword">auto</span> mp = std::format(<span class="stringliteral">&quot;{:p}&quot;</span>, m);</div>
+<div class="line"><span class="keyword">auto</span> mx = std::format(<span class="stringliteral">&quot;{:x}&quot;</span>, m);</div>
+<div class="line">assert_eq(ms, <span class="stringliteral">&quot;1111\n1111\n1111\n1111&quot;</span>);</div>
+<div class="line">assert_eq(mp, <span class="stringliteral">&quot;\u25021 1 1 1\u2502\n\u25021 1 1 1\u2502\n\u25021 1 1 1\u2502\n\u25021 1 1 1\u2502&quot;</span>);</div>
+<div class="line">assert_eq(mx, <span class="stringliteral">&quot;F\nF\nF\nF&quot;</span>);</div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -159,7 +173,7 @@ Namespaces</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>gf2</b></li><li class="navelem"><a href="BitVec_8h.html">BitVec.h</a></li>
+    <li class="navelem"><a href="namespacestd.html">std</a></li><li class="navelem"><a href="structstd_1_1formatter_3_01gf2_1_1BitMatrix_3_01Word_01_4_01_4.html">formatter&lt; gf2::BitMatrix&lt; Word &gt; &gt;</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

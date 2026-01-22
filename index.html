@@ -145,17 +145,17 @@ Main Classes</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitArray.html"><span class="tt">BitArray</span></a>  </td><td class="markdownTableBodyNone">A fixed-size vector of bits.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitVec.html"><span class="tt">BitVec</span></a>  </td><td class="markdownTableBodyNone">A dynamically-sized vector of bits.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitVector.html"><span class="tt">BitVector</span></a>  </td><td class="markdownTableBodyNone">A dynamically-sized vector of bits.  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitSpan.html"><span class="tt">BitSpan</span></a>  </td><td class="markdownTableBodyNone">A non-owning view into contiguous ranges of bits.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitPoly.html"><span class="tt">BitPoly</span></a>  </td><td class="markdownTableBodyNone">A polynomial over GF(2).  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitPolynomial.html"><span class="tt">BitPolynomial</span></a>  </td><td class="markdownTableBodyNone">A polynomial over GF(2).  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitMat.html"><span class="tt">BitMat</span></a>  </td><td class="markdownTableBodyNone">A matrix over GF(2).  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitMatrix.html"><span class="tt">BitMatrix</span></a>  </td><td class="markdownTableBodyNone">A matrix over GF(2).  </td></tr>
 </table>
-<p>The <span class="tt">BitArray</span>, <span class="tt">BitVec</span>, and <span class="tt">BitSpan</span> classes share many methods, and all implement the <a class="el" href="md_docs_2pages_2BitStore.html"><span class="tt">BitStore</span></a> concept, which provides a rich interface for manipulating collections of bits. The functions include bit accessors, mutators, fills, queries, iterators, stringification methods, bit-wise operators, arithmetic operators, and more.</p>
+<p>The <span class="tt">BitArray</span>, <span class="tt">BitVector</span>, and <span class="tt">BitSpan</span> classes share many methods, and all implement the <a class="el" href="md_docs_2pages_2BitStore.html"><span class="tt">BitStore</span></a> concept, which provides a rich interface for manipulating collections of bits. The functions include bit accessors, mutators, fills, queries, iterators, stringification methods, bit-wise operators, arithmetic operators, and more.</p>
 <p>There are other classes to support linear algebra operations, such as solving systems of linear equations, finding matrix inverses, and computing eigenvalues and eigenvectors. Among other things, the interface includes methods for examining the eigen-structure of large bit matrices.</p>
-<p>The <span class="tt">BitPoly</span> class has methods to compute \(x^N\bmod{p(x)}\) where \(p(x)\) is a polynomial over \(\mathbb{F}_2\) and \(N\) is a potentially huge integer.</p>
+<p>The <span class="tt">BitPolynomial</span> class has methods to compute \(x^N\bmod{p(x)}\) where \(p(x)\) is a polynomial over \(\mathbb{F}_2\) and \(N\) is a potentially huge integer.</p>
 <p>The classes are efficient and pack the individual bit elements into natural unsigned word blocks. There is a rich interface for setting up and manipulating these classes, as well as allowing them to interact with each other.</p>
 <dl class="section note"><dt>Note</dt><dd>Operations on and between objects in the <span class="tt"><a class="el" href="namespacegf2.html" title="The namespace for the gf2 library.">gf2</a></span> library are implemented using bitwise operations on whole underlying words at a time. This means we never have to worry about overflows or carries as we would with normal integer arithmetic. Moreover, these operations are highly optimised in modern CPUs, enabling fast computation even on large bit matrices and bit vectors.</dd></dl>
 <h1 class="doxsection"><a class="anchor" id="a-simple-example"></a>
@@ -164,7 +164,7 @@ A Simple Example</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="namespace_8h.html">gf2/namespace.h</a>&gt;</span></div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">    <span class="keyword">auto</span> M = BitMat&lt;&gt;::random(6, 6);</div>
+<div class="line">    <span class="keyword">auto</span> M = BitMatrix&lt;&gt;::random(6, 6);</div>
 <div class="line">    <span class="keyword">auto</span> c = M.characteristic_polynomial();</div>
 <div class="line">    std::println(<span class="stringliteral">&quot;The bit-matrix M:\n{}&quot;</span>, M);</div>
 <div class="line">    std::println(<span class="stringliteral">&quot;has characteristic polynomial c(x) = {}&quot;</span>, c);</div>

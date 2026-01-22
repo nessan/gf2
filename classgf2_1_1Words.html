@@ -138,11 +138,11 @@ class gf2::Words&lt; Store &gt;</div><p>An iterator over the "words" underlying 
 <p>This is a constant iterator that returns the "words" underlying a bit-store as successive <span class="tt">Word</span>s.</p>
 <h1 class="doxsection"><a class="anchor" id="example-460"></a>
 Example</h1>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVec.html#abe88a62254e18559eaa3a5bdc8eec2c7">BitVec&lt;u8&gt;::ones</a>(10);</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1111111111&quot;</span>);</div>
 <div class="line"><span class="keyword">auto</span> words = std::ranges::to&lt;std::vector&gt;(v.store_words());</div>
 <div class="line">assert_eq(words, (std::vector&lt;std::uint8_t&gt;{0b1111&#39;1111, 0b0000&#39;0011}));</div>
-<div class="ttc" id="aclassgf2_1_1BitVec_html_abe88a62254e18559eaa3a5bdc8eec2c7"><div class="ttname"><a href="classgf2_1_1BitVec.html#abe88a62254e18559eaa3a5bdc8eec2c7">gf2::BitVec::ones</a></div><div class="ttdeci">static constexpr BitVec ones(usize n)</div><div class="ttdoc">Factory method to generate a bit-vector of length n where the elements are all 1.</div><div class="ttdef"><b>Definition</b> BitVec.h:202</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_abcfb7a88f30c8faa177519571a76ba8d"><div class="ttname"><a href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">gf2::BitVector::ones</a></div><div class="ttdeci">static constexpr BitVector ones(usize n)</div><div class="ttdoc">Factory method to generate a bit-vector of length n where the elements are all 1.</div><div class="ttdef"><b>Definition</b> BitVector.h:202</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

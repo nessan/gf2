@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['parse_0',['parse',['../structstd_1_1formatter_3_01gf2_1_1BitMat_3_01Word_01_4_01_4.html#a7023739531ad6143d52aca663d323bf0',1,'std::formatter&lt; gf2::BitMat&lt; Word &gt; &gt;::parse()'],['../structstd_1_1formatter_3_01gf2_1_1BitPoly_3_01Word_01_4_01_4.html#ae9c66da7782f0427d5effcb535bf67ce',1,'std::formatter&lt; gf2::BitPoly&lt; Word &gt; &gt;::parse()']]],
+  ['parse_0',['parse',['../structstd_1_1formatter_3_01gf2_1_1BitMatrix_3_01Word_01_4_01_4.html#a2043a064f213f786cef8df7541ae4156',1,'std::formatter&lt; gf2::BitMatrix&lt; Word &gt; &gt;::parse()'],['../structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a2c24db03a37b3a69b2d8b3afe18fecd6',1,'std::formatter&lt; gf2::BitPolynomial&lt; Word &gt; &gt;::parse()']]],
   ['permutation_5fvector_1',['permutation_vector',['../classgf2_1_1BitLU.html#a63728f5e57f796f304a950f83b42ecd5',1,'gf2::BitLU']]],
-  ['permute_2',['permute',['../classgf2_1_1BitLU.html#a36dfccacabf8937863685c6c47e4d875',1,'gf2::BitLU::permute(BitMat&lt; Word &gt; &amp;B) const'],['../classgf2_1_1BitLU.html#a76c6104824f5bdb8eaf2e2e5f06890f8',1,'gf2::BitLU::permute(Store &amp;b) const']]],
-  ['pop_3',['pop',['../classgf2_1_1BitVec.html#a7ae048f5abad05cf4e62a3a36338a0cc',1,'gf2::BitVec']]],
-  ['previous_5fset_4',['previous_set',['../classgf2_1_1BitArray.html#a73051c3f6075d625c1a78ae6afd735c2',1,'gf2::BitArray::previous_set()'],['../classgf2_1_1BitSpan.html#aada8bd4b9e0ebb906850af368800e27c',1,'gf2::BitSpan::previous_set()'],['../classgf2_1_1BitVec.html#aca2b1afc660ff95d8ec775cbc2689dcc',1,'gf2::BitVec::previous_set()'],['../namespacegf2.html#a7acc8bbe9a3578c1d8b9e8659c2bd891',1,'gf2::previous_set()']]],
-  ['previous_5funset_5',['previous_unset',['../classgf2_1_1BitArray.html#a2f70552ecd9a67ade70df35fc747bb03',1,'gf2::BitArray::previous_unset()'],['../classgf2_1_1BitSpan.html#ad388e08f60848e03910e2c0a4a779d2f',1,'gf2::BitSpan::previous_unset()'],['../classgf2_1_1BitVec.html#a35581d0c84cca8d385abd42e963cb69e',1,'gf2::BitVec::previous_unset()'],['../namespacegf2.html#aaee9a90d260c8210b965a7b9aaf54570',1,'gf2::previous_unset()']]],
-  ['probability_5finvertible_6',['probability_invertible',['../classgf2_1_1BitMat.html#a3b8ba1da0230bc82dd2974ac751d9a5e',1,'gf2::BitMat']]],
-  ['probability_5fsingular_7',['probability_singular',['../classgf2_1_1BitMat.html#a46525f36b95df8b4ee03facecdf32e99',1,'gf2::BitMat']]],
-  ['push_8',['push',['../classgf2_1_1BitVec.html#a5843880584a61949af70e645f0db7d14',1,'gf2::BitVec']]]
+  ['permute_2',['permute',['../classgf2_1_1BitLU.html#a7416f4c8d9067044a968c057ed9aed0a',1,'gf2::BitLU::permute(BitMatrix&lt; Word &gt; &amp;B) const'],['../classgf2_1_1BitLU.html#a76c6104824f5bdb8eaf2e2e5f06890f8',1,'gf2::BitLU::permute(Store &amp;b) const']]],
+  ['pop_3',['pop',['../classgf2_1_1BitVector.html#a7cab0bece6d69e0d89ae7a4b866ed12b',1,'gf2::BitVector']]],
+  ['previous_5fset_4',['previous_set',['../classgf2_1_1BitArray.html#a73051c3f6075d625c1a78ae6afd735c2',1,'gf2::BitArray::previous_set()'],['../classgf2_1_1BitSpan.html#aada8bd4b9e0ebb906850af368800e27c',1,'gf2::BitSpan::previous_set()'],['../classgf2_1_1BitVector.html#a8a1df02604e2457c56c4de2a9d00c5c3',1,'gf2::BitVector::previous_set()'],['../namespacegf2.html#a7acc8bbe9a3578c1d8b9e8659c2bd891',1,'gf2::previous_set()']]],
+  ['previous_5funset_5',['previous_unset',['../classgf2_1_1BitArray.html#a2f70552ecd9a67ade70df35fc747bb03',1,'gf2::BitArray::previous_unset()'],['../classgf2_1_1BitSpan.html#ad388e08f60848e03910e2c0a4a779d2f',1,'gf2::BitSpan::previous_unset()'],['../classgf2_1_1BitVector.html#a9000a2348948286e3d12eacaa5948ff6',1,'gf2::BitVector::previous_unset()'],['../namespacegf2.html#aaee9a90d260c8210b965a7b9aaf54570',1,'gf2::previous_unset()']]],
+  ['probability_5finvertible_6',['probability_invertible',['../classgf2_1_1BitMatrix.html#ad037ef7306a35e234e545aa70b34ead1',1,'gf2::BitMatrix']]],
+  ['probability_5fsingular_7',['probability_singular',['../classgf2_1_1BitMatrix.html#ac3a45b35307c319db9f475ee9a4c6efd',1,'gf2::BitMatrix']]],
+  ['push_8',['push',['../classgf2_1_1BitVector.html#ab1ec353b0b28d8f85f402b368883405e',1,'gf2::BitVector']]]
 ];

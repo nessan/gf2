@@ -135,7 +135,7 @@ Introduction</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size vector over GF(2) with N bit elements compactly stored in a standard array of primitive ...">gf2::BitArray</a></span>  </td><td class="markdownTableBodyNone">A fixed-size array of bits packed into a <span class="tt">std::array</span> of unsigned words.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVec.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVec</a></span>  </td><td class="markdownTableBodyNone">A dynamically sized vector of bits packed into a <span class="tt">std::vector</span> of unsigned words.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVector</a></span>  </td><td class="markdownTableBodyNone">A dynamically sized vector of bits packed into a <span class="tt">std::vector</span> of unsigned words.  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span>  </td><td class="markdownTableBodyNone">A non-owning <em>view</em> of some span of bits held by one of the two previous types.  </td></tr>
 </table>
@@ -182,10 +182,10 @@ Other Notes</h2>
 </ul>
 <h2 class="doxsection"><a class="anchor" id="example"></a>
 Example</h2>
-<p>The methods are trivial to implement for <span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size vector over GF(2) with N bit elements compactly stored in a standard array of primitive ...">gf2::BitArray</a></span> and <span class="tt"><a class="el" href="classgf2_1_1BitVec.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVec</a></span>.</p>
-<p>Here is a sketch of how they might work for the <span class="tt"><a class="el" href="classgf2_1_1BitVec.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVec</a></span> class which stores <span class="tt">m_size</span> bits in a <span class="tt">std::vector&lt;Word&gt;</span> called <span class="tt">m_store</span>:</p>
+<p>The methods are trivial to implement for <span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size vector over GF(2) with N bit elements compactly stored in a standard array of primitive ...">gf2::BitArray</a></span> and <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVector</a></span>.</p>
+<p>Here is a sketch of how they might work for the <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVector</a></span> class which stores <span class="tt">m_size</span> bits in a <span class="tt">std::vector&lt;Word&gt;</span> called <span class="tt">m_store</span>:</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;Un<span class="keywordtype">signed</span> Word = usize&gt;                                    <span class="comment">// &lt;1&gt;</span></div>
-<div class="line"><span class="keyword">class </span>BitVec {</div>
+<div class="line"><span class="keyword">class </span>BitVector {</div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">    usize m_size;</div>
 <div class="line">    std::vector&lt;Word&gt; m_store;</div>
@@ -351,7 +351,7 @@ Copies</h2>
 <li>An unsigned integer that has the same number of bits as the store. The integer type need not be the same as the underlying <span class="tt">Word</span> used by the bit-vector.</li>
 <li>A function or callable object that takes a single <span class="tt">usize</span> index argument and returns a boolean value for that index.</li>
 </ul>
-<dl class="section note"><dt>Note</dt><dd>In each case, the <em>size</em> of the source and destinations must match exactly and that condition is always checked unless the <span class="tt">NDEBUG</span> flag is set at compile time. You can always use a <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span> to copy a subset of bits if needed. However, the underlying <em>word types</em> need <b>not</b> match, so you can copy between bit-stores that use different underlying word types. You can use the <span class="tt"><a class="el" href="namespacegf2.html#abb0639e0206955a54efb469f9f55ac8f" title="Copies the bits from an unsigned integral src value and returns the store for chaining.">gf2::copy</a></span> method to convert between different <span class="tt">Word</span> type stores (e.g., from <span class="tt">BitVec&lt;u32&gt;</span> to <span class="tt">BitVec&lt;u8&gt;</span>) as long as the size of the source and destinations match.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>In each case, the <em>size</em> of the source and destinations must match exactly and that condition is always checked unless the <span class="tt">NDEBUG</span> flag is set at compile time. You can always use a <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span> to copy a subset of bits if needed. However, the underlying <em>word types</em> need <b>not</b> match, so you can copy between bit-stores that use different underlying word types. You can use the <span class="tt"><a class="el" href="namespacegf2.html#abb0639e0206955a54efb469f9f55ac8f" title="Copies the bits from an unsigned integral src value and returns the store for chaining.">gf2::copy</a></span> method to convert between different <span class="tt">Word</span> type stores (e.g., from <span class="tt">BitVector&lt;u32&gt;</span> to <span class="tt">BitVector&lt;u8&gt;</span>) as long as the size of the source and destinations match.</dd></dl>
 <h2 class="doxsection"><a class="anchor" id="random-fills"></a>
 Random Fills</h2>
 <p>By default, the random fill method uses a random number generator seeded with system entropy, so the results change from run to run. You can set a specific seed to get reproducible fills.</p>
@@ -386,9 +386,9 @@ Sub-vectors</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a8fe2ab8650590f082f800d223fdd6422" title="Returns a clone of the elements in the half-open range [begin, end) as a new bit-vector.">gf2::sub</a></span>  </td><td class="markdownTableBodyNone">Returns a new <span class="tt"><a class="el" href="classgf2_1_1BitVec.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVec</a></span> encompassing the bits in a half-open range <span class="tt">[begin, end)</span>.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a8fe2ab8650590f082f800d223fdd6422" title="Returns a clone of the elements in the half-open range [begin, end) as a new bit-vector.">gf2::sub</a></span>  </td><td class="markdownTableBodyNone">Returns a new <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVector</a></span> encompassing the bits in a half-open range <span class="tt">[begin, end)</span>.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a9344ddae3efd8e5877e12bfe6c28ef1f" title="Views a bit-store as two parts containing the elements [0, at) and [at, size()) respectively....">gf2::split</a></span>  </td><td class="markdownTableBodyNone">Fills two bit-vectors with the bits in the ranges <span class="tt">[0, at)</span> and <span class="tt">[at, size())</span>.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a56284774b49c6d8b626c41eb23c285db" title="Views a bit-store as two parts containing the elements [0, at) and [at, size()) respectively....">gf2::split</a></span>  </td><td class="markdownTableBodyNone">Fills two bit-vectors with the bits in the ranges <span class="tt">[0, at)</span> and <span class="tt">[at, size())</span>.  </td></tr>
 </table>
 <p>The <span class="tt">split_</span> method can optionally take two pre-existing bit-vectors to fill, thereby avoiding unnecessary allocations in some iterative algorithms that repeatedly use this method.</p>
 <dl class="section note"><dt>Note</dt><dd>These methods do not alter the underlying store.</dd></dl>
@@ -399,12 +399,12 @@ Riffling</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#ae123441e95a65409de010c9937fc89f5" title="Interleaves the bits of a bit-store with zeros storing the result into the passed bit-vector dst.">gf2::riffle</a></span>  </td><td class="markdownTableBodyNone">Fills a pre-existing bit-vector with the result of riffling this store.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#ac462028756047a28bd47ba5134841371" title="Interleaves the bits of a bit-store with zeros storing the result into the passed bit-vector dst.">gf2::riffle</a></span>  </td><td class="markdownTableBodyNone">Fills a pre-existing bit-vector with the result of riffling this store.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#ae123441e95a65409de010c9937fc89f5" title="Interleaves the bits of a bit-store with zeros storing the result into the passed bit-vector dst.">gf2::riffle</a></span>  </td><td class="markdownTableBodyNone">Returns a new bit-vector that is this store with its bits interleaved with zeros.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#ac462028756047a28bd47ba5134841371" title="Interleaves the bits of a bit-store with zeros storing the result into the passed bit-vector dst.">gf2::riffle</a></span>  </td><td class="markdownTableBodyNone">Returns a new bit-vector that is this store with its bits interleaved with zeros.  </td></tr>
 </table>
 <p>If the store looks like \(v_0 v_1 v_2 \ldots v_n\), then the riffling operation produces the vector \(v_0 0 v_1 0 v_2 0 \ldots v_n\) where a zero is interleaved <em>between</em> every bit in the original store (there is no trailing zero at the end).</p>
-<p>If you think of a bit-store as representing the coefficients of a polynomial over GF(2), then riffling corresponds to squaring that polynomial. See the documentation for <span class="tt"><a class="el" href="classgf2_1_1BitPoly.html#abfa3f15a7f16328bd2f6a4f7a770e7fd" title="Fills dst with the square of this bit-polynomial.">gf2::BitPoly::squared</a></span> for more information.</p>
+<p>If you think of a bit-store as representing the coefficients of a polynomial over GF(2), then riffling corresponds to squaring that polynomial. See the documentation for <span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#a30309419a9ed46754fc450052ef19bfb" title="Fills dst with the square of this bit-polynomial.">gf2::BitPolynomial::squared</a></span> for more information.</p>
 <h1 class="doxsection"><a class="anchor" id="store-indices"></a>
 Set/Unset Bit Indices</h1>
 <p>The following functions find the indices of set or unset bits in the store.</p>
@@ -572,9 +572,9 @@ Other Functions</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a7056122762ed4582459e853194bba275" title="Bit-matrix, bit-store multiplication, M * v, returning a new bit-vector.">gf2::dot</a></span>  </td><td class="markdownTableBodyNone">Returns the dot product of two equal-sized bit-stores as a boolean.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a612727967670558acfd0fd2adc99eccf" title="Bit-matrix, bit-store multiplication, M * v, returning a new bit-vector.">gf2::dot</a></span>  </td><td class="markdownTableBodyNone">Returns the dot product of two equal-sized bit-stores as a boolean.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a38168852e668107e510f6c3cb24df1e1" title="Operator form for bit-matrix, bit-store multiplication, M * v, returning a new bit-vector.">gf2::operator*</a></span>  </td><td class="markdownTableBodyNone">Returns the dot product of two equal-sized bit-stores as a boolean.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a287f8e09de01d9f8db3ad6363ee55088" title="Operator form for bit-matrix, bit-store multiplication, M * v, returning a new bit-vector.">gf2::operator*</a></span>  </td><td class="markdownTableBodyNone">Returns the dot product of two equal-sized bit-stores as a boolean.  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a3b0ea5c405d2ed08ce9fa5bbbb2cc169" title="Convolutions:">gf2::convolve</a></span>  </td><td class="markdownTableBodyNone">Returns the convolution of two bit-stores as a new bit-vector.  </td></tr>
 <tr class="markdownTableRowEven">
@@ -586,7 +586,7 @@ See Also</h1>
 <ul>
 <li>The <span class="tt"><a class="el" href="conceptgf2_1_1BitStore.html" title="A concept that is satisfied by all bit-vector-like types, which we refer to as bit-stores.">gf2::BitStore</a></span> reference for detailed documentation with examples for each function.</li>
 <li><a class="el" href="md_docs_2pages_2BitArray.html"><span class="tt">BitArray</span></a> for fixed-size vectors of bits.</li>
-<li><a class="el" href="md_docs_2pages_2BitVec.html"><span class="tt">BitVec</span></a> for dynamically-sized vectors of bits.</li>
+<li><a class="el" href="md_docs_2pages_2BitVector.html"><span class="tt">BitVector</span></a> for dynamically-sized vectors of bits.</li>
 <li><a class="el" href="md_docs_2pages_2BitSpan.html"><span class="tt">BitSpan</span></a> for non-owning views into any bit-store.</li>
 <li><a class="el" href="md_docs_2pages_2BitRef.html"><span class="tt">BitRef</span></a> for read-write references to individual bits in a bit-store.</li>
 <li><a class="el" href="md_docs_2pages_2Iterators.html"><span class="tt">Bits</span></a> for iterators over the bits in a bit-store.</li>

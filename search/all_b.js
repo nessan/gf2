@@ -1,8 +1,8 @@
 var searchData=
 [
   ['gaussian_20elimination_20in_200_0',['Gaussian Elimination in \\(\\mathbb{F}_2\\)',['../GF2.html#gaussian-elimination-in-fmathbbf_2f',1,'']]],
-  ['general_20access_1',['General Access',['../md_docs_2pages_2BitMat.html#general-access',1,'']]],
-  ['get_2',['get',['../classgf2_1_1BitArray.html#aaa00b06652d4701559e37f9a510048a4',1,'gf2::BitArray::get()'],['../classgf2_1_1BitMat.html#a20d4b073fa358adea7bdba8fee0c8fc7',1,'gf2::BitMat::get()'],['../classgf2_1_1BitSpan.html#ae3fbdca67b049aa5bef82749ea4fe235',1,'gf2::BitSpan::get()'],['../classgf2_1_1BitVec.html#ac682031cf75b027bc7ab6a54f767f819',1,'gf2::BitVec::get()'],['../namespacegf2.html#a690f9210e98f6a9615fc5b9cabd67cd3',1,'gf2::get()']]],
+  ['general_20access_1',['General Access',['../md_docs_2pages_2BitMatrix.html#general-access',1,'']]],
+  ['get_2',['get',['../classgf2_1_1BitArray.html#aaa00b06652d4701559e37f9a510048a4',1,'gf2::BitArray::get()'],['../classgf2_1_1BitMatrix.html#a26840ca85eed88714fe311efe9001e46',1,'gf2::BitMatrix::get()'],['../classgf2_1_1BitSpan.html#ae3fbdca67b049aa5bef82749ea4fe235',1,'gf2::BitSpan::get()'],['../classgf2_1_1BitVector.html#a4174ea457afc81234d769dcf75f1b4ac',1,'gf2::BitVector::get()'],['../namespacegf2.html#a690f9210e98f6a9615fc5b9cabd67cd3',1,'gf2::get()']]],
   ['gf_202_3',['Working in GF(2)',['../GF2.html',1,'md_docs_2pages_2Notes_2Introduction']]],
   ['gf2_4',['gf2',['../namespacegf2.html',1,'']]],
   ['gf2_2eh_5',['gf2.h',['../gf2_8h.html',1,'']]],
