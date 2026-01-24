@@ -237,11 +237,51 @@ Coefficient Access</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#a3c2782de944f53f93186505a3c5c4f0f" title="Kills any trailing zero coefficients, so e.g. p(x) := 0*x^4 + x^2 + x becomes p(x) := x^2 + x.">gf2::BitPolynomial::make_monic</a></span>  </td><td class="markdownTableBodyNone">Kills any high order zero coefficients to make the polynomial <em>monic</em>.  </td></tr>
 </table>
+<h1 class="doxsection"><a class="anchor" id="polynomial-pieces"></a>
+Polynomial Pieces</h1>
+<p>We have methods to extract sub-polynomials:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Method Name  </th><th class="markdownTableHeadNone">Description  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#a1b9b2ccbbd1840d8c4d278e34c812a67" title="Makes the destination bit-polynomial a copy of the low d + 1 coefficients of this bit-polynomial....">gf2::BitPolynomial::sub</a></span>  </td><td class="markdownTableBodyNone">Extract a bit-polynomial that is a copy of some low degree terms.  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#aa689ce1a2406150ca949056456d6c389" title="Splits the bit-polynomial into a low and high part where the low part has degree at most d....">gf2::BitPolynomial::split</a></span>  </td><td class="markdownTableBodyNone">Extract two bit-polynomials <span class="tt">lo</span> and <span class="tt">hi</span>, <span class="tt">lo</span> is a copy of low degree terms and <span class="tt">hi</span> is the rest.  </td></tr>
+</table>
+<p>Both methods can be passed pre-allocated polynomial(s) to store the result(s) to avoid unnecessary allocations. For example:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a837fb37511b510d33f40414feaef6c42">gf2::BitPolynomial&lt;&gt;::random</a>(100);   <span class="comment">// Random degree 100 polynomial, so 101 coefficients.</span></div>
+<div class="line"><span class="keyword">auto</span> [l, h] = p.split(50);                    <span class="comment">// First 51 coefficients in lo, rest in hi.</span></div>
+<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a837fb37511b510d33f40414feaef6c42"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#a837fb37511b510d33f40414feaef6c42">gf2::BitPolynomial::random</a></div><div class="ttdeci">static constexpr BitPolynomial random(usize n)</div><div class="ttdoc">Factory method to return a new bit-polynomial of degree n with n + 1 coefficients picked uniformly at...</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:172</div></div>
+</div><!-- fragment --><p>On return, <span class="tt">l</span> will be a polynomial of degree at most 50 (so have at most 51 coefficients) and <span class="tt">h</span> will be a polynomial of degree at most 49 (so have at most 50 coefficients). The original polynomial can be reconstructed as:</p>
+<p>$$ p(x) = l(x) + x^{51} h(x) $$</p>
+<p>The same code can be written to avoid allocations as:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a837fb37511b510d33f40414feaef6c42">gf2::BitPolynomial&lt;&gt;::random</a>(100);   <span class="comment">// Random degree</span></div>
+<div class="line">BitPolynomial&lt;&gt; l, h;</div>
+<div class="line">p.split(50, l, h);                            <span class="comment">// First 51 coefficients in lo, rest in hi.</span></div>
+</div><!-- fragment --><p>This is useful if the split operation is being performed repeatedly in an algorithm.</p>
 <h1 class="doxsection"><a class="anchor" id="arithmetic-operations"></a>
 Arithmetic Operations</h1>
 <p>We have all the usual arithmetic operations defined for <span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">gf2::BitPolynomial</a></span> objects where the addition and subtraction operations are identical since we are working over GF(2).</p>
-<p>Multiplication of two arbitrary bit-polynomials, \(p(x) q(x)\), is performed using <span class="tt"><a class="el" href="namespacegf2.html#a3b0ea5c405d2ed08ce9fa5bbbb2cc169" title="Convolutions:">gf2::convolve</a></span> which implements efficient convolutions of bit-stores.</p>
-<p>There are a couple of "fast" methods for common arithmetic operations:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Method Name  </th><th class="markdownTableHeadNone">Description  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#ae7da0476a16cb8123348ddaf33cc4519" title="In-place addition with another bit-polynomial, returning a reference to the result.">gf2::BitPolynomial::operator+=()</a></span>  </td><td class="markdownTableBodyNone">In-place addition with another bit-polynomial.  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#af5976981c47b34d0159ff3ed37bfa0a2" title="In-place subtraction with another bit-polynomial, returning a reference to the result.">gf2::BitPolynomial::operator-=()</a></span>  </td><td class="markdownTableBodyNone">In-place subtraction with another bit-polynomial.  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#a7b57b4ed37a59ff017904a2dd3f6c216" title="In-place multiplication with another bit-polynomial, returning a reference to the result.">gf2::BitPolynomial::operator*=()</a></span>  </td><td class="markdownTableBodyNone">In-place multiplication by another bit-polynomial.  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#a9a34034e4decc2b91209488d598d892f" title="Returns the sum of two bit-polynomials.">gf2::BitPolynomial::operator+()</a></span>  </td><td class="markdownTableBodyNone">Adds another polynomial to this one and returns the result as a new bit-polynomial.  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#a94757bdf3dd733c53c940c1fd05083dd" title="Returns the difference of two bit-polynomials.">gf2::BitPolynomial::operator-()</a></span>  </td><td class="markdownTableBodyNone">Subtracts another polynomial from this one and returns the result as a new bit-polynomial.  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#ada1764cdb89b7fed87ad03971af2c4c2" title="Returns the product of two bit-polynomials.">gf2::BitPolynomial::operator*()</a></span>  </td><td class="markdownTableBodyNone">Multiplies this and another polynomial and returns the result as a new bit-polynomial.  </td></tr>
+</table>
+<p><b>TODO:</b> As yet, we have not implemented polynomial division.</p>
+<dl class="section note"><dt>Note</dt><dd>Considerable speed improvements are possible by using carryless multiplication algorithms. However, for now at least, those depend on using platform-specific intrinsics which complicates the library and, in particular, testing the library across multiple platforms. <br  />
+ So for the time being, we stick to a more portable convolution approach using <span class="tt"><a class="el" href="namespacegf2.html#a3b0ea5c405d2ed08ce9fa5bbbb2cc169" title="Convolutions:">gf2::convolve</a></span> on the coefficient bit-vectors.</dd></dl>
+<p>However, we do have a couple of "fast" methods for common arithmetic operations:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Method Name  </th><th class="markdownTableHeadNone">Description  </th></tr>

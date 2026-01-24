@@ -395,7 +395,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Constructs a bit-vector of length <span class="tt">n</span> with all the bit elements set to 0. </p>
 <dl class="section note"><dt>Note</dt><dd>The default constructor returns the empty bit-vector with no elements.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-378"></a>
+<h1 class="doxsection"><a class="anchor" id="example-382"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> u;</div>
 <div class="line">assert_eq(u.<a class="code hl_function" href="#ad2b8ef3dc6d1ea250253135172bb48e7">to_string</a>(), <span class="stringliteral">&quot;&quot;</span>);</div>
@@ -437,7 +437,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Constructs a bit-vector with <span class="tt">len</span> elements by repeatedly copying all the bits from <span class="tt"><a class="el" href="#a94f28415157fbc4b4486555fe71b98bd" title="Returns word i from the bit-vector&#39;s underlying word store.">word</a></span>. </p>
 <p>You specify the length <span class="tt">len</span> of the bit-vector which means the final copy of <span class="tt"><a class="el" href="#a94f28415157fbc4b4486555fe71b98bd" title="Returns word i from the bit-vector&#39;s underlying word store.">word</a></span> may be truncated and padded with zeros (unused bit slots are always set to zero in this library).</p>
-<h1 class="doxsection"><a class="anchor" id="example-379"></a>
+<h1 class="doxsection"><a class="anchor" id="example-383"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector&lt;u8&gt;</a> v{10, <a class="code hl_typedef" href="namespacegf2.html#a872a69469085fcdddf299ae4adc3c940">u8</a>{0b0101&#39;0101}};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a8b10006eb120ea7fafdeecf68adb53cb">size</a>(), 10);</div>
@@ -475,7 +475,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns <span class="tt">true</span> if all bits in the store are set, <span class="tt">false</span> otherwise. </p>
 <dl class="section note"><dt>Note</dt><dd>Empty stores have no set bits (logical connective for <span class="tt"><a class="el" href="#ae2e0b8b3f0dd29888976c9b8c8b92656" title="Returns true if all bits in the store are set, false otherwise.">all</a></span> is <span class="tt">AND</span> with identity <span class="tt">true</span>).</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-419"></a>
+<h1 class="doxsection"><a class="anchor" id="example-423"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{3};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#ae2e0b8b3f0dd29888976c9b8c8b92656">all</a>(), <span class="keyword">false</span>);</div>
@@ -514,7 +514,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to generate a bit-vector of length <span class="tt">n</span> looking like <span class="tt">101010...</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="example-385"></a>
+<h1 class="doxsection"><a class="anchor" id="example-389"></a>
 Example</h1>
 <div class="fragment"><div class="line">assert_eq(<a class="code hl_function" href="#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;u8&gt;::alternating</a>(10).<a class="code hl_function" href="#ad2b8ef3dc6d1ea250253135172bb48e7">to_string</a>(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
 <div class="ttc" id="aclassgf2_1_1BitVector_html_aeed3a5c646dbc7c38b4298574734ae4a"><div class="ttname"><a href="#aeed3a5c646dbc7c38b4298574734ae4a">gf2::BitVector::alternating</a></div><div class="ttdeci">static constexpr BitVector alternating(usize n)</div><div class="ttdoc">Factory method to generate a bit-vector of length n looking like 101010....</div><div class="ttdef"><b>Definition</b> BitVector.h:237</div></div>
@@ -548,7 +548,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns <span class="tt">true</span> if at least one bit in the store is set, <span class="tt">false</span> otherwise. </p>
 <dl class="section note"><dt>Note</dt><dd>Empty stores have no set bits (logical connective for <span class="tt"><a class="el" href="#ac47715a1879d7e80066ca121f21d381c" title="Returns true if at least one bit in the store is set, false otherwise.">any</a></span> is <span class="tt">OR</span> with identity <span class="tt">false</span>).</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-418"></a>
+<h1 class="doxsection"><a class="anchor" id="example-422"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{10};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#ac47715a1879d7e80066ca121f21d381c">any</a>(), <span class="keyword">false</span>);</div>
@@ -587,7 +587,7 @@ template&lt;BitStore Src&gt; </div>
 
 <p>Appends all the bits from <em>any</em> <span class="tt"><a class="el" href="conceptgf2_1_1BitStore.html" title="A concept that is satisfied by all bit-vector-like types, which we refer to as bit-stores.">BitStore</a></span> <span class="tt">src</span> onto the end of the bit-vector and returns this for chaining. </p>
 <dl class="section note"><dt>Note</dt><dd>Generally, we do not support interactions between bit-stores that use different underlying unsigned word types. This method is an exception, and the <span class="tt">src</span> bit-store may use a different unsigned type from the one used here.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-403"></a>
+<h1 class="doxsection"><a class="anchor" id="example-407"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;u8&gt;::zeros</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> w = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u16&gt;::ones</a>(10);</div>
@@ -628,7 +628,7 @@ template&lt;Unsigned Src&gt; </div>
 
 <p>Appends all the bits from any unsigned integral <span class="tt">src</span> value and returns a reference to this for chaining. </p>
 <dl class="section note"><dt>Note</dt><dd>We allow <em>any</em> unsigned integral source, e.g. appending a single <span class="tt"><a class="el" href="namespacegf2.html#ae858164ae3b877b1f9ea2606fae215a0" title="Word type alias for a 16-bit unsigned integer.">u16</a></span> into a <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">BitVector</a>&lt;<a class="el" href="namespacegf2.html#a872a69469085fcdddf299ae4adc3c940" title="Word type alias for an 8-bit unsigned integer.">u8</a>&gt;</span>.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-402"></a>
+<h1 class="doxsection"><a class="anchor" id="example-406"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(4);</div>
 <div class="line"><a class="code hl_typedef" href="namespacegf2.html#ae858164ae3b877b1f9ea2606fae215a0">u16</a> src = 0b1010101010101010;</div>
@@ -669,7 +669,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Appends all the bits from a <span class="tt">std::bitset</span> onto the end of the bit-vector and returns this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="example-404"></a>
+<h1 class="doxsection"><a class="anchor" id="example-408"></a>
 Example</h1>
 <div class="fragment"><div class="line">std::bitset&lt;10&gt; src{0b1010101010};</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1BitVector.html">BitVector</a> v;</div>
@@ -712,7 +712,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Appends a single character <span class="tt">c</span> onto the end of bit-vector and returns this for chaining. </p>
 <p>The character is interpreted as a base <span class="tt">base</span> number where<span class="tt">base</span> must be one of 2, 4, 8, 16.</p>
 <dl class="section note"><dt>Note</dt><dd>This method does nothing if the base or character is not recognized.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-405"></a>
+<h1 class="doxsection"><a class="anchor" id="example-409"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#a7b73a1d27f306f5b7fc3909f46ab6809">append_digit</a>(<span class="charliteral">&#39;A&#39;</span>, 16);</div>
@@ -757,7 +757,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Appends a single hex digit character <span class="tt">c</span> onto the end of bit-vector and returns this for chaining. </p>
 <dl class="section note"><dt>Note</dt><dd>This method does nothing if the character is not a hex digit.</dd></dl>
 <p>This is the same as <span class="tt">append_digit(c, 16)</span> but we push hex digits more often than other bases and want to skip some checks for efficiency.</p>
-<h1 class="doxsection"><a class="anchor" id="example-406"></a>
+<h1 class="doxsection"><a class="anchor" id="example-410"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#a95ad154ae65e3999bb24c7ad0e03db50">append_hex_digit</a>(<span class="charliteral">&#39;F&#39;</span>);</div>
@@ -797,7 +797,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns <span class="tt">true</span> if the last bit element is set, <span class="tt">false</span> otherwise. </p>
 <dl class="section note"><dt>Note</dt><dd>In debug mode the method panics of the store is empty.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-412"></a>
+<h1 class="doxsection"><a class="anchor" id="example-416"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(10);</div>
 <div class="line">assert_eq(v.back(), <span class="keyword">true</span>);</div>
@@ -843,7 +843,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </table>
   </dd>
 </dl>
-<h1 class="doxsection"><a class="anchor" id="example-392"></a>
+<h1 class="doxsection"><a class="anchor" id="example-396"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#a6a03cc6deeaf781fde67c5e2b5a6e58a">BitVector&lt;&gt;::biased_random</a>(10, 0.3);</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a6a03cc6deeaf781fde67c5e2b5a6e58a">BitVector&lt;&gt;::biased_random</a>(10, 0.3);</div>
@@ -880,7 +880,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Returns a non-const iterator over the values of the bits in the mutable bit-store. </p>
 <p>You can use this iterator to iterate over the bits in the store to get <em>or</em> set the value of each bit.</p>
 <dl class="section note"><dt>Note</dt><dd>For the most part, try to avoid iterating through individual bits. It is much more efficient to use methods that work on whole words of bits at a time.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-441"></a>
+<h1 class="doxsection"><a class="anchor" id="example-445"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;u8&gt;::zeros</a>(10);</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; bit : v.bits()) bit = <span class="keyword">true</span>;</div>
@@ -916,7 +916,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Returns a const iterator over the <span class="tt">bool</span> values of the bits in the const bit-store. </p>
 <p>You can use this iterator to iterate over the bits in the store and get the values of each bit as a <span class="tt">bool</span>.</p>
 <dl class="section note"><dt>Note</dt><dd>For the most part, try to avoid iterating through individual bits. It is much more efficient to use methods that work on whole words of bits at a time.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-440"></a>
+<h1 class="doxsection"><a class="anchor" id="example-444"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; bit : u.bits()) assert_eq(bit, <span class="keyword">true</span>);</div>
@@ -950,7 +950,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns the current capacity of the bit-vector. </p>
 <p>This is the total number of bits that the bit-vector can hold without allocating more memory. The number <em>includes</em> the number of bits already in use.</p>
-<h1 class="doxsection"><a class="anchor" id="example-396"></a>
+<h1 class="doxsection"><a class="anchor" id="example-400"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v0;</div>
 <div class="line">assert_eq(v0.<a class="code hl_function" href="#a4b9cffc16ebebe17e183311de0119d55">capacity</a>(), 0);</div>
@@ -1050,7 +1050,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to generate a bit-vector of length <span class="tt">n</span> where the elements are set to <span class="tt">value</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="example-383"></a>
+<h1 class="doxsection"><a class="anchor" id="example-387"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a6772a3f88ec78ec6d26ee559d2e20e7f">BitVector&lt;&gt;::constant</a>(10, <span class="keyword">true</span>);</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1111111111&quot;</span>);</div>
@@ -1089,7 +1089,7 @@ template&lt;BitStore Src&gt; </div>
 
 <p>Copies the bits from an equal-sized <span class="tt">src</span> store and returns a reference to this for chaining. </p>
 <dl class="section note"><dt>Note</dt><dd>This is one of the few methods in the library that <em>doesn't</em> require the two stores to have the same <span class="tt"><a class="el" href="#aca1c8345774c71accac5a29b6d79e166" title="The underlying unsigned word type used to store the bits.">word_type</a></span>. You can use it to convert between different <span class="tt"><a class="el" href="#aca1c8345774c71accac5a29b6d79e166" title="The underlying unsigned word type used to store the bits.">word_type</a></span> stores (e.g., from <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">BitVector</a>&lt;<a class="el" href="namespacegf2.html#ad1e43953e374bea8222087e4aba6c74a" title="Word type alias for a 32-bit unsigned integer.">u32</a>&gt;</span> to <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">BitVector</a>&lt;<a class="el" href="namespacegf2.html#a872a69469085fcdddf299ae4adc3c940" title="Word type alias for an 8-bit unsigned integer.">u8</a>&gt;</span>) as long as the sizes match.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-424"></a>
+<h1 class="doxsection"><a class="anchor" id="example-428"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u64&gt;::ones</a>(10);</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1111111111&quot;</span>);</div>
@@ -1133,7 +1133,7 @@ Notes:</h1>
 <li>We allow <em>any</em> unsigned integral source, e.g. copying a single <span class="tt"><a class="el" href="namespacegf2.html#a770302128133591da0ca93ded6abf8aa" title="Word type alias for a 64-bit unsigned integer.">u64</a></span> into a <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">BitVector</a>&lt;<a class="el" href="namespacegf2.html#a872a69469085fcdddf299ae4adc3c940" title="Word type alias for an 8-bit unsigned integer.">u8</a>&gt;</span> of size 64.</li>
 <li>The least-significant bit of the source becomes the bit at index 0 in the store.</li>
 </ol>
-<h1 class="doxsection"><a class="anchor" id="example-423"></a>
+<h1 class="doxsection"><a class="anchor" id="example-427"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector&lt;u8&gt;</a> v{16};</div>
 <div class="line"><a class="code hl_typedef" href="namespacegf2.html#ae858164ae3b877b1f9ea2606fae215a0">u16</a> src = 0b1010101010101010;</div>
@@ -1175,7 +1175,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Copies the bits of an equal-sized <span class="tt">std::bitset</span> and returns a reference to this for chaining. </p>
 <dl class="section note"><dt>Note</dt><dd><span class="tt">std::bitset</span> prints its bit elements in <em>bit-order</em> which is the reverse of our convention.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-425"></a>
+<h1 class="doxsection"><a class="anchor" id="example-429"></a>
 Example</h1>
 <div class="fragment"><div class="line">std::bitset&lt;10&gt; src{0b1010101010};</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1BitVector.html">BitVector</a> v{10};</div>
@@ -1210,7 +1210,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Fills the store by repeatedly calling <span class="tt">f(i)</span> and returns a reference to this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="example-426"></a>
+<h1 class="doxsection"><a class="anchor" id="example-430"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{10};</div>
 <div class="line">v.<a class="code hl_function" href="#aa880f41bb83fd7d4894b2fcb057ff504">copy</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
@@ -1246,7 +1246,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the number of set bits in the store. </p>
-<h1 class="doxsection"><a class="anchor" id="example-428"></a>
+<h1 class="doxsection"><a class="anchor" id="example-432"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{10};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#ac2d2d233519d4c7531ceb2be692eae3d">count_ones</a>(), 0);</div>
@@ -1282,7 +1282,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the number of unset bits in the store. </p>
-<h1 class="doxsection"><a class="anchor" id="example-429"></a>
+<h1 class="doxsection"><a class="anchor" id="example-433"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{10};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#acdc8cf20785c6091f60dfb2498a69316">count_zeros</a>(), 10);</div>
@@ -1361,7 +1361,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>If <span class="tt">p &lt; 0</span> then the fill is all zeros, if <span class="tt">p &gt; 1</span> then the fill is all ones.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-427"></a>
+<h1 class="doxsection"><a class="anchor" id="example-431"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> u{10}, v{10};</div>
 <div class="line"><a class="code hl_typedef" href="namespacegf2.html#a770302128133591da0ca93ded6abf8aa">u64</a> seed = 1234567890;</div>
@@ -1399,7 +1399,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the index of the first set bit in the bit-store or <span class="tt">{}</span> if no bits are set. </p>
-<h1 class="doxsection"><a class="anchor" id="example-432"></a>
+<h1 class="doxsection"><a class="anchor" id="example-436"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;u8&gt;::zeros</a>(37);</div>
 <div class="line">assert(v.first_set() == std::optional&lt;usize&gt;{});</div>
@@ -1441,7 +1441,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the index of the first unset bit in the bit-store or <span class="tt">{}</span> if no bits are unset. </p>
-<h1 class="doxsection"><a class="anchor" id="example-436"></a>
+<h1 class="doxsection"><a class="anchor" id="example-440"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(37);</div>
 <div class="line">assert(v.first_unset() == std::optional&lt;usize&gt;{});</div>
@@ -1484,7 +1484,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Flips the value of the bit-element <span class="tt">i</span> and returns this for chaining. </p>
 <dl class="section note"><dt>Note</dt><dd>In debug mode the index is bounds-checked.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-415"></a>
+<h1 class="doxsection"><a class="anchor" id="example-419"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
 <div class="line">v.flip(0);</div>
@@ -1522,7 +1522,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Flips the value of the bits in the store and returns a reference to this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="example-422"></a>
+<h1 class="doxsection"><a class="anchor" id="example-426"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;u8&gt;::zeros</a>(10);</div>
 <div class="line">v.flip_all();</div>
@@ -1561,7 +1561,7 @@ template&lt;BitStore Src&gt; </div>
 <h1 class="doxsection"><a class="anchor" id="note-3"></a>
 Note</h1>
 <p>Generally, we do not support interactions between bit-stores that use different underlying unsigned word types. This method is an exception &ndash; the <span class="tt">src</span> bit-store may use a different unsigned type from the one used here. It makes it possible to convert between bit-vector types which is occasionally useful.</p>
-<h1 class="doxsection"><a class="anchor" id="example-387"></a>
+<h1 class="doxsection"><a class="anchor" id="example-391"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a3f33e12942bab8d475697297db924cb0">BitVector&lt;u8&gt;::from</a>(<a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10));</div>
 <div class="line">assert_eq(v.size(), 10);</div>
@@ -1604,7 +1604,7 @@ template&lt;Unsigned Src&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to construct a bit-vector by copying <em>all</em> the bits from <em>any</em> <span class="tt"><a class="el" href="conceptgf2_1_1Unsigned.html" title="The Unsigned concept is the same as std::unsigned_integral. It is satisfied by all primitive unsigned...">Unsigned</a></span> instance. The resulting bit-vector will have the same size as the number of bits in the <span class="tt">src</span> unsigned integer. </p>
-<h1 class="doxsection"><a class="anchor" id="example-386"></a>
+<h1 class="doxsection"><a class="anchor" id="example-390"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_typedef" href="namespacegf2.html#a872a69469085fcdddf299ae4adc3c940">u8</a> s8 = 0b01010101;</div>
 <div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#a3f33e12942bab8d475697297db924cb0">BitVector&lt;u8&gt;::from</a>(s8);</div>
@@ -1649,7 +1649,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Factory method to construct a bit-vector from the bits of a <span class="tt">std::bitset</span>. </p>
 <dl class="section note"><dt>Note</dt><dd><span class="tt">std::bitset</span> prints its bit elements in <em>bit-order</em> ...b2b1b0., we print in <em>vector-order</em> b0b1b2...</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-388"></a>
+<h1 class="doxsection"><a class="anchor" id="example-392"></a>
 Example</h1>
 <div class="fragment"><div class="line">std::bitset&lt;10&gt; src{0b1010101010};</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a3f33e12942bab8d475697297db924cb0">BitVector&lt;&gt;::from</a>(src);</div>
@@ -1694,7 +1694,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </table>
   </dd>
 </dl>
-<h1 class="doxsection"><a class="anchor" id="example-389"></a>
+<h1 class="doxsection"><a class="anchor" id="example-393"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a3f33e12942bab8d475697297db924cb0">BitVector&lt;u8&gt;::from</a>(10, [](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
 <div class="line">assert_eq(v.size(), 10);</div>
@@ -1733,7 +1733,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Factory method to construct a bit-vector from a binary string, returning <span class="tt">std::nullopt</span> on failure. </p>
 <p>The string can contain whitespace, commas, single quotes, and underscores. If the second argument is true, then the string is assumed to have none of the above characters. There can always be a "0b" prefix.</p>
-<h1 class="doxsection"><a class="anchor" id="example-394"></a>
+<h1 class="doxsection"><a class="anchor" id="example-398"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a193a2ffb36fa664bbdbfe057f4f491d2">BitVector&lt;u8&gt;::from_binary_string</a>(<span class="stringliteral">&quot;0b1010&#39;1010&#39;10&quot;</span>).value();</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
@@ -1774,7 +1774,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Factory method to construct a bit-vector from a hex string, returning <span class="tt">std::nullopt</span> on failure. </p>
 <p>The hex string should consist of the characters 0-9, A-F, a-f, with an optional prefix "0x" or "0X". The string may also have a suffix of the form ".base" where <span class="tt">base</span> is one of 2, 4 or 8 which indicates that the last digit should be interpreted as a base <span class="tt">base</span> number. This allows for bit-vectors whose length is not a multiple of 4.</p>
-<h1 class="doxsection"><a class="anchor" id="example-395"></a>
+<h1 class="doxsection"><a class="anchor" id="example-399"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v1 = <a class="code hl_function" href="#a94bc956ed38b656c83518854999bc5f1">gf2::BitVector&lt;&gt;::from_hex_string</a>(<span class="stringliteral">&quot;0xAA&quot;</span>).value();</div>
 <div class="line">assert_eq(v1.to_string(), <span class="stringliteral">&quot;10101010&quot;</span>);</div>
@@ -1818,7 +1818,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Factory method to construct a bit-vector from a string <span class="tt">s</span>, returning <span class="tt">std::nullopt</span> on failure. </p>
 <p>The string can contain whitespace, commas, single quotes, and underscores and optionally a "0b", "0x", or "0X" prefix. If there is no prefix, and the string only contains '0' and '1' characters, we assume the string is binary. To force getting it interpreted as a hex string, add a prefix of "0x" or "0X".</p>
 <p>A hex string can have a suffix of ".2", ".4", or ".8" to indicate the base of the last digit/character. This allows for bit-vectors of any length as opposed to just a multiple of 4.</p>
-<h1 class="doxsection"><a class="anchor" id="example-393"></a>
+<h1 class="doxsection"><a class="anchor" id="example-397"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v1 = <a class="code hl_function" href="#a17ba4f50de43f5e84ef3943ad77410ea">BitVector&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;0b1010_1010_10&quot;</span>).value();</div>
 <div class="line">assert_eq(v1.to_string(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
@@ -1859,7 +1859,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns <span class="tt">true</span> if the first bit element is set, <span class="tt">false</span> otherwise. </p>
 <dl class="section note"><dt>Note</dt><dd>In debug mode the method panics of the store is empty.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-411"></a>
+<h1 class="doxsection"><a class="anchor" id="example-415"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(10);</div>
 <div class="line">assert_eq(v.front(), <span class="keyword">true</span>);</div>
@@ -1895,7 +1895,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns <span class="tt">true</span> if the bit at the given index <span class="tt">i</span> is set, <span class="tt">false</span> otherwise. </p>
 <dl class="section note"><dt>Note</dt><dd>In debug mode the index <span class="tt">i</span> is bounds-checked.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-409"></a>
+<h1 class="doxsection"><a class="anchor" id="example-413"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{10};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a4174ea457afc81234d769dcf75f1b4ac">get</a>(0), <span class="keyword">false</span>);</div>
@@ -1931,7 +1931,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns <span class="tt">true</span> if the store is empty, <span class="tt">false</span> otherwise. </p>
-<h1 class="doxsection"><a class="anchor" id="example-417"></a>
+<h1 class="doxsection"><a class="anchor" id="example-421"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a26c48c7ba8dc5dacdfe886a081641e0e">is_empty</a>(), <span class="keyword">true</span>);</div>
@@ -1967,7 +1967,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the index of the last set bit in the bit-store or <span class="tt">{}</span> if no bits are set. </p>
-<h1 class="doxsection"><a class="anchor" id="example-433"></a>
+<h1 class="doxsection"><a class="anchor" id="example-437"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;u8&gt;::zeros</a>(37);</div>
 <div class="line">assert(v.last_set() == std::optional&lt;usize&gt;{});</div>
@@ -2007,7 +2007,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the index of the last unset bit in the bit-store or <span class="tt">{}</span> if no bits are unset. </p>
-<h1 class="doxsection"><a class="anchor" id="example-437"></a>
+<h1 class="doxsection"><a class="anchor" id="example-441"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(37);</div>
 <div class="line">assert(v.last_unset() == std::optional&lt;usize&gt;{});</div>
@@ -2049,7 +2049,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the number of leading zeros in the store. </p>
-<h1 class="doxsection"><a class="anchor" id="example-430"></a>
+<h1 class="doxsection"><a class="anchor" id="example-434"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{37};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a3c810f15c19034ff0fb20cc8bd038616">leading_zeros</a>(), 37);</div>
@@ -2087,7 +2087,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the index of the next set bit after <span class="tt">index</span> in the store or <span class="tt">{}</span> if no more set bits exist. </p>
-<h1 class="doxsection"><a class="anchor" id="example-434"></a>
+<h1 class="doxsection"><a class="anchor" id="example-438"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;u8&gt;::zeros</a>(37);</div>
 <div class="line">assert(v.next_set(0) == std::optional&lt;usize&gt;{});</div>
@@ -2125,7 +2125,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the index of the next unset bit after <span class="tt">index</span> in the store or <span class="tt">{}</span> if no more unset bits exist. </p>
-<h1 class="doxsection"><a class="anchor" id="example-438"></a>
+<h1 class="doxsection"><a class="anchor" id="example-442"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(37);</div>
 <div class="line">assert(v.next_unset(0) == std::optional&lt;usize&gt;{});</div>
@@ -2167,7 +2167,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns <span class="tt">true</span> if no bits in the store are set, <span class="tt">false</span> otherwise. </p>
 <dl class="section note"><dt>Note</dt><dd>Empty store have no set bits (logical connective for <span class="tt"><a class="el" href="#ad35a4ea3c7e58752695053c532f70104" title="Returns true if no bits in the store are set, false otherwise.">none</a></span> is <span class="tt">AND</span> with identity <span class="tt">true</span>).</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-420"></a>
+<h1 class="doxsection"><a class="anchor" id="example-424"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{10};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#ad35a4ea3c7e58752695053c532f70104">none</a>(), <span class="keyword">true</span>);</div>
@@ -2233,7 +2233,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to generate a bit-vector of length <span class="tt">n</span> where the elements are all 1. </p>
-<h1 class="doxsection"><a class="anchor" id="example-382"></a>
+<h1 class="doxsection"><a class="anchor" id="example-386"></a>
 Example</h1>
 <div class="fragment"><div class="line">assert_eq(<a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(10).<a class="code hl_function" href="#ad2b8ef3dc6d1ea250253135172bb48e7">to_string</a>(), <span class="stringliteral">&quot;1111111111&quot;</span>);</div>
 </div><!-- fragment --> 
@@ -2269,7 +2269,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>The referenced bit-store must continue to exist while the <span class="tt"><a class="el" href="classgf2_1_1BitRef.html" title="A BitRef is a proxy class to reference a single bit in a bit-store.">BitRef</a></span> is in use. </dd>
 <dd>
 In debug mode the index <span class="tt">i</span> is bounds-checked.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-414"></a>
+<h1 class="doxsection"><a class="anchor" id="example-418"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{10};</div>
 <div class="line">v[2] = <span class="keyword">true</span>;</div>
@@ -2309,7 +2309,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns the boolean value of the bit element <span class="tt">i</span>. </p>
 <dl class="section note"><dt>Note</dt><dd>In debug mode the index is bounds-checked.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-410"></a>
+<h1 class="doxsection"><a class="anchor" id="example-414"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{10};</div>
 <div class="line">assert(v[2] == <span class="keyword">false</span>);</div>
@@ -2345,7 +2345,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Removes the last bit from the bit-vector and returns it or <span class="tt">std::nullopt</span> if the bit-vector is empty. </p>
-<h1 class="doxsection"><a class="anchor" id="example-401"></a>
+<h1 class="doxsection"><a class="anchor" id="example-405"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#ab1ec353b0b28d8f85f402b368883405e">push</a>(1);</div>
@@ -2390,7 +2390,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the index of the previous set bit before <span class="tt">index</span> in the store or <span class="tt">{}</span> if there are none. </p>
-<h1 class="doxsection"><a class="anchor" id="example-435"></a>
+<h1 class="doxsection"><a class="anchor" id="example-439"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;u8&gt;::zeros</a>(37);</div>
 <div class="line">assert(v.previous_set(36) == std::optional&lt;usize&gt;{});</div>
@@ -2428,7 +2428,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the index of the previous unset bit before <span class="tt">index</span> in the store or <span class="tt">{}</span> if no more unset bits exist. </p>
-<h1 class="doxsection"><a class="anchor" id="example-439"></a>
+<h1 class="doxsection"><a class="anchor" id="example-443"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(37);</div>
 <div class="line">assert(v.previous_unset(0) == std::optional&lt;usize&gt;{});</div>
@@ -2470,7 +2470,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Pushes a single bit <span class="tt">b</span> onto the bit-vector. </p>
 <p>Returns a reference to the current object for chaining.</p>
-<h1 class="doxsection"><a class="anchor" id="example-400"></a>
+<h1 class="doxsection"><a class="anchor" id="example-404"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#ab1ec353b0b28d8f85f402b368883405e">push</a>(1);</div>
@@ -2525,7 +2525,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>If <span class="tt">p &lt; 0</span> then the bit-vector is all zeros, if <span class="tt">p &gt; 1</span> then the bit-vector is all ones.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-390"></a>
+<h1 class="doxsection"><a class="anchor" id="example-394"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_typedef" href="namespacegf2.html#a770302128133591da0ca93ded6abf8aa">u64</a> seed = 1234567890;</div>
 <div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#ade5751f621f74291115c14ca08549e5e">BitVector&lt;&gt;::random</a>(10, 0.5, seed);</div>
@@ -2561,7 +2561,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the number of <em>additional</em> elements we can store in the bit-vector without reallocating. </p>
-<h1 class="doxsection"><a class="anchor" id="example-397"></a>
+<h1 class="doxsection"><a class="anchor" id="example-401"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector&lt;u64&gt;</a> v1(10);</div>
 <div class="line">assert_eq(v1.remaining_capacity(), 54);</div>
@@ -2598,7 +2598,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <li>If <span class="tt">n</span> is greater than the bit-vector's current size, then the new elements are set to 0.</li>
 <li>If <span class="tt">n</span> is less than the bit-vector's current size, then the bit-vector is truncated.</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="example-399"></a>
+<h1 class="doxsection"><a class="anchor" id="example-403"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(1000);</div>
 <div class="line">v.resize(10);</div>
@@ -2636,7 +2636,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Returns a new bit-vector that is the result of riffling the bits in this bit-store with zeros. </p>
 <p>If bit-store has the bits <span class="tt">abcde</span> then the output bit-vector will have the bits <span class="tt">a0b0c0d0e</span>.</p>
 <dl class="section note"><dt>Note</dt><dd>There is no last zero bit in <span class="tt">dst</span>.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-452"></a>
+<h1 class="doxsection"><a class="anchor" id="example-456"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> dst = v.riffled();</div>
@@ -2672,7 +2672,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Interleaves the bits of this bit-store with zeros storing the result into the bit-vector <span class="tt">dst</span>. </p>
 <p>On return, <span class="tt">dst</span> will have the bits of this bit-store interleaved with zeros. For example, if this bit-store has the bits <span class="tt">abcde</span> then <span class="tt">dst</span> will have the bits <span class="tt">a0b0c0d0e</span>.</p>
 <dl class="section note"><dt>Note</dt><dd>There is no last zero bit in <span class="tt">dst</span>.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-451"></a>
+<h1 class="doxsection"><a class="anchor" id="example-455"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
 <div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector&lt;u8&gt;</a> dst;</div>
@@ -2720,7 +2720,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>If <span class="tt">p &lt; 0</span> then the bit-vector is all zeros, if <span class="tt">p &gt; 1</span> then the bit-vector is all ones.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-391"></a>
+<h1 class="doxsection"><a class="anchor" id="example-395"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_typedef" href="namespacegf2.html#a770302128133591da0ca93ded6abf8aa">u64</a> seed = 1234567890;</div>
 <div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#abdc67ef1499263a36cdc53eefd16d6f2">BitVector&lt;&gt;::seeded_random</a>(10, seed);</div>
@@ -2761,7 +2761,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Sets the bit-element <span class="tt">i</span> to the specified boolean <span class="tt">value</span> &amp; returns this for chaining. The default value for <span class="tt">value</span> is <span class="tt">true</span>. </p>
 <dl class="section note"><dt>Note</dt><dd>In debug mode the index is bounds-checked.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-413"></a>
+<h1 class="doxsection"><a class="anchor" id="example-417"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{10};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a4174ea457afc81234d769dcf75f1b4ac">get</a>(0), <span class="keyword">false</span>);</div>
@@ -2797,7 +2797,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Sets the bits in the store to the boolean <span class="tt">value</span> and returns a reference to this for chaining. </p>
 <p>By default, all bits are set to <span class="tt">true</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="example-421"></a>
+<h1 class="doxsection"><a class="anchor" id="example-425"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;u8&gt;::zeros</a>(10);</div>
 <div class="line">v.set_all();</div>
@@ -2832,7 +2832,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns an iterator over the <em>indices</em> of any <em>set</em> bits in the bit-store. </p>
 <p>You can use this iterator to iterate over the set bits in the store and get the index of each bit.</p>
-<h1 class="doxsection"><a class="anchor" id="example-442"></a>
+<h1 class="doxsection"><a class="anchor" id="example-446"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;u8&gt;::alternating</a>(10);</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
@@ -2873,7 +2873,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Sets word <span class="tt">i</span> in the bit-vector's underlying word store to <span class="tt">value</span> (masked if necessary). </p>
 <p>The final word in the store may not be fully occupied but we ensure that unused bits remain set to 0.</p>
 <dl class="section note"><dt>Note</dt><dd>In debug mode the index is bounds checked.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-375"></a>
+<h1 class="doxsection"><a class="anchor" id="example-379"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;u8&gt;::zeros</a>(10);</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;0000000000&quot;</span>);</div>
@@ -2910,7 +2910,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Shrinks the bit-vector's capacity as much as possible. </p>
 <p>This method may do nothing.</p>
-<h1 class="doxsection"><a class="anchor" id="example-398"></a>
+<h1 class="doxsection"><a class="anchor" id="example-402"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(1000);</div>
 <div class="line">v.resize(15);</div>
@@ -2945,7 +2945,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the number of bit-elements in the bit-vector. </p>
-<h1 class="doxsection"><a class="anchor" id="example-372"></a>
+<h1 class="doxsection"><a class="anchor" id="example-376"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v0;</div>
 <div class="line">assert_eq(v0.<a class="code hl_function" href="#a8b10006eb120ea7fafdeecf68adb53cb">size</a>(), 0);</div>
@@ -2986,7 +2986,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Returns a mutable bit-span encompassing the bits in the half-open range <span class="tt">[begin, end)</span>. </p>
 <p>Mutability here is deep &ndash; the interior pointer in the returned span is to <em>non-const</em> words.</p>
 <dl class="section note"><dt>Note</dt><dd>This method panics if the span range is not valid.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-447"></a>
+<h1 class="doxsection"><a class="anchor" id="example-451"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> s = v.span(1,5);</div>
@@ -3029,7 +3029,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Returns an <em>immutable</em> bit-span encompassing the store's bits in the half-open range <span class="tt">[begin, end)</span>. </p>
 <p>Immutability here is deep &ndash; the interior pointer in the returned span is to <em>const</em> words.</p>
 <dl class="section note"><dt>Note</dt><dd>This method panics if the span range is not valid.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-446"></a>
+<h1 class="doxsection"><a class="anchor" id="example-450"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> s = v.span(1,5);</div>
@@ -3066,7 +3066,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Clones of the parts are returned as a pair of bit-vectors [<span class="tt">left</span>, <span class="tt">right</span>].</p>
 <p>On return, <span class="tt">left</span> is a clone of the bits from the start of the bit-vector up to but not including <span class="tt">at</span> and <span class="tt">right</span> contains the bits from <span class="tt">at</span> to the end of the bit-vector. This bit-vector itself is not modified.</p>
 <dl class="section note"><dt>Note</dt><dd>This method panics if the split point is beyond the end of the bit-vector.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-450"></a>
+<h1 class="doxsection"><a class="anchor" id="example-454"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> [left, right] = v.split_at(5);</div>
@@ -3115,7 +3115,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>On return, <span class="tt">left</span> contains the bits from the start of the bit-vector up to but not including <span class="tt">at</span> and <span class="tt">right</span> contains the bits from <span class="tt">at</span> to the end of the bit-vector. This bit-vector itself is not modified.</p>
 <p>This lets one reuse the <span class="tt">left</span> and <span class="tt">right</span> destinations without having to allocate new bit-vectors. This is useful when implementing iterative algorithms that need to split a bit-vector into two parts repeatedly.</p>
 <dl class="section note"><dt>Note</dt><dd>This method panics if the split point is beyond the end of the bit-vector.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-449"></a>
+<h1 class="doxsection"><a class="anchor" id="example-453"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(10);</div>
 <div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> left, right;</div>
@@ -3154,7 +3154,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Splits a bit-vector into two at the given index, returning a new <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">BitVector</a></span>. </p>
 <p>The returned bit-vector contains the bits from <span class="tt">at</span> to the end of the bit-vector. The bit-vector is resized to only contain the bits in the half-open range <span class="tt">[0, at)</span>.</p>
 <dl class="section note"><dt>Note</dt><dd>This method panics if the split point is beyond the end of the bit-vector.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-407"></a>
+<h1 class="doxsection"><a class="anchor" id="example-411"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> w = v.split_off(5);</div>
@@ -3195,7 +3195,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Splits a bit-vector into two at the given index, returning the second part in <span class="tt">dst</span>. </p>
 <p>On return, <span class="tt">dst</span> contains the bits from <span class="tt">at</span> to the end of the bit-vector. The bit-vector is resized to only contain the bits in the half-open range <span class="tt">[0, at)</span>.</p>
 <dl class="section note"><dt>Note</dt><dd>This method panics if the split point is beyond the end of the bit-vector.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-408"></a>
+<h1 class="doxsection"><a class="anchor" id="example-412"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(10);</div>
 <div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> dst;</div>
@@ -3279,7 +3279,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns a pointer to the underlying store of words. </p>
 <dl class="section note"><dt>Note</dt><dd>The pointer is non-const but you should be careful about using it to modify the words in the store.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-377"></a>
+<h1 class="doxsection"><a class="anchor" id="example-381"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> ptr = v.store();</div>
@@ -3313,7 +3313,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns a const pointer to the underlying store of words . </p>
-<h1 class="doxsection"><a class="anchor" id="example-376"></a>
+<h1 class="doxsection"><a class="anchor" id="example-380"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> ptr = v.store();</div>
@@ -3349,7 +3349,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Returns a const iterator over all the <em>words</em> underlying the bit-store. </p>
 <p>You can use this iterator to iterate over the words in the store and read the <span class="tt">Word</span> value of each word. You <b>cannot</b> use this iterator to modify the words in the store.</p>
 <dl class="section note"><dt>Note</dt><dd>The words here may be a synthetic construct. The expectation is that the bit <span class="tt">0</span> in the store is located at the bit-location <span class="tt">0</span> of <span class="tt">word(0)</span>. That is always the case for bit-vectors but bit-slices typically synthesise "words" on the fly from adjacent pairs of bit-vector words. Nevertheless, almost all the methods in <span class="tt"><a class="el" href="conceptgf2_1_1BitStore.html" title="A concept that is satisfied by all bit-vector-like types, which we refer to as bit-stores.">BitStore</a></span> are implemented efficiently by operating on those words.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-444"></a>
+<h1 class="doxsection"><a class="anchor" id="example-448"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1111111111&quot;</span>);</div>
@@ -3390,7 +3390,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns a <em>clone</em> of the elements in the half-open range <span class="tt">[begin, end)</span> as a new bit-vector. </p>
 <dl class="section note"><dt>Note</dt><dd>This method panics if the range is not valid.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-448"></a>
+<h1 class="doxsection"><a class="anchor" id="example-452"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> s = v.sub(1,5);</div>
@@ -3432,7 +3432,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Swaps the bits in the bit-store at indices <span class="tt">i0</span> and <span class="tt">i1</span> and returns this for chaining. </p>
 <dl class="section note"><dt>Note</dt><dd>In debug mode, panics if either of the indices is out of bounds.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-416"></a>
+<h1 class="doxsection"><a class="anchor" id="example-420"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;&gt;::zeros</a>(10);</div>
 <div class="line">v.set(0);</div>
@@ -3492,7 +3492,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </table>
   </dd>
 </dl>
-<h1 class="doxsection"><a class="anchor" id="example-453"></a>
+<h1 class="doxsection"><a class="anchor" id="example-457"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{10};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7cc78c5e7773c30d8da8916af258d081">to_binary_string</a>(), <span class="stringliteral">&quot;0000000000&quot;</span>);</div>
@@ -3541,7 +3541,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <li><span class="tt">0X1.2</span> is the hex representation of the bit-vector <span class="tt">1</span> =&gt; length 1.</li>
 </ul>
 <p>The output is in <em>vector-order</em>. If "h0" is the first hex digit in the output string, you can print it as four binary digits <span class="tt">v_0v_1v_2v_3</span>. For example, if h0 = "A" which is <span class="tt">1010</span> in binary, then v = 1010.</p>
-<h1 class="doxsection"><a class="anchor" id="example-456"></a>
+<h1 class="doxsection"><a class="anchor" id="example-460"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v0;</div>
 <div class="line">assert_eq(v0.<a class="code hl_function" href="#afec1640c73d1be249030207fcd061ab1">to_hex_string</a>(), <span class="stringliteral">&quot;&quot;</span>);</div>
@@ -3583,7 +3583,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns a "pretty" string representation of the store. </p>
 <p>The output is a string of 0's and 1's with spaces between each bit, and the whole thing enclosed in square brackets.</p>
-<h1 class="doxsection"><a class="anchor" id="example-455"></a>
+<h1 class="doxsection"><a class="anchor" id="example-459"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(10);</div>
 <div class="line">assert_eq(v.to_pretty_string(), <span class="stringliteral">&quot;[1,0,1,0,1,0,1,0,1,0]&quot;</span>);</div>
@@ -3637,7 +3637,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </table>
   </dd>
 </dl>
-<h1 class="doxsection"><a class="anchor" id="example-454"></a>
+<h1 class="doxsection"><a class="anchor" id="example-458"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v{10};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#ad2b8ef3dc6d1ea250253135172bb48e7">to_string</a>(), <span class="stringliteral">&quot;0000000000&quot;</span>);</div>
@@ -3674,7 +3674,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns a copy of the words underlying this bit-store. </p>
 <dl class="section note"><dt>Note</dt><dd>The last word in the vector may not be fully occupied but unused slots will be all zeros.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-445"></a>
+<h1 class="doxsection"><a class="anchor" id="example-449"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="#a916cdd15c618a1a2eb2d58d47be5eaba">words</a> = v.to_words();</div>
@@ -3708,7 +3708,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the number of trailing zeros in the store. </p>
-<h1 class="doxsection"><a class="anchor" id="example-431"></a>
+<h1 class="doxsection"><a class="anchor" id="example-435"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;u8&gt;::zeros</a>(27);</div>
 <div class="line">assert_eq(v.trailing_zeros(), 27);</div>
@@ -3748,7 +3748,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Factory method to generate a "unit" bit-vector of length <span class="tt">n</span> where only element <span class="tt">i</span> is set. </p>
 <p>This method panics if the condition <span class="tt">i &lt; n</span> is not met.</p>
-<h1 class="doxsection"><a class="anchor" id="example-384"></a>
+<h1 class="doxsection"><a class="anchor" id="example-388"></a>
 Example</h1>
 <div class="fragment"><div class="line">assert_eq(<a class="code hl_function" href="#a3be06c38681e26a2e4695c90f2edf9c7">BitVector&lt;&gt;::unit</a>(10, 0).<a class="code hl_function" href="#ad2b8ef3dc6d1ea250253135172bb48e7">to_string</a>(), <span class="stringliteral">&quot;1000000000&quot;</span>);</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a3be06c38681e26a2e4695c90f2edf9c7">BitVector&lt;&gt;::unit</a>(10, 9).<a class="code hl_function" href="#ad2b8ef3dc6d1ea250253135172bb48e7">to_string</a>(), <span class="stringliteral">&quot;0000000001&quot;</span>);</div>
@@ -3783,7 +3783,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns an iterator over the <em>indices</em> of any <em>unset</em> bits in the bit-store. </p>
 <p>You can use this iterator to iterate over the unset bits in the store and get the index of each bit.</p>
-<h1 class="doxsection"><a class="anchor" id="example-443"></a>
+<h1 class="doxsection"><a class="anchor" id="example-447"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;u8&gt;::alternating</a>(10);</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
@@ -3818,7 +3818,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to construct an empty bit-vector with at least the specified capacity. </p>
-<h1 class="doxsection"><a class="anchor" id="example-380"></a>
+<h1 class="doxsection"><a class="anchor" id="example-384"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a214dd0c738e0a17e8d6afda0c55b5962">BitVector&lt;&gt;::with_capacity</a>(10);</div>
 <div class="line">assert_eq(v.size(), 0);</div>
@@ -3855,7 +3855,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Returns word <span class="tt">i</span> from the bit-vector's underlying word store. </p>
 <p>The final word in the store may not be fully occupied but we guarantee that unused bits are set to 0.</p>
 <dl class="section note"><dt>Note</dt><dd>In debug mode the index is bounds checked.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-374"></a>
+<h1 class="doxsection"><a class="anchor" id="example-378"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1111111111&quot;</span>);</div>
@@ -3892,7 +3892,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns the number of words in the bit-vector's underlying word store. </p>
 <p>The bit-elements are packed into a standard vector with this number of words.</p>
-<h1 class="doxsection"><a class="anchor" id="example-373"></a>
+<h1 class="doxsection"><a class="anchor" id="example-377"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a52189f70e562c21d024f62c202eb3cbe">BitVector</a> v0;</div>
 <div class="line">assert_eq(v0.<a class="code hl_function" href="#a916cdd15c618a1a2eb2d58d47be5eaba">words</a>(), 0);</div>
@@ -3927,7 +3927,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to generate a bit-vector of length <span class="tt">n</span> where the elements are all 0. </p>
-<h1 class="doxsection"><a class="anchor" id="example-381"></a>
+<h1 class="doxsection"><a class="anchor" id="example-385"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;&gt;::zeros</a>(10);</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;0000000000&quot;</span>);</div>

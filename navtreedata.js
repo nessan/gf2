@@ -147,6 +147,7 @@ var NAVTREE =
       ] ],
       [ "Queries", "md_docs_2pages_2BitPolynomial.html#queries", null ],
       [ "Coefficient Access", "md_docs_2pages_2BitPolynomial.html#coefficient-access", null ],
+      [ "Polynomial Pieces", "md_docs_2pages_2BitPolynomial.html#polynomial-pieces", null ],
       [ "Arithmetic Operations", "md_docs_2pages_2BitPolynomial.html#arithmetic-operations", null ],
       [ "Polynomial Evaluation", "md_docs_2pages_2BitPolynomial.html#polynomial-evaluation", null ],
       [ "Modular Reduction", "md_docs_2pages_2BitPolynomial.html#modular-reduction", null ],
@@ -280,10 +281,10 @@ var NAVTREEINDEX =
 [
 "BitArray_8h.html",
 "classgf2_1_1BitMatrix.html",
-"classgf2_1_1BitPolynomial.html#a27afefe457918a27afde17fa3c233ad4",
-"classgf2_1_1BitVector.html#a193a2ffb36fa664bbdbfe057f4f491d2",
-"md_docs_2pages_2BitArray.html#set-indices",
-"namespacegf2.html#aa074227777980943f4e0a52c2abb2e3e"
+"classgf2_1_1BitPolynomial.html#a1b9b2ccbbd1840d8c4d278e34c812a67",
+"classgf2_1_1BitVector.html#a13021d202501e705a4dc095ef46dcaad",
+"md_docs_2pages_2BitArray.html#other-operators-and-functions",
+"namespacegf2.html#a8fe2ab8650590f082f800d223fdd6422"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

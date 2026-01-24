@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['case_20101_0',['Case \\(N &amp;lt; n\\)',['../Reduction.html#case-fn--nf',1,'']]],
-  ['case_20104_1',['Case \\(N = n\\)',['../Reduction.html#case-fn--nf-1',1,'']]],
-  ['case_20107_2',['Case \\(N &amp;gt; n\\)',['../Reduction.html#case-fn--nf-2',1,'']]],
+  ['case_20100_0',['Case \\(N &amp;lt; n\\)',['../Reduction.html#case-fn--nf',1,'']]],
+  ['case_20103_1',['Case \\(N = n\\)',['../Reduction.html#case-fn--nf-1',1,'']]],
+  ['case_20106_2',['Case \\(N &amp;gt; n\\)',['../Reduction.html#case-fn--nf-2',1,'']]],
   ['cases_3',['Use Cases',['../index.html#use-cases',1,'']]],
   ['characteristic_20polynomials_4',['Characteristic Polynomials',['../md_docs_2pages_2BitMatrix.html#characteristic-polynomials',1,'Characteristic Polynomials'],['../Danilevsky.html#characteristic-polynomials-1',1,'Characteristic Polynomials']]],
   ['checks_20that_20lu_20pa_20for_20a_20random_20matrix_20a_5',['Example (checks that &lt;span class=&quot;tt&quot;&gt;LU = PA&lt;/span&gt; for a random matrix &lt;span class=&quot;tt&quot;&gt;A&lt;/span&gt;)',['../classgf2_1_1BitLU.html#example-checks-that-lu--pa-for-a-random-matrix-a',1,'']]],

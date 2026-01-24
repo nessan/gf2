@@ -163,7 +163,7 @@ class gf2::BitRef&lt; Store &gt;</div><p>A <span class="tt"><a class="el" href="
 <p>If <span class="tt">v</span> is any non-const bit-store then <span class="tt">v[i]</span> is a <span class="tt"><a class="el" href="classgf2_1_1BitRef.html" title="A BitRef is a proxy class to reference a single bit in a bit-store.">BitRef</a></span> that "references" the bit at index <span class="tt">i</span> in <span class="tt">v</span>. It behaves as a proxy for that element and allows us to set or get the bit value via the <span class="tt">=</span> operator.</p>
 <p>The end user can also treat the <span class="tt"><a class="el" href="classgf2_1_1BitRef.html" title="A BitRef is a proxy class to reference a single bit in a bit-store.">BitRef</a></span> object as a reference to a boolean value and use it in boolean expressions.</p>
 <dl class="section note"><dt>Note</dt><dd>The underlying bit-store must live as long as the <span class="tt"><a class="el" href="classgf2_1_1BitRef.html" title="A BitRef is a proxy class to reference a single bit in a bit-store.">BitRef</a></span> that refers to it.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-242"></a>
+<h1 class="doxsection"><a class="anchor" id="example-246"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classgf2_1_1BitVector.html">BitVector</a> v{3};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="classgf2_1_1BitVector.html#ad2b8ef3dc6d1ea250253135172bb48e7">to_string</a>(), <span class="stringliteral">&quot;000&quot;</span>);</div>
@@ -200,7 +200,7 @@ template&lt;BitStore Store&gt; </div>
 </div><div class="memdoc">
 
 <p>Flips the bit at <span class="tt">index</span> in the referenced bit-store. </p>
-<h1 class="doxsection"><a class="anchor" id="example-246"></a>
+<h1 class="doxsection"><a class="anchor" id="example-250"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;&gt;::zeros</a>(3);</div>
 <div class="line"><a class="code hl_function" href="namespacegf2.html#a44a358ee6c3e8f2c57c85745d37f867f">ref</a>(v, 0).flip();</div>
@@ -237,7 +237,7 @@ template&lt;BitStore Store&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the boolean value of the bit at <span class="tt">index</span> in the referenced bit-store. </p>
-<h1 class="doxsection"><a class="anchor" id="example-243"></a>
+<h1 class="doxsection"><a class="anchor" id="example-247"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classgf2_1_1BitVector.html">BitVector</a> v{3};</div>
 <div class="line"><span class="keyword">auto</span> bit = <a class="code hl_function" href="namespacegf2.html#a44a358ee6c3e8f2c57c85745d37f867f">ref</a>(v, 0);</div>
@@ -271,7 +271,7 @@ template&lt;BitStore Store&gt; </div>
 </div><div class="memdoc">
 
 <p>Performs an <span class="tt">AND</span> operation on the bit at <span class="tt">index</span> in the referenced bit-store with <span class="tt">rhs</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="example-248"></a>
+<h1 class="doxsection"><a class="anchor" id="example-252"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> w = <a class="code hl_function" href="classgf2_1_1BitVector.html#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;&gt;::zeros</a>(3);</div>
@@ -307,7 +307,7 @@ template&lt;BitStore Store&gt; </div>
 </div><div class="memdoc">
 
 <p>Performs an <span class="tt">AND</span> operation on the bit at <span class="tt">index</span> in the referenced bit-store with <span class="tt">rhs</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="example-247"></a>
+<h1 class="doxsection"><a class="anchor" id="example-251"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
 <div class="line"><a class="code hl_function" href="namespacegf2.html#a44a358ee6c3e8f2c57c85745d37f867f">ref</a>(v, 0) &amp;= <span class="keyword">false</span>;</div>
@@ -341,7 +341,7 @@ template&lt;BitStore Store&gt; </div>
 </div><div class="memdoc">
 
 <p>Sets the bit at <span class="tt">index</span> in the referenced bit-store to the value of the given <span class="tt"><a class="el" href="classgf2_1_1BitRef.html" title="A BitRef is a proxy class to reference a single bit in a bit-store.">BitRef</a></span>. </p>
-<h1 class="doxsection"><a class="anchor" id="example-245"></a>
+<h1 class="doxsection"><a class="anchor" id="example-249"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;&gt;::zeros</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> w = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -380,7 +380,7 @@ template&lt;BitStore Store&gt; </div>
 </div><div class="memdoc">
 
 <p>Sets the bit at <span class="tt">index</span> in the referenced bit-store to the given value. </p>
-<h1 class="doxsection"><a class="anchor" id="example-244"></a>
+<h1 class="doxsection"><a class="anchor" id="example-248"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classgf2_1_1BitVector.html">BitVector</a> v{3};</div>
 <div class="line"><a class="code hl_function" href="namespacegf2.html#a44a358ee6c3e8f2c57c85745d37f867f">ref</a>(v, 0) = <span class="keyword">true</span>;</div>
@@ -414,7 +414,7 @@ template&lt;BitStore Store&gt; </div>
 </div><div class="memdoc">
 
 <p>Performs an <span class="tt">XOR</span> operation on the bit at <span class="tt">index</span> in the referenced bit-store with <span class="tt">rhs</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="example-252"></a>
+<h1 class="doxsection"><a class="anchor" id="example-256"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> w = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -449,7 +449,7 @@ template&lt;BitStore Store&gt; </div>
 </div><div class="memdoc">
 
 <p>Performs an <span class="tt">XOR</span> operation on the bit at <span class="tt">index</span> in the referenced bit-store with <span class="tt">rhs</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="example-251"></a>
+<h1 class="doxsection"><a class="anchor" id="example-255"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
 <div class="line"><a class="code hl_function" href="namespacegf2.html#a44a358ee6c3e8f2c57c85745d37f867f">ref</a>(v, 0) ^= <span class="keyword">true</span>;</div>
@@ -483,7 +483,7 @@ template&lt;BitStore Store&gt; </div>
 </div><div class="memdoc">
 
 <p>Performs an <span class="tt">OR</span> operation on the bit at <span class="tt">index</span> in the referenced bit-store with <span class="tt">rhs</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="example-250"></a>
+<h1 class="doxsection"><a class="anchor" id="example-254"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;&gt;::zeros</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> w = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -518,7 +518,7 @@ template&lt;BitStore Store&gt; </div>
 </div><div class="memdoc">
 
 <p>Performs an <span class="tt">OR</span> operation on the bit at <span class="tt">index</span> in the referenced bit-store with <span class="tt">rhs</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="example-249"></a>
+<h1 class="doxsection"><a class="anchor" id="example-253"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;&gt;::zeros</a>(3);</div>
 <div class="line"><a class="code hl_function" href="namespacegf2.html#a44a358ee6c3e8f2c57c85745d37f867f">ref</a>(v, 0) |= <span class="keyword">true</span>;</div>

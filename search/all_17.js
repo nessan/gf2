@@ -15,7 +15,7 @@ var searchData=
   ['the_20bitvector_20class_12',['The &lt;span class=&quot;tt&quot;&gt;BitVector&lt;/span&gt; Class',['../md_docs_2pages_2BitVector.html',1,'']]],
   ['the_20debug_20versions_13',['The &quot;Debug&quot; Versions',['../md_docs_2pages_2assert.html#the-debug-versions',1,'']]],
   ['the_20multiply_20step_14',['The Multiply Step',['../Reduction.html#the-multiply-step',1,'']]],
-  ['the_20polynomial_2088_15',['The Polynomial \\(x^N\\)',['../Reduction.html#the-polynomial-fxnf',1,'']]],
+  ['the_20polynomial_2087_15',['The Polynomial \\(x^N\\)',['../Reduction.html#the-polynomial-fxnf',1,'']]],
   ['the_20square_20step_16',['The Square Step',['../Reduction.html#the-square-step',1,'']]],
   ['the_20standard_20versions_17',['The &quot;Standard&quot; Versions',['../md_docs_2pages_2assert.html#the-standard-versions',1,'']]],
   ['times_5fx_5fto_5fthe_18',['times_x_to_the',['../classgf2_1_1BitPolynomial.html#a178abb5ed13f4efe219136a7a7c07fee',1,'gf2::BitPolynomial']]],

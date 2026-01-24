@@ -216,15 +216,24 @@ constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_monic</b
 <tr class="memdesc:a53603451055ebde3b58c0415d2cc1485"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a new <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a> that is the square of this <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a>.  <br /></td></tr>
 <tr class="memitem:a178abb5ed13f4efe219136a7a7c07fee" id="r_a178abb5ed13f4efe219136a7a7c07fee"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a178abb5ed13f4efe219136a7a7c07fee">times_x_to_the</a> (<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> n)</td></tr>
 <tr class="memdesc:a178abb5ed13f4efe219136a7a7c07fee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies the <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a> by <span class="tt">x^n</span> and returns <span class="tt">self</span>.  <br /></td></tr>
-<tr id="pub-methods-6" class="groupHeader"><td colspan="2"><div class="groupHeader">Polynomial Evaluation:</div></td></tr>
+<tr id="pub-methods-6" class="groupHeader"><td colspan="2"><div class="groupHeader">Polynomial Pieces:</div></td></tr>
+<tr class="memitem:a1b9b2ccbbd1840d8c4d278e34c812a67" id="r_a1b9b2ccbbd1840d8c4d278e34c812a67"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b9b2ccbbd1840d8c4d278e34c812a67">sub</a> (<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> d, <a class="el" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> &amp;dst) const</td></tr>
+<tr class="memdesc:a1b9b2ccbbd1840d8c4d278e34c812a67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes the destination bit-polynomial a copy of the low <span class="tt">d + 1</span> coefficients of this bit-polynomial. The destination bit-polynomial will have degree at most <span class="tt">d</span>.  <br /></td></tr>
+<tr class="memitem:aab94ad1948e22e3dfceac3b21c48c71c" id="r_aab94ad1948e22e3dfceac3b21c48c71c"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aab94ad1948e22e3dfceac3b21c48c71c">sub</a> (<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> d) const</td></tr>
+<tr class="memdesc:aab94ad1948e22e3dfceac3b21c48c71c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a new bit-polynomial that is a copy of the low <span class="tt">d + 1</span> coefficients of this bit-polynomial. The returned bit-polynomial will have degree at most <span class="tt">d</span>.  <br /></td></tr>
+<tr class="memitem:aa689ce1a2406150ca949056456d6c389" id="r_aa689ce1a2406150ca949056456d6c389"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa689ce1a2406150ca949056456d6c389">split</a> (<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> d, <a class="el" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> &amp;lo, <a class="el" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> &amp;hi) const</td></tr>
+<tr class="memdesc:aa689ce1a2406150ca949056456d6c389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Splits the bit-polynomial into a low and high part where the low part has degree at most <span class="tt">d</span>. On return <span class="tt">self(x) = low(x) + x^(d+1) * high(x)</span>.  <br /></td></tr>
+<tr class="memitem:a0ea7309b029a3ae322dd9fdade51e3bd" id="r_a0ea7309b029a3ae322dd9fdade51e3bd"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ea7309b029a3ae322dd9fdade51e3bd">split</a> (<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> d) const</td></tr>
+<tr class="memdesc:a0ea7309b029a3ae322dd9fdade51e3bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Splits the bit-polynomial into a low and high part where the low part has degree at most <span class="tt">d</span>. On return <span class="tt">self(x) = low(x) + x^(d+1) * high(x)</span>.  <br /></td></tr>
+<tr id="pub-methods-7" class="groupHeader"><td colspan="2"><div class="groupHeader">Polynomial Evaluation:</div></td></tr>
 <tr class="memitem:ab4ae356df16e262c6736f683a0247fc2" id="r_ab4ae356df16e262c6736f683a0247fc2"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab4ae356df16e262c6736f683a0247fc2">operator()</a> (bool x) const</td></tr>
 <tr class="memdesc:ab4ae356df16e262c6736f683a0247fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a> at the boolean scalar point <span class="tt">x</span> and returns the result.  <br /></td></tr>
 <tr class="memitem:a405187693de8aa18ac710caec3cdb4c7" id="r_a405187693de8aa18ac710caec3cdb4c7"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a405187693de8aa18ac710caec3cdb4c7">operator()</a> (<a class="el" href="classgf2_1_1BitMatrix.html">BitMatrix</a>&lt; Word &gt; const &amp;M) const</td></tr>
 <tr class="memdesc:a405187693de8aa18ac710caec3cdb4c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the bit-polynomial for a <em>square</em> <span class="tt"><a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">gf2::BitMatrix</a></span> argument <span class="tt">M</span>.  <br /></td></tr>
-<tr id="pub-methods-7" class="groupHeader"><td colspan="2"><div class="groupHeader">Modular Reduction:</div></td></tr>
+<tr id="pub-methods-8" class="groupHeader"><td colspan="2"><div class="groupHeader">Modular Reduction:</div></td></tr>
 <tr class="memitem:abdd695f14c6c1087e441a15b2ec41250" id="r_abdd695f14c6c1087e441a15b2ec41250"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abdd695f14c6c1087e441a15b2ec41250">reduce_x_to_the</a> (<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> n, bool n_is_log2=false) const</td></tr>
 <tr class="memdesc:abdd695f14c6c1087e441a15b2ec41250"><td class="mdescLeft">&#160;</td><td class="mdescRight">If this polynomial is P(x) we return x^e mod P(x) for e = n or e = 2^n depending on the <span class="tt">n_is_log2</span> argument.  <br /></td></tr>
-<tr id="pub-methods-8" class="groupHeader"><td colspan="2"><div class="groupHeader">String Representations:</div></td></tr>
+<tr id="pub-methods-9" class="groupHeader"><td colspan="2"><div class="groupHeader">String Representations:</div></td></tr>
 <tr class="memitem:ad1fbf0f547d577a09ae151e9ca28deea" id="r_ad1fbf0f547d577a09ae151e9ca28deea"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a> (std::string_view var=&quot;x&quot;) const</td></tr>
 <tr class="memdesc:ad1fbf0f547d577a09ae151e9ca28deea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a readable string representation of the bit-polynomial <span class="tt">p(x) = p0 + p1x + ...</span>.  <br /></td></tr>
 <tr class="memitem:a4fb80fdbc97e94b8d7836329ace31f89" id="r_a4fb80fdbc97e94b8d7836329ace31f89"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fb80fdbc97e94b8d7836329ace31f89">to_full_string</a> (std::string_view var=&quot;x&quot;) const</td></tr>
@@ -307,7 +316,7 @@ Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> p;</div>
 <div class="line">assert_eq(p.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;0&quot;</span>);</div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a9288a6402252424b52e4208d9129c5a8"><div class="ttname"><a href="#a9288a6402252424b52e4208d9129c5a8">gf2::BitPolynomial::BitPolynomial</a></div><div class="ttdeci">constexpr BitPolynomial()</div><div class="ttdoc">The default constructor creates an empty bit-polynomial with no coefficients.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:53</div></div>
-<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ad1fbf0f547d577a09ae151e9ca28deea"><div class="ttname"><a href="#ad1fbf0f547d577a09ae151e9ca28deea">gf2::BitPolynomial::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view var=&quot;x&quot;) const</div><div class="ttdoc">Returns a readable string representation of the bit-polynomial p(x) = p0 + p1x + ....</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:815</div></div>
+<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ad1fbf0f547d577a09ae151e9ca28deea"><div class="ttname"><a href="#ad1fbf0f547d577a09ae151e9ca28deea">gf2::BitPolynomial::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view var=&quot;x&quot;) const</div><div class="ttdoc">Returns a readable string representation of the bit-polynomial p(x) = p0 + p1x + ....</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:912</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -853,7 +862,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Evaluates the bit-polynomial for a <em>square</em> <span class="tt"><a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">gf2::BitMatrix</a></span> argument <span class="tt">M</span>. </p>
 <p>Uses Horner's method to evaluate <span class="tt">p(M)</span> where <span class="tt">M</span> is a square matrix and returns the result as a new bit-matrix.</p>
 <dl class="section note"><dt>Note</dt><dd>This method panics if the matrix is not square.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-237"></a>
+<h1 class="doxsection"><a class="anchor" id="example-241"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(6);</div>
 <div class="line"><a class="code hl_function" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> p1{<a class="code hl_function" href="classgf2_1_1BitVector.html#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(12)};</div>
@@ -893,7 +902,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Evaluates the <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a> at the boolean scalar point <span class="tt">x</span> and returns the result. </p>
-<h1 class="doxsection"><a class="anchor" id="example-236"></a>
+<h1 class="doxsection"><a class="anchor" id="example-240"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a6907fccf1e429bc894f952d3eb17a059">BitPolynomial&lt;&gt;::x_to_the</a>(3);</div>
 <div class="line">assert_eq(p(<span class="keyword">true</span>), <span class="keyword">true</span>);</div>
@@ -1249,7 +1258,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>In general, we can write any polynomial h(x) as h(x) = q(x) * P(x) + r(x) where degree(r) &lt; degree(P). <span class="tt">q(x)</span> is the quotient polynomial and <span class="tt">r(x)</span>the remainder polynomial that is returned by this method.</p>
 <p>Here we consider <span class="tt">h(x) = x^e</span> where the exponent <span class="tt">e</span> is either <span class="tt">n</span> or <span class="tt">2^n</span> depending on the final argument. Setting <span class="tt">n_is_log2 = true</span> allows for enormous powers of <span class="tt">x</span> which is useful for some applications. The default is <span class="tt">n_is_log2 = false</span> so we return <span class="tt">x^n mod P(x)</span>.</p>
 <dl class="section note"><dt>Note</dt><dd>This method panics if the polynomial is the zero polynomial.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-238"></a>
+<h1 class="doxsection"><a class="anchor" id="example-242"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a6907fccf1e429bc894f952d3eb17a059">BitPolynomial&lt;&gt;::x_to_the</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> r = p.reduce_x_to_the(2);</div>
@@ -1297,7 +1306,7 @@ Example</h1>
 <div class="line">assert_eq(p.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;1 + x&quot;</span>);</div>
 <div class="line">p.<a class="code hl_function" href="#a98460a92a789b7f46ecf3fc2050ce6c4">resize</a>(4);</div>
 <div class="line">assert_eq(p.<a class="code hl_function" href="#a4fb80fdbc97e94b8d7836329ace31f89">to_full_string</a>(), <span class="stringliteral">&quot;1 + x + 0x^2 + 0x^3&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a4fb80fdbc97e94b8d7836329ace31f89"><div class="ttname"><a href="#a4fb80fdbc97e94b8d7836329ace31f89">gf2::BitPolynomial::to_full_string</a></div><div class="ttdeci">std::string to_full_string(std::string_view var=&quot;x&quot;) const</div><div class="ttdoc">Returns a readable full string representation of the bit-polynomial.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:853</div></div>
+<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a4fb80fdbc97e94b8d7836329ace31f89"><div class="ttname"><a href="#a4fb80fdbc97e94b8d7836329ace31f89">gf2::BitPolynomial::to_full_string</a></div><div class="ttdeci">std::string to_full_string(std::string_view var=&quot;x&quot;) const</div><div class="ttdoc">Returns a readable full string representation of the bit-polynomial.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:950</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a98460a92a789b7f46ecf3fc2050ce6c4"><div class="ttname"><a href="#a98460a92a789b7f46ecf3fc2050ce6c4">gf2::BitPolynomial::resize</a></div><div class="ttdeci">constexpr BitPolynomial &amp; resize(usize n)</div><div class="ttdoc">Resizes the BitPolynomial to have the n coefficients and returns self.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:377</div></div>
 </div><!-- fragment --> 
 </div>
@@ -1414,6 +1423,94 @@ Example</h1>
 </div><!-- fragment --> 
 </div>
 </div>
+<a id="a0ea7309b029a3ae322dd9fdade51e3bd" name="a0ea7309b029a3ae322dd9fdade51e3bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ea7309b029a3ae322dd9fdade51e3bd">&#9670;&#160;</a></span>split() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned Word = usize&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classgf2_1_1BitPolynomial.html">gf2::BitPolynomial</a>&lt; Word &gt;::split </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a></td>          <td class="paramname"><span class="paramname"><em>d</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Splits the bit-polynomial into a low and high part where the low part has degree at most <span class="tt">d</span>. On return <span class="tt">self(x) = low(x) + x^(d+1) * high(x)</span>. </p>
+<h1 class="doxsection"><a class="anchor" id="example-239"></a>
+Example</h1>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a5f4593b61b4e2eb435b33218930e279d">BitPolynomial&lt;&gt;::ones</a>(7);</div>
+<div class="line">assert_eq(p.to_string(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4 + x^5 + x^6 + x^7&quot;</span>);</div>
+<div class="line"><span class="keyword">auto</span> [low, high] = p.split(4);</div>
+<div class="line">assert_eq(low.to_string(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4&quot;</span>);</div>
+<div class="line">assert_eq(high.to_string(), <span class="stringliteral">&quot;1 + x + x^2&quot;</span>);</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="aa689ce1a2406150ca949056456d6c389" name="aa689ce1a2406150ca949056456d6c389"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa689ce1a2406150ca949056456d6c389">&#9670;&#160;</a></span>split() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned Word = usize&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classgf2_1_1BitPolynomial.html">gf2::BitPolynomial</a>&lt; Word &gt;::split </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a></td>          <td class="paramname"><span class="paramname"><em>d</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a>&lt; Word &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lo</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a>&lt; Word &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>hi</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Splits the bit-polynomial into a low and high part where the low part has degree at most <span class="tt">d</span>. On return <span class="tt">self(x) = low(x) + x^(d+1) * high(x)</span>. </p>
+<h1 class="doxsection"><a class="anchor" id="example-238"></a>
+Example</h1>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a5f4593b61b4e2eb435b33218930e279d">BitPolynomial&lt;&gt;::ones</a>(6);</div>
+<div class="line">assert_eq(p.to_string(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4 + x^5 + x^6&quot;</span>);</div>
+<div class="line"><a class="code hl_function" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> low, high;</div>
+<div class="line">p.split(4, low, high);</div>
+<div class="line">assert_eq(low.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4&quot;</span>);</div>
+<div class="line">assert_eq(high.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;1 + x&quot;</span>);</div>
+<div class="line">p.split(6, low, high);</div>
+<div class="line">assert_eq(low.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4 + x^5 + x^6&quot;</span>);</div>
+<div class="line">assert_eq(high.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;0&quot;</span>);</div>
+<div class="line">p.split(0, low, high);</div>
+<div class="line">assert_eq(low.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;1&quot;</span>);</div>
+<div class="line">assert_eq(high.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4 + x^5&quot;</span>);</div>
+</div><!-- fragment --> 
+</div>
+</div>
 <a id="a53603451055ebde3b58c0415d2cc1485" name="a53603451055ebde3b58c0415d2cc1485"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53603451055ebde3b58c0415d2cc1485">&#9670;&#160;</a></span>squared() <span class="overload">[1/2]</span></h2>
 
@@ -1489,6 +1586,89 @@ Example</h1>
 </div><!-- fragment --> 
 </div>
 </div>
+<a id="aab94ad1948e22e3dfceac3b21c48c71c" name="aab94ad1948e22e3dfceac3b21c48c71c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab94ad1948e22e3dfceac3b21c48c71c">&#9670;&#160;</a></span>sub() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned Word = usize&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classgf2_1_1BitPolynomial.html">gf2::BitPolynomial</a>&lt; Word &gt;::sub </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a></td>          <td class="paramname"><span class="paramname"><em>d</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a new bit-polynomial that is a copy of the low <span class="tt">d + 1</span> coefficients of this bit-polynomial. The returned bit-polynomial will have degree at most <span class="tt">d</span>. </p>
+<h1 class="doxsection"><a class="anchor" id="example-237"></a>
+Example</h1>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a5f4593b61b4e2eb435b33218930e279d">BitPolynomial&lt;&gt;::ones</a>(6);</div>
+<div class="line">assert_eq(p.to_string(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4 + x^5 + x^6&quot;</span>);</div>
+<div class="line">assert_eq(p.sub(4).to_string(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4&quot;</span>);</div>
+<div class="line">assert_eq(p.sub(6).to_string(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4 + x^5 + x^6&quot;</span>);</div>
+<div class="line">assert_eq(p.sub(16).to_string(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4 + x^5 + x^6&quot;</span>);</div>
+<div class="line">assert_eq(p.sub(0).to_string(), <span class="stringliteral">&quot;1&quot;</span>);</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="a1b9b2ccbbd1840d8c4d278e34c812a67" name="a1b9b2ccbbd1840d8c4d278e34c812a67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b9b2ccbbd1840d8c4d278e34c812a67">&#9670;&#160;</a></span>sub() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Unsigned Word = usize&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classgf2_1_1BitPolynomial.html">gf2::BitPolynomial</a>&lt; Word &gt;::sub </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a></td>          <td class="paramname"><span class="paramname"><em>d</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a>&lt; Word &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>dst</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Makes the destination bit-polynomial a copy of the low <span class="tt">d + 1</span> coefficients of this bit-polynomial. The destination bit-polynomial will have degree at most <span class="tt">d</span>. </p>
+<h1 class="doxsection"><a class="anchor" id="example-236"></a>
+Example</h1>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a5f4593b61b4e2eb435b33218930e279d">BitPolynomial&lt;&gt;::ones</a>(6);</div>
+<div class="line">assert_eq(p.to_string(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4 + x^5 + x^6&quot;</span>);</div>
+<div class="line"><a class="code hl_function" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> q;</div>
+<div class="line">p.sub(4, q);</div>
+<div class="line">assert_eq(q.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4&quot;</span>);</div>
+<div class="line">p.sub(6, q);</div>
+<div class="line">assert_eq(q.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4 + x^5 + x^6&quot;</span>);</div>
+<div class="line">p.sub(16, q);</div>
+<div class="line">assert_eq(q.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4 + x^5 + x^6&quot;</span>);</div>
+<div class="line">p.sub(0, q);</div>
+<div class="line">assert_eq(q.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;1&quot;</span>);</div>
+</div><!-- fragment --> 
+</div>
+</div>
 <a id="a178abb5ed13f4efe219136a7a7c07fee" name="a178abb5ed13f4efe219136a7a7c07fee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a178abb5ed13f4efe219136a7a7c07fee">&#9670;&#160;</a></span>times_x_to_the()</h2>
 
@@ -1553,7 +1733,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Returns a readable <em>full</em> string representation of the bit-polynomial. </p>
 <p>You can specify the variable name using the <span class="tt">var</span> parameter. The default variable name is <span class="tt">x</span>.</p>
 <dl class="section note"><dt>Note</dt><dd>We show all terms including those with zero coefficients.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-240"></a>
+<h1 class="doxsection"><a class="anchor" id="example-244"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> coeffs = <a class="code hl_function" href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">BitVector&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;101010&quot;</span>).value();</div>
 <div class="line"><a class="code hl_function" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> p{coeffs};</div>
@@ -1589,7 +1769,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Returns a readable string representation of the bit-polynomial <span class="tt">p(x) = p0 + p1x + ...</span>. </p>
 <p>You can specify the variable name using the <span class="tt">var</span> parameter. The default variable name is <span class="tt">x</span>.</p>
 <dl class="section note"><dt>Note</dt><dd>We do not show any terms with zero coefficients.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-239"></a>
+<h1 class="doxsection"><a class="anchor" id="example-243"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> coeffs = <a class="code hl_function" href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">BitVector&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;101010&quot;</span>).value();</div>
 <div class="line"><a class="code hl_function" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> p{coeffs};</div>
@@ -1730,7 +1910,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Equality operator checks that any pair of bit-polynomials are equal in content. </p>
 <dl class="section note"><dt>Note</dt><dd>We ignore any high order trailing zero coefficients in either operand so 1 + x == 1 + x + 0x^2.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="example-241"></a>
+<h1 class="doxsection"><a class="anchor" id="example-245"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a6907fccf1e429bc894f952d3eb17a059">BitPolynomial&lt;&gt;::x_to_the</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> q = <a class="code hl_function" href="#a27afefe457918a27afde17fa3c233ad4">BitPolynomial&lt;&gt;::zeros</a>(1000);</div>

@@ -1,9 +1,9 @@
 var searchData=
 [
   ['capacity_0',['capacity',['../classgf2_1_1BitVector.html#a4b9cffc16ebebe17e183311de0119d55',1,'gf2::BitVector']]],
-  ['case_20101_1',['Case \\(N &amp;lt; n\\)',['../Reduction.html#case-fn--nf',1,'']]],
-  ['case_20104_2',['Case \\(N = n\\)',['../Reduction.html#case-fn--nf-1',1,'']]],
-  ['case_20107_3',['Case \\(N &amp;gt; n\\)',['../Reduction.html#case-fn--nf-2',1,'']]],
+  ['case_20100_1',['Case \\(N &amp;lt; n\\)',['../Reduction.html#case-fn--nf',1,'']]],
+  ['case_20103_2',['Case \\(N = n\\)',['../Reduction.html#case-fn--nf-1',1,'']]],
+  ['case_20106_3',['Case \\(N &amp;gt; n\\)',['../Reduction.html#case-fn--nf-2',1,'']]],
   ['cases_4',['Use Cases',['../index.html#use-cases',1,'']]],
   ['characteristic_20polynomials_5',['Characteristic Polynomials',['../md_docs_2pages_2BitMatrix.html#characteristic-polynomials',1,'Characteristic Polynomials'],['../Danilevsky.html#characteristic-polynomials-1',1,'Characteristic Polynomials']]],
   ['characteristic_5fpolynomial_6',['characteristic_polynomial',['../classgf2_1_1BitMatrix.html#a6d9eddc365a7974d59f36e5d822419f4',1,'gf2::BitMatrix']]],

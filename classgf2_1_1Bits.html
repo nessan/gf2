@@ -141,7 +141,7 @@ class gf2::Bits&lt; Store, is_const &gt;</div><p>Two iterators over <em>all</em>
 </ul>
 <p>Both iterators allow us to view the bit values but only the non-const iterator allows us to set the bit values.</p>
 <p>The two iterator types have lots of common functionality. To avoid code duplication we add a final boolean template parameter <span class="tt">is_const</span> to distinguish the two types. Depending on the value of <span class="tt">is_const</span>, the <span class="tt">std::conditional_t</span> is used to choose the correct type for the store pointer and value type.</p>
-<h1 class="doxsection"><a class="anchor" id="example-457"></a>
+<h1 class="doxsection"><a class="anchor" id="example-461"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classgf2_1_1BitVector.html">BitVector</a> v{10};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="classgf2_1_1BitVector.html#ad2b8ef3dc6d1ea250253135172bb48e7">to_string</a>(), <span class="stringliteral">&quot;0000000000&quot;</span>);</div>

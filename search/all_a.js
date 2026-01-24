@@ -11,7 +11,7 @@ var searchData=
   ['flip_5fsub_5fdiagonal_8',['flip_sub_diagonal',['../classgf2_1_1BitMatrix.html#ab47ecf702774bddeceb16f73be15366a',1,'gf2::BitMatrix']]],
   ['flip_5fsuper_5fdiagonal_9',['flip_super_diagonal',['../classgf2_1_1BitMatrix.html#a474bac1dd3227f980d8d130db801304a',1,'gf2::BitMatrix']]],
   ['for_200_10',['Algorithm for \\(\\mathbb{F}_2\\)',['../Danilevsky.html#algorithm-for-fmathbbf_2f',1,'']]],
-  ['for_2051_11',['Algorithm for \\(\\mathbb{R}\\)',['../Danilevsky.html#algorithm-for-fmathbbrf',1,'']]],
+  ['for_2050_11',['Algorithm for \\(\\mathbb{R}\\)',['../Danilevsky.html#algorithm-for-fmathbbrf',1,'']]],
   ['for_20a_20random_20matrix_20a_12',['Example (checks that &lt;span class=&quot;tt&quot;&gt;LU = PA&lt;/span&gt; for a random matrix &lt;span class=&quot;tt&quot;&gt;A&lt;/span&gt;)',['../classgf2_1_1BitLU.html#example-checks-that-lu--pa-for-a-random-matrix-a',1,'']]],
   ['for_20bit_20matrices_13',['Danilevsky for Bit-Matrices',['../Danilevsky.html#danilevsky-for-bit-matrices',1,'']]],
   ['for_20real_20matrices_14',['Danilevsky for Real Matrices',['../Danilevsky.html#danilevsky-for-real-matrices',1,'']]],
