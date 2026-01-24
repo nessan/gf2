@@ -607,6 +607,103 @@ public:
     }
 
     /// @}
+    /// @name Polynomial Pieces:
+    /// @{
+
+    /// Makes the destination bit-polynomial a copy of the low `d + 1` coefficients of this bit-polynomial.
+    /// The destination bit-polynomial will have degree at most `d`.
+    ///
+    /// # Example
+    /// ```
+    /// auto p = BitPolynomial<>::ones(6);
+    /// assert_eq(p.to_string(), "1 + x + x^2 + x^3 + x^4 + x^5 + x^6");
+    /// BitPolynomial q;
+    /// p.sub(4, q);
+    /// assert_eq(q.to_string(), "1 + x + x^2 + x^3 + x^4");
+    /// p.sub(6, q);
+    /// assert_eq(q.to_string(), "1 + x + x^2 + x^3 + x^4 + x^5 + x^6");
+    /// p.sub(16, q);
+    /// assert_eq(q.to_string(), "1 + x + x^2 + x^3 + x^4 + x^5 + x^6");
+    /// p.sub(0, q);
+    /// assert_eq(q.to_string(), "1");
+    /// ```
+    constexpr void sub(usize d, BitPolynomial& dst) const {
+        if (d == 0) {
+            dst = BitPolynomial<Word>::constant(m_coeffs.get(0));
+        } else if (d+1 >= m_coeffs.size()) {
+            dst = *this;
+        } else {
+            dst.copy_coefficients(m_coeffs.span(0, d+1));
+        }
+    }
+
+    /// Returns a new bit-polynomial that is a copy of the low `d + 1` coefficients of this bit-polynomial.
+    /// The returned bit-polynomial will have degree at most `d`.
+    ///
+    /// # Example
+    /// ```
+    /// auto p = BitPolynomial<>::ones(6);
+    /// assert_eq(p.to_string(), "1 + x + x^2 + x^3 + x^4 + x^5 + x^6");
+    /// assert_eq(p.sub(4).to_string(), "1 + x + x^2 + x^3 + x^4");
+    /// assert_eq(p.sub(6).to_string(), "1 + x + x^2 + x^3 + x^4 + x^5 + x^6");
+    /// assert_eq(p.sub(16).to_string(), "1 + x + x^2 + x^3 + x^4 + x^5 + x^6");
+    /// assert_eq(p.sub(0).to_string(), "1");
+    /// ```
+    constexpr auto sub(usize d) const {
+        BitPolynomial dst;
+        sub(d, dst);
+        return std::move(dst);
+    }
+
+    /// Splits the bit-polynomial into a low and high part where the low part has degree at most `d`.
+    /// On return `self(x) = low(x) + x^(d+1) * high(x)`.
+    ///
+    /// # Example
+    /// ```
+    /// auto p = BitPolynomial<>::ones(6);
+    /// assert_eq(p.to_string(), "1 + x + x^2 + x^3 + x^4 + x^5 + x^6");
+    /// BitPolynomial low, high;
+    /// p.split(4, low, high);
+    /// assert_eq(low.to_string(), "1 + x + x^2 + x^3 + x^4");
+    /// assert_eq(high.to_string(), "1 + x");
+    /// p.split(6, low, high);
+    /// assert_eq(low.to_string(), "1 + x + x^2 + x^3 + x^4 + x^5 + x^6");
+    /// assert_eq(high.to_string(), "0");
+    /// p.split(0, low, high);
+    /// assert_eq(low.to_string(), "1");
+    /// assert_eq(high.to_string(), "1 + x + x^2 + x^3 + x^4 + x^5");
+    /// ```
+    constexpr void split(usize d, BitPolynomial& lo, BitPolynomial& hi) const {
+        if (d == 0) {
+            lo = BitPolynomial<Word>::constant(m_coeffs.get(0));
+            hi.copy_coefficients(m_coeffs.span(1, m_coeffs.size()));
+        } else if (d+1 >= m_coeffs.size()) {
+            lo = *this;
+            hi.clear();
+        } else {
+            lo.copy_coefficients(m_coeffs.span(0, d+1));
+            hi.copy_coefficients(m_coeffs.span(d+1, m_coeffs.size()));
+        }
+    }
+
+    /// Splits the bit-polynomial into a low and high part where the low part has degree at most `d`.
+    /// On return `self(x) = low(x) + x^(d+1) * high(x)`.
+    ///
+    /// # Example
+    /// ```
+    /// auto p = BitPolynomial<>::ones(7);
+    /// assert_eq(p.to_string(), "1 + x + x^2 + x^3 + x^4 + x^5 + x^6 + x^7");
+    /// auto [low, high] = p.split(4);
+    /// assert_eq(low.to_string(), "1 + x + x^2 + x^3 + x^4");
+    /// assert_eq(high.to_string(), "1 + x + x^2");
+    /// ```
+    constexpr auto split(usize d) const {
+        BitPolynomial lo, hi;
+        split(d, lo, hi);
+        return std::make_pair(lo, hi);
+    }
+
+    /// @}
     /// @name Polynomial Evaluation:
     /// @{
 

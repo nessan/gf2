@@ -104,13 +104,59 @@ There are methods to access and modify the polynomial coefficients either indivi
 | `gf2::BitPolynomial::shrink_to_fit`      | Calls `gf2::BitVector::shrink_to_fit` on the coefficient bit-vector.         |
 | `gf2::BitPolynomial::make_monic`         | Kills any high order zero coefficients to make the polynomial _monic_.       |
 
+## Polynomial Pieces
+
+We have methods to extract sub-polynomials:
+
+| Method Name                 | Description                                                                                         |
+| --------------------------- | --------------------------------------------------------------------------------------------------- |
+| `gf2::BitPolynomial::sub`   | Extract a bit-polynomial that is a copy of some low degree terms.                                   |
+| `gf2::BitPolynomial::split` | Extract two bit-polynomials `lo` and `hi`, `lo` is a copy of low degree terms and `hi` is the rest. |
+
+Both methods can be passed pre-allocated polynomial(s) to store the result(s) to avoid unnecessary allocations.
+For example:
+
+```c++
+auto p = gf2::BitPolynomial<>::random(100);   // Random degree 100 polynomial, so 101 coefficients.
+auto [l, h] = p.split(50);                    // First 51 coefficients in lo, rest in hi.
+```
+
+On return, `l` will be a polynomial of degree at most 50 (so have at most 51 coefficients) and `h` will be a polynomial of degree at most 49 (so have at most 50 coefficients). The original polynomial can be reconstructed as:
+
+$$
+p(x) = l(x) + x^{51} h(x)
+$$
+
+The same code can be written to avoid allocations as:
+
+```c++
+auto p = gf2::BitPolynomial<>::random(100);   // Random degree
+BitPolynomial<> l, h;
+p.split(50, l, h);                            // First 51 coefficients in lo, rest in hi.
+```
+
+This is useful if the split operation is being performed repeatedly in an algorithm.
+
 ## Arithmetic Operations
 
 We have all the usual arithmetic operations defined for `gf2::BitPolynomial` objects where the addition and subtraction operations are identical since we are working over GF(2).
 
-Multiplication of two arbitrary bit-polynomials, $p(x) q(x)$, is performed using `gf2::convolve` which implements efficient convolutions of bit-stores.
+| Method Name                        | Description                                                                                |
+| ---------------------------------- | ------------------------------------------------------------------------------------------ |
+| `gf2::BitPolynomial::operator+=()` | In-place addition with another bit-polynomial.                                             |
+| `gf2::BitPolynomial::operator-=()` | In-place subtraction with another bit-polynomial.                                          |
+| `gf2::BitPolynomial::operator*=()` | In-place multiplication by another bit-polynomial.                                         |
+| `gf2::BitPolynomial::operator+()`  | Adds another polynomial to this one and returns the result as a new bit-polynomial.        |
+| `gf2::BitPolynomial::operator-()`  | Subtracts another polynomial from this one and returns the result as a new bit-polynomial. |
+| `gf2::BitPolynomial::operator*()`  | Multiplies this and another polynomial and returns the result as a new bit-polynomial.     |
 
-There are a couple of "fast" methods for common arithmetic operations:
+**TODO:** As yet, we have not implemented polynomial division.
+
+> [!NOTE]
+> Considerable speed improvements are possible by using carryless multiplication algorithms. However, for now at least, those depend on using platform-specific intrinsics which complicates the library and, in particular, testing the library across multiple platforms. <br>
+> So for the time being, we stick to a more portable convolution approach using `gf2::convolve` on the coefficient bit-vectors.
+
+However, we do have a couple of "fast" methods for common arithmetic operations:
 
 | Method Name                          | Description                                                   |
 | ------------------------------------ | ------------------------------------------------------------- |
