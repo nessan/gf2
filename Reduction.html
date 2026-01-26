@@ -266,7 +266,7 @@ The Square Step</h2>
 <p>$$ s(x) = q(x)^2 \sim \mathbf{s} = [q_0, 0, q_1, 0, q_2, \ldots, 0, q_{n-1}], $$</p>
 <p>i.e. the bit-vector we get by interspersing the elements of \(\mathbf{q}\) with zeros.</p>
 <p>Riffling can be done very efficiently word by word. The <span class="tt">gf2::BitVector::riffle_into</span> method takes a bit-vector \(\mathbf{q}\) and fills a destination bit-vector \(\mathbf{s}\) with a <em>riffled</em> version of \(\mathbf{q}\).</p>
-<p>The <span class="tt"><a class="el" href="classgf2_1_1BitVector.html#a6e2078e3f40d295f483d87a09d26a92f" title="Views a bit-store as two parts containing the elements [0, at) and [at, size()) respectively.">gf2::BitVector::split_at</a></span> method takes a bit-vector \(\mathbf{s}\), a number \(n\), and then fills two other bit-vectors \(\mathbf{l}\) and \(\mathbf{h}\) where \(\mathbf{l}\) gets the first \(n\) elements in \(\mathbf{s}\) and \(\mathbf{h}\) gets the rest.</p>
+<p>The <span class="tt"><a class="el" href="classgf2_1_1BitVector.html#a6e2078e3f40d295f483d87a09d26a92f" title="Views the bit-vector as two parts containing the elements [0, at) and [at, size()) respectively.">gf2::BitVector::split_at</a></span> method takes a bit-vector \(\mathbf{s}\), a number \(n\), and then fills two other bit-vectors \(\mathbf{l}\) and \(\mathbf{h}\) where \(\mathbf{l}\) gets the first \(n\) elements in \(\mathbf{s}\) and \(\mathbf{h}\) gets the rest.</p>
 <p>$$ \begin{align} \mathbf{l} &amp;= [s_0, s_1, \ldots, s_{n-1}], \\ \mathbf{h} &amp;= [s_n, s_{n+1}, \dots]. \end{align} $$</p>
 <p>In polynomial terms this is equivalent to the decomposition:</p>
 <p>$$ s(x) = l(x) + x^n \, h(x), $$</p>

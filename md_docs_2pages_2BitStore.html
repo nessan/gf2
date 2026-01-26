@@ -133,7 +133,7 @@ Introduction</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Type  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size vector over GF(2) with N bit elements compactly stored in a standard array of primitive ...">gf2::BitArray</a></span>  </td><td class="markdownTableBodyNone">A fixed-size array of bits packed into a <span class="tt">std::array</span> of unsigned words.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size &quot;vector&quot; over GF(2) with N bit elements compactly stored in a standard array of primitiv...">gf2::BitArray</a></span>  </td><td class="markdownTableBodyNone">A fixed-size array of bits packed into a <span class="tt">std::array</span> of unsigned words.  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVector</a></span>  </td><td class="markdownTableBodyNone">A dynamically sized vector of bits packed into a <span class="tt">std::vector</span> of unsigned words.  </td></tr>
 <tr class="markdownTableRowOdd">
@@ -182,7 +182,7 @@ Other Notes</h2>
 </ul>
 <h2 class="doxsection"><a class="anchor" id="example"></a>
 Example</h2>
-<p>The methods are trivial to implement for <span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size vector over GF(2) with N bit elements compactly stored in a standard array of primitive ...">gf2::BitArray</a></span> and <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVector</a></span>.</p>
+<p>The methods are trivial to implement for <span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size &quot;vector&quot; over GF(2) with N bit elements compactly stored in a standard array of primitiv...">gf2::BitArray</a></span> and <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVector</a></span>.</p>
 <p>Here is a sketch of how they might work for the <span class="tt"><a class="el" href="classgf2_1_1BitVector.html" title="A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...">gf2::BitVector</a></span> class which stores <span class="tt">m_size</span> bits in a <span class="tt">std::vector&lt;Word&gt;</span> called <span class="tt">m_store</span>:</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;Un<span class="keywordtype">signed</span> Word = usize&gt;                                    <span class="comment">// &lt;1&gt;</span></div>
 <div class="line"><span class="keyword">class </span>BitVector {</div>
@@ -286,11 +286,11 @@ Bit Access</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a6ea9570ad5ef2845429ce2e5aa2faa52" title="Returns true if the final bit element is set, false otherwise.">gf2::back</a></span>  </td><td class="markdownTableBodyNone">Returns the value of the last element in the store.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a9a81b88db4554b65bcdd1ea0aa62e4ea" title="Sets the bit-element at the given index to the specified boolean value and returns the store for chai...">gf2::set</a></span>  </td><td class="markdownTableBodyNone">Sets a bit to the given boolean value, which defaults to <span class="tt">true</span>.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a0185d340520fd8519443cff59ddbe8a2" title="Sets the bit-element at the given index to the specified boolean value (default value is true).">gf2::set</a></span>  </td><td class="markdownTableBodyNone">Sets a bit to the given boolean value, which defaults to <span class="tt">true</span>.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a55715718cd3a990d743cba739a32300b" title="Flips the value of the bit-element at the given index and returns the store for chaining.">gf2::flip</a></span>  </td><td class="markdownTableBodyNone">Flips the value of the bit element at a given index.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#aa424649d48359d85a30260dc0de4835a" title="Flips the value of the bit-element at the given index.">gf2::flip</a></span>  </td><td class="markdownTableBodyNone">Flips the value of the bit element at a given index.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#af7a926ab27c517b932ad513960488d1c" title="Swaps the bits in the bit-store at indices i0 and i1 and returns the store for chaining.">gf2::swap</a></span>  </td><td class="markdownTableBodyNone">Swaps the values of bit elements at locations <span class="tt">i</span> and <span class="tt">j</span>.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a23cbb1ad7a7a0ce5c2f8835564cc21ec" title="Swaps the bits in the bit-store at indices i0 and i1.">gf2::swap</a></span>  </td><td class="markdownTableBodyNone">Swaps the values of bit elements at locations <span class="tt">i</span> and <span class="tt">j</span>.  </td></tr>
 </table>
 <dl class="section note"><dt>Note</dt><dd>You can set the <span class="tt">DEBUG</span> flag at compile time to enable bounds checks on the index arguments.</dd></dl>
 <p>The <span class="tt">ref(store, i)</span> function returns a <span class="tt"><a class="el" href="classgf2_1_1BitRef.html" title="A BitRef is a proxy class to reference a single bit in a bit-store.">gf2::BitRef</a></span>, which is a "reference" to an individual bit in the store. It is automatically converted to a boolean on reads, but it also allows writes.</p>
@@ -326,9 +326,9 @@ Mutators</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a86e5f614c73359d9f4281474d3a5a7c0" title="Sets the bits in the store to the boolean value and returns the store for chaining.">gf2::set_all</a></span>  </td><td class="markdownTableBodyNone">Sets all the bits in the store to the passed value, which defaults to <span class="tt">true</span>.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a03ce4352f6f0b4a759b7bb7d880928df" title="Sets the bits in the store to the boolean value.">gf2::set_all</a></span>  </td><td class="markdownTableBodyNone">Sets all the bits in the store to the passed value, which defaults to <span class="tt">true</span>.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a44620977a1e882054ded8d0fcd19a29e" title="Flips the value of the bits in the store and returns the store for chaining.">gf2::flip_all</a></span>  </td><td class="markdownTableBodyNone">Flips the values of all the bits in the store.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a94314a30722546a006db2f38a2b8a054" title="Flips the value of the bits in the store.">gf2::flip_all</a></span>  </td><td class="markdownTableBodyNone">Flips the values of all the bits in the store.  </td></tr>
 </table>
 <p>They efficiently operate on words at a time, so they are inherently parallel.</p>
 <h1 class="doxsection"><a class="anchor" id="store-fills"></a>
@@ -338,9 +338,9 @@ Copies &amp; Fills</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#abb0639e0206955a54efb469f9f55ac8f" title="Copies the bits from an unsigned integral src value and returns the store for chaining.">gf2::copy</a></span>  </td><td class="markdownTableBodyNone">Copies bit values from various sources to this store.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#ab9a3ab2cfb7f67f6b195372d0e66e734" title="Copies all the bits from any unsigned integral src value to an equal-sized bit-store.">gf2::copy</a></span>  </td><td class="markdownTableBodyNone">Copies bit values from various sources to this store.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#a05be0fd076ab2e9089ccb9c5127b5070" title="Fill the store with random bits and returns the store for chaining.">gf2::fill_random</a></span>  </td><td class="markdownTableBodyNone">Fills the store with random 0's and 1's.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="namespacegf2.html#ac6cf8bbef5f96104b2e770e54abdd08a" title="Fill the store with random bits based on an optional probability p and an optional seed for the RNG.">gf2::fill_random</a></span>  </td><td class="markdownTableBodyNone">Fills the store with random 0's and 1's.  </td></tr>
 </table>
 <h2 class="doxsection"><a class="anchor" id="copies"></a>
 Copies</h2>
@@ -351,7 +351,7 @@ Copies</h2>
 <li>An unsigned integer that has the same number of bits as the store. The integer type need not be the same as the underlying <span class="tt">Word</span> used by the bit-vector.</li>
 <li>A function or callable object that takes a single <span class="tt">usize</span> index argument and returns a boolean value for that index.</li>
 </ul>
-<dl class="section note"><dt>Note</dt><dd>In each case, the <em>size</em> of the source and destinations must match exactly and that condition is always checked unless the <span class="tt">NDEBUG</span> flag is set at compile time. You can always use a <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span> to copy a subset of bits if needed. However, the underlying <em>word types</em> need <b>not</b> match, so you can copy between bit-stores that use different underlying word types. You can use the <span class="tt"><a class="el" href="namespacegf2.html#abb0639e0206955a54efb469f9f55ac8f" title="Copies the bits from an unsigned integral src value and returns the store for chaining.">gf2::copy</a></span> method to convert between different <span class="tt">Word</span> type stores (e.g., from <span class="tt">BitVector&lt;u32&gt;</span> to <span class="tt">BitVector&lt;u8&gt;</span>) as long as the size of the source and destinations match.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>In each case, the <em>size</em> of the source and destinations must match exactly and that condition is always checked unless the <span class="tt">NDEBUG</span> flag is set at compile time. You can always use a <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span> to copy a subset of bits if needed. However, the underlying <em>word types</em> need <b>not</b> match, so you can copy between bit-stores that use different underlying word types. You can use the <span class="tt"><a class="el" href="namespacegf2.html#ab9a3ab2cfb7f67f6b195372d0e66e734" title="Copies all the bits from any unsigned integral src value to an equal-sized bit-store.">gf2::copy</a></span> method to convert between different <span class="tt">Word</span> type stores (e.g., from <span class="tt">BitVector&lt;u32&gt;</span> to <span class="tt">BitVector&lt;u8&gt;</span>) as long as the size of the source and destinations match.</dd></dl>
 <h2 class="doxsection"><a class="anchor" id="random-fills"></a>
 Random Fills</h2>
 <p>By default, the random fill method uses a random number generator seeded with system entropy, so the results change from run to run. You can set a specific seed to get reproducible fills.</p>

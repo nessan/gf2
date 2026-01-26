@@ -178,7 +178,7 @@ class gf2::BitLU&lt; Word &gt;</div><p>The <span class="tt"><a class="el" href="
 <p>Formally, <em>LU</em> decomposition of <span class="tt">A</span> is \(P \cdot A = L \cdot U\) where \(P\) is a permutation matrix, \(L\) is a unit lower triangular matrix and \(U\) is an upper triangular matrix.</p>
 <p>The <span class="tt"><a class="el" href="#ab46e29baf332eea2bbc3296d55ae08f7" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span> and <span class="tt"><a class="el" href="#a9ccba9d92861785aa4ed7aef1592d37f" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span> triangles can be efficiently packed into a single bit-matrix of the same size as <span class="tt">A</span></p>
 <p><span class="tt">P</span> is a permutation of the identity matrix with one non-zero entry per row. In practice, we just need to store the locations of those entries as some form of vector.</p>
-<dl class="section note"><dt>Note</dt><dd>There are generalisations of the LU decomposition for non-square matrices but those are not considered yet.</dd></dl>
+<p><b>Note:</b> There are generalisations of the LU decomposition for non-square matrices but those are not considered yet.</p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://en.wikipedia.org/wiki/Finite_field_arithmetic">Finite field arithmetic</a> </dd></dl>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a92c7094a721d3bbfa9503612f7585866" name="a92c7094a721d3bbfa9503612f7585866"></a>
@@ -210,7 +210,9 @@ template&lt;Unsigned Word&gt; </div>
 <p>On construction, this method computes a unit lower triangular matrix <span class="tt"><a class="el" href="#ab46e29baf332eea2bbc3296d55ae08f7" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span>, an upper triangular matrix <span class="tt"><a class="el" href="#a9ccba9d92861785aa4ed7aef1592d37f" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span>, and a permutation matrix <span class="tt">P</span> such that <span class="tt">P.A = L.U</span>. The <span class="tt"><a class="el" href="#ab46e29baf332eea2bbc3296d55ae08f7" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span> and <span class="tt"><a class="el" href="#a9ccba9d92861785aa4ed7aef1592d37f" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span> triangles are efficiently packed into a single matrix and <span class="tt">P</span> is stored as a vector of row swap instructions.</p>
 <p>The construction works even if <span class="tt">A</span> is singular, though the solver methods will not.</p>
 <p>If <span class="tt">A</span> is <span class="tt">n x n</span>, then the construction takes O(n^3) operations. There are block iterative methods that can reduce that to a sub-cubic count but they are not implemented here. Of course, the method works on whole words or bit elements at a time so is very efficient even without those enhancements.</p>
-<dl class="section note"><dt>Note</dt><dd>Panics if the <span class="tt">A</span> matrix is not square. There are generalisations of the LU decomposition for non-square matrices but those are not considered yet.</dd></dl>
+<h1 class="doxsection"><a class="anchor" id="panics-19"></a>
+Panics</h1>
+<p>Constructor panics if the <span class="tt">A</span> matrix is not square. There are generalisations of the LU decomposition for non-square matrices but those are not considered yet.</p>
 <h1 class="doxsection"><a class="anchor" id="example-checks-that-lu--pa-for-a-random-matrix-a"></a>
 Example (checks that <span class="tt">LU = PA</span> for a random matrix <span class="tt">A</span>)</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a47a029b47df5b3641f6f06483b549ce6">BitMatrix&lt;u8&gt;::random</a>(100, 100);</div>
@@ -219,8 +221,8 @@ Example (checks that <span class="tt">LU = PA</span> for a random matrix <span c
 <div class="line"><span class="keyword">auto</span> PA = A;</div>
 <div class="line">lu.permute(PA);</div>
 <div class="line">assert_eq(PA, <a class="code hl_function" href="#a70b65617eea5d01c4e061069eb9ebddd">LU</a>);</div>
-<div class="ttc" id="aclassgf2_1_1BitLU_html_a70b65617eea5d01c4e061069eb9ebddd"><div class="ttname"><a href="#a70b65617eea5d01c4e061069eb9ebddd">gf2::BitLU::LU</a></div><div class="ttdeci">constexpr const BitMatrix&lt; Word &gt; &amp; LU() const</div><div class="ttdoc">Read-only access to the LU form of the bit-matrix where A -&gt; [L\U].</div><div class="ttdef"><b>Definition</b> BitLU.h:117</div></div>
-<div class="ttc" id="aclassgf2_1_1BitMatrix_html_a47a029b47df5b3641f6f06483b549ce6"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#a47a029b47df5b3641f6f06483b549ce6">gf2::BitMatrix::random</a></div><div class="ttdeci">static BitMatrix random(usize m, usize n, double p=0.5, std::uint64_t seed=0)</div><div class="ttdoc">Factory method to generate a bit-matrix of size m x n where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:261</div></div>
+<div class="ttc" id="aclassgf2_1_1BitLU_html_a70b65617eea5d01c4e061069eb9ebddd"><div class="ttname"><a href="#a70b65617eea5d01c4e061069eb9ebddd">gf2::BitLU::LU</a></div><div class="ttdeci">constexpr const BitMatrix&lt; Word &gt; &amp; LU() const</div><div class="ttdoc">Read-only access to the LU form of the bit-matrix where A -&gt; [L\U].</div><div class="ttdef"><b>Definition</b> BitLU.h:119</div></div>
+<div class="ttc" id="aclassgf2_1_1BitMatrix_html_a47a029b47df5b3641f6f06483b549ce6"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#a47a029b47df5b3641f6f06483b549ce6">gf2::BitMatrix::random</a></div><div class="ttdeci">static BitMatrix random(usize m, usize n, double p=0.5, std::uint64_t seed=0)</div><div class="ttdoc">Factory method to generate a bit-matrix of size m x n where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:264</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -257,10 +259,10 @@ Example</h1>
 <div class="line"><a class="code hl_function" href="#a92c7094a721d3bbfa9503612f7585866">BitLU</a> lu{A};</div>
 <div class="line"><span class="keyword">auto</span> A_inv = lu.<a class="code hl_function" href="#a79cdebce01c27f3d9f3c2136a6b77d71">inverse</a>().value();</div>
 <div class="line">assert_eq(A_inv, <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a6fefecbb0bd5f81e499abeec66751e60">BitMatrix&lt;&gt;::right_rotation</a>(100, 1));</div>
-<div class="ttc" id="aclassgf2_1_1BitLU_html_a79cdebce01c27f3d9f3c2136a6b77d71"><div class="ttname"><a href="#a79cdebce01c27f3d9f3c2136a6b77d71">gf2::BitLU::inverse</a></div><div class="ttdeci">std::optional&lt; BitMatrix&lt; Word &gt; &gt; inverse() const</div><div class="ttdoc">Returns the inverse of the matrix A as a full independent bit-matrix or std::nullopt if the matrix is...</div><div class="ttdef"><b>Definition</b> BitLU.h:291</div></div>
-<div class="ttc" id="aclassgf2_1_1BitLU_html_a92c7094a721d3bbfa9503612f7585866"><div class="ttname"><a href="#a92c7094a721d3bbfa9503612f7585866">gf2::BitLU::BitLU</a></div><div class="ttdeci">BitLU(BitMatrix&lt; Word &gt; const &amp;A)</div><div class="ttdoc">Constructs the LU decomposition object for a square matrix A.</div><div class="ttdef"><b>Definition</b> BitLU.h:60</div></div>
-<div class="ttc" id="aclassgf2_1_1BitMatrix_html_a6fefecbb0bd5f81e499abeec66751e60"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#a6fefecbb0bd5f81e499abeec66751e60">gf2::BitMatrix::right_rotation</a></div><div class="ttdeci">static BitMatrix right_rotation(usize n, usize p)</div><div class="ttdoc">Constructs the n x n rotate-right by p places matrix.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:469</div></div>
-<div class="ttc" id="aclassgf2_1_1BitMatrix_html_a8b23de84fa10d85060a045c3c4058242"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">gf2::BitMatrix::left_rotation</a></div><div class="ttdeci">static BitMatrix left_rotation(usize n, usize p)</div><div class="ttdoc">Constructs the n x n rotate-left by p places matrix.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:450</div></div>
+<div class="ttc" id="aclassgf2_1_1BitLU_html_a79cdebce01c27f3d9f3c2136a6b77d71"><div class="ttname"><a href="#a79cdebce01c27f3d9f3c2136a6b77d71">gf2::BitLU::inverse</a></div><div class="ttdeci">std::optional&lt; BitMatrix&lt; Word &gt; &gt; inverse() const</div><div class="ttdoc">Returns the inverse of the matrix A as a full independent bit-matrix or std::nullopt if the matrix is...</div><div class="ttdef"><b>Definition</b> BitLU.h:296</div></div>
+<div class="ttc" id="aclassgf2_1_1BitLU_html_a92c7094a721d3bbfa9503612f7585866"><div class="ttname"><a href="#a92c7094a721d3bbfa9503612f7585866">gf2::BitLU::BitLU</a></div><div class="ttdeci">BitLU(BitMatrix&lt; Word &gt; const &amp;A)</div><div class="ttdoc">Constructs the LU decomposition object for a square matrix A.</div><div class="ttdef"><b>Definition</b> BitLU.h:62</div></div>
+<div class="ttc" id="aclassgf2_1_1BitMatrix_html_a6fefecbb0bd5f81e499abeec66751e60"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#a6fefecbb0bd5f81e499abeec66751e60">gf2::BitMatrix::right_rotation</a></div><div class="ttdeci">static BitMatrix right_rotation(usize n, usize p)</div><div class="ttdoc">Constructs the n x n rotate-right by p places matrix.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:472</div></div>
+<div class="ttc" id="aclassgf2_1_1BitMatrix_html_a8b23de84fa10d85060a045c3c4058242"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">gf2::BitMatrix::left_rotation</a></div><div class="ttdeci">static BitMatrix left_rotation(usize n, usize p)</div><div class="ttdoc">Constructs the n x n rotate-left by p places matrix.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:453</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -291,8 +293,10 @@ template&lt;Unsigned Word&gt; </div>
 
 <p>Solves the linear system <span class="tt">A.X_for = B</span> for any <span class="tt">B</span> where <span class="tt">A</span> is the matrix used to construct the <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> object. </p>
 <p>This methods returns <span class="tt">std::nullopt</span> if the matrix is singular.</p>
-<p>Each column of <span class="tt">X</span> is a solution to the linear system <span class="tt">A.x_for = b</span> where <span class="tt">b</span> is the corresponding column of <span class="tt">B</span>.</p>
-<dl class="section note"><dt>Note</dt><dd>This method panics if the bit-matrix <span class="tt">B</span> has a different number of rows than the number of row swap instructions.</dd></dl>
+<p>Each column of <span class="tt">X</span> is a solution to the system <span class="tt">A.x_for = b</span> where <span class="tt">b</span> is the corresponding column of <span class="tt">B</span>.</p>
+<h1 class="doxsection"><a class="anchor" id="panics-23"></a>
+Panics</h1>
+<p>This method panics if the bit-matrix <span class="tt">B</span> has a different number of rows than the number of row swap instructions.</p>
 <h1 class="doxsection"><a class="anchor" id="example-87"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">BitMatrix&lt;&gt;::left_rotation</a>(100, 5);</div>
@@ -333,16 +337,18 @@ requires (std::same_as&lt;typename Store::word_type, Word&gt;)</div>
 
 <p>Solves the linear system <span class="tt">A.x_for = b</span> for any <span class="tt">b</span> where <span class="tt">A</span> is the matrix used to construct the <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> object. </p>
 <p>This methods returns <span class="tt">std::nullopt</span> if the matrix is singular.</p>
-<dl class="section note"><dt>Note</dt><dd>This method panics if the bit-matrix <span class="tt">b</span> has a different number of rows than the number of row swap instructions.</dd></dl>
+<h1 class="doxsection"><a class="anchor" id="panics-22"></a>
+Panics</h1>
+<p>This method panics if the bit-matrix <span class="tt">b</span> has a different number of rows than the number of row swap instructions.</p>
 <h1 class="doxsection"><a class="anchor" id="example-86"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> n = 100uz;</div>
 <div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">BitMatrix&lt;&gt;::left_rotation</a>(n, 1);</div>
 <div class="line"><span class="keyword">auto</span> lu = A.LU();</div>
-<div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#ade5751f621f74291115c14ca08549e5e">BitVector&lt;&gt;::random</a>(n);</div>
+<div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#a4b7006134bcff1ddfc81bcc8133dd3cc">BitVector&lt;&gt;::random</a>(n);</div>
 <div class="line"><span class="keyword">auto</span> x = lu(b).value();</div>
 <div class="line">assert_eq(A * x, b);</div>
-<div class="ttc" id="aclassgf2_1_1BitVector_html_ade5751f621f74291115c14ca08549e5e"><div class="ttname"><a href="classgf2_1_1BitVector.html#ade5751f621f74291115c14ca08549e5e">gf2::BitVector::random</a></div><div class="ttdeci">static BitVector random(usize len, double p=0.5, u64 seed=0)</div><div class="ttdoc">Factory method to generate a bit-vector of size len where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitVector.h:345</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_a4b7006134bcff1ddfc81bcc8133dd3cc"><div class="ttname"><a href="classgf2_1_1BitVector.html#a4b7006134bcff1ddfc81bcc8133dd3cc">gf2::BitVector::random</a></div><div class="ttdeci">static BitVector random(usize size, double p=0.5, u64 seed=0)</div><div class="ttdoc">Factory method to generate a bit-vector of size size where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitVector.h:348</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -404,7 +410,9 @@ template&lt;Unsigned Word&gt; </div>
 </div><div class="memdoc">
 
 <p>Permutes the rows of the input matrix <span class="tt">B</span> in-place using our row-swap instruction vector. </p>
-<dl class="section note"><dt>Note</dt><dd>This method panics if the dimensions of <span class="tt">B</span> and the row-swap instruction vector do not match. </dd></dl>
+<h1 class="doxsection"><a class="anchor" id="panics-20"></a>
+Panics</h1>
+<p>This method panics if the dimensions of <span class="tt">B</span> and the row-swap instruction vector do not match. </p>
 
 </div>
 </div>
@@ -437,7 +445,9 @@ requires (std::same_as&lt;typename Store::word_type, Word&gt;)</div>
 </div><div class="memdoc">
 
 <p>Permute the rows of the input vector <span class="tt">b</span> in-place using our row-swap instruction vector. </p>
-<dl class="section note"><dt>Note</dt><dd>This method panics if the dimensions of <span class="tt">b</span> and the row-swap instruction vector do not match. </dd></dl>
+<h1 class="doxsection"><a class="anchor" id="panics-21"></a>
+Panics</h1>
+<p>This method panics if the dimensions of <span class="tt">b</span> and the row-swap instruction vector do not match. </p>
 
 </div>
 </div>

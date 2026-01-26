@@ -316,7 +316,7 @@ Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> p;</div>
 <div class="line">assert_eq(p.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;0&quot;</span>);</div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a9288a6402252424b52e4208d9129c5a8"><div class="ttname"><a href="#a9288a6402252424b52e4208d9129c5a8">gf2::BitPolynomial::BitPolynomial</a></div><div class="ttdeci">constexpr BitPolynomial()</div><div class="ttdoc">The default constructor creates an empty bit-polynomial with no coefficients.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:53</div></div>
-<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ad1fbf0f547d577a09ae151e9ca28deea"><div class="ttname"><a href="#ad1fbf0f547d577a09ae151e9ca28deea">gf2::BitPolynomial::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view var=&quot;x&quot;) const</div><div class="ttdoc">Returns a readable string representation of the bit-polynomial p(x) = p0 + p1x + ....</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:912</div></div>
+<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ad1fbf0f547d577a09ae151e9ca28deea"><div class="ttname"><a href="#ad1fbf0f547d577a09ae151e9ca28deea">gf2::BitPolynomial::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view var=&quot;x&quot;) const</div><div class="ttdoc">Returns a readable string representation of the bit-polynomial p(x) = p0 + p1x + ....</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:914</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -348,12 +348,12 @@ template&lt;BitStore Src&gt; </div>
 </div><div class="memdoc">
 
 <p>Constructs a bit-polynomial with the given coefficients by copying them from any bit-store. </p>
-<dl class="section note"><dt>Note</dt><dd>The input coefficient bit-store can have any underlying unsigned word type.</dd></dl>
+<p><b>Note:</b> The input coefficient bit-store can have any underlying unsigned word type.</p>
 <h1 class="doxsection"><a class="anchor" id="example-205"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> p{<a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(10)};</div>
 <div class="line">assert_eq(p.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;1 + x + x^2 + x^3 + x^4 + x^5 + x^6 + x^7 + x^8 + x^9&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitVector_html_abcfb7a88f30c8faa177519571a76ba8d"><div class="ttname"><a href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">gf2::BitVector::ones</a></div><div class="ttdeci">static constexpr BitVector ones(usize n)</div><div class="ttdoc">Factory method to generate a bit-vector of length n where the elements are all 1.</div><div class="ttdef"><b>Definition</b> BitVector.h:202</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_abcfb7a88f30c8faa177519571a76ba8d"><div class="ttname"><a href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">gf2::BitVector::ones</a></div><div class="ttdeci">static constexpr BitVector ones(usize n)</div><div class="ttdoc">Factory method to generate a bit-vector of length n where the elements are all 1.</div><div class="ttdef"><b>Definition</b> BitVector.h:204</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -384,7 +384,9 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Constructs a bit-polynomial with the given coefficients by moving them. </p>
 <p>Use <span class="tt">std::move(coeffs)</span> in the constructor argument to get this version.</p>
-<dl class="section note"><dt>Note</dt><dd>The input coefficient bit-vector is moved into the bit-polynomial so it is no longer valid after this constructor.</dd></dl>
+<h1 class="doxsection"><a class="anchor" id="note-8"></a>
+Note</h1>
+<p>The input coefficient bit-vector is moved into the bit-polynomial so it is no longer valid after this call.</p>
 <h1 class="doxsection"><a class="anchor" id="example-206"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> coeffs = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(10);</div>
@@ -565,7 +567,7 @@ template&lt;BitStore Src&gt; </div>
 </div><div class="memdoc">
 
 <p>Set the bit-polynomial coefficients by <em>copying</em> them from a pre-filled bit-store. </p>
-<dl class="section note"><dt>Note</dt><dd>The input coefficient bit-store can have any underlying unsigned word type.</dd></dl>
+<p><b>Note:</b> The input coefficient bit-store can have any underlying unsigned word type.</p>
 <h1 class="doxsection"><a class="anchor" id="example-221"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> p;</div>
@@ -605,7 +607,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns the degree of the bit-polynomial. </p>
 <p>The degree of the bit-polynomial is the highest power of <span class="tt">x</span> with a non-zero coefficient.</p>
-<dl class="section note"><dt>Note</dt><dd>We return 0 for the zero polynomial.</dd></dl>
+<p><b>Note:</b> We return 0 for the zero polynomial.</p>
 <h1 class="doxsection"><a class="anchor" id="example-215"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> coeffs = <a class="code hl_function" href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">BitVector&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;10101000&quot;</span>).value();</div>
@@ -614,7 +616,7 @@ Example</h1>
 <div class="line">assert_eq(p.<a class="code hl_function" href="#ad38c2969e7285ab9ba99b67a02b8241c">size</a>(), 8);</div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a8ae665db25f0ca00d53a4d8275c2a579"><div class="ttname"><a href="#a8ae665db25f0ca00d53a4d8275c2a579">gf2::BitPolynomial::degree</a></div><div class="ttdeci">constexpr usize degree() const</div><div class="ttdoc">Returns the degree of the bit-polynomial.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:219</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ad38c2969e7285ab9ba99b67a02b8241c"><div class="ttname"><a href="#ad38c2969e7285ab9ba99b67a02b8241c">gf2::BitPolynomial::size</a></div><div class="ttdeci">constexpr usize size() const</div><div class="ttdoc">Returns the &quot;size&quot; of the bit-polynomial which is its total number of coefficients.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:232</div></div>
-<div class="ttc" id="aclassgf2_1_1BitVector_html_a17ba4f50de43f5e84ef3943ad77410ea"><div class="ttname"><a href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">gf2::BitVector::from_string</a></div><div class="ttdeci">static std::optional&lt; BitVector &gt; from_string(std::string_view sv)</div><div class="ttdoc">Factory method to construct a bit-vector from a string s, returning std::nullopt on failure.</div><div class="ttdef"><b>Definition</b> BitVector.h:408</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_a17ba4f50de43f5e84ef3943ad77410ea"><div class="ttname"><a href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">gf2::BitVector::from_string</a></div><div class="ttdeci">static std::optional&lt; BitVector &gt; from_string(std::string_view sv)</div><div class="ttdoc">Factory method to construct a bit-vector from a string s, returning std::nullopt on failure.</div><div class="ttdef"><b>Definition</b> BitVector.h:411</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -713,7 +715,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Kills any trailing zero coefficients, so e.g. p(x) := 0*x^4 + x^2 + x becomes p(x) := x^2 + x. </p>
-<h1 class="doxsection"><a class="anchor" id="note-1"></a>
+<h1 class="doxsection"><a class="anchor" id="note-10"></a>
 Note</h1>
 <p>Does nothing to any form of the zero <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a>.</p>
 <h1 class="doxsection"><a class="anchor" id="example-226"></a>
@@ -755,7 +757,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Set the <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a> coefficients by <em>moving</em> a bit-vector of coefficients into place. </p>
 <p>Use <span class="tt">std::move(coeffs)</span> in the argument to get this version of <span class="tt"><a class="el" href="#a66016938a3da223a1dd5ce1983762faf" title="Set the bit-polynomial coefficients by copying them from a pre-filled bit-store.">copy_coefficients</a></span>.</p>
-<dl class="section note"><dt>Note</dt><dd>After the call the argument bit-vector is no longer valid.</dd></dl>
+<p><b>Note:</b> After the call the argument bit-vector is no longer valid.</p>
 <h1 class="doxsection"><a class="anchor" id="example-222"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> p;</div>
@@ -861,7 +863,9 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Evaluates the bit-polynomial for a <em>square</em> <span class="tt"><a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">gf2::BitMatrix</a></span> argument <span class="tt">M</span>. </p>
 <p>Uses Horner's method to evaluate <span class="tt">p(M)</span> where <span class="tt">M</span> is a square matrix and returns the result as a new bit-matrix.</p>
-<dl class="section note"><dt>Note</dt><dd>This method panics if the matrix is not square.</dd></dl>
+<h1 class="doxsection"><a class="anchor" id="panics-73"></a>
+Panics</h1>
+<p>This method panics if the matrix is not square.</p>
 <h1 class="doxsection"><a class="anchor" id="example-241"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(6);</div>
@@ -869,10 +873,10 @@ Example</h1>
 <div class="line">assert_eq(p1(m), <a class="code hl_function" href="classgf2_1_1BitMatrix.html#ac1d3def1adcb007ac348873c3580f276">BitMatrix&lt;&gt;::zeros</a>(6, 6));</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1BitPolynomial.html">BitPolynomial</a> p2{<a class="code hl_function" href="classgf2_1_1BitVector.html#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(6)};</div>
 <div class="line">assert_eq(p2(m), <a class="code hl_function" href="classgf2_1_1BitMatrix.html#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(6));</div>
-<div class="ttc" id="aclassgf2_1_1BitMatrix_html_ab34ac8ed7a00be3f9f1548bb881e216e"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#ab34ac8ed7a00be3f9f1548bb881e216e">gf2::BitMatrix::identity</a></div><div class="ttdeci">static constexpr BitMatrix identity(usize m)</div><div class="ttdoc">Factory method to create the m x m identity bit-matrix.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:380</div></div>
-<div class="ttc" id="aclassgf2_1_1BitMatrix_html_ac1d3def1adcb007ac348873c3580f276"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#ac1d3def1adcb007ac348873c3580f276">gf2::BitMatrix::zeros</a></div><div class="ttdeci">static constexpr BitMatrix zeros(usize m, usize n)</div><div class="ttdoc">Factory method to create the m x n zero bit-matrix with all the elements set to 0.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:124</div></div>
+<div class="ttc" id="aclassgf2_1_1BitMatrix_html_ab34ac8ed7a00be3f9f1548bb881e216e"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#ab34ac8ed7a00be3f9f1548bb881e216e">gf2::BitMatrix::identity</a></div><div class="ttdeci">static constexpr BitMatrix identity(usize m)</div><div class="ttdoc">Factory method to create the m x m identity bit-matrix.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:383</div></div>
+<div class="ttc" id="aclassgf2_1_1BitMatrix_html_ac1d3def1adcb007ac348873c3580f276"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#ac1d3def1adcb007ac348873c3580f276">gf2::BitMatrix::zeros</a></div><div class="ttdeci">static constexpr BitMatrix zeros(usize m, usize n)</div><div class="ttdoc">Factory method to create the m x n zero bit-matrix with all the elements set to 0.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:127</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html">gf2::BitPolynomial</a></div><div class="ttdoc">A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:30</div></div>
-<div class="ttc" id="aclassgf2_1_1BitVector_html_aeed3a5c646dbc7c38b4298574734ae4a"><div class="ttname"><a href="classgf2_1_1BitVector.html#aeed3a5c646dbc7c38b4298574734ae4a">gf2::BitVector::alternating</a></div><div class="ttdeci">static constexpr BitVector alternating(usize n)</div><div class="ttdoc">Factory method to generate a bit-vector of length n looking like 101010....</div><div class="ttdef"><b>Definition</b> BitVector.h:237</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_aeed3a5c646dbc7c38b4298574734ae4a"><div class="ttname"><a href="classgf2_1_1BitVector.html#aeed3a5c646dbc7c38b4298574734ae4a">gf2::BitVector::alternating</a></div><div class="ttdeci">static constexpr BitVector alternating(usize n)</div><div class="ttdoc">Factory method to generate a bit-vector of length n looking like 101010....</div><div class="ttdef"><b>Definition</b> BitVector.h:239</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -971,7 +975,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>In-place multiplication with another bit-polynomial, returning a reference to the result. </p>
-<dl class="section note"><dt>Note</dt><dd>This method uses the convolution method for bit-vectors under the hood.</dd></dl>
+<p><b>Note:</b> This method uses the convolution method for bit-vectors under the hood.</p>
 <h1 class="doxsection"><a class="anchor" id="example-229"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a5f4593b61b4e2eb435b33218930e279d">BitPolynomial&lt;&gt;::ones</a>(1);</div>
@@ -1079,7 +1083,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the difference of two bit-polynomials. </p>
-<dl class="section note"><dt>Note</dt><dd>In GF(2) subtraction is the same as addition.</dd></dl>
+<p><b>Note:</b> In GF(2) subtraction is the same as addition.</p>
 <h1 class="doxsection"><a class="anchor" id="example-231"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a6907fccf1e429bc894f952d3eb17a059">BitPolynomial&lt;&gt;::x_to_the</a>(3);</div>
@@ -1115,7 +1119,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>In-place subtraction with another bit-polynomial, returning a reference to the result. </p>
-<dl class="section note"><dt>Note</dt><dd>In GF(2) subtraction is the same as addition.</dd></dl>
+<p><b>Note:</b> In GF(2) subtraction is the same as addition.</p>
 <h1 class="doxsection"><a class="anchor" id="example-228"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a6907fccf1e429bc894f952d3eb17a059">BitPolynomial&lt;&gt;::x_to_the</a>(2);</div>
@@ -1221,7 +1225,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Factory method to return a new bit-polynomial of <em>degree</em> <span class="tt">n</span> with <span class="tt">n + 1</span> coefficients picked uniformly at random. </p>
 <p>The random coefficients are from independent fair coin flips seeded with entropy.</p>
-<dl class="section note"><dt>Note</dt><dd>If <span class="tt">n &gt; 0</span> then the returned <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a> is monic. </dd></dl>
+<p><b>Note:</b> If <span class="tt">n &gt; 0</span> then the returned <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a> is monic. </p>
 
 </div>
 </div>
@@ -1257,7 +1261,9 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>If this polynomial is P(x) we return x^e mod P(x) for e = n or e = 2^n depending on the <span class="tt">n_is_log2</span> argument. </p>
 <p>In general, we can write any polynomial h(x) as h(x) = q(x) * P(x) + r(x) where degree(r) &lt; degree(P). <span class="tt">q(x)</span> is the quotient polynomial and <span class="tt">r(x)</span>the remainder polynomial that is returned by this method.</p>
 <p>Here we consider <span class="tt">h(x) = x^e</span> where the exponent <span class="tt">e</span> is either <span class="tt">n</span> or <span class="tt">2^n</span> depending on the final argument. Setting <span class="tt">n_is_log2 = true</span> allows for enormous powers of <span class="tt">x</span> which is useful for some applications. The default is <span class="tt">n_is_log2 = false</span> so we return <span class="tt">x^n mod P(x)</span>.</p>
-<dl class="section note"><dt>Note</dt><dd>This method panics if the polynomial is the zero polynomial.</dd></dl>
+<h1 class="doxsection"><a class="anchor" id="panics-74"></a>
+Panics</h1>
+<p>This method panics if the polynomial is the zero polynomial.</p>
 <h1 class="doxsection"><a class="anchor" id="example-242"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a6907fccf1e429bc894f952d3eb17a059">BitPolynomial&lt;&gt;::x_to_the</a>(3);</div>
@@ -1292,7 +1298,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Resizes the <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a> to have the <span class="tt">n</span> coefficients and returns <span class="tt">self</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="note"></a>
+<h1 class="doxsection"><a class="anchor" id="note-9"></a>
 Note</h1>
 <p>If <span class="tt">n</span> &gt; <span class="tt">self.size()</span> then the <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a> is padded with zero coefficients. If <span class="tt">n</span> &lt; <span class="tt">self.size()</span> then the <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a> is truncated which can change the degree of the <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a>.</p>
 <h1 class="doxsection"><a class="anchor" id="example-224"></a>
@@ -1306,7 +1312,7 @@ Example</h1>
 <div class="line">assert_eq(p.<a class="code hl_function" href="#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(), <span class="stringliteral">&quot;1 + x&quot;</span>);</div>
 <div class="line">p.<a class="code hl_function" href="#a98460a92a789b7f46ecf3fc2050ce6c4">resize</a>(4);</div>
 <div class="line">assert_eq(p.<a class="code hl_function" href="#a4fb80fdbc97e94b8d7836329ace31f89">to_full_string</a>(), <span class="stringliteral">&quot;1 + x + 0x^2 + 0x^3&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a4fb80fdbc97e94b8d7836329ace31f89"><div class="ttname"><a href="#a4fb80fdbc97e94b8d7836329ace31f89">gf2::BitPolynomial::to_full_string</a></div><div class="ttdeci">std::string to_full_string(std::string_view var=&quot;x&quot;) const</div><div class="ttdoc">Returns a readable full string representation of the bit-polynomial.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:950</div></div>
+<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a4fb80fdbc97e94b8d7836329ace31f89"><div class="ttname"><a href="#a4fb80fdbc97e94b8d7836329ace31f89">gf2::BitPolynomial::to_full_string</a></div><div class="ttdeci">std::string to_full_string(std::string_view var=&quot;x&quot;) const</div><div class="ttdoc">Returns a readable full string representation of the bit-polynomial.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:952</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a98460a92a789b7f46ecf3fc2050ce6c4"><div class="ttname"><a href="#a98460a92a789b7f46ecf3fc2050ce6c4">gf2::BitPolynomial::resize</a></div><div class="ttdeci">constexpr BitPolynomial &amp; resize(usize n)</div><div class="ttdoc">Resizes the BitPolynomial to have the n coefficients and returns self.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:377</div></div>
 </div><!-- fragment --> 
 </div>
@@ -1413,7 +1419,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the "size" of the bit-polynomial which is its total number of coefficients. </p>
-<dl class="section note"><dt>Note</dt><dd>Contrast this to the <span class="tt"><a class="el" href="#a8ae665db25f0ca00d53a4d8275c2a579" title="Returns the degree of the bit-polynomial.">degree()</a></span> method which ignores trailing zero coefficients.</dd></dl>
+<p><b>Note:</b> Contrast this to the <span class="tt"><a class="el" href="#a8ae665db25f0ca00d53a4d8275c2a579" title="Returns the degree of the bit-polynomial.">degree()</a></span> method which ignores trailing zero coefficients.</p>
 <h1 class="doxsection"><a class="anchor" id="example-216"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> coeffs = <a class="code hl_function" href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">BitVector&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;10101000&quot;</span>).value();</div>
@@ -1537,7 +1543,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns a new <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a> that is the square of this <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a>. </p>
-<dl class="section note"><dt>Note</dt><dd>This is more efficient than multiplying two <span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a></span>s for this special case.</dd></dl>
+<p><b>Note:</b> This is more efficient than multiplying two <span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a></span>s for this special case.</p>
 <h1 class="doxsection"><a class="anchor" id="example-234"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a6907fccf1e429bc894f952d3eb17a059">BitPolynomial&lt;&gt;::x_to_the</a>(3);</div>
@@ -1573,7 +1579,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Fills <span class="tt">dst</span> with the square of this bit-polynomial. </p>
-<dl class="section note"><dt>Note</dt><dd>This is more efficient than multiplying two <span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a></span>s for this special case.</dd></dl>
+<p><b>Note:</b> This is more efficient than multiplying two <span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a></span>s for this special case.</p>
 <h1 class="doxsection"><a class="anchor" id="example-233"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> coeffs = <a class="code hl_function" href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">BitVector&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;111&quot;</span>).value();</div>
@@ -1695,7 +1701,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Multiplies the <a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">BitPolynomial</a> by <span class="tt">x^n</span> and returns <span class="tt">self</span>. </p>
-<dl class="section note"><dt>Note</dt><dd>This is faster than general multiplication for this special, common case.</dd></dl>
+<p><b>Note:</b> This is faster than general multiplication for this special, common case.</p>
 <h1 class="doxsection"><a class="anchor" id="example-235"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a6907fccf1e429bc894f952d3eb17a059">BitPolynomial&lt;&gt;::x_to_the</a>(3);</div>
@@ -1732,7 +1738,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns a readable <em>full</em> string representation of the bit-polynomial. </p>
 <p>You can specify the variable name using the <span class="tt">var</span> parameter. The default variable name is <span class="tt">x</span>.</p>
-<dl class="section note"><dt>Note</dt><dd>We show all terms including those with zero coefficients.</dd></dl>
+<p><b>Note:</b> We show all terms including those with zero coefficients.</p>
 <h1 class="doxsection"><a class="anchor" id="example-244"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> coeffs = <a class="code hl_function" href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">BitVector&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;101010&quot;</span>).value();</div>
@@ -1768,7 +1774,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns a readable string representation of the bit-polynomial <span class="tt">p(x) = p0 + p1x + ...</span>. </p>
 <p>You can specify the variable name using the <span class="tt">var</span> parameter. The default variable name is <span class="tt">x</span>.</p>
-<dl class="section note"><dt>Note</dt><dd>We do not show any terms with zero coefficients.</dd></dl>
+<p><b>Note:</b> We do not show any terms with zero coefficients.</p>
 <h1 class="doxsection"><a class="anchor" id="example-243"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> coeffs = <a class="code hl_function" href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">BitVector&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;101010&quot;</span>).value();</div>
@@ -1909,7 +1915,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Equality operator checks that any pair of bit-polynomials are equal in content. </p>
-<dl class="section note"><dt>Note</dt><dd>We ignore any high order trailing zero coefficients in either operand so 1 + x == 1 + x + 0x^2.</dd></dl>
+<p><b>Note:</b> We ignore any high order trailing zero coefficients in either operand so 1 + x == 1 + x + 0x^2.</p>
 <h1 class="doxsection"><a class="anchor" id="example-245"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#a6907fccf1e429bc894f952d3eb17a059">BitPolynomial&lt;&gt;::x_to_the</a>(3);</div>

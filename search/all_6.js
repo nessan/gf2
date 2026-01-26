@@ -1,7 +1,7 @@
 var searchData=
 [
   ['back_0',['back',['../classgf2_1_1BitArray.html#a017bf4fa4deddd2a4f660aec879b2450',1,'gf2::BitArray::back()'],['../classgf2_1_1BitSpan.html#adf7aee770c68ff00c5661e603eaf92d4',1,'gf2::BitSpan::back()'],['../classgf2_1_1BitVector.html#ae5e06517a282d17f1e2b914e66322538',1,'gf2::BitVector::back()'],['../namespacegf2.html#a6ea9570ad5ef2845429ce2e5aa2faa52',1,'gf2::back()']]],
-  ['biased_5frandom_1',['biased_random',['../classgf2_1_1BitArray.html#a76cc891c25b8b9da8fcb9a07e2d2cbda',1,'gf2::BitArray::biased_random()'],['../classgf2_1_1BitMatrix.html#a1a6f5a1b96bdc7d9d4738d70cf32b49e',1,'gf2::BitMatrix::biased_random(usize m, usize n, double p)'],['../classgf2_1_1BitMatrix.html#acfa2e69664b85fe8ddd5e93d48cc7cc4',1,'gf2::BitMatrix::biased_random(usize m, double p)'],['../classgf2_1_1BitVector.html#a6a03cc6deeaf781fde67c5e2b5a6e58a',1,'gf2::BitVector::biased_random()']]],
+  ['biased_5frandom_1',['biased_random',['../classgf2_1_1BitArray.html#a76cc891c25b8b9da8fcb9a07e2d2cbda',1,'gf2::BitArray::biased_random()'],['../classgf2_1_1BitMatrix.html#a1a6f5a1b96bdc7d9d4738d70cf32b49e',1,'gf2::BitMatrix::biased_random(usize m, usize n, double p)'],['../classgf2_1_1BitMatrix.html#acfa2e69664b85fe8ddd5e93d48cc7cc4',1,'gf2::BitMatrix::biased_random(usize m, double p)'],['../classgf2_1_1BitVector.html#a1b2b8c3a489d9c5c88d51b90008bacf3',1,'gf2::BitVector::biased_random()']]],
   ['binary_20string_20encoding_2',['Binary String Encoding',['../md_docs_2pages_2BitStore.html#binary-string-encoding',1,'']]],
   ['bit_20access_3',['Bit Access',['../md_docs_2pages_2BitStore.html#store-bit-access',1,'Bit Access'],['../md_docs_2pages_2BitArray.html#set-bit-access',1,'Bit Access'],['../md_docs_2pages_2BitVector.html#vec-bit-access',1,'Bit Access'],['../md_docs_2pages_2BitSpan.html#span-bit-access',1,'Bit Access']]],
   ['bit_20counts_4',['Bit Counts',['../md_docs_2pages_2BitMatrix.html#bit-counts',1,'Bit Counts'],['../md_docs_2pages_2Unsigned.html#bit-counts-1',1,'Bit Counts']]],
@@ -41,7 +41,7 @@ var searchData=
   ['bitstore_38',['BitStore',['../conceptgf2_1_1BitStore.html',1,'gf2']]],
   ['bitstore_20concept_39',['The &lt;span class=&quot;tt&quot;&gt;BitStore&lt;/span&gt; Concept',['../md_docs_2pages_2BitStore.html',1,'']]],
   ['bitstore_2eh_40',['BitStore.h',['../BitStore_8h.html',1,'']]],
-  ['bitvector_41',['BitVector',['../classgf2_1_1BitVector.html',1,'gf2::BitVector&lt; Word &gt;'],['../classgf2_1_1BitVector.html#a52189f70e562c21d024f62c202eb3cbe',1,'gf2::BitVector::BitVector(usize len=0)'],['../classgf2_1_1BitVector.html#a9fb5ca7b5077273b3bddca465859f423',1,'gf2::BitVector::BitVector(usize len, Word word)']]],
+  ['bitvector_41',['BitVector',['../classgf2_1_1BitVector.html',1,'gf2::BitVector&lt; Word &gt;'],['../classgf2_1_1BitVector.html#a14c3dd77166009bede404d9de9f20b7f',1,'gf2::BitVector::BitVector(usize size=0)'],['../classgf2_1_1BitVector.html#a8087d3c3ace15adb9f1167ac2c58cd4f',1,'gf2::BitVector::BitVector(usize size, Word word)']]],
   ['bitvector_20class_42',['The &lt;span class=&quot;tt&quot;&gt;BitVector&lt;/span&gt; Class',['../md_docs_2pages_2BitVector.html',1,'']]],
   ['bitvector_2eh_43',['BitVector.h',['../BitVector_8h.html',1,'']]],
   ['bitvector_3c_20usize_20_3e_44',['BitVector&lt; usize &gt;',['../classgf2_1_1BitVector.html',1,'gf2']]],

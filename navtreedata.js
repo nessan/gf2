@@ -282,9 +282,9 @@ var NAVTREEINDEX =
 "BitArray_8h.html",
 "classgf2_1_1BitMatrix.html",
 "classgf2_1_1BitPolynomial.html#a1b9b2ccbbd1840d8c4d278e34c812a67",
-"classgf2_1_1BitVector.html#a13021d202501e705a4dc095ef46dcaad",
+"classgf2_1_1BitVector.html#a146f71d85f944143c73ee666c66c878b",
 "md_docs_2pages_2BitArray.html#other-operators-and-functions",
-"namespacegf2.html#a8fe2ab8650590f082f800d223fdd6422"
+"namespacegf2.html#a91d03fc055e7a9b1f082e80b34b30bbf"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';
