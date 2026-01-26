@@ -22,7 +22,8 @@ namespace gf2 {
 /// `P` is a permutation of the identity matrix with one non-zero entry per row. In practice, we just need to store the
 /// locations of those entries as some form of vector.
 ///
-/// @note There are generalisations of the LU decomposition for non-square matrices but those are not considered yet.
+/// **Note:** There are generalisations of the LU decomposition for non-square matrices but those are not considered
+/// yet.
 ///
 /// @see [Finite field arithmetic](https://en.wikipedia.org/wiki/Finite_field_arithmetic)
 template<Unsigned Word>
@@ -45,7 +46,8 @@ public:
     /// reduce that to a sub-cubic count but they are not implemented here. Of course, the method works on whole words
     /// or bit elements at a time so is very efficient even without those enhancements.
     ///
-    /// @note Panics if the `A` matrix is not square. There are generalisations of the LU decomposition for
+    /// # Panics
+    /// Constructor panics if the `A` matrix is not square. There are generalisations of the LU decomposition for
     /// non-square matrices but those are not considered yet.
     ///
     /// # Example (checks that `LU = PA` for a random matrix `A`)
@@ -166,7 +168,8 @@ public:
 
     /// Permutes the rows of the input matrix `B` in-place using our row-swap instruction vector.
     ///
-    /// @note This method panics if the dimensions of `B` and the row-swap instruction vector do not match.
+    /// # Panics
+    /// This method panics if the dimensions of `B` and the row-swap instruction vector do not match.
     constexpr void permute(BitMatrix<Word>& B) const {
         auto n = m_swaps.size();
         gf2_assert(B.rows() == n, "Matrix has {} rows but the row-swap instruction vector has {}.", B.rows(), n);
@@ -176,7 +179,8 @@ public:
 
     /// Permute the rows of the input vector `b` in-place using our row-swap instruction vector.
     ///
-    /// @note This method panics if the dimensions of `b` and the row-swap instruction vector do not match.
+    /// # Panics
+    /// This method panics if the dimensions of `b` and the row-swap instruction vector do not match.
     template<BitStore Store>
         requires(std::same_as<typename Store::word_type, Word>)
     constexpr void permute(Store& b) const {
@@ -190,7 +194,8 @@ public:
     ///
     /// This methods returns `std::nullopt` if the matrix is singular.
     ///
-    /// @note This method panics if the bit-matrix `b` has a different number of rows than the number of row swap
+    /// # Panics
+    /// This method panics if the bit-matrix `b` has a different number of rows than the number of row swap
     /// instructions.
     ///
     /// # Example
@@ -234,10 +239,10 @@ public:
     ///
     /// This methods returns `std::nullopt` if the matrix is singular.
     ///
-    /// Each column of `X` is a solution to the linear system `A.x_for = b` where `b` is the corresponding column of
-    /// `B`.
+    /// Each column of `X` is a solution to the system `A.x_for = b` where `b` is the corresponding column of `B`.
     ///
-    /// @note This method panics if the bit-matrix `B` has a different number of rows than the number of row swap
+    /// # Panics
+    /// This method panics if the bit-matrix `B` has a different number of rows than the number of row swap
     /// instructions.
     ///
     /// # Example

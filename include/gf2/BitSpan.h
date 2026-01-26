@@ -62,7 +62,8 @@ public:
     ///
     /// Generally bit-spans are constructed using the `span` method of any `gf2::BitStore` compatible object.
     ///
-    /// @note It is the responsibility of the caller to ensure that the underlying store of unsigneds continues to
+    /// # Note
+    /// It is the responsibility of the caller to ensure that the underlying store of unsigneds continues to
     /// exist for as long as the `BitSpan` is in use.
     ///
     /// # Example
@@ -88,7 +89,7 @@ public:
     /// @name Required BitStore Concept Methods:
     /// @{
 
-    /// Returns the number of bits in the span.
+    /// Returns the number of bits in the bit-span.
     ///
     /// # Example
     /// ```
@@ -98,9 +99,9 @@ public:
     /// ```
     constexpr usize size() const { return m_size; }
 
-    /// Returns the *minimum* number of words needed to hold the bits in the span.
+    /// Returns the *minimum* number of words needed to hold the bits in the bit-span.
     ///
-    /// These spans are views into a contiguous range of bits from some underlying array of unsigned words.
+    /// These bit-spans are views into a contiguous range of bits from some underlying array of unsigned words.
     /// Generally a bit-span is not aligned with the word boundaries of that array. However, the bit-span can synthesise
     /// words *as if* it copied the bits and shifted them down so that element 0 is at bit-position zero in synthetic
     /// word number 0. This function returns the number of such words.
@@ -186,13 +187,13 @@ public:
         }
     }
 
-    /// Returns a pointer to the first span word in some underlying span of words (const version).
+    /// Returns a pointer to the first bit-span word in some underlying span of words (const version).
     constexpr const Word* store() const { return m_store; }
 
-    /// Returns a pointer to the first span word in some underlying span of words (non-const version).
+    /// Returns a pointer to the first bit-span word in some underlying span of words (non-const version).
     constexpr Word* store() { return m_store; }
 
-    /// Returns the offset (in bits) of the first bit in the span within the first span word.
+    /// Returns the offset (in bits) of the first bit in the bit-span within the first bit-span word.
     constexpr u8 offset() const { return m_offset; }
 
     /// @}
@@ -201,7 +202,8 @@ public:
 
     /// Returns `true` if the bit at the given index `i` is set, `false` otherwise.
     ///
-    /// @note In debug mode the index `i` is bounds-checked.
+    /// # Panics
+    /// In debug mode the index is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -215,7 +217,8 @@ public:
 
     /// Returns the boolean value of the bit element `i`.
     ///
-    /// @note In debug mode the index is bounds-checked.
+    /// # Panics
+    /// In debug mode the index is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -227,7 +230,8 @@ public:
 
     /// Returns `true` if the first bit element is set, `false` otherwise.
     ///
-    /// @note In debug mode the method panics of the span is empty.
+    /// # Panics
+    /// In debug mode the method panics of the bit-span is empty.
     ///
     /// # Example
     /// ```
@@ -239,7 +243,8 @@ public:
 
     /// Returns `true` if the last bit element is set, `false` otherwise.
     ///
-    /// @note In debug mode the method panics of the span is empty.
+    /// # Panics
+    /// In debug mode the method panics of the bit-span is empty.
     ///
     /// # Example
     /// ```
@@ -256,7 +261,8 @@ public:
     /// Sets the bit-element `i` to the specified boolean `value` & returns this for chaining.
     /// The default value for `value` is `true`.
     ///
-    /// @note In debug mode the index is bounds-checked.
+    /// # Panics
+    /// In debug mode the index is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -267,14 +273,19 @@ public:
     /// assert_eq(v.get(0), true);
     /// assert_eq(u.get(0), true);
     /// ```
-    auto set(usize i, bool value = true) { return gf2::set(*this, i, value); }
+    constexpr auto set(usize i, bool value = true) {
+        gf2::set(*this, i, value);
+        return *this;
+    }
 
     /// Returns a "reference" to the bit element `i`.
     ///
     /// The returned object is a `BitRef` reference for the bit element at `index` rather than a true reference.
     ///
-    /// @note The referenced bit-span must continue to exist while the `BitRef` is in use.
-    /// @note In debug mode the index `i` is bounds-checked.
+    /// **Note:** The referenced bit-span must continue to exist while the `BitRef` is in use.
+    ///
+    /// # Panics
+    /// In debug mode the index is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -294,7 +305,8 @@ public:
 
     /// Flips the value of the bit-element `i` and returns this for chaining.
     ///
-    /// @note In debug mode the index is bounds-checked.
+    /// # Panics
+    /// In debug mode the index is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -305,11 +317,15 @@ public:
     /// assert_eq(v.to_string(), "0111");
     /// assert_eq(u.to_string(), "1011111111");
     /// ```
-    auto flip(usize i) { return gf2::flip(*this, i); }
+    constexpr auto flip(usize i) {
+        gf2::flip(*this, i);
+        return *this;
+    }
 
     /// Swaps the bits in the bit-span at indices `i0` and `i1` and returns this for chaining.
     ///
-    /// @note In debug mode, panics if either of the indices is out of bounds.
+    /// # Panics
+    /// In debug mode the indices are bounds-checked.
     ///
     /// # Example
     /// ```
@@ -322,13 +338,16 @@ public:
     /// assert_eq(v.to_string(), "0100");
     /// assert_eq(u.to_string(), "0010000000");
     /// ```
-    constexpr auto swap(usize i0, usize i1) { return gf2::swap(*this, i0, i1); }
+    constexpr auto swap(usize i0, usize i1) {
+        gf2::swap(*this, i0, i1);
+        return *this;
+    }
 
     /// @}
     /// @name Span Queries:
     /// @{
 
-    /// Returns `true` if the span is empty, `false` otherwise.
+    /// Returns `true` if the bit-span is empty, `false` otherwise.
     ///
     /// # Example
     /// ```
@@ -340,9 +359,9 @@ public:
     /// ```
     constexpr bool is_empty() const { return gf2::is_empty(*this); }
 
-    /// Returns `true` if at least one bit in the span is set, `false` otherwise.
+    /// Returns `true` if at least one bit in the bit-span is set, `false` otherwise.
     ///
-    /// @note  Empty stores have no set bits (logical connective for `any` is `OR` with identity `false`).
+    /// **Note:** Empty bit-spans have no set bits (logical connective for `any` is `OR` with identity `false`).
     ///
     /// # Example
     /// ```
@@ -354,9 +373,9 @@ public:
     /// ```
     constexpr bool any() const { return gf2::any(*this); }
 
-    /// Returns `true` if all bits in the span are set, `false` otherwise.
+    /// Returns `true` if all bits in the bit-span are set, `false` otherwise.
     ///
-    /// @note  Empty stores have no set bits (logical connective for `all` is `AND` with identity `true`).
+    /// **Note:** Empty bit-spans have no set bits (logical connective for `all` is `AND` with identity `true`).
     ///
     /// # Example
     /// ```
@@ -370,9 +389,9 @@ public:
     /// ```
     constexpr bool all() const { return gf2::all(*this); }
 
-    /// Returns `true` if no bits in the span are set, `false` otherwise.
+    /// Returns `true` if no bits in the bit-span are set, `false` otherwise.
     ///
-    /// @note  Empty span have no set bits (logical connective for `none` is `AND` with identity `true`).
+    /// **Note:** Empty bit-spans have no set bits (logical connective for `none` is `AND` with identity `true`).
     ///
     /// # Example
     /// ```
@@ -385,10 +404,10 @@ public:
     constexpr bool none() const { return gf2::none(*this); }
 
     /// @}
-    /// @name Span Mutators:
+    /// @name BitSpan Mutators:
     /// @{
 
-    /// Sets the bits in the span to the boolean `value` and returns a reference to this for chaining.
+    /// Sets the bits in the bit-span to the boolean `value` and returns a reference to this for chaining.
     ///
     /// By default, all bits are set to `true`.
     ///
@@ -402,7 +421,7 @@ public:
     /// ```
     auto set_all(bool value = true) { return gf2::set_all(*this, value); }
 
-    /// Flips the value of the bits in the span and returns a reference to this for chaining.
+    /// Flips the value of the bits in the bit-span and returns a reference to this for chaining.
     ///
     /// # Example
     /// ```
@@ -415,15 +434,18 @@ public:
     auto flip_all() { return gf2::flip_all(*this); }
 
     /// @}
-    /// @name Copying into the Span:
+    /// @name Copying into the BitSpan:
     /// @{
 
-    /// Copies the bits from an unsigned integral `src` value and returns a reference to this for chaining.
+    /// Copies all the bits from _any_ unsigned integral `src` value to this _equal-sized_ bit-span and returns a
+    /// reference to this for chaining.
     ///
-    /// # Notes:
-    /// 1. The size of the span *must* match the number of bits in the source type.
-    /// 2. We allow *any* unsigned integral source, e.g. copying a single `u64` into a `BitVector<u8>` of size 64.
-    /// 3. The least-significant bit of the source becomes the bit at index 0 in the span.
+    /// # Note
+    /// 1. We allow *any* unsigned integral source, e.g. copying a single `u64` into a `BitSpan<u8>` of size 64.
+    /// 2. The least-significant bit of the source becomes the bit at index 0 in the bit-span.
+    ///
+    /// # Panics
+    /// Panics if the size of the bit-span does not match the number of bits in the source integer type.
     ///
     /// # Example
     /// ```
@@ -440,15 +462,20 @@ public:
     /// assert_eq(w.to_string(), "00001010101010101010000000");
     /// ```
     template<Unsigned Src>
-    auto copy(Src src) {
-        return gf2::copy(src, *this);
+    constexpr auto copy(Src src) {
+        gf2::copy(src, *this);
+        return *this;
     }
 
-    /// Copies the bits from an equal-sized `src` span and returns a reference to this for chaining.
+    /// Copies all the bits from an equal-sized `src` bit-store and returns a reference to this for chaining.
     ///
-    /// @note This is one of the few methods in the library that *doesn't* require the two stores to have the same
-    /// `word_type`. You can use it to convert between different `word_type` stores (e.g., from `BitVector<u32>` to
+    /// # Note
+    /// This is one of the few methods in the library that *doesn't* require the two stores to have the same
+    /// `word_type`. You can use it to convert between different `word_type` stores (e.g., from `BitSpan<u32>` to
     /// `BitVector<u8>`) as long as the sizes match.
+    ///
+    /// # Panics
+    /// Panics if the size of the bit-span does not match the number of bits in the source store.
     ///
     /// # Example
     /// ```
@@ -459,13 +486,19 @@ public:
     /// assert_eq(v.to_string(), "1010101010111111");
     /// ```
     template<BitStore Src>
-    auto copy(Src const& src) {
-        return gf2::copy(src, *this);
+    constexpr auto copy(Src const& src) {
+        gf2::copy(src, *this);
+        return *this;
+        ;
     }
 
-    /// Copies the bits of an equal-sized `std::bitset` and returns a reference to this for chaining.
+    /// Copies all the bits from an equal-sized `std::bitset` and returns a reference to this for chaining.
     ///
-    /// @note `std::bitset` prints its bit elements in *bit-order* which is the reverse of our convention.
+    /// # Note
+    /// A `std::bitset` prints its bit elements in *bit-order* which is the reverse of our convention.
+    ///
+    /// # Panics
+    /// Panics if the size of the bit-span does not match the number of bits in the source bitset.
     ///
     /// # Example
     /// ```
@@ -477,15 +510,17 @@ public:
     /// assert_eq(v.to_string(), "0101010101111111");
     /// ```
     template<usize N>
-    auto copy(std::bitset<N> const& src) {
-        return gf2::copy(src, *this);
+    constexpr auto copy(std::bitset<N> const& src) {
+        gf2::copy(src, *this);
+        return *this;
+        ;
     }
 
     /// @}
     /// @name Fills:
     /// @{
 
-    /// Fill the span by repeatedly calling `f(i)` and returns a reference to this for chaining.
+    /// Fill the bit-span by repeatedly calling `f(i)` and returns a reference to this for chaining.
     ///
     /// # Example
     /// ```
@@ -495,16 +530,19 @@ public:
     /// assert_eq(s.to_string(), "1010101010");
     /// assert_eq(v.to_string(), "1010101010111111");
     /// ```
-    auto copy(std::invocable<usize> auto f) { return gf2::copy(*this, f); }
+    constexpr auto copy(std::invocable<usize> auto f) {
+        gf2::copy(*this, f);
+        return *this;
+    }
 
-    /// Fill the span with random bits and returns a reference to this for chaining.
+    /// Fill the bit-span with random bits and returns a reference to this for chaining.
     ///
     /// The default call `fill_random()` sets each bit to 1 with probability 0.5 (fair coin).
     ///
     /// @param p The probability of the elements being 1 (defaults to a fair coin, i.e. 50-50).
     /// @param seed The seed to use for the random number generator (defaults to 0, which means use entropy).
     ///
-    /// @note If `p < 0` then the fill is all zeros, if `p > 1` then the fill is all ones.
+    /// If `p < 0` then the fill is all zeros, if `p > 1` then the fill is all ones.
     ///
     /// # Example
     /// ```
@@ -516,13 +554,16 @@ public:
     /// t.fill_random(0.5, seed);
     /// assert(u == v);
     /// ```
-    auto fill_random(double p = 0.5, u64 seed = 0) { return gf2::fill_random(*this, p, seed); }
+    constexpr auto fill_random(double p = 0.5, u64 seed = 0) {
+        gf2::fill_random(*this, p, seed);
+        return *this;
+    }
 
     /// @}
     /// @name Bit Counts:
     /// @{
 
-    /// Returns the number of set bits in the span.
+    /// Returns the number of set bits in the bit-span.
     ///
     /// # Example
     /// ```
@@ -534,7 +575,7 @@ public:
     /// ```
     constexpr usize count_ones() const { return gf2::count_ones(*this); }
 
-    /// Returns the number of unset bits in the span.
+    /// Returns the number of unset bits in the bit-span.
     ///
     /// # Example
     /// ```
@@ -546,7 +587,7 @@ public:
     /// ```
     constexpr usize count_zeros() const { return gf2::count_zeros(*this); }
 
-    /// Returns the number of leading zeros in the span.
+    /// Returns the number of leading zeros in the bit-span.
     ///
     /// # Example
     /// ```
@@ -560,7 +601,7 @@ public:
     /// ```
     constexpr usize leading_zeros() const { return gf2::leading_zeros(*this); }
 
-    /// Returns the number of trailing zeros in the span.
+    /// Returns the number of trailing zeros in the bit-span.
     ///
     /// # Example
     /// ```
@@ -607,7 +648,7 @@ public:
     /// ```
     constexpr std::optional<usize> last_set() const { return gf2::last_set(*this); }
 
-    /// Returns the index of the next set bit after `index` in the span or `{}` if no more set bits exist.
+    /// Returns the index of the next set bit after `index` in the bit-span or `{}` if no more set bits exist.
     ///
     /// # Example
     /// ```
@@ -621,7 +662,7 @@ public:
     /// ```
     constexpr std::optional<usize> next_set(usize index) const { return gf2::next_set(*this, index); }
 
-    /// Returns the index of the previous set bit before `index` in the span or `{}` if there are none.
+    /// Returns the index of the previous set bit before `index` in the bit-span or `{}` if there are none.
     ///
     /// # Example
     /// ```
@@ -668,7 +709,7 @@ public:
     /// ```
     constexpr std::optional<usize> last_unset() const { return gf2::last_unset(*this); }
 
-    /// Returns the index of the next unset bit after `index` in the span or `{}` if no more unset bits exist.
+    /// Returns the index of the next unset bit after `index` in the bit-span or `{}` if no more unset bits exist.
     ///
     /// # Example
     /// ```
@@ -683,7 +724,7 @@ public:
     /// ```
     constexpr std::optional<usize> next_unset(usize index) const { return gf2::next_unset(*this, index); }
 
-    /// Returns the index of the previous unset bit before `index` in the span or `{}` if no more unset bits exist.
+    /// Returns the index of the previous unset bit before `index` in the bit-span or `{}` if no more unset bits exist.
     ///
     /// # Example
     /// ```
@@ -703,10 +744,11 @@ public:
 
     /// Returns a const iterator over the `bool` values of the bits in the const bit-span.
     ///
-    /// You can use this iterator to iterate over the bits in the span and get the values of each bit as a `bool`.
+    /// You can use this iterator to iterate over the bits in the bit-span and get the values of each bit as a `bool`.
     ///
-    /// @note For the most part, try to avoid iterating through individual bits. It is much more efficient to use
-    /// methods that work on whole words of bits at a time.
+    /// # Note
+    /// For the most part, try to avoid iterating through individual bits. It is much more efficient to use methods that
+    /// work on whole words of bits at a time.
     ///
     /// # Example
     /// ```
@@ -718,10 +760,11 @@ public:
 
     /// Returns a non-const iterator over the values of the bits in the mutable bit-span.
     ///
-    /// You can use this iterator to iterate over the bits in the span to get *or* set the value of each bit.
+    /// You can use this iterator to iterate over the bits in the bit-span to get *or* set the value of each bit.
     ///
-    /// @note For the most part, try to avoid iterating through individual bits. It is much more efficient to use
-    /// methods that work on whole words of bits at a time.
+    /// # Note
+    /// For the most part, try to avoid iterating through individual bits. It is much more efficient to use methods that
+    /// work on whole words of bits at a time.
     ///
     /// # Example
     /// ```
@@ -735,7 +778,7 @@ public:
 
     /// Returns an iterator over the *indices* of any *set* bits in the bit-span.
     ///
-    /// You can use this iterator to iterate over the set bits in the span and get the index of each bit.
+    /// You can use this iterator to iterate over the set bits in the bit-span and get the index of each bit.
     ///
     /// # Example
     /// ```
@@ -749,7 +792,7 @@ public:
 
     /// Returns an iterator over the *indices* of any *unset* bits in the bit-span.
     ///
-    /// You can use this iterator to iterate over the unset bits in the span and get the index of each bit.
+    /// You can use this iterator to iterate over the unset bits in the bit-span and get the index of each bit.
     ///
     /// # Example
     /// ```
@@ -763,13 +806,14 @@ public:
 
     /// Returns a const iterator over all the *words* underlying the bit-span.
     ///
-    /// You can use this iterator to iterate over the words in the span and read the `Word` value of each word.
+    /// You can use this iterator to iterate over the words in the bit-span and read the `Word` value of each word.
     /// You **cannot** use this iterator to modify the words in the span.
     ///
-    /// @note The words here may be a synthetic construct. The expectation is that the bit `0` in the span is
-    /// located at the bit-location `0` of `word(0)`. That is always the case for bit-vectors but bit-slices typically
-    /// synthesise "words" on the fly from adjacent pairs of bit-vector words. Nevertheless, almost all the methods
-    /// in `BitStore` are implemented efficiently by operating on those words.
+    /// # Note
+    /// The words here are likely a synthetic construct. The expectation is that the bit `0` in the span is located at
+    /// the bit-location `0` of `word(0)`. That is always the case for bit-vectors but bit-slices typically synthesise
+    /// "words" on the fly from adjacent pairs of bit-vector words. Nevertheless, almost all the methods in `BitStore`
+    /// are implemented efficiently by operating on those words.
     ///
     /// # Example
     /// ```
@@ -783,7 +827,7 @@ public:
 
     /// Returns a copy of the words underlying this bit-span.
     ///
-    /// @note The last word in the vector may not be fully occupied but unused slots will be all zeros.
+    /// **Note:** The last word in the vector may not be fully occupied but unused slots will be all zeros.
     ///
     /// # Example
     /// ```
@@ -799,11 +843,12 @@ public:
     /// @name Spans:
     /// @{
 
-    /// Returns an immutable sub-span encompassing the span's bits in the half-open range `[begin, end)`.
+    /// Returns an immutable sub-span encompassing the bit-span's bits in the half-open range `[begin, end)`.
     ///
     /// Span mutability is deep -- the interior pointer in the returned sub-span is to *const* words.
     ///
-    /// @note This method panics if the sub-span range is not valid.
+    /// # Panics
+    /// This method panics if the sub-span range is not valid.
     ///
     /// # Example
     /// ```
@@ -815,11 +860,12 @@ public:
     /// ```
     constexpr auto span(usize begin, usize end) const { return gf2::span(*this, begin, end); }
 
-    /// Returns an mutable sub-span encompassing the span's bits in the half-open range `[begin, end)`.
+    /// Returns an mutable sub-span encompassing the bit-span's bits in the half-open range `[begin, end)`.
     ///
     /// Mutability here is deep -- the interior pointer in the returned sub-span is to *non-const* words.
     ///
-    /// @note This method panics if the sub-span range is not valid.
+    /// # Panics
+    /// This method panics if the sub-span range is not valid.
     ///
     /// # Example
     /// ```
@@ -841,7 +887,8 @@ public:
 
     /// Returns a *clone* of the span elements in the half-open range `[begin, end)` as a new bit-vector.
     ///
-    /// @note This method panics if the range is not valid.
+    /// # Panics
+    /// This method panics if the sub-span range is not valid.
     ///
     /// # Example
     /// ```
@@ -864,13 +911,14 @@ public:
     ///
     /// Clones of the parts are stored in the passed bit-vectors `left` and `right`.
     ///
-    /// On return, `left` contains the bits from the start of the bit-vector up to but not including `at` and `right`
-    /// contains the bits from `at` to the end of the bit-vector. This bit-vector itself is not modified.
+    /// On return, `left` contains the bits from the start of the bit-span up to but not including `at` and `right`
+    /// contains the bits from `at` to the end of the bit-span. This bit-span itself is not modified.
     ///
     /// This lets one reuse the `left` and `right` destinations without having to allocate new bit-vectors.
-    /// This is useful when implementing iterative algorithms that need to split a bit-vector into two parts repeatedly.
+    /// This is useful when implementing iterative algorithms that need to split a bit-span into two parts repeatedly.
     ///
-    /// @note This method panics if the split point is beyond the end of the bit-vector.
+    /// # Panics
+    /// This method panics if the split point is beyond the end of the bit-span.
     ///
     /// # Example
     /// ```
@@ -890,10 +938,11 @@ public:
     ///
     /// Clones of the parts are returned as a pair of bit-vectors [`left`, `right`].
     ///
-    /// On return, `left` is a clone of the bits from the start of the bit-vector up to but not including `at` and
-    /// `right` contains the bits from `at` to the end of the bit-vector. This bit-vector itself is not modified.
+    /// On return, `left` is a clone of the bits from the start of the bit-span up to but not including `at` and
+    /// `right` contains the bits from `at` to the end of the bit-span. This bit-span itself is not modified.
     ///
-    /// @note This method panics if the split point is beyond the end of the bit-vector.
+    /// # Panics
+    /// This method panics if the split point is beyond the end of the bit-span.
     ///
     /// # Example
     /// ```
@@ -915,7 +964,7 @@ public:
     /// On return, `dst` will have the bits of this bit-span interleaved with zeros. For example, if this
     /// bit-span has the bits `abcde` then `dst` will have the bits `a0b0c0d0e`.
     ///
-    /// @note There is no last zero bit in `dst`.
+    /// **Note:** There is no last zero bit in `dst`.
     ///
     /// # Example
     /// ```
@@ -930,7 +979,7 @@ public:
     ///
     /// If bit-span has the bits `abcde` then the output bit-vector will have the bits `a0b0c0d0e`.
     ///
-    /// @note There is no last zero bit in `dst`.
+    /// **Note:** There is no last zero bit in `dst`.
     ///
     /// # Example
     /// ```
@@ -944,7 +993,7 @@ public:
     /// @name String Representations:
     /// @{
 
-    /// Returns a binary string representation of the span.
+    /// Returns a binary string representation of the bit-span.
     ///
     /// The string is formatted as a sequence of `0`s and `1`s with the least significant bit on the right.
     ///
@@ -966,7 +1015,7 @@ public:
         return gf2::to_binary_string(*this, sep, pre, post);
     }
 
-    /// Returns a binary string representation of the span.
+    /// Returns a binary string representation of the bit-span.
     ///
     /// The string is formatted as a sequence of `0`s and `1`s with the least significant bit on the right.
     ///
@@ -987,7 +1036,7 @@ public:
         return gf2::to_string(*this, sep, pre, post);
     }
 
-    /// Returns a "pretty" string representation of the span.
+    /// Returns a "pretty" string representation of the bit-span.
     ///
     /// The output is a string of 0's and 1's with spaces between each bit, and the whole thing enclosed in square
     /// brackets.
@@ -1002,7 +1051,7 @@ public:
     /// ```
     std::string to_pretty_string() const { return gf2::to_pretty_string(*this); }
 
-    /// Returns the "hex" string representation of the bits in the bit-span
+    /// Returns the "hex" string representation of the bits in the bit-span.
     ///
     /// The output is a string of hex characters without any spaces, commas, or other formatting.
     ///

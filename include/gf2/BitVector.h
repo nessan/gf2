@@ -66,7 +66,8 @@ public:
     ///
     /// The final word in the store may not be fully occupied but we guarantee that unused bits are set to 0.
     ///
-    /// @note In debug mode the index is bounds checked.
+    /// # Panics
+    /// In debug mode the index is bounds checked.
     ///
     /// # Example
     /// ```
@@ -85,7 +86,8 @@ public:
     ///
     /// The final word in the store may not be fully occupied but we ensure that unused bits remain set to 0.
     ///
-    /// @note In debug mode the index is bounds checked.
+    /// # Panics
+    /// In debug mode the index is bounds checked.
     ///
     /// # Example
     /// ```
@@ -115,7 +117,7 @@ public:
 
     /// Returns a pointer to the underlying store of words.
     ///
-    /// @note The pointer is non-const but you should be careful about using it to modify the words in the store.
+    /// **Note:** The pointer is non-const but you should be careful about using it to modify the words in the store.
     ///
     /// # Example
     /// ```
@@ -125,7 +127,7 @@ public:
     /// ```
     constexpr Word* store() { return m_store.data(); }
 
-    /// Returns the offset (in bits) of the first bit in the store within the first word.
+    /// Returns the offset (in bits) of the first bit in the bit-vector within the first word.
     ///
     /// This is always zero for `BitVector`.
     constexpr u8 offset() const { return 0; }
@@ -136,7 +138,7 @@ public:
 
     /// Constructs a bit-vector of length `n` with all the bit elements set to 0.
     ///
-    /// @note The default constructor returns the empty bit-vector with no elements.
+    /// **Note:** The default constructor returns the empty bit-vector with no elements.
     ///
     /// # Example
     /// ```
@@ -145,14 +147,14 @@ public:
     /// BitVector<u8> v{10};
     /// assert_eq(v.to_string(), "0000000000");
     /// ```
-    explicit constexpr BitVector(usize len = 0) : m_size(len), m_store(gf2::words_needed<Word>(len)) {
+    explicit constexpr BitVector(usize size = 0) : m_size(size), m_store(gf2::words_needed<Word>(size)) {
         // Empty body -- we now have an underlying vector of words all initialized to 0.
         // Note: We avoided using uniform initialization on the `std::vector` data member.
     }
 
-    /// Constructs a bit-vector with `len` elements by repeatedly copying all the bits from `word`.
+    /// Constructs a bit-vector with `size` elements by repeatedly copying all the bits from `word`.
     ///
-    /// You specify the length `len` of the bit-vector which means the final copy of `word` may be truncated and padded
+    /// You specify the `size` of the bit-vector which means the final copy of `word` may be truncated and padded
     /// with zeros (unused bit slots are always set to zero in this library).
     ///
     /// # Example
@@ -161,7 +163,7 @@ public:
     /// assert_eq(v.size(), 10);
     /// assert_eq(v.to_string(), "1010101010");
     /// ```
-    explicit constexpr BitVector(usize len, Word word) : m_size(len), m_store(gf2::words_needed<Word>(len), word) {
+    explicit constexpr BitVector(usize size, Word word) : m_size(size), m_store(gf2::words_needed<Word>(size), word) {
         // Make sure any excess bits are set to 0.
         clean();
     }
@@ -260,7 +262,7 @@ public:
         return result;
     }
 
-    /// Factory method to construct a bit-vector by copying *all* the bits from *any* bit-store instance.
+    /// Factory method to construct a bit-vector by copying *all* the bits from *any* other bit-store instance.
     ///
     /// # Note
     /// Generally, we do not support interactions between bit-stores that use different underlying unsigned word types.
@@ -288,7 +290,8 @@ public:
 
     /// Factory method to construct a bit-vector from the bits of a `std::bitset`.
     ///
-    /// @note `std::bitset` prints its bit elements in *bit-order*  ...b2b1b0., we print in *vector-order* b0b1b2...
+    /// # Note
+    /// A `std::bitset` prints its bit elements in *bit-order*  ...b2b1b0., we print in *vector-order* b0b1b2...
     ///
     /// # Example
     /// ```
@@ -303,10 +306,10 @@ public:
         return result;
     }
 
-    /// Factory method to construct a bit-vector by repeatedly calling `f(i)` for `i` in `[0, len)`.
+    /// Factory method to construct a bit-vector by repeatedly calling `f(i)` for `i` in `[0, size)`.
     ///
-    /// @param len The length of the bit-vector to generate.
-    /// @param f The function to call for each index `i` in `[0, len)`.
+    /// @param size The length of the bit-vector to generate.
+    /// @param f The function to call for each index `i` in `[0, size)`.
     ///
     /// # Example
     /// ```
@@ -314,26 +317,26 @@ public:
     /// assert_eq(v.size(), 10);
     /// assert_eq(v.to_string(), "1010101010");
     /// ```
-    static constexpr BitVector from(usize len, std::invocable<usize> auto f) {
-        BitVector result{len};
+    static constexpr BitVector from(usize size, std::invocable<usize> auto f) {
+        BitVector result{size};
         result.copy(f);
         return result;
     }
 
     /// @}
-    /// @name Random Bit-Vector Constructors:
+    /// @name Constructor BitVectors with Random Fills:
     /// @{
 
-    /// Factory method to generate a bit-vector of size `len` where the elements are picked at random.
+    /// Factory method to generate a bit-vector of size `size` where the elements are picked at random.
     ///
-    /// The default call `BitVector<>::random(len)` produces a random bit-vector with each bit being 1 with probability
+    /// The default call `BitVector<>::random(size)` produces a random bit-vector with each bit being 1 with probability
     /// 0.5 and where the RNG is seeded from entropy.
     ///
-    /// @param len The length of the bit-vector to generate.
+    /// @param size The length of the bit-vector to generate.
     /// @param p The probability of the elements being 1 (defaults to a fair coin, i.e. 50-50).
     /// @param seed The seed to use for the random number generator (defaults to 0, which means use entropy).
     ///
-    /// @note If `p < 0` then the bit-vector is all zeros, if `p > 1` then the bit-vector is all ones.
+    /// If `p < 0` then the bit-vector is all zeros, if `p > 1` then the bit-vector is all ones.
     ///
     /// # Example
     /// ```
@@ -342,21 +345,21 @@ public:
     /// auto v = BitVector<>::random(10, 0.5, seed);
     /// assert(u == v);
     /// ```
-    static BitVector random(usize len, double p = 0.5, u64 seed = 0) {
-        BitVector result{len};
+    static BitVector random(usize size, double p = 0.5, u64 seed = 0) {
+        BitVector result{size};
         result.fill_random(p, seed);
         return result;
     }
 
-    /// Factory method to generate a bit-vector of size `len` where the elements are from independent fair
+    /// Factory method to generate a bit-vector of size `size` where the elements are from independent fair
     /// coin flips generated from an RNG seeded with the given `seed`.
     ///
     /// This allows one to have reproducible random bit-vectors, which is useful for testing and debugging.
     ///
-    /// @param len The length of the bit-vector to generate.
+    /// @param size The length of the bit-vector to generate.
     /// @param seed The seed to use for the random number generator (if you set this to 0 then entropy is used).
     ///
-    /// @note If `p < 0` then the bit-vector is all zeros, if `p > 1` then the bit-vector is all ones.
+    /// If `p < 0` then the bit-vector is all zeros, if `p > 1` then the bit-vector is all ones.
     ///
     /// # Example
     /// ```
@@ -365,12 +368,12 @@ public:
     /// auto v = BitVector<>::seeded_random(10, seed);
     /// assert(u == v);
     /// ```
-    static BitVector seeded_random(usize len, u64 seed) { return random(len, 0.5, seed); }
+    static BitVector seeded_random(usize size, u64 seed) { return random(size, 0.5, seed); }
 
-    /// Factory method to generate a bit-vector of size `len` where the elements are from independent fair
+    /// Factory method to generate a bit-vector of size `size` where the elements are from independent fair
     /// coin flips and where each bit is 1 with probability `p`.
     ///
-    /// @param len The length of the bit-vector to generate.
+    /// @param size The length of the bit-vector to generate.
     /// @param p The probability of the elements being 1.
     ///
     /// # Example
@@ -379,7 +382,7 @@ public:
     /// auto v = BitVector<>::biased_random(10, 0.3);
     /// assert_eq(u.size(), v.size());
     /// ```
-    static BitVector biased_random(usize len, double p) { return random(len, p, 0); }
+    static BitVector biased_random(usize size, double p) { return random(size, p, 0); }
 
     /// @}
     /// @name Constructors from Strings:
@@ -661,7 +664,7 @@ public:
 
     /// Appends all the bits from any unsigned integral `src` value and returns a reference to this for chaining.
     ///
-    /// @note We allow *any* unsigned integral source, e.g. appending a single `u16` into a `BitVector<u8>`.
+    /// **Note:** We allow *any* unsigned integral source, e.g. appending a single `u16` into a `BitVector<u8>`.
     ///
     /// # Example
     /// ```
@@ -683,9 +686,9 @@ public:
 
     /// Appends all the bits from *any* `BitStore` `src` onto the end of the bit-vector and returns this for chaining.
     ///
-    /// @note Generally, we do not support interactions between bit-stores that use different underlying unsigned word
-    /// types. This method is an exception, and the `src` bit-store may use a different unsigned type from the one used
-    /// here.
+    /// # Note
+    /// Generally, we do not support interactions between bit-stores that use different underlying unsigned word types.
+    /// This method is an exception, and the `src` bit-store may use a different unsigned type from the one used here.
     ///
     /// # Example
     /// ```
@@ -724,7 +727,7 @@ public:
     ///
     /// The character is interpreted as a base `base` number where`base` must be one of 2, 4, 8, 16.
     ///
-    /// @note This method does nothing if the base or character is not recognized.
+    /// **Note:** This method does nothing if the base or character is not recognized.
     ///
     /// # Example
     /// ```
@@ -759,7 +762,7 @@ public:
 
     /// Appends a single hex digit character `c` onto the end of bit-vector and returns this for chaining
     ///
-    /// @note This method does nothing if the character is not a hex digit.
+    /// **Note:** This method does nothing if the character is not a hex digit.
     ///
     /// This is the same as `append_digit(c, 16)` but we push hex digits more often than other bases and want to skip
     /// some checks for efficiency.
@@ -795,7 +798,8 @@ public:
     /// The returned bit-vector contains the bits from `at` to the end of the bit-vector.
     /// The bit-vector is resized to only contain the bits in the half-open range `[0, at)`.
     ///
-    /// @note This method panics if the split point is beyond the end of the bit-vector.
+    /// # Panics
+    /// This method panics if the split point is beyond the end of the bit-vector.
     ///
     /// # Example
     /// ```
@@ -815,7 +819,8 @@ public:
     /// On return, `dst` contains the bits from `at` to the end of the bit-vector.
     /// The bit-vector is resized to only contain the bits in the half-open range `[0, at)`.
     ///
-    /// @note This method panics if the split point is beyond the end of the bit-vector.
+    /// # Panics
+    /// This method panics if the split point is beyond the end of the bit-vector.
     ///
     /// # Example
     /// ```
@@ -835,8 +840,8 @@ public:
     /// Split off a single arbitrary sized unsigned integer off the end of the bit-vector and returns it or
     /// `std::nullopt` if the bit-vector is empty.
     ///
-    /// @note You can split off a primitive unsigned integer type of *any* size from the end of a non-empty bit-vector.
-    ///
+    /// # Note
+    /// You can split off a primitive unsigned integer type of *any* size from the end of a non-empty bit-vector.
     /// For example, if `v` is a `BitVector<u8>`with 22 elements, then you can split off a `u16` value from the end of
     /// `v` by calling `v.split_off_unsigned<u16>()`. This leaves the bit-vector with 6 elements.
     ///
@@ -904,7 +909,8 @@ public:
 
     /// Returns `true` if the bit at the given index `i` is set, `false` otherwise.
     ///
-    /// @note In debug mode the index `i` is bounds-checked.
+    /// # Panics
+    /// In debug mode the index `i` is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -917,7 +923,8 @@ public:
 
     /// Returns the boolean value of the bit element `i`.
     ///
-    /// @note In debug mode the index is bounds-checked.
+    /// # Panics
+    /// In debug mode the index `i` is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -931,7 +938,8 @@ public:
 
     /// Returns `true` if the first bit element is set, `false` otherwise.
     ///
-    /// @note In debug mode the method panics of the store is empty.
+    /// # Panics
+    /// In debug mode the method panics of the store is empty.
     ///
     /// # Example
     /// ```
@@ -944,7 +952,8 @@ public:
 
     /// Returns `true` if the last bit element is set, `false` otherwise.
     ///
-    /// @note In debug mode the method panics of the store is empty.
+    /// # Panics
+    /// In debug mode the method panics of the store is empty.
     ///
     /// # Example
     /// ```
@@ -962,7 +971,8 @@ public:
     /// Sets the bit-element `i` to the specified boolean `value` & returns this for chaining.
     /// The default value for `value` is `true`.
     ///
-    /// @note In debug mode the index is bounds-checked.
+    /// # Panics
+    /// In debug mode the index `i` is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -971,14 +981,20 @@ public:
     /// v.set(0);
     /// assert_eq(v.get(0), true);
     /// ```
-    auto set(usize i, bool value = true) { return gf2::set(*this, i, value); }
+    constexpr auto set(usize i, bool value = true) {
+        gf2::set(*this, i, value);
+        return *this;
+    }
 
     /// Returns a "reference" to the bit element `i`.
     ///
     /// The returned object is a `BitRef` reference for the bit element at `index` rather than a true reference.
     ///
-    /// @note The referenced bit-store must continue to exist while the `BitRef` is in use.
-    /// @note In debug mode the index `i` is bounds-checked.
+    /// # Note
+    /// The referenced bit-store must continue to exist while the `BitRef` is in use.
+    ///
+    /// # Panics
+    /// In debug mode the index `i` is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -995,7 +1011,8 @@ public:
 
     /// Flips the value of the bit-element `i` and returns this for chaining.
     ///
-    /// @note In debug mode the index is bounds-checked.
+    /// # Panics
+    /// In debug mode the index `i` is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -1007,11 +1024,15 @@ public:
     /// v.flip(9);
     /// assert_eq(v.to_string(), "0011111110");
     /// ```
-    auto flip(usize i) { return gf2::flip(*this, i); }
+    constexpr auto flip(usize i) {
+        gf2::flip(*this, i);
+        return *this;
+    }
 
-    /// Swaps the bits in the bit-store at indices `i0` and `i1` and returns this for chaining.
+    /// Swaps the bits in the bit-vector at indices `i0` and `i1` and returns this for chaining.
     ///
-    /// @note In debug mode, panics if either of the indices is out of bounds.
+    /// # Panics
+    /// In debug mode the indices are bounds-checked.
     ///
     /// # Example
     /// ```
@@ -1027,13 +1048,16 @@ public:
     /// v.swap(0, 9);
     /// assert_eq(v.to_string(), "1000000000");
     /// ```
-    constexpr auto swap(usize i0, usize i1) { return gf2::swap(*this, i0, i1); }
+    constexpr auto swap(usize i0, usize i1) {
+        gf2::swap(*this, i0, i1);
+        return *this;
+    }
 
     /// @}
     /// @name Store Queries:
     /// @{
 
-    /// Returns `true` if the store is empty, `false` otherwise.
+    /// Returns `true` if the bit-vector is empty, `false` otherwise.
     ///
     /// # Example
     /// ```
@@ -1044,9 +1068,9 @@ public:
     /// ```
     constexpr bool is_empty() const { return gf2::is_empty(*this); }
 
-    /// Returns `true` if at least one bit in the store is set, `false` otherwise.
+    /// Returns `true` if at least one bit in the bit-vector is set, `false` otherwise.
     ///
-    /// @note  Empty stores have no set bits (logical connective for `any` is `OR` with identity `false`).
+    /// **Note:** Empty bit-vectors have no set bits (logical connective for `any` is `OR` with identity `false`).
     ///
     /// # Example
     /// ```
@@ -1057,9 +1081,9 @@ public:
     /// ```
     constexpr bool any() const { return gf2::any(*this); }
 
-    /// Returns `true` if all bits in the store are set, `false` otherwise.
+    /// Returns `true` if all bits in the bit-vector are set, `false` otherwise.
     ///
-    /// @note  Empty stores have no set bits (logical connective for `all` is `AND` with identity `true`).
+    /// **Note:** Empty bit-vectors have no set bits (logical connective for `all` is `AND` with identity `true`).
     ///
     /// # Example
     /// ```
@@ -1072,9 +1096,9 @@ public:
     /// ```
     constexpr bool all() const { return gf2::all(*this); }
 
-    /// Returns `true` if no bits in the store are set, `false` otherwise.
+    /// Returns `true` if no bits in the bit-vector are set, `false` otherwise.
     ///
-    /// @note  Empty store have no set bits (logical connective for `none` is `AND` with identity `true`).
+    /// **Note:** Empty bit-vectors have no set bits (logical connective for `none` is `AND` with identity `true`).
     ///
     /// # Example
     /// ```
@@ -1089,7 +1113,7 @@ public:
     /// @name Store Mutators:
     /// @{
 
-    /// Sets the bits in the store to the boolean `value` and returns a reference to this for chaining.
+    /// Sets the bits in the bit-vector to the boolean `value` and returns a reference to this for chaining.
     ///
     /// By default, all bits are set to `true`.
     ///
@@ -1099,9 +1123,12 @@ public:
     /// v.set_all();
     /// assert_eq(v.to_string(), "1111111111");
     /// ```
-    auto set_all(bool value = true) { return gf2::set_all(*this, value); }
+    constexpr auto set_all(bool value = true) {
+        gf2::set_all(*this, value);
+        return *this;
+    }
 
-    /// Flips the value of the bits in the store and returns a reference to this for chaining.
+    /// Flips the value of the bits in the bit-vector and returns a reference to this for chaining.
     ///
     /// # Example
     /// ```
@@ -1109,18 +1136,25 @@ public:
     /// v.flip_all();
     /// assert_eq(v.to_string(), "1111111111");
     /// ```
-    auto flip_all() { return gf2::flip_all(*this); }
+    constexpr auto flip_all() {
+        gf2::flip_all(*this);
+        return *this;
+    }
 
     /// @}
     /// @name Copying into the BitVector:
     /// @{
 
-    /// Copies the bits from an unsigned integral `src` value and returns a reference to this for chaining.
+    /// Copies all the bits from _any_ unsigned integral `src` value to this _equal-sized_ bit-vector.
+    /// Returns a reference to this for chaining.
     ///
     /// # Notes:
-    /// 1. The size of the store *must* match the number of bits in the source type.
-    /// 2. We allow *any* unsigned integral source, e.g. copying a single `u64` into a `BitVector<u8>` of size 64.
-    /// 3. The least-significant bit of the source becomes the bit at index 0 in the store.
+    /// 1. We allow *any* unsigned integral source, e.g. copying a single `u64` into a `BitVector<u8>` of size 64.
+    /// 2. The least-significant bit of the source becomes the bit at index 0 in the bit-vector.
+    ///
+    /// # Panics
+    /// Panics if the size of the bit-vector does not match the number of bits in the source integer type.
+    ///
     ///
     /// # Example
     /// ```
@@ -1133,15 +1167,22 @@ public:
     /// assert_eq(w.to_string(), "0101010101010101");
     /// ```
     template<Unsigned Src>
-    auto copy(Src src) {
-        return gf2::copy(src, *this);
+    constexpr auto copy(Src src) {
+        gf2::copy(src, *this);
+        return *this;
     }
 
-    /// Copies the bits from an equal-sized `src` store and returns a reference to this for chaining.
+    /// Copies all the bits from _any_ `src` bit-store to this _equal-sized_ bit-vector and returns a reference to this
+    /// for chaining.
     ///
-    /// @note This is one of the few methods in the library that *doesn't* require the two stores to have the same
+    /// # Note
+    /// This is one of the few methods in the library that *doesn't* require the two stores to have the same
     /// `word_type`. You can use it to convert between different `word_type` stores (e.g., from `BitVector<u32>` to
     /// `BitVector<u8>`) as long as the sizes match.
+    ///
+    /// # Panics
+    /// Panics if the sizes of this bit-vector and the `src` bit-store do not match.
+    ///
     ///
     /// # Example
     /// ```
@@ -1151,13 +1192,19 @@ public:
     /// assert_eq(v.to_string(), "1010101010");
     /// ```
     template<BitStore Src>
-    auto copy(Src const& src) {
-        return gf2::copy(src, *this);
+    constexpr auto copy(Src const& src) {
+        gf2::copy(src, *this);
+        return *this;
     }
 
-    /// Copies the bits of an equal-sized `std::bitset` and returns a reference to this for chaining.
+    /// Copies all the bits from a `std::bitset` to this _equal-sized_ bit-vector and returns a reference to this for
+    /// chaining.
     ///
-    /// @note `std::bitset` prints its bit elements in *bit-order* which is the reverse of our convention.
+    /// # Note
+    /// A `std::bitset` prints its bit elements in *bit-order* which is the reverse of our convention.
+    ///
+    /// # Panics
+    /// Panics if the size of the bit-vectors does not match the number of bits in the source `std::bitset`.
     ///
     /// # Example
     /// ```
@@ -1167,15 +1214,16 @@ public:
     /// assert_eq(v.to_string(), "0101010101");
     /// ```
     template<usize N>
-    auto copy(std::bitset<N> const& src) {
-        return gf2::copy(src, *this);
+    constexpr auto copy(std::bitset<N> const& src) {
+        gf2::copy(src, *this);
+        return *this;
     }
 
     /// @}
-    /// @name Store Fills:
+    /// @name BitVector Fills:
     /// @{
 
-    /// Fills the store by repeatedly calling `f(i)` and returns a reference to this for chaining.
+    /// Fills the bit-vector by repeatedly calling `f(i)` and returns a reference to this for chaining.
     ///
     /// # Example
     /// ```
@@ -1184,16 +1232,19 @@ public:
     /// assert_eq(v.size(), 10);
     /// assert_eq(v.to_string(), "1010101010");
     /// ```
-    auto copy(std::invocable<usize> auto f) { return gf2::copy(*this, f); }
+    constexpr auto copy(std::invocable<usize> auto f) {
+        gf2::copy(*this, f);
+        return *this;
+    }
 
-    /// Fill the store with random bits and returns a reference to this for chaining.
+    /// Fill the bit-vector with random bits and returns a reference to this for chaining.
     ///
     /// The default call `fill_random()` sets each bit to 1 with probability 0.5 (fair coin).
     ///
     /// @param p The probability of the elements being 1 (defaults to a fair coin, i.e. 50-50).
     /// @param seed The seed to use for the random number generator (defaults to 0, which means use entropy).
     ///
-    /// @note If `p < 0` then the fill is all zeros, if `p > 1` then the fill is all ones.
+    /// If `p < 0` then the fill is all zeros, if `p > 1` then the fill is all ones.
     ///
     /// # Example
     /// ```
@@ -1203,13 +1254,16 @@ public:
     /// v.fill_random(0.5, seed);
     /// assert(u == v);
     /// ```
-    auto fill_random(double p = 0.5, u64 seed = 0) { return gf2::fill_random(*this, p, seed); }
+    constexpr auto fill_random(double p = 0.5, u64 seed = 0) {
+        gf2::fill_random(*this, p, seed);
+        return *this;
+    }
 
     /// @}
     /// @name Bit Counts:
     /// @{
 
-    /// Returns the number of set bits in the store.
+    /// Returns the number of set bits in the bit-vector.
     ///
     /// # Example
     /// ```
@@ -1220,7 +1274,7 @@ public:
     /// ```
     constexpr usize count_ones() const { return gf2::count_ones(*this); }
 
-    /// Returns the number of unset bits in the store.
+    /// Returns the number of unset bits in the bit-vector.
     ///
     /// # Example
     /// ```
@@ -1231,7 +1285,7 @@ public:
     /// ```
     constexpr usize count_zeros() const { return gf2::count_zeros(*this); }
 
-    /// Returns the number of leading zeros in the store.
+    /// Returns the number of leading zeros in the bit-vector.
     ///
     /// # Example
     /// ```
@@ -1244,7 +1298,7 @@ public:
     /// ```
     constexpr usize leading_zeros() const { return gf2::leading_zeros(*this); }
 
-    /// Returns the number of trailing zeros in the store.
+    /// Returns the number of trailing zeros in the bit-vector.
     ///
     /// # Example
     /// ```
@@ -1259,7 +1313,7 @@ public:
     /// @name Set-bit Indices:
     /// @{
 
-    /// Returns the index of the first set bit in the bit-store or `{}` if no bits are set.
+    /// Returns the index of the first set bit in the bit-vector or `{}` if no bits are set.
     ///
     /// # Example
     /// ```
@@ -1276,7 +1330,7 @@ public:
     /// ```
     constexpr std::optional<usize> first_set() const { return gf2::first_set(*this); }
 
-    /// Returns the index of the last set bit in the bit-store or `{}` if no bits are set.
+    /// Returns the index of the last set bit in the bit-vector or `{}` if no bits are set.
     ///
     /// # Example
     /// ```
@@ -1291,7 +1345,7 @@ public:
     /// ```
     constexpr std::optional<usize> last_set() const { return gf2::last_set(*this); }
 
-    /// Returns the index of the next set bit after `index` in the store or `{}` if no more set bits exist.
+    /// Returns the index of the next set bit after `index` in the bit-vector or `{}` if no more set bits exist.
     ///
     /// # Example
     /// ```
@@ -1305,7 +1359,7 @@ public:
     /// ```
     constexpr std::optional<usize> next_set(usize index) const { return gf2::next_set(*this, index); }
 
-    /// Returns the index of the previous set bit before `index` in the store or `{}` if there are none.
+    /// Returns the index of the previous set bit before `index` in the bit-vector or `{}` if there are none.
     ///
     /// # Example
     /// ```
@@ -1323,7 +1377,7 @@ public:
     /// @name Unset-bit Indices:
     /// @{
 
-    /// Returns the index of the first unset bit in the bit-store or `{}` if no bits are unset.
+    /// Returns the index of the first unset bit in the bit-vector or `{}` if no bits are unset.
     ///
     /// # Example
     /// ```
@@ -1340,7 +1394,7 @@ public:
     /// ```
     constexpr std::optional<usize> first_unset() const { return gf2::first_unset(*this); }
 
-    /// Returns the index of the last unset bit in the bit-store or `{}` if no bits are unset.
+    /// Returns the index of the last unset bit in the bit-vector or `{}` if no bits are unset.
     ///
     /// # Example
     /// ```
@@ -1357,7 +1411,7 @@ public:
     /// ```
     constexpr std::optional<usize> last_unset() const { return gf2::last_unset(*this); }
 
-    /// Returns the index of the next unset bit after `index` in the store or `{}` if no more unset bits exist.
+    /// Returns the index of the next unset bit after `index` in the bit-vector or `{}` if no more unset bits exist.
     ///
     /// # Example
     /// ```
@@ -1373,7 +1427,8 @@ public:
     /// ```
     constexpr std::optional<usize> next_unset(usize index) const { return gf2::next_unset(*this, index); }
 
-    /// Returns the index of the previous unset bit before `index` in the store or `{}` if no more unset bits exist.
+    /// Returns the index of the previous unset bit before `index` in the bit-vector or `{}` if no more unset bits
+    /// exist.
     ///
     /// # Example
     /// ```
@@ -1393,12 +1448,13 @@ public:
     /// @name Iterators:
     /// @{
 
-    /// Returns a const iterator over the `bool` values of the bits in the const bit-store.
+    /// Returns a const iterator over the `bool` values of the bits in the const bit-vector.
     ///
-    /// You can use this iterator to iterate over the bits in the store and get the values of each bit as a `bool`.
+    /// You can use this iterator to iterate over the bits in the bit-vector and get the values of each bit as a `bool`.
     ///
-    /// @note For the most part, try to avoid iterating through individual bits. It is much more efficient to use
-    /// methods that work on whole words of bits at a time.
+    /// # Note
+    /// For the most part, try to avoid iterating through individual bits. It is much more efficient to use methods that
+    /// work on whole words of bits at a time.
     ///
     /// # Example
     /// ```
@@ -1407,12 +1463,13 @@ public:
     /// ```
     constexpr auto bits() const { return gf2::bits(*this); }
 
-    /// Returns a non-const iterator over the values of the bits in the mutable bit-store.
+    /// Returns a non-const iterator over the values of the bits in the mutable bit-vector.
     ///
-    /// You can use this iterator to iterate over the bits in the store to get *or* set the value of each bit.
+    /// You can use this iterator to iterate over the bits in the bit-vector to get *or* set the value of each bit.
     ///
-    /// @note For the most part, try to avoid iterating through individual bits. It is much more efficient to use
-    /// methods that work on whole words of bits at a time.
+    /// # Note
+    /// For the most part, try to avoid iterating through individual bits. It is much more efficient to use methods that
+    /// work on whole words of bits at a time.
     ///
     /// # Example
     /// ```
@@ -1422,9 +1479,9 @@ public:
     /// ```
     constexpr auto bits() { return gf2::bits(*this); }
 
-    /// Returns an iterator over the *indices* of any *set* bits in the bit-store.
+    /// Returns an iterator over the *indices* of any *set* bits in the bit-vector.
     ///
-    /// You can use this iterator to iterate over the set bits in the store and get the index of each bit.
+    /// You can use this iterator to iterate over the set bits in the bit-vector and get the index of each bit.
     ///
     /// # Example
     /// ```
@@ -1435,9 +1492,9 @@ public:
     /// ```
     constexpr auto set_bits() const { return gf2::set_bits(*this); }
 
-    /// Returns an iterator over the *indices* of any *unset* bits in the bit-store.
+    /// Returns an iterator over the *indices* of any *unset* bits in the bit-vector.
     ///
-    /// You can use this iterator to iterate over the unset bits in the store and get the index of each bit.
+    /// You can use this iterator to iterate over the unset bits in the bit-vector and get the index of each bit.
     ///
     /// # Example
     /// ```
@@ -1448,15 +1505,10 @@ public:
     /// ```
     constexpr auto unset_bits() const { return gf2::unset_bits(*this); }
 
-    /// Returns a const iterator over all the *words* underlying the bit-store.
+    /// Returns a const iterator over all the *words* underlying the bit-vector.
     ///
-    /// You can use this iterator to iterate over the words in the store and read the `Word` value of each word.
-    /// You **cannot** use this iterator to modify the words in the store.
-    ///
-    /// @note The words here may be a synthetic construct. The expectation is that the bit `0` in the store is
-    /// located at the bit-location `0` of `word(0)`. That is always the case for bit-vectors but bit-slices typically
-    /// synthesise "words" on the fly from adjacent pairs of bit-vector words. Nevertheless, almost all the methods
-    /// in `BitStore` are implemented efficiently by operating on those words.
+    /// You can use this iterator to iterate over the words in the bit-vector and read the `Word` value of each word.
+    /// You **cannot** use this iterator to modify the words in the bit-vector.
     ///
     /// # Example
     /// ```
@@ -1467,9 +1519,9 @@ public:
     /// ```
     constexpr auto store_words() const { return gf2::store_words(*this); }
 
-    /// Returns a copy of the words underlying this bit-store.
+    /// Returns a copy of the words underlying this bit-vector.
     ///
-    /// @note The last word in the vector may not be fully occupied but unused slots will be all zeros.
+    /// **Note:** The last word in the vector may not be fully occupied but unused slots will be all zeros.
     ///
     /// # Example
     /// ```
@@ -1483,11 +1535,12 @@ public:
     /// @name Spans:
     /// @{
 
-    /// Returns an *immutable* bit-span encompassing the store's bits in the half-open range `[begin, end)`.
+    /// Returns an *immutable* bit-span encompassing the bit-vector's bits in the half-open range `[begin, end)`.
     ///
     /// Immutability here is deep -- the interior pointer in the returned span is to *const* words.
     ///
-    /// @note This method panics if the span range is not valid.
+    /// # Panics
+    /// This method panics if the range is not valid.
     ///
     /// # Example
     /// ```
@@ -1497,11 +1550,12 @@ public:
     /// ```
     constexpr auto span(usize begin, usize end) const { return gf2::span(*this, begin, end); }
 
-    /// Returns a mutable bit-span encompassing the bits in the half-open range `[begin, end)`.
+    /// Returns a mutable bit-span encompassing the bit-vector's bits in the half-open range `[begin, end)`.
     ///
     /// Mutability here is deep -- the interior pointer in the returned span is to *non-const* words.
     ///
-    /// @note This method panics if the span range is not valid.
+    /// # Panics
+    /// This method panics if the range is not valid.
     ///
     /// # Example
     /// ```
@@ -1520,7 +1574,8 @@ public:
 
     /// Returns a *clone* of the elements in the half-open range `[begin, end)` as a new bit-vector.
     ///
-    /// @note This method panics if the range is not valid.
+    /// # Panics
+    /// This method panics if the range is not valid.
     ///
     /// # Example
     /// ```
@@ -1537,7 +1592,7 @@ public:
     /// @name Splits:
     /// @{
 
-    /// Views a bit-store as two parts containing the elements `[0, at)` and `[at, size())` respectively.
+    /// Views the bit-vector as two parts containing the elements `[0, at)` and `[at, size())` respectively.
     ///
     /// Clones of the parts are stored in the passed bit-vectors `left` and `right`.
     ///
@@ -1547,7 +1602,8 @@ public:
     /// This lets one reuse the `left` and `right` destinations without having to allocate new bit-vectors.
     /// This is useful when implementing iterative algorithms that need to split a bit-vector into two parts repeatedly.
     ///
-    /// @note This method panics if the split point is beyond the end of the bit-vector.
+    /// # Panics
+    /// This method panics if the split point is beyond the end of the bit-vector.
     ///
     /// # Example
     /// ```
@@ -1562,14 +1618,15 @@ public:
         return gf2::split(*this, at, left, right);
     }
 
-    /// Views a bit-store as two parts containing the elements `[0, at)` and `[at, size())` respectively.
+    /// Views the bit-vector as two parts containing the elements `[0, at)` and `[at, size())` respectively.
     ///
     /// Clones of the parts are returned as a pair of bit-vectors [`left`, `right`].
     ///
     /// On return, `left` is a clone of the bits from the start of the bit-vector up to but not including `at` and
     /// `right` contains the bits from `at` to the end of the bit-vector. This bit-vector itself is not modified.
     ///
-    /// @note This method panics if the split point is beyond the end of the bit-vector.
+    /// # Panics
+    /// This method panics if the split point is beyond the end of the bit-vector.
     ///
     /// # Example
     /// ```
@@ -1585,12 +1642,12 @@ public:
     /// @name Riffling:
     /// @{
 
-    /// Interleaves the bits of this bit-store with zeros storing the result into the bit-vector `dst`.
+    /// Interleaves the bits of this bit-vector with zeros storing the result into the bit-vector `dst`.
     ///
-    /// On return, `dst` will have the bits of this bit-store interleaved with zeros. For example, if this
-    /// bit-store has the bits `abcde` then `dst` will have the bits `a0b0c0d0e`.
+    /// On return, `dst` will have the bits of this bit-vector interleaved with zeros. For example, if this
+    /// bit-vector has the bits `abcde` then `dst` will have the bits `a0b0c0d0e`.
     ///
-    /// @note There is no last zero bit in `dst`.
+    /// **Note:** There is no last zero bit in `dst`.
     ///
     /// # Example
     /// ```
@@ -1601,11 +1658,11 @@ public:
     /// ```
     constexpr void riffled(BitVector<word_type>& dst) const { return gf2::riffle(*this, dst); }
 
-    /// Returns a new bit-vector that is the result of riffling the bits in this bit-store with zeros.
+    /// Returns a new bit-vector that is the result of riffling the bits in this bit-vector with zeros.
     ///
-    /// If bit-store has the bits `abcde` then the output bit-vector will have the bits `a0b0c0d0e`.
+    /// If this bit-vector has the bits `abcde` then the output bit-vector will have the bits `a0b0c0d0e`.
     ///
-    /// @note There is no last zero bit in `dst`.
+    /// **Note:** There is no last zero bit in `dst`.
     ///
     /// # Example
     /// ```
@@ -1619,7 +1676,7 @@ public:
     /// @name String Representations:
     /// @{
 
-    /// Returns a binary string representation of the store.
+    /// Returns a binary string representation of the bit-vector.
     ///
     /// The string is formatted as a sequence of `0`s and `1`s with the least significant bit on the right.
     ///
@@ -1640,7 +1697,7 @@ public:
         return gf2::to_binary_string(*this, sep, pre, post);
     }
 
-    /// Returns a binary string representation of the store.
+    /// Returns a binary string representation of the bit-vector.
     ///
     /// The string is formatted as a sequence of `0`s and `1`s with the least significant bit on the right.
     ///
@@ -1660,7 +1717,7 @@ public:
         return gf2::to_string(*this, sep, pre, post);
     }
 
-    /// Returns a "pretty" string representation of the store.
+    /// Returns a "pretty" string representation of the bit-vector.
     ///
     /// The output is a string of 0's and 1's with spaces between each bit, and the whole thing enclosed in square
     /// brackets.
@@ -1674,7 +1731,7 @@ public:
     /// ```
     std::string to_pretty_string() const { return gf2::to_pretty_string(*this); }
 
-    /// Returns the "hex" string representation of the bits in the bit-store
+    /// Returns the "hex" string representation of the bits in the bit-vector.
     ///
     /// The output is a string of hex characters without any spaces, commas, or other formatting.
     ///
@@ -1706,7 +1763,7 @@ public:
     /// ```
     std::string to_hex_string() const { return gf2::to_hex_string(*this); }
 
-    /// Returns a multi-line string describing the bit-store in some detail.
+    /// Returns a multi-line string describing the bit-vector in some detail.
     ///
     /// This method is useful for debugging but you should not rely on the output format which may change.
     std::string describe() const { return gf2::describe(*this); }

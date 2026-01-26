@@ -18,7 +18,7 @@ namespace gf2 {
 /// The end user can also treat the `BitRef` object as a reference to a boolean value and use it in boolean
 /// expressions.
 ///
-/// @note The underlying bit-store must live as long as the `BitRef` that refers to it.
+///  **Note:** The underlying bit-store must live as long as the `BitRef` that refers to it.
 ///
 /// # Example
 /// ```

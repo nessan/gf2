@@ -15,6 +15,7 @@
 #include <bitset>
 #include <concepts>
 #include <format>
+#include <iterator>
 #include <optional>
 #include <ranges>
 #include <string>
@@ -88,7 +89,8 @@ concept BitStore = requires(Store store, const Store const_store) {
 
     /// The `words()` method should return the **fewest** number of words needed to hold the bits in the store.
     ///
-    /// @note The return value will always be identical to `gf2::words_needed<word_type>(size())` so we could compute
+    /// # Note
+    /// The return value will always be identical to `gf2::words_needed<word_type>(size())` so we could compute
     /// `words()` on the fly but all bit-store types cache this value, which has a measurable performance impact.
     { const_store.words() } -> std::same_as<usize>;
 
@@ -101,7 +103,8 @@ concept BitStore = requires(Store store, const Store const_store) {
     /// For example, if the store has 18 elements and the word type is `u8`, then `word(0)` should cover bit elements 0
     /// through 7, `word(1)` bit elements 8 through 15, and `word(2)` bit elements 16 and 17.
     ///
-    /// @note The final word may not be fully occupied but the method must guarantee that unused bits are set to 0.
+    /// # Note
+    /// The final word may not be fully occupied but the method must guarantee that unused bits are set to 0.
     { const_store.word(usize{}) } -> std::same_as<typename Store::word_type>;
 
     /// The `set_word(i, value)` method should set "word" `i` from the store to the specified `value`.
@@ -114,7 +117,8 @@ concept BitStore = requires(Store store, const Store const_store) {
     /// elements 0 through 7, `set_word(1,v)` should change bit elements 8 through 15, and `set_word(2,v)` should change
     /// just bit elements 16 and 17.
     ///
-    /// @note The method must ensure that inaccessible bits in the underlying store are not changed by this call.
+    /// # Note
+    /// The method must ensure that inaccessible bits in the underlying store are not changed by this call.
     { store.set_word(usize{}, typename Store::word_type{}) } -> std::same_as<void>;
 };
 
@@ -149,7 +153,8 @@ namespace gf2 {
 
 /// Returns the bool value of the bit at index `i` in the given bit-store.
 ///
-/// @note In debug mode the index `i` is bounds-checked.
+/// # Panics
+/// In debug mode the index `i` is bounds-checked.
 ///
 /// # Example
 /// ```
@@ -170,8 +175,11 @@ get(Store const& store, usize i) {
 ///
 /// The returned object is a `BitRef` reference for the bit element at `index` rather than a true reference.
 ///
-/// @note The referenced bit-store must continue to exist while the `BitRef` is in use.
-/// @note In debug mode the index `i` is bounds-checked.
+/// # Note
+/// The referenced bit-store must continue to exist while the `BitRef` is in use.
+///
+// # Panics
+/// In debug mode the index `i` is bounds-checked.
 ///
 /// # Example
 /// ```
@@ -193,7 +201,8 @@ ref(Store& store, usize i) {
 
 /// Returns `true` if the first bit element is set, `false` otherwise.
 ///
-/// @note In debug mode the method panics of the store is empty.
+/// # Panics
+/// In debug mode the method panics if the store is empty.
 ///
 /// # Example
 /// ```
@@ -211,7 +220,8 @@ front(Store const& store) {
 
 /// Returns `true` if the final bit element is set, `false` otherwise.
 ///
-/// @note In debug mode the method panics of the store is empty.
+/// # Panics
+/// In debug mode the method panics if the store is empty.
 ///
 /// # Example
 /// ```
@@ -227,10 +237,10 @@ back(Store const& store) {
     return get(store, store.size() - 1);
 }
 
-/// Sets the bit-element at the given `index` to the specified boolean `value` and returns the store for chaining.
-/// The default value for `value` is `true`.
+/// Sets the bit-element at the given `index` to the specified boolean `value` (default `value` is `true`).
 ///
-/// @note In debug mode the index is bounds-checked.
+/// # Panics
+/// In debug mode the method panics if the index is out of bounds.
 ///
 /// # Example
 /// ```
@@ -240,19 +250,19 @@ back(Store const& store) {
 /// assert_eq(get(v, 0), true);
 /// ```
 template<BitStore Store>
-constexpr auto&
+constexpr void
 set(Store& store, usize i, bool value = true) {
     gf2_debug_assert(i < store.size(), "Index {} is out of bounds for store of length {}", i, store.size());
     auto [word_index, word_mask] = index_and_mask<typename Store::word_type>(i);
     auto word_value = store.word(word_index);
     auto bit_value = (word_value & word_mask) != 0;
     if (bit_value != value) store.set_word(word_index, word_value ^ word_mask);
-    return store;
 }
 
-/// Flips the value of the bit-element at the given `index` and returns the store for chaining.
+/// Flips the value of the bit-element at the given `index`.
 ///
-/// @note In debug mode the index is bounds-checked.
+/// # Panics
+/// In debug mode the method panics if the index is out of bounds.
 ///
 /// # Example
 /// ```
@@ -265,18 +275,18 @@ set(Store& store, usize i, bool value = true) {
 /// assert_eq(to_string(v), "0011111110");
 /// ```
 template<BitStore Store>
-constexpr auto&
+constexpr void
 flip(Store& store, usize i) {
     gf2_debug_assert(i < store.size(), "Index {} is out of bounds for store of length {}", i, store.size());
     auto [word_index, word_mask] = index_and_mask<typename Store::word_type>(i);
     auto word_value = store.word(word_index);
     store.set_word(word_index, word_value ^ word_mask);
-    return store;
 }
 
-/// Swaps the bits in the bit-store at indices `i0` and `i1` and returns the store for chaining.
+/// Swaps the bits in the bit-store at indices `i0` and `i1`.
 ///
-/// @note In debug mode, panics if either of the indices is out of bounds.
+/// # Panics
+/// In debug mode the method panics if either index is out of bounds.
 ///
 /// # Example
 /// ```
@@ -293,7 +303,7 @@ flip(Store& store, usize i) {
 /// assert_eq(to_string(v), "1000000000");
 /// ```
 template<BitStore Store>
-constexpr auto&
+constexpr void
 swap(Store& store, usize i0, usize i1) {
     gf2_debug_assert(i0 < store.size(), "index {} is out of bounds for a store of length {}", i0, store.size());
     gf2_debug_assert(i1 < store.size(), "index {} is out of bounds for a store of length {}", i1, store.size());
@@ -315,7 +325,6 @@ swap(Store& store, usize i0, usize i1) {
             }
         }
     }
-    return store;
 }
 
 /// @}
@@ -339,7 +348,8 @@ is_empty(Store const& store) {
 
 /// Returns `true` if at least one bit in the store is set, `false` otherwise.
 ///
-/// @note  Empty stores have no set bits (logical connective for `any` is `OR` with identity `false`).
+/// # Note
+/// Empty stores have no set bits (logical connective for `any` is `OR` with identity `false`).
 ///
 /// # Example
 /// ```
@@ -358,7 +368,8 @@ any(Store const& store) {
 
 /// Returns `true` if all bits in the store are set, `false` otherwise.
 ///
-/// @note  Empty stores have no set bits (logical connective for `all` is `AND` with identity `true`).
+/// # Note
+/// Empty stores have no set bits (logical connective for `all` is `AND` with identity `true`).
 ///
 /// # Example
 /// ```
@@ -393,7 +404,8 @@ all(Store const& store) {
 
 /// Returns `true` if no bits in the store are set, `false` otherwise.
 ///
-/// @note  Empty store have no set bits (logical connective for `none` is `AND` with identity `true`).
+/// # Note
+/// Empty store have no set bits (logical connective for `none` is `AND` with identity `true`).
 ///
 /// # Example
 /// ```
@@ -412,7 +424,7 @@ none(Store const& store) {
 /// @name Store Mutators:
 /// @{
 
-/// Sets the bits in the store to the boolean `value` and returns the store for chaining.
+/// Sets the bits in the store to the boolean `value`.
 ///
 /// By default, all bits are set to `true`.
 ///
@@ -423,15 +435,14 @@ none(Store const& store) {
 /// assert_eq(to_string(v), "1111111111");
 /// ```
 template<BitStore Store>
-constexpr auto&
+constexpr void
 set_all(Store& store, bool value = true) {
     using word_type = typename Store::word_type;
     auto word_value = value ? MAX<word_type> : word_type{0};
     for (auto i = 0uz; i < store.words(); ++i) store.set_word(i, word_value);
-    return store;
 }
 
-/// Flips the value of the bits in the store and returns the store for chaining.
+/// Flips the value of the bits in the store.
 ///
 /// # Example
 /// ```
@@ -440,23 +451,24 @@ set_all(Store& store, bool value = true) {
 /// assert_eq(to_string(v), "1111111111");
 /// ```
 template<BitStore Store>
-constexpr auto&
+constexpr void
 flip_all(Store& store) {
     using word_type = typename Store::word_type;
     for (auto i = 0uz; i < store.words(); ++i) store.set_word(i, static_cast<word_type>(~store.word(i)));
-    return store;
 }
 
 /// @}
 /// @name Store Fills:
 /// @{
 
-/// Copies the bits from an unsigned integral `src` value and returns the store for chaining.
+/// Copies all the bits from _any_ unsigned integral `src` value to an _equal-sized_ bit-store.
 ///
-/// # Notes:
-/// 1. The size of the store *must* match the number of bits in the source integer type.
-/// 2. We allow *any* unsigned integral source, e.g. copying a single `u64` into a `BitVector<u8>` of size 64.
-/// 3. The least-significant bit of the source becomes the bit at index 0 in the store.
+/// # Note
+/// 1. We allow *any* unsigned integral source, e.g. copying a single `u64` into a `BitVector<u8>` of size 64.
+/// 2. The least-significant bit of the source becomes the bit at index 0 in the store.
+///
+/// # Panics
+/// Panics if the size of the store does not match the number of bits in the source integer type.
 ///
 /// # Example
 /// ```
@@ -469,10 +481,10 @@ flip_all(Store& store) {
 /// assert_eq(to_string(w), "0101010101010101");
 /// ```
 template<Unsigned Src, BitStore Store>
-constexpr auto&
+constexpr void
 copy(Src src, Store& store) {
     constexpr auto src_bits = BITS<Src>;
-    gf2_assert(store.size() == src_bits, "Lengths do not match: {} != {}.", store.size(), src_bits);
+    gf2_always_assert(store.size() == src_bits, "Lengths do not match: {} != {}.", store.size(), src_bits);
 
     using word_type = typename Store::word_type;
     constexpr auto bits_per_word = BITS<word_type>;
@@ -488,15 +500,17 @@ copy(Src src, Store& store) {
             store.set_word(i, word_value);
         }
     }
-    return store;
 }
 
-/// Copies the bits from an equal-sized `src` store and returns the store for chaining.
+/// Copies all the bits from _any_ `src` bit-store to another _equal-sized_ bit-store.
 ///
 /// # Note:
-/// This is one of the few methods in the library that *doesn't* require the two stores to have the same
-/// `word_type`. You can use it to convert between different `word_type` stores (e.g., from `BitVector<u32>` to
-/// `BitVector<u8>`) as long as the sizes match.
+/// This is one of the few methods in the library that *doesn't* require the two stores to have the same `word_type`.
+/// You can use it to convert between different `word_type` stores (e.g., from `BitVector<u32>` to `BitVector<u8>`) as
+/// long as the sizes match.
+///
+/// # Panics
+/// Panics if the sizes of the two stores do not match.
 ///
 /// # Example
 /// ```
@@ -506,10 +520,10 @@ copy(Src src, Store& store) {
 /// assert_eq(to_string(v), "1010101010");
 /// ```
 template<BitStore Src, BitStore Store>
-constexpr auto&
+constexpr void
 copy(Src const& src, Store& store) {
     // The sizes must match ...
-    gf2_assert(store.size() == src.size(), "Lengths do not match: {} != {}.", store.size(), src.size());
+    gf2_always_assert(store.size() == src.size(), "Lengths do not match: {} != {}.", store.size(), src.size());
 
     // What is the word types (without any const qualifiers)?
     using word_type = std::remove_const_t<typename Store::word_type>;
@@ -563,12 +577,15 @@ copy(Src const& src, Store& store) {
             }
         }
     }
-    return store;
 }
 
-/// Copies the bits of an equal-sized `std::bitset` and returns the store for chaining.
+/// Copies all the bits from a `std::bitset` to an _equal-sized_ bit-store.
 ///
-/// @note `std::bitset` prints its bit elements in *bit-order* which is the reverse of our convention.
+/// # Note
+/// A `std::bitset` prints its bit elements in *bit-order* which is the reverse of our convention.
+///
+/// # Panics
+/// Panics if the size of the store does not match the number of bits in the source `std::bitset`.
 ///
 /// # Example
 /// ```
@@ -578,7 +595,7 @@ copy(Src const& src, Store& store) {
 /// assert_eq(to_string(v), "0101010101");
 /// ```
 template<usize N, BitStore Store>
-constexpr auto&
+constexpr void
 copy(std::bitset<N> const& src, Store& store) {
     // The sizes must match
     gf2_assert(store.size() == N, "Lengths do not match: {} != {}.", store.size(), N);
@@ -587,10 +604,9 @@ copy(std::bitset<N> const& src, Store& store) {
     set_all(store, false);
     for (auto i = 0uz; i < N; ++i)
         if (src[i]) set(store, i);
-    return store;
 }
 
-/// Fill the store by repeatedly calling `f(i)` and returns the store for chaining.
+/// Copies bits from enumerating calls `f(i)` for each index in the bit-store
 ///
 /// # Example
 /// ```
@@ -600,22 +616,21 @@ copy(std::bitset<N> const& src, Store& store) {
 /// assert_eq(to_string(v), "1010101010");
 /// ```
 template<BitStore Store>
-constexpr auto&
+constexpr void
 copy(Store& store, std::invocable<usize> auto f) {
     set_all(store, false);
     for (auto i = 0uz; i < store.size(); ++i)
         if (f(i) == true) set(store, i);
-    return store;
 }
 
-/// Fill the store with random bits and returns the store for chaining.
+/// Fill the store with random bits based on an optional probability `p` and an optional `seed` for the RNG.
 ///
 /// The default call `fill_random()` sets each bit to 1 with probability 0.5 (fair coin).
 ///
 /// @param p The probability of the elements being 1 (defaults to a fair coin, i.e. 50-50).
 /// @param seed The seed to use for the random number generator (defaults to 0, which means use entropy).
 ///
-/// @note If `p < 0` then the fill is all zeros, if `p > 1` then the fill is all ones.
+/// If `p < 0` then the fill is all zeros, if `p > 1` then the fill is all ones.
 ///
 /// # Example
 /// ```
@@ -626,18 +641,24 @@ copy(Store& store, std::invocable<usize> auto f) {
 /// assert(u == v);
 /// ```
 template<BitStore Store>
-constexpr auto&
+constexpr void
 fill_random(Store& store, double p = 0.5, u64 seed = 0) {
     // Keep a single static RNG per thread for all calls to this method, seeded with entropy on the first call.
     thread_local RNG rng;
 
     // Edge case handling ...
-    if (p < 0) return set_all(store, false);
+    if (p < 0) {
+        set_all(store, false);
+        return;
+    }
 
     // Scale p by 2^64 to remove floating point arithmetic from the main loop below.
     // If we determine p rounds to 1 then we can just set all elements to 1 and return early.
     p = p * 0x1p64 + 0.5;
-    if (p >= 0x1p64) return set_all(store);
+    if (p >= 0x1p64) {
+        set_all(store);
+        return;
+    }
 
     // p does not round to 1 so we use a 64-bit URNG and check each draw against the 64-bit scaled p.
     auto scaled_p = static_cast<u64>(p);
@@ -652,7 +673,6 @@ fill_random(Store& store, double p = 0.5, u64 seed = 0) {
 
     // Restore the old seed if necessary.
     if (seed != 0) rng.set_seed(old_seed);
-    return store;
 }
 
 /// @}
@@ -1047,8 +1067,9 @@ previous_unset(Store const& store, usize index) {
 ///
 /// You can use this iterator to iterate over the bits in the store and get the values of each bit as a `bool`.
 ///
-/// @note For the most part, try to avoid iterating through individual bits. It is much more efficient to use
-/// methods that work on whole words of bits at a time.
+/// # Note
+/// For the most part, try to avoid iterating through individual bits. It is much more efficient to use methods that
+/// work on whole words of bits at a time.
 ///
 /// # Example
 /// ```
@@ -1065,8 +1086,9 @@ bits(Store const& store) {
 ///
 /// You can use this iterator to iterate over the bits in the store to get *or* set the value of each bit.
 ///
-/// @note For the most part, try to avoid iterating through individual bits. It is much more efficient to use
-/// methods that work on whole words of bits at a time.
+/// # Note
+/// For the most part, try to avoid iterating through individual bits. It is much more efficient to use methods that
+/// work on whole words of bits at a time.
 ///
 /// # Example
 /// ```
@@ -1119,10 +1141,11 @@ unset_bits(Store const& store) {
 /// You can use this iterator to iterate over the words in the store and read the `Word` value of each word.
 /// You **cannot** use this iterator to modify the words in the store.
 ///
-/// @note The words here may be a synthetic construct. The expectation is that the bit `0` in the store is
-/// located at the bit-location `0` of `word(0)`. That is always the case for bit-vectors but bit-slices typically
-/// synthesise "words" on the fly from adjacent pairs of bit-vector words. Nevertheless, almost all the methods
-/// in `BitStore` are implemented efficiently by operating on those words.
+/// # Note
+/// The words here may be a synthetic construct. The expectation is that the bit `0` in the store is located at the
+/// bit-location `0` of `word(0)`. That is always the case for bit-vectors but bit-slices typically synthesise "words"
+/// on the fly from adjacent pairs of real underlying words. Nevertheless, almost all the methods in `BitStore` are
+/// implemented efficiently by operating on those words.
 ///
 /// # Example
 /// ```
@@ -1139,7 +1162,8 @@ store_words(Store const& store) {
 
 /// Returns a copy of the words underlying this bit-store.
 ///
-/// @note The last word in the vector may not be fully occupied but unused slots will be all zeros.
+/// # Note
+/// The last word in the store may not be fully occupied but unused slots will be all zeros.
 ///
 /// # Example
 /// ```
@@ -1162,7 +1186,8 @@ to_words(Store const& store) {
 /// It is the responsibility of the caller to ensure that the underlying bit-store continues to exist for as long as the
 /// `BitSpan` is in use.
 ///
-/// @note This method panics if the span range is invalid.
+/// # Panics
+/// This method panics if the span range is invalid.
 ///
 /// # Example
 /// ```
@@ -1199,7 +1224,8 @@ span(Store const& store, usize begin, usize end) {
 /// It is the responsibility of the caller to ensure that the underlying bit-store continues to exist for as long as the
 /// `BitSpan` is in use.
 ///
-/// @note This method panics if the span range is invalid.
+/// # Panics
+/// This method panics if the span range is invalid.
 ///
 /// # Example
 /// ```
@@ -1236,7 +1262,8 @@ span(Store& store, usize begin, usize end) {
 
 /// Returns a *clone* of the elements in the half-open range `[begin, end)` as a new bit-vector.
 ///
-/// @note This method panics if the range is not valid.
+/// # Panics
+/// This method panics if the span range is invalid.
 ///
 /// # Example
 /// ```
@@ -1266,7 +1293,8 @@ sub(Store const& store, usize begin, usize end) {
 /// This lets one reuse the `left` and `right` destinations without having to allocate new bit-vectors.
 /// This is useful when implementing iterative algorithms that need to split a bit-vector into two parts repeatedly.
 ///
-/// @note This method panics if the split point is beyond the end of the bit-vector.
+/// # Panics
+/// This method panics if the split point is beyond the end of the bit-vector.
 ///
 /// # Example
 /// ```
@@ -1295,7 +1323,8 @@ split(Store const& store, usize at, BitVector<typename Store::word_type>& left,
 /// On return, `left` is a clone of the bits from the start of the bit-vector up to but not including `at` and
 /// `right` contains the bits from `at` to the end of the bit-vector. This bit-vector itself is not modified.
 ///
-/// @note This method panics if the split point is beyond the end of the bit-vector.
+/// # Panics
+/// This method panics if the split point is beyond the end of the bit-vector.
 ///
 /// # Example
 /// ```
@@ -1348,7 +1377,7 @@ join(Lhs const& lhs, Rhs const& rhs) {
 /// On return, `dst` will have the bits of this bit-store interleaved with zeros. For example, if this
 /// bit-store has the bits `abcde` then `dst` will have the bits `a0b0c0d0e`.
 ///
-/// @note There is no last zero bit in `dst`.
+/// **Note:** There is no last zero bit in `dst`.
 ///
 /// # Example
 /// ```
@@ -1389,7 +1418,7 @@ riffle(Store const& store, BitVector<typename Store::word_type>& dst) {
 ///
 /// If bit-store has the bits `abcde` then the output bit-vector will have the bits `a0b0c0d0e`.
 ///
-/// @note There is no last zero bit in `dst`.
+/// **Note:** There is no last zero bit in `dst`.
 ///
 /// # Example
 /// ```
@@ -1643,7 +1672,7 @@ operator==(Lhs const& lhs, Rhs const& rhs) {
 /// Shifting is in *vector-order* so if `v = [v0,v1,v2,v3]` then `v <<= 1` is `[v1,v2,v3,0]` with zeros added to
 /// the right. Left shifting in vector-order is the same as right shifting in bit-order.
 ///
-/// @note Only accessible bits are affected by the shift.
+/// **Note:** Only accessible bits are affected by the shift.
 ///
 /// # Example
 /// ```
@@ -1704,7 +1733,7 @@ operator<<=(Store& store, usize shift) {
 /// Shifting is in *vector-order* so if `v = [v0,v1,v2,v3]` then `v >>= 1` is `[0,v0,v1,v2]` with zeros added to
 /// the left. Right shifting in vector-order is the same as left shifting in bit-order.
 ///
-/// @note Only accessible bits are affected by the shift.
+/// **Note:** Only accessible bits are affected by the shift.
 ///
 /// # Example
 /// ```
@@ -1766,7 +1795,7 @@ operator>>=(Store& store, usize shift) {
 /// Shifting is in *vector-order* so if `v = [v0,v1,v2,v3]` then `v << 1` is `[v1,v2,v3,0]` with zeros added to
 /// the right. Left shifting in vector-order is the same as right shifting in bit-order.
 ///
-/// @note Only accessible bits are affected by the shift.
+/// **Note:** Only accessible bits are affected by the shift.
 ///
 /// # Example
 /// ```
@@ -1787,7 +1816,7 @@ operator<<(Store const& store, usize shift) {
 /// Shifting is in *vector-order* so if `v = [v0,v1,v2,v3]` then `v >>= 1` is `[0,v0,v1,v2]` with zeros added to
 /// the left. Right shifting in vector-order is the same as left shifting in bit-order.
 ///
-/// @note Only accessible bits are affected by the shift.
+/// **Note:** Only accessible bits are affected by the shift.
 ///
 /// # Example
 /// ```
@@ -1809,7 +1838,7 @@ operator>>(Store const& store, usize shift) {
 
 /// In-place `XOR` of one bit-store with an equal-sized bit-store.
 ///
-/// @note In debug mode, this method panics if the lengths of the two bit-stores do not match.
+/// **Note:** Only accessible bits are affected by the shift.
 ///
 /// # Example
 /// ```
@@ -1827,7 +1856,8 @@ operator^=(Lhs& lhs, Rhs const& rhs) {
 
 /// In-place `AND` of one bit-store with an equal-sized bit-store.
 ///
-/// @note In debug mode, this method panics if the lengths of the two bit-stores do not match.
+/// # Panics
+/// In debug mode, this method panics if the lengths of the two bit-stores do not match.
 ///
 /// # Example
 /// ```
@@ -1845,7 +1875,8 @@ operator&=(Lhs& lhs, Rhs const& rhs) {
 
 /// In-place `OR` of one bit-store with an equal-sized bit-store.
 ///
-/// @note In debug mode, this method panics if the lengths of the two bit-stores do not match.
+/// # Panics
+/// In debug mode, this method panics if the lengths of the two bit-stores do not match.
 ///
 /// # Example
 /// ```
@@ -1884,7 +1915,8 @@ operator~(Store const& store) {
 
 /// Returns the `XOR` of two equal-sized bit-stores as a new bit-vector.
 ///
-/// @note In debug mode, this method panics if the lengths of the two bit-stores do not match.
+/// # Panics
+/// In debug mode, this method panics if the lengths of the two bit-stores do not match.
 ///
 /// # Example
 /// ```
@@ -1904,7 +1936,8 @@ operator^(Lhs const& lhs, Rhs const& rhs) {
 
 /// Returns the `AND` of two equal-sized bit-stores as a new bit-vector.
 ///
-/// @note In debug mode, this method panics if the lengths of the two bit-stores do not match.
+/// # Panics
+/// In debug mode, this method panics if the lengths of the two bit-stores do not match.
 ///
 /// # Example
 /// ```
@@ -1924,7 +1957,8 @@ operator&(Lhs const& lhs, Rhs const& rhs) {
 
 /// Returns the `OR` of two equal-sized bit-stores as a new bit-vector.
 ///
-/// @note In debug mode, this method panics if the lengths of the two bit-stores do not match.
+/// # Panics
+/// In debug mode, this method panics if the lengths of the two bit-stores do not match.
 ///
 /// # Example
 /// ```
@@ -1950,7 +1984,8 @@ operator|(Lhs const& lhs, Rhs const& rhs) {
 ///
 /// In GF(2) addition is the same as `XOR`.
 ///
-/// @note In debug mode, this method panics if the lengths of the two bit-stores do not match.
+/// # Panics
+/// In debug mode, this method panics if the lengths of the two bit-stores do not match.
 ///
 /// # Example
 /// ```
@@ -1969,7 +2004,8 @@ operator+=(Lhs& lhs, Rhs const& rhs) {
 ///
 /// In GF(2) difference is the same as `XOR`.
 ///
-/// @note In debug mode, this method panics if the lengths of the two bit-stores do not match.
+/// # Panics
+/// In debug mode, this method panics if the lengths of the two bit-stores do not match.
 ///
 /// # Example
 /// ```
@@ -1992,7 +2028,8 @@ operator-=(Lhs& lhs, Rhs const& rhs) {
 ///
 /// In GF(2) addition is the same as `XOR`.
 ///
-/// @note In debug mode, this method panics if the lengths of the two bit-stores do not match.
+/// # Panics
+/// In debug mode, this method panics if the lengths of the two bit-stores do not match.
 ///
 /// # Example
 /// ```
@@ -2014,7 +2051,8 @@ operator+(Lhs const& lhs, Rhs const& rhs) {
 ///
 /// In GF(2) addition is the same as `XOR`.
 ///
-/// @note In debug mode, this method panics if the lengths of the two bit-stores do not match.
+/// # Panics
+/// In debug mode, this method panics if the lengths of the two bit-stores do not match.
 ///
 /// # Example
 /// ```
@@ -2042,7 +2080,8 @@ operator-(Lhs const& lhs, Rhs const& rhs) {
 /// indices so the two operands must have the same length. In GF(2) the sum is modulo 2 and, by convention, the scalar
 /// output is a boolean value.
 ///
-/// @note In debug mode, this methods panics if the lengths of `lhs` and `rhs` do not match.
+/// # Panics
+/// In debug mode, this method panics if the lengths of the two bit-stores do not match.
 ///
 /// # Example
 /// ```
@@ -2058,9 +2097,7 @@ dot(Lhs const& lhs, Rhs const& rhs) {
     gf2_debug_assert_eq(lhs.size(), rhs.size(), "Length mismatch {} != {}", lhs.size(), rhs.size());
     using word_type = typename Lhs::word_type;
     auto sum = word_type{0};
-    for (auto i = 0uz; i < lhs.words(); ++i) {
-        sum ^= static_cast<word_type>(lhs.word(i) & rhs.word(i));
-    }
+    for (auto i = 0uz; i < lhs.words(); ++i) { sum ^= static_cast<word_type>(lhs.word(i) & rhs.word(i)); }
     return count_ones(sum) % 2 == 1;
 }
 
@@ -2070,7 +2107,8 @@ dot(Lhs const& lhs, Rhs const& rhs) {
 /// indices so the two operands must have the same length. In GF(2) the sum is modulo 2 and, by convention, the scalar
 /// output is a boolean value.
 ///
-/// @note In debug mode, this methods panics if the lengths of `lhs` and `rhs` do not match.
+/// # Panics
+/// In debug mode, this method panics if the lengths of the two bit-stores do not match.
 ///
 /// # Example
 /// ```

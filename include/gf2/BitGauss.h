@@ -26,7 +26,8 @@ namespace gf2 {
 ///
 /// For underdetermined systems, the "indexing" is something convenient and consistent across runs but not unique.
 ///
-/// @note The `BitLU` class provides another, often more efficient, way to solve systems of linear equations over GF(2).
+/// # Note
+/// The `BitLU` class provides another, often more efficient, way to solve systems of linear equations over GF(2).
 /// It also provides the `BitLU::inverse` method for computing the inverse of a matrix.
 ///
 /// # Example
@@ -52,7 +53,8 @@ private:
 public:
     /// Constructs a new `BitGauss` object where we are solving the system of linear equations `A.x = b`.
     ///
-    /// @note Panics if the `A` matrix is not square or if the `A` matrix and `b` vector have a different number of rows
+    /// # Panics
+    /// Constructor panics if the `A` matrix is not square or if the `A` matrix and `b` vector have a different number of rows
     ///
     /// # Example
     /// ```

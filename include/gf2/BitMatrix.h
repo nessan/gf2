@@ -26,8 +26,9 @@ template<Unsigned Word> class BitLU;
 /// elements are compactly stored in standard vectors of primitive unsigned words whose type is given by the template
 /// parameter `Word`.
 ///
-/// @note These matrices are stored by row, so it is always more efficient to arrange computations to operate on rows
-/// instead of columns. The high-level methods in this library take care of this for you.
+/// # Note
+/// Bit-matrices are stored by row, so it is always more efficient to arrange computations to operate on rows instead of
+/// columns. The high-level methods in this library take care of this for you.
 template<Unsigned Word = usize>
 class BitMatrix {
 private:
@@ -81,7 +82,8 @@ public:
 
     /// Construct a bit-matrix by *copying* a given set of rows which can be any `BitStore` subclass.
     ///
-    /// @note We check that all the rows have the same size unless `NDEBUG` is defined.
+    /// # Panics
+    /// We check that all the rows have the same size unless `NDEBUG` is defined.
     ///
     /// # Example
     /// ```
@@ -98,7 +100,8 @@ public:
     /// Use `std::move(rows)` in the constructor argument to get this version.
     /// The input rows are moved into the bit-matrix so they are no longer valid after this constructor.
     ///
-    /// @note We check that all the rows have the same size unless `NDEBUG` is defined.
+    /// # Panics
+    /// We check that all the rows have the same size unless `NDEBUG` is defined.
     ///
     /// # Example
     /// ```
@@ -249,7 +252,7 @@ public:
     /// @param p The probability of the elements being 1 (defaults to a fair coin, i.e. 50-50).
     /// @param seed The seed to use for the random number generator (defaults to 0, which means use entropy).
     ///
-    /// @note If `p < 0` then the bit-matrix is all zeros, if `p > 1` then the bit-matrix is all ones.
+    /// If `p < 0` then the bit-matrix is all zeros, if `p > 1` then the bit-matrix is all ones.
     ///
     /// # Example
     /// ```
@@ -299,7 +302,7 @@ public:
     /// @param n The number of columns in the bit-matrix to generate.
     /// @param seed The seed to use for the random number generator (if you set this to 0 then entropy is used).
     ///
-    /// @note If `p < 0` then the bit-matrix is all zeros, if `p > 1` then the bit-matrix is all ones.
+    /// If `p < 0` then the bit-matrix is all zeros, if `p > 1` then the bit-matrix is all ones.
     ///
     /// # Example
     /// ```
@@ -318,7 +321,7 @@ public:
     /// @param m The number of rows & columns in the bit-matrix to generate.
     /// @param seed The seed to use for the random number generator (if you set this to 0 then entropy is used).
     ///
-    /// @note If `p < 0` then the bit-matrix is all zeros, if `p > 1` then the bit-matrix is all ones.
+    /// If `p < 0` then the bit-matrix is all zeros, if `p > 1` then the bit-matrix is all ones.
     ///
     /// # Example
     /// ```
@@ -731,7 +734,8 @@ public:
 
     /// Returns the number of ones on the main diagonal of the bit-matrix.
     ///
-    /// @note In debug mode, this method will panic if the bit-matrix is not square.
+    /// # Panics
+    /// In debug mode, this method will panic if the bit-matrix is not square.
     ///
     /// # Example
     /// ```
@@ -750,7 +754,8 @@ public:
     ///
     /// Returns the "sum" of the main diagonal elements of the bit-matrix.
     ///
-    /// @note In debug mode, this method will panic if the bit-matrix is not square.
+    /// # Panics
+    /// In debug mode, this method will panic if the bit-matrix is not square.
     ///
     /// # Example
     /// ```
@@ -828,7 +833,8 @@ public:
 
     /// Returns `true` if the element at row `r` and column `c` is set.
     ///
-    /// @note In debug mode, this method will panic if `r` or `c` is out of bounds.
+    /// # Panics
+    /// In debug mode, this method will panic if `r` or `c` is out of bounds.
     ///
     /// # Example
     /// ```
@@ -845,7 +851,8 @@ public:
 
     /// Returns the value of the bit at row `r` and column `c` as a `bool`.
     ///
-    /// @note In debug mode, this method will panic if `r` or `c` is out of bounds.
+    /// # Panics
+    /// In debug mode, this method will panic if `r` or `c` is out of bounds.
     ///
     /// # Example
     /// ```
@@ -863,7 +870,8 @@ public:
     /// Sets the bit at row `r` and column `c` to the bool value `val`.
     /// The default is to set the bit to `true`.
     ///
-    /// @note In debug mode, this method will panic if `r` or `c` is out of bounds.
+    /// # Panics
+    /// In debug mode, this method will panic if `r` or `c` is out of bounds.
     ///
     /// # Example
     /// ```
@@ -879,7 +887,8 @@ public:
 
     /// Returns the bit at row `r` and column `c` as a `BitRef` reference which can be used to set the bit.
     ///
-    /// @note In debug mode, this method will panic if `r` or `c` is out of bounds.
+    /// # Panics
+    /// In debug mode, this method will panic if `r` or `c` is out of bounds.
     ///
     /// # Example
     /// ```
@@ -896,7 +905,8 @@ public:
 
     /// Flips the bit at row `r` and column `c`.
     ///
-    /// @note In debug mode, this method will panic if `r` or `c` is out of bounds.
+    /// # Panics
+    /// In debug mode, this method will panic if `r` or `c` is out of bounds.
     ///
     /// # Example
     /// ```
@@ -916,7 +926,8 @@ public:
 
     /// Returns a read-only reference to the row at index `r`.
     ///
-    /// @note In debug mode, this method will panic if `r` is out of bounds.
+    /// # Panics
+    /// In debug mode, this method will panic if `r` is out of bounds.
     ///
     /// # Example
     /// ```
@@ -932,7 +943,8 @@ public:
 
     /// Returns a read-write reference to the row at index `r`.
     ///
-    /// @note In debug mode, this method will panic if `r` is out of bounds.
+    /// # Panics
+    /// In debug mode, this method will panic if `r` is out of bounds.
     ///
     /// # Example
     /// ```
@@ -949,7 +961,8 @@ public:
 
     /// Returns a read-only reference to the row at index `r`.
     ///
-    /// @note In debug mode, this method will panic if `r` is out of bounds.
+    /// # Panics
+    /// In debug mode, this method will panic if `r` is out of bounds.
     ///
     /// # Example
     /// ```
@@ -965,7 +978,8 @@ public:
 
     /// Returns a read-write reference to the row at index `r`.
     ///
-    /// @note In debug mode, this method will panic if `r` is out of bounds.
+    /// # Panics
+    /// In debug mode, this method will panic if `r` is out of bounds.
     ///
     /// # Example
     /// ```
@@ -988,7 +1002,8 @@ public:
     ///
     /// Matrices are stored by rows and there is no cheap reference style access to the BitMatrix columns!
     ///
-    /// @note In debug mode, this method will panic if `c` is out of bounds.
+    /// # Panics
+    /// In debug mode, this method will panic if `c` is out of bounds.
     ///
     /// # Example
     /// ```
@@ -1045,7 +1060,8 @@ public:
 
     /// Sets the main diagonal of a square bit-matrix to the boolean value `val`.
     ///
-    /// @note In debug mode, this method will panic if the bit-matrix is not square.
+    /// # Panics
+    /// In debug mode, this method will panic if the bit-matrix is not square.
     ///
     /// # Example
     /// ```
@@ -1060,7 +1076,8 @@ public:
 
     /// Flips all the elements on the main diagonal of a square bit-matrix.
     ///
-    /// @note In debug mode, this method will panic if the bit-matrix is not square.
+    /// # Panics
+    /// In debug mode, this method will panic if the bit-matrix is not square.
     ///
     /// # Example
     /// ```
@@ -1077,7 +1094,8 @@ public:
     ///
     /// Here `d = 0` is the main diagonal and `d = 1` is the first super-diagonal etc.
     ///
-    /// @note In debug mode, this method will panic if the bit-matrix is not square.
+    /// # Panics
+    /// In debug mode, this method will panic if the bit-matrix is not square.
     ///
     /// # Example
     /// ```
@@ -1094,7 +1112,8 @@ public:
     ///
     /// Here `d = 0` is the main diagonal and `d = 1` is the first super-diagonal etc.
     ///
-    /// @note In debug mode, this method will panic if the bit-matrix is not square.
+    /// # Panics
+    /// In debug mode, this method will panic if the bit-matrix is not square.
     ///
     /// # Example
     /// ```
@@ -1111,7 +1130,8 @@ public:
     ///
     /// Here `d = 0` is the main diagonal and `d = 1` is the first sub-diagonal etc.
     ///
-    /// @note In debug mode, this method will panic if the bit-matrix is not square.
+    /// # Panics
+    /// In debug mode, this method will panic if the bit-matrix is not square.
     ///
     /// # Example
     /// ```
@@ -1128,7 +1148,8 @@ public:
     ///
     /// Here `d = 0` is the main diagonal and `d = 1` is the first sub-diagonal etc.
     ///
-    /// @note In debug mode, this method will panic if the bit-matrix is not square.
+    /// # Panics
+    /// In debug mode, this method will panic if the bit-matrix is not square.
     ///
     /// # Example
     /// ```
@@ -1204,10 +1225,11 @@ public:
     /// @name Appending Rows and Columns
     /// @{
 
-    /// Appends a single row onto the end of the bit-matrix by copying it.
+    /// Appends a single row onto the end of the bit-matrix by copying it and returns a reference to the this for
+    /// chaining.
     ///
-    /// Returns a reference to the current object for chaining.
-    /// @note The row must have the same number of elements as the bit-matrix has columns.
+    /// # Panics
+    /// The row must have the same number of elements as the bit-matrix has columns.
     ///
     /// # Example
     /// ```
@@ -1224,13 +1246,14 @@ public:
         return *this;
     }
 
-    /// Appends a single row onto the end of the bit-matrix by moving it.
+    /// Appends a single row onto the end of the bit-matrix by moving it and returns a reference to the this for
+    /// chaining.
     ///
     /// Use `std::move(row)` in the method argument to guarantee this version. The input row is moved into the
     /// matrix and is no longer valid after this call.
     ///
-    /// Returns a reference to the current object for chaining.
-    /// @note The row must have the same number of elements as the bit-matrix has columns.
+    /// # Panics
+    /// The row must have the same number of elements as the bit-matrix has columns.
     ///
     /// # Example
     /// ```
@@ -1246,10 +1269,11 @@ public:
         return *this;
     }
 
-    /// Appends all the rows from the `src` bit-matrix onto the end of this bit-matrix by copying them.
+    /// Appends all the rows from the `src` bit-matrix onto the end of this bit-matrix by copying them and returns a
+    /// reference to the this for chaining.
     ///
-    /// Returns a reference to the current object for chaining.
-    /// @note The source bit-matrix must have the same number of columns as this bit-matrix.
+    /// # Panics
+    /// The source bit-matrix must have the same number of columns as this bit-matrix.
     ///
     /// # Example
     /// ```
@@ -1264,13 +1288,14 @@ public:
         return *this;
     }
 
-    /// Appends all the rows from the `src` bit-matrix onto the end of this bit-matrix by moving them.
+    /// Appends all the rows from the `src` bit-matrix onto the end of this bit-matrix by moving them  and returns a
+    /// reference to the this for chaining.
     ///
     /// Use `std::move(src)` in the method argument to guarantee this version. The source bit-matrix is moved into
     /// this matrix and is no longer valid after this call.
     ///
-    /// Returns a reference to the current object for chaining.
-    /// @note The source bit-matrix must have the same number of columns as this bit-matrix.
+    /// # Panics
+    /// The source bit-matrix must have the same number of columns as this bit-matrix.
     ///
     /// # Example
     /// ```
@@ -1285,10 +1310,11 @@ public:
         return *this;
     }
 
-    /// Appends a single column `col` onto the right of the bit-matrix so `M` -> `M|col`.
+    /// Appends a single column `col` onto the right of the bit-matrix so `M` -> `M|col`  and returns a
+    /// reference to the this for chaining.
     ///
-    /// Returns a reference to the current object for chaining.
-    /// @note The column must have the same number of elements as the bit-matrix has rows.
+    /// # Panics
+    /// The column must have the same number of elements as the bit-matrix has rows.
     ///
     /// # Example
     /// ```
@@ -1305,10 +1331,11 @@ public:
         return *this;
     }
 
-    /// Appends all the columns from the `src` bit-matrix onto the right of this bit-matrix so `M` -> `M|src`.
+    /// Appends all the columns from the `src` bit-matrix onto the right of this bit-matrix so `M` -> `M|src`  and
+    /// returns a reference to the this for chaining.
     ///
-    /// Returns a reference to the current object for chaining.
-    /// @note The source bit-matrix must have the same number of rows as this bit-matrix.
+    /// # Panics
+    /// The source bit-matrix must have the same number of rows as this bit-matrix.
     ///
     /// # Example
     /// ```
@@ -1387,7 +1414,8 @@ public:
     ///
     /// The ranges are half open `[r_start, r_end) X [c_start, c_end)` where `r` is for rows and `c` for columns.
     ///
-    /// @note Panics if the bit-matrix has incompatible dimensions with the requested sub-matrix.
+    /// # Panics
+    /// Panics if the bit-matrix has incompatible dimensions with the requested sub-matrix.
     ///
     /// # Example
     /// ```
@@ -1420,7 +1448,8 @@ public:
 
     /// Replaces the sub-matrix starting at row `top` and column `left` with a copy of the sub-matrix `src`.
     ///
-    /// @note Panics if `src` does not fit within this bit-matrix starting at row `top` and column `left`.
+    /// # Panics
+    /// Panics if `src` does not fit within this bit-matrix starting at row `top` and column `left`.
     ///
     /// # Example
     /// ```
@@ -1557,8 +1586,9 @@ public:
     /// @{
 
     /// Swaps rows `i` and `j` of the bit-matrix.
-    //
-    /// @note In debug mode, this method will panic if either of the indices is out of bounds.
+    ///
+    /// # Panics
+    /// In debug mode, this method will panic if either of the indices is out of bounds.
     ///
     /// # Example
     /// ```
@@ -1574,7 +1604,8 @@ public:
 
     /// Swaps columns `i` and `j` of the bit-matrix.
     ///
-    /// @note In debug mode, this method will panic if either of the indices is out of bounds.
+    /// # Panics
+    /// In debug mode, this method will panic if either of the indices is out of bounds.
     ///
     /// # Example
     /// ```
@@ -1590,7 +1621,8 @@ public:
 
     /// Adds the identity bit-matrix to the bit-matrix.
     ///
-    /// @note In debug mode, this panics if the bit-matrix is not square.
+    /// # Panics
+    /// In debug mode, this method will panic if the bit-matrix is not square.
     ///
     /// # Example
     /// ```
@@ -1609,7 +1641,7 @@ public:
 
     /// Returns a new bit-matrix that is the transpose of this one.
     ///
-    /// @note This method isn't particularly efficient as it works by iterating over all elements of the bit-matrix.
+    /// **Note:** This method isn't particularly efficient as it works by iterating over all elements of the bit-matrix.
     ///
     /// # Example
     /// ```
@@ -1633,7 +1665,8 @@ public:
 
     /// Transposes a *square* bit-matrix in place.
     ///
-    /// @note This method panics if the bit-matrix is not square.
+    /// # Panics
+    /// This method will panic if the bit-matrix is not square.
     ///
     /// # Example
     /// ```
@@ -1664,7 +1697,8 @@ public:
     /// We efficiently compute `M^e` by using a square and multiply algorithm where by default `e = n`.
     /// If the second argument `n_is_log2 = true` then we consider `e = 2^n` instead.
     ///
-    /// @note This method panics if the bit-matrix is not square.
+    /// # Panics
+    /// This method will panic if the bit-matrix is not square.
     ///
     /// # Example
     /// ```
@@ -1724,7 +1758,8 @@ public:
     /// Any all zero rows are moved to the bottom of the matrix.
     /// The echelon form is not unique.
     ///
-    /// @note This method panics if the bit-matrix is empty.
+    /// # Panics
+    /// This method will panic if the bit-matrix is empty.
     ///
     /// # Example
     /// ```
@@ -1781,7 +1816,8 @@ public:
     /// A bit-matrix is in reduced echelon form if it is in echelon form with at most one 1 in each column.
     /// The reduced echelon form is unique.
     ///
-    /// @note This method panics if the bit-matrix is empty.
+    /// # Panics
+    /// This method will panic if the bit-matrix is empty.
     ///
     /// # Example
     /// ```
@@ -1845,8 +1881,9 @@ public:
     ///
     /// For large `n`, the value is roughly 29% and that holds for n as low as 10.
     ///
-    /// @note This method panics if `n` is 0 -- based on the assumption that querying the probability of a 0 x 0
-    /// bit-matrix being invertible is an upstream error somewhere.
+    /// # Panics
+    /// This method panics if `n` is 0 -- based on the assumption that querying the probability of a 0 x 0 bit-matrix
+    /// being invertible is an upstream error somewhere.
     ///
     /// # Example
     /// ```
@@ -1875,8 +1912,9 @@ public:
     ///
     /// For large `n`, the value is 71% and that holds for n as low as 10.
     ///
-    /// @note This method panics if `n` is 0 -- based on the assumption that querying the probability of a 0 x 0
-    /// bit-matrix being invertible is an upstream error somewhere.
+    /// # Panics
+    /// This method panics if `n` is 0 -- based on the assumption that querying the probability of a 0 x 0 bit-matrix
+    /// being invertible is an upstream error somewhere
     ///
     /// # Example
     /// ```
@@ -1947,7 +1985,8 @@ public:
     /// computable characteristic polynomial. Similarity transformations preserve eigen-structure, and in particular
     /// they preserve the characteristic polynomial.
     ///
-    /// @note This method panics if the bit-matrix is not square.
+    /// # Panics
+    /// This method panics if the bit-matrix is not square.
     ///
     /// # Example
     /// ```
@@ -2021,7 +2060,8 @@ public:
     ///
     /// We return the Frobenius companion matrices in a compact form as a `Vec` of their top rows as bit-vectors.
     ///
-    /// @note This method panics if the bit-matrix is not square.
+    /// # Panics
+    /// This method panics if the bit-matrix is not square.
     std::vector<BitVector<Word>> frobenius_form() const {
         // The bit-matrix must be square.
         gf2_assert(is_square(), "Bit-matrix must be square not {} x {}", rows(), cols());
@@ -2047,7 +2087,8 @@ public:
 
     /// In-place `XOR` with a bit-matrix `rhs`.
     ///
-    /// @note This methods panics if the dimensions do not match.
+    /// # Panics
+    /// This method panics if the dimensions do not match.
     ///
     /// # Example
     /// ```
@@ -2065,7 +2106,8 @@ public:
 
     /// In-place `AND` with a bit-matrix `rhs`.
     ///
-    /// @note This methods panics if the dimensions do not match.
+    /// # Panics
+    /// This method panics if the dimensions do not match.
     ///
     /// # Example
     /// ```
@@ -2083,7 +2125,8 @@ public:
 
     /// In-place `OR` with a bit-matrix `rhs`.
     ///
-    /// @note This methods panics if the dimensions do not match.
+    /// # Panics
+    /// This method panics if the dimensions do not match.
     ///
     /// # Example
     /// ```
@@ -2101,7 +2144,8 @@ public:
 
     /// The`XOR` of this with a bit-matrix `rhs` returning a new bit-matrix.
     ///
-    /// @note This methods panics if the dimensions do not match.
+    /// # Panics
+    /// This method panics if the dimensions do not match.
     ///
     /// # Example
     /// ```
@@ -2121,7 +2165,8 @@ public:
 
     /// The`AND` of this with a bit-matrix `rhs` returning a new bit-matrix.
     ///
-    /// @note This methods panics if the dimensions do not match.
+    /// # Panics
+    /// This method panics if the dimensions do not match.
     ///
     /// # Example
     /// ```
@@ -2141,7 +2186,8 @@ public:
 
     /// The`OR` of this with a bit-matrix `rhs` returning a new bit-matrix.
     ///
-    /// @note This methods panics if the dimensions do not match.
+    /// # Panics
+    /// This method panics if the dimensions do not match.
     ///
     /// # Example
     /// ```
@@ -2179,7 +2225,8 @@ public:
 
     /// In-place addition with a bit-matrix `rhs` -- in GF(2) addition is the same as `XOR`.
     ///
-    /// @note This methods panics if the dimensions of do not match.
+    /// # Panics
+    /// This method panics if the dimensions do not match.
     ///
     /// # Example
     /// ```
@@ -2193,7 +2240,8 @@ public:
 
     /// In-place difference with a bit-matrix `rhs` -- in GF(2) subtraction is the same as `XOR`.
     ///
-    /// @note This methods panics if the dimensions do not match.
+    /// # Panics
+    /// This method panics if the dimensions do not match.
     ///
     /// # Example
     /// ```
@@ -2207,7 +2255,8 @@ public:
 
     /// Returns a new bit-matrix that is `*this + rhs` which is `*this ^ rhs` in GF(2).
     ///
-    /// @note This methods panics if the dimensions do not match.
+    /// # Panics
+    /// This method panics if the dimensions do not match.
     ///
     /// # Example
     /// ```
@@ -2225,7 +2274,8 @@ public:
 
     /// Returns a new bit-matrix that is `*this - rhs` which is `*this ^ rhs` in GF(2).
     ///
-    /// @note This methods panics if the dimensions so not match.
+    /// # Panics
+    /// This method panics if the dimensions do not match.
     ///
     /// # Example
     /// ```
@@ -2540,7 +2590,7 @@ operator*(BitMatrix<Word> const& lhs, Rhs const& rhs) {
 
 /// `Bit-vector, bit-matrix multiplication, `v * M`, returning a new bit-vector.
 ///
-/// @note We store bit-matrices by rows so `dot(BitMatrix, BitVector)` will always be faster than this.
+/// **Note:** We store bit-matrices by rows so `dot(BitMatrix, BitVector)` will always be faster than this.
 template<Unsigned Word, BitStore Lhs>
     requires std::same_as<typename Lhs::word_type, Word>
 constexpr auto
@@ -2556,7 +2606,7 @@ dot(Lhs const& lhs, BitMatrix<Word> const& rhs) {
 
 /// Operator form for bit-vector, bit-matrix multiplication, `v * M`, returning a new bit-vector.
 ///
-/// @note We store bit-matrices by rows so `dot(BitMatrix, BitVector)` will always be faster than this.
+/// **Note:** We store bit-matrices by rows so `dot(BitMatrix, BitVector)` will always be faster than this.
 template<Unsigned Word, BitStore Lhs>
     requires std::same_as<typename Lhs::word_type, Word>
 constexpr auto

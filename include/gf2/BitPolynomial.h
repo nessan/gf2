@@ -54,7 +54,7 @@ public:
 
     /// Constructs a bit-polynomial with the given coefficients by copying them from any bit-store.
     ///
-    /// @note The input coefficient bit-store can have any underlying unsigned word type.
+    /// **Note:** The input coefficient bit-store can have any underlying unsigned word type.
     ///
     /// # Example
     /// ```
@@ -70,8 +70,8 @@ public:
     ///
     /// Use `std::move(coeffs)` in the constructor argument to get this version.
     ///
-    /// @note The input coefficient bit-vector is moved into the bit-polynomial so it is no longer valid after this
-    /// constructor.
+    /// # Note
+    /// The input coefficient bit-vector is moved into the bit-polynomial so it is no longer valid after this call.
     ///
     /// # Example
     /// ```
@@ -168,7 +168,7 @@ public:
     ///
     /// The random coefficients are from independent fair coin flips seeded with entropy.
     ///
-    /// @note If `n > 0` then the returned BitPolynomial is monic.
+    /// **Note:** If `n > 0` then the returned BitPolynomial is monic.
     static constexpr BitPolynomial random(usize n) {
         // BitPolynomial of degree `n` has `n + 1` coefficients.
         auto coeffs = coeffs_type::random(n + 1);
@@ -207,7 +207,7 @@ public:
     ///
     /// The degree of the bit-polynomial is the highest power of `x` with a non-zero coefficient.
     ///
-    /// @note We return 0 for the zero polynomial.
+    /// **Note:** We return 0 for the zero polynomial.
     ///
     /// # Example
     /// ```
@@ -220,7 +220,7 @@ public:
 
     /// Returns the "size" of the bit-polynomial which is its total number of coefficients.
     ///
-    /// @note Contrast this to the `degree()` method which ignores trailing zero coefficients.
+    /// **Note:** Contrast this to the `degree()` method which ignores trailing zero coefficients.
     ///
     /// # Example
     /// ```
@@ -305,7 +305,7 @@ public:
 
     /// Set the bit-polynomial coefficients by *copying* them from a pre-filled bit-store.
     ///
-    /// @note The input coefficient bit-store can have any underlying unsigned word type.
+    /// **Note:** The input coefficient bit-store can have any underlying unsigned word type.
     ///
     /// # Example
     /// ```
@@ -326,7 +326,7 @@ public:
     ///
     /// Use `std::move(coeffs)` in the argument to get this version of `copy_coefficients`.
     ///
-    /// @note After the call the argument bit-vector is no longer valid.
+    /// **Note:** After the call the argument bit-vector is no longer valid.
     ///
     /// # Example
     /// ```
@@ -447,7 +447,7 @@ public:
 
     /// In-place subtraction with another bit-polynomial, returning a reference to the result.
     ///
-    /// @note In GF(2) subtraction is the same as addition.
+    /// **Note:** In GF(2) subtraction is the same as addition.
     ///
     /// # Example
     /// ```
@@ -460,7 +460,7 @@ public:
 
     /// In-place multiplication with another bit-polynomial, returning a reference to the result.
     ///
-    /// @note This method uses the convolution method for bit-vectors under the hood.
+    /// **Note:** This method uses the convolution method for bit-vectors under the hood.
     ///
     /// # Example
     /// ```
@@ -512,7 +512,7 @@ public:
 
     /// Returns the difference of two bit-polynomials.
     ///
-    /// @note In GF(2) subtraction is the same as addition.
+    /// **Note:** In GF(2) subtraction is the same as addition.
     ///
     /// # Example
     /// ```
@@ -547,7 +547,7 @@ public:
 
     /// Fills `dst` with the square of this bit-polynomial.
     ///
-    /// @note This is more efficient than multiplying two `BitPolynomial`s for this special case.
+    /// **Note:** This is more efficient than multiplying two `BitPolynomial`s for this special case.
     ///
     /// # Example
     /// ```
@@ -572,7 +572,7 @@ public:
 
     /// Returns a new BitPolynomial that is the square of this BitPolynomial.
     ///
-    /// @note This is more efficient than multiplying two `BitPolynomial`s for this special case.
+    /// **Note:** This is more efficient than multiplying two `BitPolynomial`s for this special case.
     ///
     /// # Example
     /// ```
@@ -589,7 +589,7 @@ public:
 
     /// Multiplies the BitPolynomial by `x^n` and returns `self`.
     ///
-    /// @note This is faster than general multiplication for this special, common case.
+    /// **Note:** This is faster than general multiplication for this special, common case.
     ///
     /// # Example
     /// ```
@@ -630,10 +630,10 @@ public:
     constexpr void sub(usize d, BitPolynomial& dst) const {
         if (d == 0) {
             dst = BitPolynomial<Word>::constant(m_coeffs.get(0));
-        } else if (d+1 >= m_coeffs.size()) {
+        } else if (d + 1 >= m_coeffs.size()) {
             dst = *this;
         } else {
-            dst.copy_coefficients(m_coeffs.span(0, d+1));
+            dst.copy_coefficients(m_coeffs.span(0, d + 1));
         }
     }
 
@@ -677,12 +677,12 @@ public:
         if (d == 0) {
             lo = BitPolynomial<Word>::constant(m_coeffs.get(0));
             hi.copy_coefficients(m_coeffs.span(1, m_coeffs.size()));
-        } else if (d+1 >= m_coeffs.size()) {
+        } else if (d + 1 >= m_coeffs.size()) {
             lo = *this;
             hi.clear();
         } else {
-            lo.copy_coefficients(m_coeffs.span(0, d+1));
-            hi.copy_coefficients(m_coeffs.span(d+1, m_coeffs.size()));
+            lo.copy_coefficients(m_coeffs.span(0, d + 1));
+            hi.copy_coefficients(m_coeffs.span(d + 1, m_coeffs.size()));
         }
     }
 
@@ -732,7 +732,8 @@ public:
     ///
     /// Uses Horner's method to evaluate `p(M)` where `M` is a square matrix and returns the result as a new bit-matrix.
     ///
-    /// @note This method panics if the matrix is not square.
+    /// # Panics
+    /// This method panics if the matrix is not square.
     ///
     /// # Example
     /// ```
@@ -785,7 +786,8 @@ public:
     /// Setting `n_is_log2 = true` allows for enormous powers of `x` which is useful for some applications.
     /// The default is `n_is_log2 = false` so we return `x^n mod P(x)`.
     ///
-    /// @note This method panics if the polynomial is the zero polynomial.
+    /// # Panics
+    /// This method panics if the polynomial is the zero polynomial.
     ///
     /// # Example
     /// ```
@@ -901,7 +903,7 @@ public:
     ///
     /// You can specify the variable name using the `var` parameter. The default variable name is `x`.
     ///
-    /// @note We do not show any terms with zero coefficients.
+    /// **Note:** We do not show any terms with zero coefficients.
     ///
     /// # Example
     /// ```
@@ -939,7 +941,7 @@ public:
     ///
     /// You can specify the variable name using the `var` parameter. The default variable name is `x`.
     ///
-    /// @note We show all terms including those with zero coefficients.
+    ///  **Note:** We show all terms including those with zero coefficients.
     ///
     /// # Example
     /// ```
@@ -981,7 +983,7 @@ public:
 
     /// Equality operator checks that any pair of bit-polynomials are equal in content.
     ///
-    /// @note We ignore any high order trailing zero coefficients in either operand so 1 + x == 1 + x + 0x^2.
+    ///  **Note:** We ignore any high order trailing zero coefficients in either operand so 1 + x == 1 + x + 0x^2.
     ///
     /// # Example
     /// ```

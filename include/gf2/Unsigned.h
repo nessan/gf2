@@ -96,7 +96,8 @@ constexpr Word ALTERNATING = MAX<Word> / 3;
 
 /// Returns an `Unsigned` with the bits in the half-open range `[begin, end)` set to 1 and the others set to 0.
 ///
-/// @note In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
+/// # Panics
+/// In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
 ///
 /// # Example
 /// ```
@@ -116,7 +117,8 @@ with_set_bits(u8 begin, u8 end) {
 
 /// Returns an `Unsigned` with the bits in the half-open range `[begin, end)` set to 0 and the others set to 1.
 ///
-/// @note In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
+/// # Panics
+/// In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
 ///
 /// # Example
 /// ```
@@ -141,7 +143,8 @@ with_unset_bits(u8 begin, u8 end) {
 
 /// Sets the bits in the half-open range `[begin, end)` of `word` to one, leaving the others unchanged.
 ///
-/// @note In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
+/// # Panics
+/// In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
 ///
 /// # Example
 /// ```
@@ -159,7 +162,8 @@ set_bits(Word& word, u8 begin, u8 end) {
 
 /// Resets the bits in the half-open range `[begin, end)` of `word` to zero, leaving the others unchanged.
 ///
-/// @note In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
+/// # Panics
+/// In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
 ///
 /// # Example
 /// ```
@@ -181,7 +185,8 @@ reset_bits(Word& word, u8 begin, u8 end) {
 
 /// Sets the bits of `word` to 1 *except* for those in the half-open range `[begin, end)`  which are unchanged.
 ///
-/// @note In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
+/// # Panics
+/// In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
 ///
 /// # Example
 /// ```
@@ -203,7 +208,8 @@ set_except_bits(Word& word, u8 begin, u8 end) {
 
 /// Sets the bits of `word` to 0 *except* for those in the half-open range `[begin, end)`  which are unchanged.
 ///
-/// @note In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
+/// # Panics
+/// In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
 ///
 /// # Example
 /// ```
@@ -252,7 +258,8 @@ reverse_bits(Word word) {
 ///
 /// The `Other` type must be convertible to `Unsigned`, perhaps by just removing a `const` qualifier.
 ///
-/// @note In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
+/// # Panics
+/// In debug mode, the range `[begin, end) is checked for validity and the program exits on failure.
 ///
 /// # Example
 /// ```

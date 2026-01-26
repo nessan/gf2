@@ -14,8 +14,8 @@
 
 namespace gf2 {
 
-/// A fixed-size vector over GF(2) with `N` bit elements compactly stored in a standard array of primitive unsigned
-/// words whose type is given by the template parameter `Word`. The elements in a bitset are initially all set to 0.
+/// A fixed-size "vector" over GF(2) with `N` bit elements compactly stored in a standard array of primitive unsigned
+/// words whose type is given by the template parameter `Word`. The elements in a bit-array are initially all set to 0.
 ///
 /// `BitArray<N>` is similar to `std::bitset<N>` but has a richer set of functionality.
 ///
@@ -36,7 +36,7 @@ public:
     /// @name Required BitStore Concept Methods.
     /// @{
 
-    /// Returns the number of bit-elements in the bitset.
+    /// Returns the number of bit-elements in the bit-array.
     ///
     /// # Example
     /// ```
@@ -45,7 +45,7 @@ public:
     /// ```
     constexpr usize size() const { return N; }
 
-    /// Returns the number of words in the bitset's underlying word store.
+    /// Returns the number of words in the bit-array's underlying word store.
     ///
     /// The bit-elements are packed into a standard array with this number of words.
     ///
@@ -58,11 +58,12 @@ public:
     /// ```
     constexpr usize words() const { return m_store.size(); }
 
-    /// Returns word `i` from the bitset's underlying word store.
+    /// Returns word `i` from the bit-array's underlying word store.
     ///
     /// The final word in the store may not be fully occupied but we guarantee that unused bits are set to 0.
     ///
-    /// @note In debug mode the index is bounds checked.
+    /// # Panics
+    /// In debug mode the index is bounds checked.
     ///
     /// # Example
     /// ```
@@ -79,11 +80,12 @@ public:
         return m_store[i];
     }
 
-    /// Sets word `i` in the bitset's underlying word store to `value` (masked if necessary).
+    /// Sets word `i` in the bit-array's underlying word store to `value` (masked if necessary).
     ///
     /// The final word in the store may not be fully occupied but we ensure that unused bits remain set to 0.
     ///
-    /// @note In debug mode the index is bounds checked.
+    /// # Panics
+    /// In debug mode the index is bounds checked.
     ///
     /// # Example
     /// ```
@@ -114,7 +116,7 @@ public:
 
     /// Returns a pointer to the underlying store of words.
     ///
-    /// @note The pointer is non-const but you should be careful about using it to modify the words in the store.
+    /// **Note:** The pointer is non-const but you should be careful about using it to modify the words in the store.
     ///
     /// # Example
     /// ```
@@ -125,7 +127,7 @@ public:
     /// ```
     constexpr Word* store() { return m_store.data(); }
 
-    /// Returns the offset (in bits) of the first bit in the store within the first word.
+    /// Returns the offset (in bits) of the first bit in the bit-array within the first word.
     ///
     /// This is always zero for `BitArray`.
     constexpr u8 offset() const { return 0; }
@@ -235,7 +237,8 @@ public:
 
     /// Factory method to construct a bit-array from the bits of a `std::bitset`.
     ///
-    /// @note `std::bitset` prints its bit elements in *bit-order*  ...b2b1b0., we print in *vector-order* b0b1b2...
+    /// # Note
+    /// A `std::bitset` prints its bit elements in *bit-order*  ...b2b1b0., we print in *vector-order* b0b1b2...
     ///
     /// # Example
     /// ```
@@ -265,7 +268,7 @@ public:
     }
 
     /// @}
-    /// @name Random BitArray Constructors:
+    /// @name Construct BitArrays with Random Fills:
     /// @{
 
     /// Factory method to generate a bit-array of size `N` where the elements are picked at random.
@@ -276,7 +279,7 @@ public:
     /// @param p The probability of the elements being 1 (defaults to a fair coin, i.e. 50-50).
     /// @param seed The seed to use for the random number generator (defaults to 0, which means use entropy).
     ///
-    /// @note If `p < 0` then the bit-array is all zeros, if `p > 1` then the bit-array is all ones.
+    /// If `p < 0` then the bit-array is all zeros, if `p > 1` then the bit-array is all ones.
     ///
     /// # Example
     /// ```
@@ -294,11 +297,11 @@ public:
     /// Factory method to generate a bit-array of size `N` where the elements are from independent fair
     /// coin flips generated from an RNG seeded with the given `seed`.
     ///
-    /// This allows one to have reproducible random bit-vectors, which is useful for testing and debugging.
+    /// This allows one to have reproducible random bit-arrays, which is useful for testing and debugging.
     ///
     /// @param seed The seed to use for the random number generator (if you set this to 0 then entropy is used).
     ///
-    /// @note If `p < 0` then the bit-array is all zeros, if `p > 1` then the bit-array is all ones.
+    /// If `p < 0` then the bit-array is all zeros, if `p > 1` then the bit-array is all ones.
     ///
     /// # Example
     /// ```
@@ -323,12 +326,13 @@ public:
     static BitArray biased_random(double p) { return random(p, 0); }
 
     /// @}
-    /// @name Bit Accessors:
+    /// @name Accessors for Individual Bits:
     /// @{
 
     /// Returns `true` if the bit at the given index `i` is set, `false` otherwise.
     ///
-    /// @note In debug mode the index `i` is bounds-checked.
+    /// # Panics
+    /// In debug mode the index is bounds checked.
     ///
     /// # Example
     /// ```
@@ -341,7 +345,8 @@ public:
 
     /// Returns the boolean value of the bit element `i`.
     ///
-    /// @note In debug mode the index is bounds-checked.
+    /// # Panics
+    /// In debug mode the index is bounds checked.
     ///
     /// # Example
     /// ```
@@ -355,7 +360,8 @@ public:
 
     /// Returns `true` if the first bit element is set, `false` otherwise.
     ///
-    /// @note In debug mode the method panics of the store is empty.
+    /// # Panics
+    /// In debug mode the method panics if the bit-array is empty.
     ///
     /// # Example
     /// ```
@@ -368,7 +374,8 @@ public:
 
     /// Returns `true` if the last bit element is set, `false` otherwise.
     ///
-    /// @note In debug mode the method panics of the store is empty.
+    /// # Panics
+    /// In debug mode the method panics if the bit-array is empty.
     ///
     /// # Example
     /// ```
@@ -386,7 +393,8 @@ public:
     /// Sets the bit-element `i` to the specified boolean `value` & returns this for chaining.
     /// The default value for `value` is `true`.
     ///
-    /// @note In debug mode the index is bounds-checked.
+    /// # Panics
+    /// In debug mode the index is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -395,14 +403,20 @@ public:
     /// v.set(0);
     /// assert_eq(v[0], true);
     /// ```
-    auto set(usize i, bool value = true) { return gf2::set(*this, i, value); }
+    constexpr auto set(usize i, bool value = true) {
+        gf2::set(*this, i, value);
+        return *this;
+    }
 
     /// Returns a "reference" to the bit element `i`.
     ///
     /// The returned object is a `BitRef` reference for the bit element at `index` rather than a true reference.
     ///
-    /// @note The referenced bit-store must continue to exist while the `BitRef` is in use.
-    /// @note In debug mode the index `i` is bounds-checked.
+    /// # Note
+    /// The referenced bit-array must continue to exist while the `BitRef` is in use.
+    ///
+    /// # Panics
+    /// In debug mode the index is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -420,7 +434,8 @@ public:
 
     /// Flips the value of the bit-element `i` and returns this for chaining.
     ///
-    /// @note In debug mode the index is bounds-checked.
+    /// # Panics
+    /// In debug mode the index is bounds-checked.
     ///
     /// # Example
     /// ```
@@ -432,11 +447,15 @@ public:
     /// v.flip(9);
     /// assert_eq(v.to_string(), "0011111110");
     /// ```
-    auto flip(usize i) { return gf2::flip(*this, i); }
+    constexpr auto flip(usize i) {
+        gf2::flip(*this, i);
+        return *this;
+    }
 
-    /// Swaps the bits in the bit-store at indices `i0` and `i1` and returns this for chaining.
+    /// Swaps the bits in the bit-array at indices `i0` and `i1` and returns this for chaining.
     ///
-    /// @note In debug mode, panics if either of the indices is out of bounds.
+    /// # Panics
+    /// In debug mode the indices are bounds-checked.
     ///
     /// # Example
     /// ```
@@ -452,13 +471,16 @@ public:
     /// v.swap(0, 9);
     /// assert_eq(v.to_string(), "1000000000");
     /// ```
-    constexpr auto swap(usize i0, usize i1) { return gf2::swap(*this, i0, i1); }
+    constexpr auto swap(usize i0, usize i1) {
+        gf2::swap(*this, i0, i1);
+        return *this;
+    }
 
     /// @}
-    /// @name Store Queries:
+    /// @name BitArray Queries:
     /// @{
 
-    /// Returns `true` if the store is empty, `false` otherwise.
+    /// Returns `true` if the bit-array is empty, `false` otherwise.
     ///
     /// # Example
     /// ```
@@ -469,9 +491,9 @@ public:
     /// ```
     constexpr bool is_empty() const { return gf2::is_empty(*this); }
 
-    /// Returns `true` if at least one bit in the store is set, `false` otherwise.
+    /// Returns `true` if at least one bit in the bit-array is set, `false` otherwise.
     ///
-    /// @note  Empty stores have no set bits (logical connective for `any` is `OR` with identity `false`).
+    /// **Note:** Empty bit-arrays have no set bits (logical connective for `any` is `OR` with identity `false`).
     ///
     /// # Example
     /// ```
@@ -482,9 +504,9 @@ public:
     /// ```
     constexpr bool any() const { return gf2::any(*this); }
 
-    /// Returns `true` if all bits in the store are set, `false` otherwise.
+    /// Returns `true` if all bits in the bit-array are set, `false` otherwise.
     ///
-    /// @note  Empty stores have no set bits (logical connective for `all` is `AND` with identity `true`).
+    /// **Note:** Empty bit-arrays have no set bits (logical connective for `all` is `AND` with identity `true`).
     ///
     /// # Example
     /// ```
@@ -497,9 +519,9 @@ public:
     /// ```
     constexpr bool all() const { return gf2::all(*this); }
 
-    /// Returns `true` if no bits in the store are set, `false` otherwise.
+    /// Returns `true` if no bits in the bit-array are set, `false` otherwise.
     ///
-    /// @note  Empty store have no set bits (logical connective for `none` is `AND` with identity `true`).
+    /// **Note:** Empty bit-arrays have no set bits (logical connective for `none` is `AND` with identity `true`).
     ///
     /// # Example
     /// ```
@@ -511,10 +533,10 @@ public:
     constexpr bool none() const { return gf2::none(*this); }
 
     /// @}
-    /// @name Store Mutators:
+    /// @name BitArray Whole Array Mutators:
     /// @{
 
-    /// Sets the bits in the store to the boolean `value` and returns a reference to this for chaining.
+    /// Sets all the bits in the bit-array to the boolean `value` and returns a reference to this for chaining.
     ///
     /// By default, all bits are set to `true`.
     ///
@@ -524,9 +546,12 @@ public:
     /// v.set_all();
     /// assert_eq(v.to_string(), "1111111111");
     /// ```
-    auto set_all(bool value = true) { return gf2::set_all(*this, value); }
+    constexpr auto set_all(bool value = true) {
+        gf2::set_all(*this, value);
+        return *this;
+    }
 
-    /// Flips the value of the bits in the store and returns a reference to this for chaining.
+    /// Flips the value of the bits in the bit-array and returns a reference to this for chaining.
     ///
     /// # Example
     /// ```
@@ -534,18 +559,24 @@ public:
     /// v.flip_all();
     /// assert_eq(v.to_string(), "1111111111");
     /// ```
-    auto flip_all() { return gf2::flip_all(*this); }
+    constexpr auto flip_all() {
+        gf2::flip_all(*this);
+        return *this;
+    }
 
     /// @}
-    /// @name Copying into the Store:
+    /// @name Copying into the BitArray:
     /// @{
 
-    /// Copies the bits from an unsigned integral `src` value and returns a reference to this for chaining.
+    /// Copies all the bits from _any_ unsigned integral `src` value to this _equal-sized_ bit-array.
+    /// Returns a reference to this for chaining.
     ///
     /// # Notes:
-    /// 1. The size of the store *must* match the number of bits in the source type.
-    /// 2. We allow *any* unsigned integral source, e.g. copying a single `u64` into a `BitArray<u8>` of size 64.
-    /// 3. The least-significant bit of the source becomes the bit at index 0 in the store.
+    /// 1. We allow *any* unsigned integral source, e.g. copying a single `u64` into a `BitArray<u8>` of size 64.
+    /// 2. The least-significant bit of the source becomes the bit at index 0 in the bit-array.
+    ///
+    /// # Panics
+    /// Panics if the size of the bit-array does not match the number of bits in the source integer type.
     ///
     /// # Example
     /// ```
@@ -558,15 +589,21 @@ public:
     /// assert_eq(w.to_string(), "0101010101010101");
     /// ```
     template<Unsigned Src>
-    auto copy(Src src) {
-        return gf2::copy(src, *this);
+    constexpr auto copy(Src src) {
+        gf2::copy(src, *this);
+        return *this;
     }
 
-    /// Copies the bits from an equal-sized `src` store and returns a reference to this for chaining.
+    /// Copies all the bits from _any_ `src` bit-store to this _equal-sized_ bit-array and returns a reference to this
+    /// for chaining.
     ///
-    /// @note This is one of the few methods in the library that *doesn't* require the two stores to have the same
+    /// # Note
+    /// This is one of the few methods in the library that *doesn't* require the two stores to have the same
     /// `word_type`. You can use it to convert between different `word_type` stores (e.g., from `BitArray<u32>` to
     /// `BitArray<u8>`) as long as the sizes match.
+    ///
+    /// # Panics
+    /// Panics if the sizes of this bit-array and the `src` bit-store do not match.
     ///
     /// # Example
     /// ```
@@ -576,13 +613,19 @@ public:
     /// assert_eq(v.to_string(), "1010101010");
     /// ```
     template<BitStore Src>
-    auto copy(Src const& src) {
-        return gf2::copy(src, *this);
+    constexpr auto copy(Src const& src) {
+        gf2::copy(src, *this);
+        return *this;
     }
 
-    /// Copies the bits of an equal-sized `std::bitset` and returns a reference to this for chaining.
+    /// Copies all the bits from a `std::bitset` to this _equal-sized_ bit-array and returns a reference to this for
+    /// chaining.
     ///
-    /// @note `std::bitset` prints its bit elements in *bit-order* which is the reverse of our convention.
+    /// # Note
+    /// A `std::bitset` prints its bit elements in *bit-order* which is the reverse of our convention.
+    ///
+    /// # Panics
+    /// Panics if the size of the bit-array does not match the number of bits in the source `std::bitset`.
     ///
     /// # Example
     /// ```
@@ -591,13 +634,16 @@ public:
     /// v.copy(src);
     /// assert_eq(v.to_string(), "0101010101");
     /// ```
-    auto copy(std::bitset<N> const& src) { return gf2::copy(src, *this); }
+    constexpr auto copy(std::bitset<N> const& src) {
+        gf2::copy(src, *this);
+        return *this;
+    }
 
     /// @}
-    /// @name Store Fills:
+    /// @name BitArray Fills:
     /// @{
 
-    /// Fill the store by repeatedly calling `f(i)` and returns a reference to this for chaining.
+    /// Fill the bit-array by repeatedly calling `f(i)` and returns a reference to this for chaining.
     ///
     /// # Example
     /// ```
@@ -606,16 +652,19 @@ public:
     /// assert_eq(v.size(), 10);
     /// assert_eq(v.to_string(), "1010101010");
     /// ```
-    auto copy(std::invocable<usize> auto f) { return gf2::copy(*this, f); }
+    constexpr auto copy(std::invocable<usize> auto f) {
+        gf2::copy(*this, f);
+        return *this;
+    }
 
-    /// Fill the store with random bits and returns a reference to this for chaining.
+    /// Fill the bit-array with random bits and returns a reference to this for chaining.
     ///
     /// The default call `fill_random()` sets each bit to 1 with probability 0.5 (fair coin).
     ///
     /// @param p The probability of the elements being 1 (defaults to a fair coin, i.e. 50-50).
     /// @param seed The seed to use for the random number generator (defaults to 0, which means use entropy).
     ///
-    /// @note If `p < 0` then the fill is all zeros, if `p > 1` then the fill is all ones.
+    /// If `p < 0` then the fill is all zeros, if `p > 1` then the fill is all ones.
     ///
     /// # Example
     /// ```
@@ -625,13 +674,16 @@ public:
     /// v.fill_random(0.5, seed);
     /// assert(u == v);
     /// ```
-    auto fill_random(double p = 0.5, u64 seed = 0) { return gf2::fill_random(*this, p, seed); }
+    constexpr auto fill_random(double p = 0.5, u64 seed = 0) {
+        gf2::fill_random(*this, p, seed);
+        return *this;
+    }
 
     /// @}
     /// @name Bit Counts:
     /// @{
 
-    /// Returns the number of set bits in the store.
+    /// Returns the number of set bits in the bit-array.
     ///
     /// # Example
     /// ```
@@ -642,7 +694,7 @@ public:
     /// ```
     constexpr usize count_ones() const { return gf2::count_ones(*this); }
 
-    /// Returns the number of unset bits in the store.
+    /// Returns the number of unset bits in the bit-array.
     ///
     /// # Example
     /// ```
@@ -653,7 +705,7 @@ public:
     /// ```
     constexpr usize count_zeros() const { return gf2::count_zeros(*this); }
 
-    /// Returns the number of leading zeros in the store.
+    /// Returns the number of leading zeros in the bit-array.
     ///
     /// # Example
     /// ```
@@ -667,7 +719,7 @@ public:
     /// ```
     constexpr usize leading_zeros() const { return gf2::leading_zeros(*this); }
 
-    /// Returns the number of trailing zeros in the store.
+    /// Returns the number of trailing zeros in the bit-array.
     ///
     /// # Example
     /// ```
@@ -682,7 +734,7 @@ public:
     /// @name Set-bit Indices:
     /// @{
 
-    /// Returns the index of the first set bit in the bit-store or `{}` if no bits are set.
+    /// Returns the index of the first set bit in the bit-array or `{}` if no bits are set.
     ///
     /// # Example
     /// ```
@@ -699,7 +751,7 @@ public:
     /// ```
     constexpr std::optional<usize> first_set() const { return gf2::first_set(*this); }
 
-    /// Returns the index of the last set bit in the bit-store or `{}` if no bits are set.
+    /// Returns the index of the last set bit in the bit-array or `{}` if no bits are set.
     ///
     /// # Example
     /// ```
@@ -714,7 +766,7 @@ public:
     /// ```
     constexpr std::optional<usize> last_set() const { return gf2::last_set(*this); }
 
-    /// Returns the index of the next set bit after `index` in the store or `{}` if no more set bits exist.
+    /// Returns the index of the next set bit after `index` in the bit-array or `{}` if no more set bits exist.
     ///
     /// # Example
     /// ```
@@ -728,7 +780,7 @@ public:
     /// ```
     constexpr std::optional<usize> next_set(usize index) const { return gf2::next_set(*this, index); }
 
-    /// Returns the index of the previous set bit before `index` in the store or `{}` if there are none.
+    /// Returns the index of the previous set bit before `index` in the bit-array or `{}` if there are none.
     ///
     /// # Example
     /// ```
@@ -746,7 +798,7 @@ public:
     /// @name Unset-bit Indices:
     /// @{
 
-    /// Returns the index of the first unset bit in the bit-store or `{}` if no bits are unset.
+    /// Returns the index of the first unset bit in the bit-array or `{}` if no bits are unset.
     ///
     /// # Example
     /// ```
@@ -763,7 +815,7 @@ public:
     /// ```
     constexpr std::optional<usize> first_unset() const { return gf2::first_unset(*this); }
 
-    /// Returns the index of the last unset bit in the bit-store or `{}` if no bits are unset.
+    /// Returns the index of the last unset bit in the bit-array or `{}` if no bits are unset.
     ///
     /// # Example
     /// ```
@@ -780,7 +832,7 @@ public:
     /// ```
     constexpr std::optional<usize> last_unset() const { return gf2::last_unset(*this); }
 
-    /// Returns the index of the next unset bit after `index` in the store or `{}` if no more unset bits exist.
+    /// Returns the index of the next unset bit after `index` in the bit-array or `{}` if no more unset bits exist.
     ///
     /// # Example
     /// ```
@@ -796,7 +848,7 @@ public:
     /// ```
     constexpr std::optional<usize> next_unset(usize index) const { return gf2::next_unset(*this, index); }
 
-    /// Returns the index of the previous unset bit before `index` in the store or `{}` if no more unset bits exist.
+    /// Returns the index of the previous unset bit before `index` in the bit-array or `{}` if no more unset bits exist.
     ///
     /// # Example
     /// ```
@@ -813,15 +865,16 @@ public:
     constexpr std::optional<usize> previous_unset(usize index) const { return gf2::previous_unset(*this, index); }
 
     /// @}
-    /// @name Iterators:
+    /// @name BitArray Iterators:
     /// @{
 
-    /// Returns a const iterator over the `bool` values of the bits in the const bit-store.
+    /// Returns a const iterator over the `bool` values of the bits in the const bit-array.
     ///
     /// You can use this iterator to iterate over the bits in the store and get the values of each bit as a `bool`.
     ///
-    /// @note For the most part, try to avoid iterating through individual bits. It is much more efficient to use
-    /// methods that work on whole words of bits at a time.
+    /// # Note
+    /// For the most part, try to avoid iterating through individual bits. It is much more efficient to use methods that
+    /// work on whole words of bits at a time.
     ///
     /// # Example
     /// ```
@@ -830,12 +883,13 @@ public:
     /// ```
     constexpr auto bits() const { return gf2::bits(*this); }
 
-    /// Returns a non-const iterator over the values of the bits in the mutable bit-store.
+    /// Returns a non-const iterator over the values of the bits in the mutable bit-array.
     ///
     /// You can use this iterator to iterate over the bits in the store to get *or* set the value of each bit.
     ///
-    /// @note For the most part, try to avoid iterating through individual bits. It is much more efficient to use
-    /// methods that work on whole words of bits at a time.
+    /// # Note
+    /// For the most part, try to avoid iterating through individual bits. It is much more efficient to use methods that
+    /// work on whole words of bits at a time.
     ///
     /// # Example
     /// ```
@@ -845,9 +899,9 @@ public:
     /// ```
     constexpr auto bits() { return gf2::bits(*this); }
 
-    /// Returns an iterator over the *indices* of any *set* bits in the bit-store.
+    /// Returns an iterator over the *indices* of any *set* bits in the bit-array.
     ///
-    /// You can use this iterator to iterate over the set bits in the store and get the index of each bit.
+    /// You can use this iterator to iterate over the set bits in the bit-array and get the index of each bit.
     ///
     /// # Example
     /// ```
@@ -859,9 +913,9 @@ public:
     /// ```
     constexpr auto set_bits() const { return gf2::set_bits(*this); }
 
-    /// Returns an iterator over the *indices* of any *unset* bits in the bit-store.
+    /// Returns an iterator over the *indices* of any *unset* bits in the bit-array.
     ///
-    /// You can use this iterator to iterate over the unset bits in the store and get the index of each bit.
+    /// You can use this iterator to iterate over the unset bits in the bit-array and get the index of each bit.
     ///
     /// # Example
     /// ```
@@ -873,15 +927,10 @@ public:
     /// ```
     constexpr auto unset_bits() const { return gf2::unset_bits(*this); }
 
-    /// Returns a const iterator over all the *words* underlying the bit-store.
+    /// Returns a const iterator over all the *words* underlying the v.
     ///
-    /// You can use this iterator to iterate over the words in the store and read the `Word` value of each word.
+    /// You can use this iterator to iterate over the words in the bit-array and read the `Word` value of each word.
     /// You **cannot** use this iterator to modify the words in the store.
-    ///
-    /// @note The words here may be a synthetic construct. The expectation is that the bit `0` in the store is
-    /// located at the bit-location `0` of `word(0)`. That is always the case for bit-vectors but bit-slices typically
-    /// synthesise "words" on the fly from adjacent pairs of bit-array words. Nevertheless, almost all the methods
-    /// in `BitStore` are implemented efficiently by operating on those words.
     ///
     /// # Example
     /// ```
@@ -892,9 +941,9 @@ public:
     /// ```
     constexpr auto store_words() const { return gf2::store_words(*this); }
 
-    /// Returns a copy of the words underlying this bit-store.
+    /// Returns a copy of the words underlying this bit-array.
     ///
-    /// @note The last word in the vector may not be fully occupied but unused slots will be all zeros.
+    /// **Note:** The last word in the bit-array may not be fully occupied but unused slots will be all zeros.
     ///
     /// # Example
     /// ```
@@ -908,11 +957,12 @@ public:
     /// @name Spans:
     /// @{
 
-    /// Returns an *immutable* bit-span encompassing the store's bits in the half-open range `[begin, end)`.
+    /// Returns an *immutable* bit-span encompassing the bit-array's bits in the half-open range `[begin, end)`.
     ///
     /// Immutability here is deep -- the interior pointer in the returned span is to *const* words.
     ///
-    /// @note This method panics if the span range is not valid.
+    /// # Panics
+    /// This method panics if the span range is not valid.
     ///
     /// # Example
     /// ```
@@ -923,11 +973,12 @@ public:
     /// ```
     constexpr auto span(usize begin, usize end) const { return gf2::span(*this, begin, end); }
 
-    /// Returns a mutable bit-span encompassing the bits in the half-open range `[begin, end)`.
+    /// Returns a mutable bit-span encompassing the bit-array's bits in the half-open range `[begin, end)`.
     ///
     /// Mutability here is deep -- the interior pointer in the returned span is to *non-const* words.
     ///
-    /// @note This method panics if the span range is not valid.
+    /// # Panics
+    /// This method panics if the span range is not valid.
     ///
     /// # Example
     /// ```
@@ -945,9 +996,10 @@ public:
     /// @name Sub-vectors:
     /// @{
 
-    /// Returns a *clone* of the elements in the half-open range `[begin, end)` as a new bit-array.
+    /// Returns a *clone* of the elements in the half-open range `[begin, end)` as a new bit-vector.
     ///
-    /// @note This method panics if the range is not valid.
+    /// # Panics
+    /// This method panics if the range is not valid.
     ///
     /// # Example
     /// ```
@@ -965,7 +1017,7 @@ public:
     /// @name Splits:
     /// @{
 
-    /// Views a bit-store as two parts containing the elements `[0, at)` and `[at, size())` respectively.
+    /// Views the bit-array as two parts containing the elements `[0, at)` and `[at, size())` respectively.
     ///
     /// Clones of the parts are stored in the passed bit-vectors `left` and `right`.
     ///
@@ -975,7 +1027,8 @@ public:
     /// This lets one reuse the `left` and `right` destinations without having to allocate new bit-vectors.
     /// This is useful when implementing iterative algorithms that need to split a bit-array into two parts repeatedly.
     ///
-    /// @note This method panics if the split point is beyond the end of the bit-array.
+    /// # Panics
+    /// This method panics if the split point is beyond the end of the bit-array.
     ///
     /// # Example
     /// ```
@@ -991,14 +1044,15 @@ public:
         return gf2::split(*this, at, left, right);
     }
 
-    /// Views a bit-store as two parts containing the elements `[0, at)` and `[at, size())` respectively.
+    /// Views the bit-array as two parts containing the elements `[0, at)` and `[at, size())` respectively.
     ///
     /// Clones of the parts are returned as a pair of bit-vectors [`left`, `right`].
     ///
     /// On return, `left` is a clone of the bits from the start of the bit-array up to but not including `at` and
     /// `right` contains the bits from `at` to the end of the bit-array. This bit-array itself is not modified.
     ///
-    /// @note This method panics if the split point is beyond the end of the bit-array.
+    /// # Panics
+    /// This method panics if the split point is beyond the end of the bit-array.
     ///
     /// # Example
     /// ```
@@ -1015,12 +1069,12 @@ public:
     /// @name Riffling:
     /// @{
 
-    /// Interleaves the bits of this bit-store with zeros storing the result into the bit-array `dst`.
+    /// Interleaves the bits of this bit-array with zeros storing the result into the bit-vector `dst`.
     ///
-    /// On return, `dst` will have the bits of this bit-store interleaved with zeros. For example, if this
-    /// bit-store has the bits `abcde` then `dst` will have the bits `a0b0c0d0e`.
+    /// On return, `dst` will have the bits of this bit-array interleaved with zeros. For example, if this
+    /// bit-array has the bits `abcde` then `dst` will have the bits `a0b0c0d0e`.
     ///
-    /// @note There is no last zero bit in `dst`.
+    /// **Note:** There is no last zero bit in `dst`.
     ///
     /// # Example
     /// ```
@@ -1031,11 +1085,11 @@ public:
     /// ```
     constexpr void riffled(BitVector<word_type>& dst) const { return gf2::riffle(*this, dst); }
 
-    /// Returns a new bit-array that is the result of riffling the bits in this bit-store with zeros.
+    /// Returns a new bit-vector that is the result of riffling the bits in this bit-array with zeros.
     ///
-    /// If bit-store has the bits `abcde` then the output bit-array will have the bits `a0b0c0d0e`.
+    /// If the bit-array has the bits `abcde` then the output bit-vector will have the bits `a0b0c0d0e`.
     ///
-    /// @note There is no last zero bit in `dst`.
+    /// **Note:** There is no last zero bit in `dst`.
     ///
     /// # Example
     /// ```
@@ -1049,7 +1103,7 @@ public:
     /// @name String Representations:
     /// @{
 
-    /// Returns a binary string representation of the store.
+    /// Returns a binary string representation of the bit-array.
     ///
     /// The string is formatted as a sequence of `0`s and `1`s with the least significant bit on the right.
     ///
@@ -1070,7 +1124,7 @@ public:
         return gf2::to_binary_string(*this, sep, pre, post);
     }
 
-    /// Returns a binary string representation of the store.
+    /// Returns a binary string representation of the bit-array.
     ///
     /// The string is formatted as a sequence of `0`s and `1`s with the least significant bit on the right.
     ///
@@ -1090,7 +1144,7 @@ public:
         return gf2::to_string(*this, sep, pre, post);
     }
 
-    /// Returns a "pretty" string representation of the store.
+    /// Returns a "pretty" string representation of the bit-array.
     ///
     /// The output is a string of 0's and 1's with spaces between each bit, and the whole thing enclosed in square
     /// brackets.
@@ -1105,7 +1159,7 @@ public:
     /// ```
     std::string to_pretty_string() const { return gf2::to_pretty_string(*this); }
 
-    /// Returns the "hex" string representation of the bits in the bit-store
+    /// Returns the "hex" string representation of the bits in the bit-array
     ///
     /// The output is a string of hex characters without any spaces, commas, or other formatting.
     ///
@@ -1138,7 +1192,7 @@ public:
     /// ```
     std::string to_hex_string() const { return gf2::to_hex_string(*this); }
 
-    /// Returns a multi-line string describing the bit-store in some detail.
+    /// Returns a multi-line string describing the bit-array in some detail.
     ///
     /// This method is useful for debugging but you should not rely on the output format which may change.
     std::string describe() const { return gf2::describe(*this); }
