@@ -138,7 +138,7 @@ There are also many static factory construction functions.
 | `gf2::BitVector::constant`      | Returns a bit-vector where all the elements are whatever is passed as a `value`.          |
 | `gf2::BitVector::unit`          | Returns a bit-vector where all the elements are zero except for a single 1.               |
 | `gf2::BitVector::alternating`   | Returns a bit-vector where all the elements follow the pattern `101010...`                |
-| `gf2::BitVector::from`          | Returns a `BitVector` filled with bits from various sources.                              |
+| `gf2::BitVector::from`          | Returns a `BitVector` filled with bits copied from various sources.                       |
 | `gf2::BitVector::random`        | Returns a `BitVector` with a random fill seeded from entropy.                             |
 | `gf2::BitVector::seeded_random` | Returns a `BitVector` with a reproducible random fill.                                    |
 | `gf2::BitVector::biased_random` | Returns a random `BitVector` where you set the probability of bits being 1.               |
@@ -146,7 +146,8 @@ There are also many static factory construction functions.
 The `gf2::BitVector::from` factory method is overloaded to allow construction from:
 
 - _Any_ other `gf2::BitStore` object. The source object need not share the same underlying storage type. <br> This allows conversions from bit-stores based on a different word type.
-- _Any_ unsigned integer type, where we copy the bits corresponding to the value.<br> The source type need not be the same as the underlying `Word` type used by the bit-vector. The size of the resulting vector is determined by the number of bits in the source type.
+- _Any_ unsigned integer value, where we copy the bits in the passed value.<br> The source type need not be the same as the underlying `Word` type used by the bit-vector. The size of the resulting vector is determined by the number of bits in the source type.
+- An iteration of _any_ unsigned integer values, where we copy all the bits in that iteration.<br> The source type need not be the same as the underlying `Word` type used by the bit-vector. The size of the resulting vector is determined by the number of bits in the iteration.
 - A [`std::bitset`] where we copy the bits over.
 - A callable object (a function of some sort) that generates bits on demand when passed an index.
 
@@ -202,7 +203,8 @@ We have methods to append elements from various sources to the end of a bit-vect
 The `gf2::BitVector::append` method is overloaded to allow appending bits from:
 
 - A [`std::bitset`] where we append the bits to the end of the bit-vector.
-- _Any_ unsigned integer type, where we append the bits corresponding to the value.<br> The type need not be the same as the underlying `Word` type used by the bit-vector.
+- _Any_ unsigned integer value, where we append the bits from the passed value to the end of the bit-vector.<br> The source type need not be the same as the underlying `Word` type used by the bit-vector.
+- An iteration of _any_ unsigned integer values, where we append all the bits from that iteration to the end of the bit-vector.<br> The source type need not be the same as the underlying `Word` type used by the bit-vector.
 - _Any_ other `gf2::BitStore` object, which need not share the same underlying `Word` storage type.
 
 The `gf2::BitVector::append_digit` method appends bits from a character representing a digit in one of the bases 2, 4, 8, or 16.

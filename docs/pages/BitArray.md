@@ -130,13 +130,15 @@ There are also many static factory construction functions.
 | `gf2::BitArray::constant`      | Returns a bit-array where all the elements are whatever is passed as a `value`. |
 | `gf2::BitArray::unit`          | Returns a bit-array where all the elements are zero except for a single 1.      |
 | `gf2::BitArray::alternating`   | Returns a bit-array where all the elements follow the pattern `101010...`       |
-| `gf2::BitArray::from`          | Returns a `BitVSet` filled with bits from various sources.                      |
-| `gf2::BitArray::random`        | Returns a `BitVSet` with a random fill seeded from entropy.                     |
-| `gf2::BitArray::seeded_random` | Returns a `BitVSet` with a reproducible random fill.                            |
+| `gf2::BitArray::from`          | Returns a `BitArray` filled with bits copied from various sources.              |
+| `gf2::BitArray::random`        | Returns a `BitArray` with a random fill seeded from entropy.                    |
+| `gf2::BitArray::seeded_random` | Returns a `BitArray` with a reproducible random fill.                           |
 | `gf2::BitArray::biased_random` | Returns a random `BitArray` where you set the probability of bits being 1.      |
 
 The `gf2::BitVector::from` factory method is overloaded to allow construction from:
 
+- _Any_ unsigned integer value, where we copy the bits in the passed value.<br> The source type need not be the same as the underlying `Word` type used by the bit-array. The number of bits in the value must match the size of given by the `N` template parameter. This is enforced at compile time.
+- An iteration of _any_ unsigned integer values, where we copy all the bits in that iteration.<br> The source type need not be the same as the underlying `Word` type used by the bit-vector. The total number of bits in the iteration must match the size of given by the `N` template parameter. This is enforced at runtime.
 - A [`std::bitset`] where we copy the bits over.
 - A callable object (a function of some sort) that generates bits on demand when passed an index.
 

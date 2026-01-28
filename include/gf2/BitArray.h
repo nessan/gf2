@@ -235,6 +235,59 @@ public:
         if (shift != 0) m_store[words() - 1] &= Word(~(MAX<Word> << shift));
     }
 
+    /// Factory method to construct a bit-array by copying *all* the bits from *any* `Unsigned` instance.
+    ///
+    /// # Note
+    /// The source type `Src` must have exactly `N` bits.
+    ///
+    /// # Example
+    /// ```
+    /// u8 s8 = 0b01010101;
+    /// auto u = BitArray<8, u8>::from(s8);
+    /// assert_eq(u.to_string(), "10101010");
+    /// u16 s16 = 0b0101010101010101;
+    /// auto v = BitArray<16, u8>::from(s16);
+    /// assert_eq(v.to_string(), "1010101010101010");
+    /// auto w = BitArray<8, u32>::from(s8);
+    /// assert_eq(w.to_string(), "10101010");
+    /// ```
+    template<Unsigned Src>
+        requires (BITS<Src> == N)
+    static constexpr BitArray from(Src src) {
+        BitArray result;
+        result.copy(src);
+        return result;
+    }
+
+    /// Factory method to construct a bit-array by copying *all* the bits from an iteration of _any_ `Unsigned`s.
+    ///
+    /// # Note
+    /// We allow *any* unsigned integral source, e.g. copying `u64` words into a `BitArray<N, u8>`.
+    ///
+    /// # Panics
+    /// Panics if the number of bits in the source iteration does not match `N`.
+    ///
+    /// # Example
+    /// ```
+    /// std::vector<u16> src = { 0b1010101010101010, 0b1010101010101010, 0b1111111111111111 };
+    /// auto v = BitArray<48, u8>::from(src.begin(), src.end());
+    /// assert_eq(v.to_string(), "010101010101010101010101010101011111111111111111");
+    /// auto w = BitArray<48, u32>::from(src.begin(), src.end());
+    /// assert_eq(w.to_string(), "010101010101010101010101010101011111111111111111");
+    /// ```
+    template<typename Iter>
+        requires std::is_unsigned_v<typename std::iterator_traits<Iter>::value_type>
+    static constexpr BitArray from(Iter src_begin, Iter src_end) {
+        // How many bits are we copying?
+        using src_type = typename std::iterator_traits<Iter>::value_type;
+        auto src_words = static_cast<std::size_t>(std::distance(src_begin, src_end));
+        auto src_bits = src_words * BITS<src_type>;
+        gf2_always_assert(src_bits == N, "Lengths do not match: {} != {}.", N, src_bits);
+        BitArray result;
+        result.copy(src_begin, src_end);
+        return result;
+    }
+
     /// Factory method to construct a bit-array from the bits of a `std::bitset`.
     ///
     /// # Note

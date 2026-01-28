@@ -262,6 +262,31 @@ public:
         return result;
     }
 
+    /// Factory method to construct a bit-vector by copying *all* the bits from an iteration of _any_ `Unsigned`s.
+    ///
+    /// # Note
+    /// We allow *any* unsigned integral source, e.g. copying `u64` words into a `BitVector<u8>`.
+    ///
+    /// # Example
+    /// ```
+    /// std::vector<u16> src = { 0b1010101010101010, 0b1010101010101010, 0b1111111111111111 };
+    /// auto v = BitVector<u8>::from(src.begin(), src.end());
+    /// assert_eq(v.to_string(), "010101010101010101010101010101011111111111111111");
+    /// auto w = BitVector<u32>::from(src.begin(), src.end());
+    /// assert_eq(w.to_string(), "010101010101010101010101010101011111111111111111");
+    /// ```
+    template<typename Iter>
+        requires std::is_unsigned_v<typename std::iterator_traits<Iter>::value_type>
+    static constexpr BitVector from(Iter src_begin, Iter src_end) {
+        // How many bits are we copying?
+        using src_type = typename std::iterator_traits<Iter>::value_type;
+        auto src_words = static_cast<std::size_t>(std::distance(src_begin, src_end));
+        auto src_bits = src_words * BITS<src_type>;
+        BitVector result{src_bits};
+        result.copy(src_begin, src_end);
+        return result;
+    }
+
     /// Factory method to construct a bit-vector by copying *all* the bits from *any* other bit-store instance.
     ///
     /// # Note
@@ -662,7 +687,7 @@ public:
     /// @name Appending from Various Sources:
     /// @{
 
-    /// Appends all the bits from any unsigned integral `src` value and returns a reference to this for chaining.
+    /// Appends *all* the bits from any unsigned integral `src` value and returns a reference to this for chaining.
     ///
     /// **Note:** We allow *any* unsigned integral source, e.g. appending a single `u16` into a `BitVector<u8>`.
     ///
@@ -677,12 +702,43 @@ public:
     /// assert_eq(w.to_string(), "11110101010101010101");
     /// ```
     template<Unsigned Src>
-    auto append(Src src) {
+    constexpr auto append(Src src) {
         auto old_size = size();
         resize(old_size + BITS<Src>);
         this->span(old_size, size()).copy(src);
         return *this;
     }
+
+    /// Appends *all* the bits from an iteration of any `Unsigned`s and returns a reference to this for chaining.
+    ///
+    /// # Note
+    /// We allow *any* unsigned integral source, e.g. appending `u64` words into a `BitVector<u8>`.
+    ///
+    /// # Example
+    /// ```
+    /// auto v = BitVector<u8>::ones(4);
+    /// std::vector<u16> src = { 0b1010101010101010, 0b1010101010101010, 0b1111111111111111 };
+    /// v.append(src.begin(), src.end());
+    /// assert_eq(v.to_string(), "1111010101010101010101010101010101011111111111111111");
+    /// auto w = BitVector<u32>::ones(4);
+    /// w.append(src.begin(), src.end());
+    /// assert_eq(w.to_string(), "1111010101010101010101010101010101011111111111111111");
+    /// ```
+    template<typename Iter>
+        requires std::is_unsigned_v<typename std::iterator_traits<Iter>::value_type>
+    constexpr auto append(Iter src_begin, Iter src_end) {
+        // How many bits are we appending?
+        using src_type = typename std::iterator_traits<Iter>::value_type;
+        auto src_words = static_cast<std::size_t>(std::distance(src_begin, src_end));
+        auto src_bits = src_words * BITS<src_type>;
+
+        // Resize & copy.
+        auto old_size = size();
+        resize(old_size + src_bits);
+        this->span(old_size, size()).copy(src_begin, src_end);
+        return *this;
+    }
+
 
     /// Appends all the bits from *any* `BitStore` `src` onto the end of the bit-vector and returns this for chaining.
     ///
