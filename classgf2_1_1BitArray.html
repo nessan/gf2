@@ -313,6 +313,14 @@ static constexpr <a class="el" href="namespacegf2.html#a872a69469085fcdddf299ae4
 Helper Method:</h2></td></tr>
 <tr class="memitem:a7a8e145c0864f8245ee1d0cb935faa9b" id="r_a7a8e145c0864f8245ee1d0cb935faa9b"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a8e145c0864f8245ee1d0cb935faa9b">clean</a> ()</td></tr>
 <tr class="memdesc:a7a8e145c0864f8245ee1d0cb935faa9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets any unused bits in the <em>last</em> occupied word to 0.  <br /></td></tr>
+<tr class="memitem:a5bcdfdb6362b71cb2c73e684914ab279" id="r_a5bcdfdb6362b71cb2c73e684914ab279"><td class="memTemplParams" colspan="2">template&lt;Unsigned Src&gt; <br />
+requires (<a class="el" href="namespacegf2.html#ad1d8969ed4ed705fbc26eec1eed8b6ae">BITS</a>&lt;Src&gt; == N)</td></tr>
+<tr class="memitem:a5bcdfdb6362b71cb2c73e684914ab279 template"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5bcdfdb6362b71cb2c73e684914ab279">from</a> (Src src)</td></tr>
+<tr class="memdesc:a5bcdfdb6362b71cb2c73e684914ab279"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory method to construct a bit-array by copying <em>all</em> the bits from <em>any</em> <span class="tt"><a class="el" href="conceptgf2_1_1Unsigned.html" title="The Unsigned concept is the same as std::unsigned_integral. It is satisfied by all primitive unsigned...">Unsigned</a></span> instance.  <br /></td></tr>
+<tr class="memitem:a9ad5d26dd30796f1fb0da4aaf74a2d2b" id="r_a9ad5d26dd30796f1fb0da4aaf74a2d2b"><td class="memTemplParams" colspan="2">template&lt;typename Iter&gt; <br />
+requires std::is_unsigned_v&lt;typename std::iterator_traits&lt;Iter&gt;::value_type&gt;</td></tr>
+<tr class="memitem:a9ad5d26dd30796f1fb0da4aaf74a2d2b template"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ad5d26dd30796f1fb0da4aaf74a2d2b">from</a> (Iter src_begin, Iter src_end)</td></tr>
+<tr class="memdesc:a9ad5d26dd30796f1fb0da4aaf74a2d2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory method to construct a bit-array by copying <em>all</em> the bits from an iteration of <em>any</em> <span class="tt"><a class="el" href="conceptgf2_1_1Unsigned.html" title="The Unsigned concept is the same as std::unsigned_integral. It is satisfied by all primitive unsigned...">Unsigned</a></span>s.  <br /></td></tr>
 <tr class="memitem:a4d89093857a783b598995b6a45b8c8dd" id="r_a4d89093857a783b598995b6a45b8c8dd"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d89093857a783b598995b6a45b8c8dd">from</a> (std::bitset&lt; N &gt; const &amp;src)</td></tr>
 <tr class="memdesc:a4d89093857a783b598995b6a45b8c8dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory method to construct a bit-array from the bits of a <span class="tt">std::bitset</span>.  <br /></td></tr>
 <tr class="memitem:a6ede5ef1640515441b749d6071fcf8c1" id="r_a6ede5ef1640515441b749d6071fcf8c1"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ede5ef1640515441b749d6071fcf8c1">from</a> (std::invocable&lt; <a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> &gt; auto f)</td></tr>
@@ -356,7 +364,7 @@ Example</h1>
 <div class="line">assert_eq(u.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;&quot;</span>);</div>
 <div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;0000000000&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a7e7ba662c7a451fb55b1f64d29d013d1"><div class="ttname"><a href="#a7e7ba662c7a451fb55b1f64d29d013d1">gf2::BitArray::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1190</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a7e7ba662c7a451fb55b1f64d29d013d1"><div class="ttname"><a href="#a7e7ba662c7a451fb55b1f64d29d013d1">gf2::BitArray::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1243</div></div>
 <div class="ttc" id="aclassgf2_1_1BitArray_html_ae52f2a1cd4ba693f95405eaa007b42fc"><div class="ttname"><a href="#ae52f2a1cd4ba693f95405eaa007b42fc">gf2::BitArray::BitArray</a></div><div class="ttdeci">constexpr BitArray()</div><div class="ttdoc">Constructs a bit-array of length N with all the bit elements set to 0.</div><div class="ttdef"><b>Definition</b> BitArray.h:148</div></div>
 </div><!-- fragment --> 
 </div>
@@ -424,7 +432,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns <span class="tt">true</span> if all bits in the bit-array are set, <span class="tt">false</span> otherwise. </p>
 <p><b>Note:</b> Empty bit-arrays have no set bits (logical connective for <span class="tt"><a class="el" href="#a495ffc84725d778f6df7e2189f622644" title="Returns true if all bits in the bit-array are set, false otherwise.">all</a></span> is <span class="tt">AND</span> with identity <span class="tt">true</span>).</p>
-<h1 class="doxsection"><a class="anchor" id="example-38"></a>
+<h1 class="doxsection"><a class="anchor" id="example-40"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;3&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a495ffc84725d778f6df7e2189f622644">all</a>(), <span class="keyword">false</span>);</div>
@@ -432,8 +440,8 @@ Example</h1>
 <div class="line">v.<a class="code hl_function" href="#a07520d5580bf502c10a4b5e53aa7d667">set</a>(1);</div>
 <div class="line">v.<a class="code hl_function" href="#a07520d5580bf502c10a4b5e53aa7d667">set</a>(2);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a495ffc84725d778f6df7e2189f622644">all</a>(), <span class="keyword">true</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a07520d5580bf502c10a4b5e53aa7d667"><div class="ttname"><a href="#a07520d5580bf502c10a4b5e53aa7d667">gf2::BitArray::set</a></div><div class="ttdeci">constexpr auto set(usize i, bool value=true)</div><div class="ttdoc">Sets the bit-element i to the specified boolean value &amp; returns this for chaining....</div><div class="ttdef"><b>Definition</b> BitArray.h:406</div></div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a495ffc84725d778f6df7e2189f622644"><div class="ttname"><a href="#a495ffc84725d778f6df7e2189f622644">gf2::BitArray::all</a></div><div class="ttdeci">constexpr bool all() const</div><div class="ttdoc">Returns true if all bits in the bit-array are set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:520</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a07520d5580bf502c10a4b5e53aa7d667"><div class="ttname"><a href="#a07520d5580bf502c10a4b5e53aa7d667">gf2::BitArray::set</a></div><div class="ttdeci">constexpr auto set(usize i, bool value=true)</div><div class="ttdoc">Sets the bit-element i to the specified boolean value &amp; returns this for chaining....</div><div class="ttdef"><b>Definition</b> BitArray.h:459</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a495ffc84725d778f6df7e2189f622644"><div class="ttname"><a href="#a495ffc84725d778f6df7e2189f622644">gf2::BitArray::all</a></div><div class="ttdeci">constexpr bool all() const</div><div class="ttdoc">Returns true if all bits in the bit-array are set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:573</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -498,13 +506,13 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns <span class="tt">true</span> if at least one bit in the bit-array is set, <span class="tt">false</span> otherwise. </p>
 <p><b>Note:</b> Empty bit-arrays have no set bits (logical connective for <span class="tt"><a class="el" href="#a765eeb4afcf8135e670176939cf3cc74" title="Returns true if at least one bit in the bit-array is set, false otherwise.">any</a></span> is <span class="tt">OR</span> with identity <span class="tt">false</span>).</p>
-<h1 class="doxsection"><a class="anchor" id="example-37"></a>
+<h1 class="doxsection"><a class="anchor" id="example-39"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a765eeb4afcf8135e670176939cf3cc74">any</a>(), <span class="keyword">false</span>);</div>
 <div class="line">v.<a class="code hl_function" href="#a07520d5580bf502c10a4b5e53aa7d667">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a765eeb4afcf8135e670176939cf3cc74">any</a>(), <span class="keyword">true</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a765eeb4afcf8135e670176939cf3cc74"><div class="ttname"><a href="#a765eeb4afcf8135e670176939cf3cc74">gf2::BitArray::any</a></div><div class="ttdeci">constexpr bool any() const</div><div class="ttdoc">Returns true if at least one bit in the bit-array is set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:505</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a765eeb4afcf8135e670176939cf3cc74"><div class="ttname"><a href="#a765eeb4afcf8135e670176939cf3cc74">gf2::BitArray::any</a></div><div class="ttdeci">constexpr bool any() const</div><div class="ttdoc">Returns true if at least one bit in the bit-array is set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:558</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -534,17 +542,17 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns <span class="tt">true</span> if the last bit element is set, <span class="tt">false</span> otherwise. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-5"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-6"></a>
 Panics</h1>
 <p>In debug mode the method panics if the bit-array is empty.</p>
-<h1 class="doxsection"><a class="anchor" id="example-31"></a>
+<h1 class="doxsection"><a class="anchor" id="example-33"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a017bf4fa4deddd2a4f660aec879b2450">back</a>(), <span class="keyword">false</span>);</div>
 <div class="line">v.<a class="code hl_function" href="#aab2791cfd5ff853058cc609a4d3b354c">set_all</a>();</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a017bf4fa4deddd2a4f660aec879b2450">back</a>(), <span class="keyword">true</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a017bf4fa4deddd2a4f660aec879b2450"><div class="ttname"><a href="#a017bf4fa4deddd2a4f660aec879b2450">gf2::BitArray::back</a></div><div class="ttdeci">constexpr bool back() const</div><div class="ttdoc">Returns true if the last bit element is set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:387</div></div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_aab2791cfd5ff853058cc609a4d3b354c"><div class="ttname"><a href="#aab2791cfd5ff853058cc609a4d3b354c">gf2::BitArray::set_all</a></div><div class="ttdeci">constexpr auto set_all(bool value=true)</div><div class="ttdoc">Sets all the bits in the bit-array to the boolean value and returns a reference to this for chaining.</div><div class="ttdef"><b>Definition</b> BitArray.h:549</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a017bf4fa4deddd2a4f660aec879b2450"><div class="ttname"><a href="#a017bf4fa4deddd2a4f660aec879b2450">gf2::BitArray::back</a></div><div class="ttdeci">constexpr bool back() const</div><div class="ttdoc">Returns true if the last bit element is set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:440</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_aab2791cfd5ff853058cc609a4d3b354c"><div class="ttname"><a href="#aab2791cfd5ff853058cc609a4d3b354c">gf2::BitArray::set_all</a></div><div class="ttdeci">constexpr auto set_all(bool value=true)</div><div class="ttdoc">Sets all the bits in the bit-array to the boolean value and returns a reference to this for chaining.</div><div class="ttdef"><b>Definition</b> BitArray.h:602</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -580,12 +588,12 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
   </table>
   </dd>
 </dl>
-<h1 class="doxsection"><a class="anchor" id="example-27"></a>
+<h1 class="doxsection"><a class="anchor" id="example-29"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#a76cc891c25b8b9da8fcb9a07e2d2cbda">BitArray&lt;10&gt;::biased_random</a>(0.3);</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a76cc891c25b8b9da8fcb9a07e2d2cbda">BitArray&lt;10&gt;::biased_random</a>(0.3);</div>
 <div class="line">assert_eq(u.size(), v.size());</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a76cc891c25b8b9da8fcb9a07e2d2cbda"><div class="ttname"><a href="#a76cc891c25b8b9da8fcb9a07e2d2cbda">gf2::BitArray::biased_random</a></div><div class="ttdeci">static BitArray biased_random(double p)</div><div class="ttdoc">Factory method to generate a bit-array of size N where the elements are from independent fair coin fl...</div><div class="ttdef"><b>Definition</b> BitArray.h:326</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a76cc891c25b8b9da8fcb9a07e2d2cbda"><div class="ttname"><a href="#a76cc891c25b8b9da8fcb9a07e2d2cbda">gf2::BitArray::biased_random</a></div><div class="ttdeci">static BitArray biased_random(double p)</div><div class="ttdoc">Factory method to generate a bit-array of size N where the elements are from independent fair coin fl...</div><div class="ttdef"><b>Definition</b> BitArray.h:379</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -616,15 +624,15 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns a non-const iterator over the values of the bits in the mutable bit-array. </p>
 <p>You can use this iterator to iterate over the bits in the store to get <em>or</em> set the value of each bit.</p>
-<h1 class="doxsection"><a class="anchor" id="note-6"></a>
+<h1 class="doxsection"><a class="anchor" id="note-8"></a>
 Note</h1>
 <p>For the most part, try to avoid iterating through individual bits. It is much more efficient to use methods that work on whole words of bits at a time.</p>
-<h1 class="doxsection"><a class="anchor" id="example-61"></a>
+<h1 class="doxsection"><a class="anchor" id="example-63"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> v;</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; bit : v.<a class="code hl_function" href="#ae827ae81443b13b09791f8987accc35e">bits</a>()) bit = <span class="keyword">true</span>;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;1111111111&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_ae827ae81443b13b09791f8987accc35e"><div class="ttname"><a href="#ae827ae81443b13b09791f8987accc35e">gf2::BitArray::bits</a></div><div class="ttdeci">constexpr auto bits() const</div><div class="ttdoc">Returns a const iterator over the bool values of the bits in the const bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:908</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_ae827ae81443b13b09791f8987accc35e"><div class="ttname"><a href="#ae827ae81443b13b09791f8987accc35e">gf2::BitArray::bits</a></div><div class="ttdeci">constexpr auto bits() const</div><div class="ttdoc">Returns a const iterator over the bool values of the bits in the const bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:961</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -655,10 +663,10 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns a const iterator over the <span class="tt">bool</span> values of the bits in the const bit-array. </p>
 <p>You can use this iterator to iterate over the bits in the store and get the values of each bit as a <span class="tt">bool</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="note-5"></a>
+<h1 class="doxsection"><a class="anchor" id="note-7"></a>
 Note</h1>
 <p>For the most part, try to avoid iterating through individual bits. It is much more efficient to use methods that work on whole words of bits at a time.</p>
-<h1 class="doxsection"><a class="anchor" id="example-60"></a>
+<h1 class="doxsection"><a class="anchor" id="example-62"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;37, u8&gt;</a> v; v.<a class="code hl_function" href="#aab2791cfd5ff853058cc609a4d3b354c">set_all</a>();</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; bit : v.<a class="code hl_function" href="#ae827ae81443b13b09791f8987accc35e">bits</a>()) assert_eq(bit, <span class="keyword">true</span>);</div>
@@ -764,13 +772,13 @@ requires std::is_unsigned_v&lt;typename std::iterator_traits&lt;Iter&gt;::value_
 </div><div class="memdoc">
 
 <p>Copies all the bits from an iteration of <em>any</em> unsigned integral <span class="tt">src</span> values to this <em>equal-sized</em> bit-array. </p>
-<h1 class="doxsection"><a class="anchor" id="note-2"></a>
+<h1 class="doxsection"><a class="anchor" id="note-4"></a>
 Note</h1>
 <p>We allow <em>any</em> unsigned integral source, e.g. copying <span class="tt"><a class="el" href="namespacegf2.html#a770302128133591da0ca93ded6abf8aa" title="Word type alias for a 64-bit unsigned integer.">u64</a></span> words into a <span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size &quot;vector&quot; over GF(2) with N bit elements compactly stored in a standard array of primitiv...">BitArray</a>&lt;N,<a class="el" href="namespacegf2.html#a872a69469085fcdddf299ae4adc3c940" title="Word type alias for an 8-bit unsigned integer.">u8</a>&gt;</span> of the correct size.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-11"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-12"></a>
 Panics</h1>
 <p>Panics if the size of this bit-array does not match the number of bits in the source iteration.</p>
-<h1 class="doxsection"><a class="anchor" id="example-43"></a>
+<h1 class="doxsection"><a class="anchor" id="example-45"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;48, u8&gt;</a> v;</div>
 <div class="line">std::vector&lt;u16&gt; src = { 0b1010101010101010, 0b1010101010101010, 0b1111111111111111 };</div>
@@ -780,7 +788,7 @@ Example</h1>
 <div class="line">w.<a class="code hl_function" href="#a6bbfb8e5e1b435b698caf37e85f23173">copy</a>(src.begin(), src.end());</div>
 <div class="line">assert_eq(w.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;010101010101010101010101010101011111111111111111&quot;</span>);</div>
 <div class="ttc" id="aclassgf2_1_1BitArray_html"><div class="ttname"><a href="classgf2_1_1BitArray.html">gf2::BitArray</a></div><div class="ttdoc">A fixed-size &quot;vector&quot; over GF(2) with N bit elements compactly stored in a standard array of primitiv...</div><div class="ttdef"><b>Definition</b> BitArray.h:24</div></div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a6bbfb8e5e1b435b698caf37e85f23173"><div class="ttname"><a href="#a6bbfb8e5e1b435b698caf37e85f23173">gf2::BitArray::copy</a></div><div class="ttdeci">constexpr auto copy(Src src)</div><div class="ttdoc">Copies all the bits from any unsigned integral src value to this equal-sized bit-array....</div><div class="ttdef"><b>Definition</b> BitArray.h:592</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a6bbfb8e5e1b435b698caf37e85f23173"><div class="ttname"><a href="#a6bbfb8e5e1b435b698caf37e85f23173">gf2::BitArray::copy</a></div><div class="ttdeci">constexpr auto copy(Src src)</div><div class="ttdoc">Copies all the bits from any unsigned integral src value to this equal-sized bit-array....</div><div class="ttdef"><b>Definition</b> BitArray.h:645</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -812,13 +820,13 @@ template&lt;BitStore Src&gt; </div>
 </div><div class="memdoc">
 
 <p>Copies all the bits from <em>any</em> <span class="tt">src</span> bit-store to this <em>equal-sized</em> bit-array and returns a reference to this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="note-3"></a>
+<h1 class="doxsection"><a class="anchor" id="note-5"></a>
 Note</h1>
 <p>This is one of the few methods in the library that <em>doesn't</em> require the two stores to have the same <span class="tt"><a class="el" href="#a82a5c674165737fe7c72832867734ea6" title="The underlying unsigned word type used to store the bits.">word_type</a></span>. You can use it to convert between different <span class="tt"><a class="el" href="#a82a5c674165737fe7c72832867734ea6" title="The underlying unsigned word type used to store the bits.">word_type</a></span> stores (e.g., from <span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size &quot;vector&quot; over GF(2) with N bit elements compactly stored in a standard array of primitiv...">BitArray</a>&lt;<a class="el" href="namespacegf2.html#ad1e43953e374bea8222087e4aba6c74a" title="Word type alias for a 32-bit unsigned integer.">u32</a>&gt;</span> to <span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size &quot;vector&quot; over GF(2) with N bit elements compactly stored in a standard array of primitiv...">BitArray</a>&lt;<a class="el" href="namespacegf2.html#a872a69469085fcdddf299ae4adc3c940" title="Word type alias for an 8-bit unsigned integer.">u8</a>&gt;</span>) as long as the sizes match.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-12"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-13"></a>
 Panics</h1>
 <p>Panics if the sizes of this bit-array and the <span class="tt">src</span> bit-store do not match.</p>
-<h1 class="doxsection"><a class="anchor" id="example-44"></a>
+<h1 class="doxsection"><a class="anchor" id="example-46"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u64&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;0000000000&quot;</span>);</div>
@@ -862,10 +870,10 @@ Notes:</h1>
 <li>We allow <em>any</em> unsigned integral source, e.g. copying a single <span class="tt"><a class="el" href="namespacegf2.html#a770302128133591da0ca93ded6abf8aa" title="Word type alias for a 64-bit unsigned integer.">u64</a></span> into a <span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size &quot;vector&quot; over GF(2) with N bit elements compactly stored in a standard array of primitiv...">BitArray</a>&lt;<a class="el" href="namespacegf2.html#a872a69469085fcdddf299ae4adc3c940" title="Word type alias for an 8-bit unsigned integer.">u8</a>&gt;</span> of size 64.</li>
 <li>The least-significant bit of the source becomes the bit at index 0 in the bit-array.</li>
 </ol>
-<h1 class="doxsection"><a class="anchor" id="panics-10"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-11"></a>
 Panics</h1>
 <p>Panics if the size of the bit-array does not match the number of bits in the source integer type.</p>
-<h1 class="doxsection"><a class="anchor" id="example-42"></a>
+<h1 class="doxsection"><a class="anchor" id="example-44"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;16, u8&gt;</a> v;</div>
 <div class="line"><a class="code hl_typedef" href="namespacegf2.html#ae858164ae3b877b1f9ea2606fae215a0">u16</a> src = 0b1010101010101010;</div>
@@ -904,13 +912,13 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Copies all the bits from a <span class="tt">std::bitset</span> to this <em>equal-sized</em> bit-array and returns a reference to this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="note-4"></a>
+<h1 class="doxsection"><a class="anchor" id="note-6"></a>
 Note</h1>
 <p>A <span class="tt">std::bitset</span> prints its bit elements in <em>bit-order</em> which is the reverse of our convention.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-13"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-14"></a>
 Panics</h1>
 <p>Panics if the size of the bit-array does not match the number of bits in the source <span class="tt">std::bitset</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="example-45"></a>
+<h1 class="doxsection"><a class="anchor" id="example-47"></a>
 Example</h1>
 <div class="fragment"><div class="line">std::bitset&lt;10&gt; src{0b1010101010};</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1BitArray.html">BitArray&lt;10&gt;</a> v;</div>
@@ -945,7 +953,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Fill the bit-array by repeatedly calling <span class="tt">f(i)</span> and returns a reference to this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="example-46"></a>
+<h1 class="doxsection"><a class="anchor" id="example-48"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#a6bbfb8e5e1b435b698caf37e85f23173">copy</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
@@ -982,13 +990,13 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the number of set bits in the bit-array. </p>
-<h1 class="doxsection"><a class="anchor" id="example-48"></a>
+<h1 class="doxsection"><a class="anchor" id="example-50"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#aec2366220f35b59668ce49ee8900ecd3">count_ones</a>(), 0);</div>
 <div class="line">v.<a class="code hl_function" href="#a07520d5580bf502c10a4b5e53aa7d667">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#aec2366220f35b59668ce49ee8900ecd3">count_ones</a>(), 1);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_aec2366220f35b59668ce49ee8900ecd3"><div class="ttname"><a href="#aec2366220f35b59668ce49ee8900ecd3">gf2::BitArray::count_ones</a></div><div class="ttdeci">constexpr usize count_ones() const</div><div class="ttdoc">Returns the number of set bits in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:719</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_aec2366220f35b59668ce49ee8900ecd3"><div class="ttname"><a href="#aec2366220f35b59668ce49ee8900ecd3">gf2::BitArray::count_ones</a></div><div class="ttdeci">constexpr usize count_ones() const</div><div class="ttdoc">Returns the number of set bits in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:772</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1018,13 +1026,13 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the number of unset bits in the bit-array. </p>
-<h1 class="doxsection"><a class="anchor" id="example-49"></a>
+<h1 class="doxsection"><a class="anchor" id="example-51"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a23e7628e2a6037aeed139fec41890031">count_zeros</a>(), 10);</div>
 <div class="line">v.<a class="code hl_function" href="#a07520d5580bf502c10a4b5e53aa7d667">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a23e7628e2a6037aeed139fec41890031">count_zeros</a>(), 9);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a23e7628e2a6037aeed139fec41890031"><div class="ttname"><a href="#a23e7628e2a6037aeed139fec41890031">gf2::BitArray::count_zeros</a></div><div class="ttdeci">constexpr usize count_zeros() const</div><div class="ttdoc">Returns the number of unset bits in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:730</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a23e7628e2a6037aeed139fec41890031"><div class="ttname"><a href="#a23e7628e2a6037aeed139fec41890031">gf2::BitArray::count_zeros</a></div><div class="ttdeci">constexpr usize count_zeros() const</div><div class="ttdoc">Returns the number of unset bits in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:783</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1097,14 +1105,14 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
   </dd>
 </dl>
 <p>If <span class="tt">p &lt; 0</span> then the fill is all zeros, if <span class="tt">p &gt; 1</span> then the fill is all ones.</p>
-<h1 class="doxsection"><a class="anchor" id="example-47"></a>
+<h1 class="doxsection"><a class="anchor" id="example-49"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> u, v;</div>
 <div class="line"><a class="code hl_typedef" href="namespacegf2.html#a770302128133591da0ca93ded6abf8aa">u64</a> seed = 1234567890;</div>
 <div class="line">u.<a class="code hl_function" href="#a62a56d20bc5fbfcd02f60906095ce694">fill_random</a>(0.5, seed);</div>
 <div class="line">v.<a class="code hl_function" href="#a62a56d20bc5fbfcd02f60906095ce694">fill_random</a>(0.5, seed);</div>
 <div class="line">assert(u == v);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a62a56d20bc5fbfcd02f60906095ce694"><div class="ttname"><a href="#a62a56d20bc5fbfcd02f60906095ce694">gf2::BitArray::fill_random</a></div><div class="ttdeci">constexpr auto fill_random(double p=0.5, u64 seed=0)</div><div class="ttdoc">Fill the bit-array with random bits and returns a reference to this for chaining.</div><div class="ttdef"><b>Definition</b> BitArray.h:701</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a62a56d20bc5fbfcd02f60906095ce694"><div class="ttname"><a href="#a62a56d20bc5fbfcd02f60906095ce694">gf2::BitArray::fill_random</a></div><div class="ttdeci">constexpr auto fill_random(double p=0.5, u64 seed=0)</div><div class="ttdoc">Fill the bit-array with random bits and returns a reference to this for chaining.</div><div class="ttdef"><b>Definition</b> BitArray.h:754</div></div>
 <div class="ttc" id="anamespacegf2_html_a770302128133591da0ca93ded6abf8aa"><div class="ttname"><a href="namespacegf2.html#a770302128133591da0ca93ded6abf8aa">gf2::u64</a></div><div class="ttdeci">std::uint64_t u64</div><div class="ttdoc">Word type alias for a 64-bit unsigned integer.</div><div class="ttdef"><b>Definition</b> Unsigned.h:39</div></div>
 </div><!-- fragment --> 
 </div>
@@ -1135,7 +1143,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the index of the first set bit in the bit-array or <span class="tt">{}</span> if no bits are set. </p>
-<h1 class="doxsection"><a class="anchor" id="example-52"></a>
+<h1 class="doxsection"><a class="anchor" id="example-54"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;37, u8&gt;</a> v;</div>
 <div class="line">assert(v.<a class="code hl_function" href="#a7a241a6121e734616ef0f6533b107c0f">first_set</a>() == std::optional&lt;usize&gt;{});</div>
@@ -1147,7 +1155,7 @@ Example</h1>
 <div class="line">assert(v.<a class="code hl_function" href="#a7a241a6121e734616ef0f6533b107c0f">first_set</a>() == std::optional&lt;usize&gt;{27});</div>
 <div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;0&gt;</a> empty;</div>
 <div class="line">assert(empty.<a class="code hl_function" href="#a7a241a6121e734616ef0f6533b107c0f">first_set</a>() == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a7a241a6121e734616ef0f6533b107c0f"><div class="ttname"><a href="#a7a241a6121e734616ef0f6533b107c0f">gf2::BitArray::first_set</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; first_set() const</div><div class="ttdoc">Returns the index of the first set bit in the bit-array or {} if no bits are set.</div><div class="ttdef"><b>Definition</b> BitArray.h:776</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a7a241a6121e734616ef0f6533b107c0f"><div class="ttname"><a href="#a7a241a6121e734616ef0f6533b107c0f">gf2::BitArray::first_set</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; first_set() const</div><div class="ttdoc">Returns the index of the first set bit in the bit-array or {} if no bits are set.</div><div class="ttdef"><b>Definition</b> BitArray.h:829</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1177,7 +1185,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the index of the first unset bit in the bit-array or <span class="tt">{}</span> if no bits are unset. </p>
-<h1 class="doxsection"><a class="anchor" id="example-56"></a>
+<h1 class="doxsection"><a class="anchor" id="example-58"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;37, u8&gt;</a> v; v.<a class="code hl_function" href="#aab2791cfd5ff853058cc609a4d3b354c">set_all</a>();</div>
 <div class="line">assert(v.<a class="code hl_function" href="#a511097c7ce5605ff98cda300d6ce558a">first_unset</a>() == std::optional&lt;usize&gt;{});</div>
@@ -1189,7 +1197,7 @@ Example</h1>
 <div class="line">assert(v.<a class="code hl_function" href="#a511097c7ce5605ff98cda300d6ce558a">first_unset</a>() == std::optional&lt;usize&gt;{27});</div>
 <div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;0&gt;</a> empty;</div>
 <div class="line">assert(empty.<a class="code hl_function" href="#a511097c7ce5605ff98cda300d6ce558a">first_unset</a>() == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a511097c7ce5605ff98cda300d6ce558a"><div class="ttname"><a href="#a511097c7ce5605ff98cda300d6ce558a">gf2::BitArray::first_unset</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; first_unset() const</div><div class="ttdoc">Returns the index of the first unset bit in the bit-array or {} if no bits are unset.</div><div class="ttdef"><b>Definition</b> BitArray.h:840</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a511097c7ce5605ff98cda300d6ce558a"><div class="ttname"><a href="#a511097c7ce5605ff98cda300d6ce558a">gf2::BitArray::first_unset</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; first_unset() const</div><div class="ttdoc">Returns the index of the first unset bit in the bit-array or {} if no bits are unset.</div><div class="ttdef"><b>Definition</b> BitArray.h:893</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1219,10 +1227,10 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Flips the value of the bit-element <span class="tt">i</span> and returns this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-8"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-9"></a>
 Panics</h1>
 <p>In debug mode the index is bounds-checked.</p>
-<h1 class="doxsection"><a class="anchor" id="example-34"></a>
+<h1 class="doxsection"><a class="anchor" id="example-36"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a67ed2efa8a38a1bf3dbfc3d331806355">BitArray&lt;10, u8&gt;::ones</a>();</div>
 <div class="line">v.flip(0);</div>
@@ -1261,17 +1269,112 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Flips the value of the bits in the bit-array and returns a reference to this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="example-41"></a>
+<h1 class="doxsection"><a class="anchor" id="example-43"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#ac03f099279bd6d712604d8d2468b0a74">flip_all</a>();</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;1111111111&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_ac03f099279bd6d712604d8d2468b0a74"><div class="ttname"><a href="#ac03f099279bd6d712604d8d2468b0a74">gf2::BitArray::flip_all</a></div><div class="ttdeci">constexpr auto flip_all()</div><div class="ttdoc">Flips the value of the bits in the bit-array and returns a reference to this for chaining.</div><div class="ttdef"><b>Definition</b> BitArray.h:562</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_ac03f099279bd6d712604d8d2468b0a74"><div class="ttname"><a href="#ac03f099279bd6d712604d8d2468b0a74">gf2::BitArray::flip_all</a></div><div class="ttdeci">constexpr auto flip_all()</div><div class="ttdoc">Flips the value of the bits in the bit-array and returns a reference to this for chaining.</div><div class="ttdef"><b>Definition</b> BitArray.h:615</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="a9ad5d26dd30796f1fb0da4aaf74a2d2b" name="a9ad5d26dd30796f1fb0da4aaf74a2d2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ad5d26dd30796f1fb0da4aaf74a2d2b">&#9670;&#160;</a></span>from() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> N, Unsigned Word = usize&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iter&gt; <br />
+requires std::is_unsigned_v&lt;typename std::iterator_traits&lt;Iter&gt;::value_type&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray</a> <a class="el" href="classgf2_1_1BitArray.html">gf2::BitArray</a>&lt; N, Word &gt;::from </td>
+          <td>(</td>
+          <td class="paramtype">Iter</td>          <td class="paramname"><span class="paramname"><em>src_begin</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iter</td>          <td class="paramname"><span class="paramname"><em>src_end</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Factory method to construct a bit-array by copying <em>all</em> the bits from an iteration of <em>any</em> <span class="tt"><a class="el" href="conceptgf2_1_1Unsigned.html" title="The Unsigned concept is the same as std::unsigned_integral. It is satisfied by all primitive unsigned...">Unsigned</a></span>s. </p>
+<h1 class="doxsection"><a class="anchor" id="note-1"></a>
+Note</h1>
+<p>We allow <em>any</em> unsigned integral source, e.g. copying <span class="tt"><a class="el" href="namespacegf2.html#a770302128133591da0ca93ded6abf8aa" title="Word type alias for a 64-bit unsigned integer.">u64</a></span> words into a <span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size &quot;vector&quot; over GF(2) with N bit elements compactly stored in a standard array of primitiv...">BitArray</a>&lt;N, <a class="el" href="namespacegf2.html#a872a69469085fcdddf299ae4adc3c940" title="Word type alias for an 8-bit unsigned integer.">u8</a>&gt;</span>.</p>
+<h1 class="doxsection"><a class="anchor" id="panics-2"></a>
+Panics</h1>
+<p>Panics if the number of bits in the source iteration does not match <span class="tt">N</span>.</p>
+<h1 class="doxsection"><a class="anchor" id="example-24"></a>
+Example</h1>
+<div class="fragment"><div class="line">std::vector&lt;u16&gt; src = { 0b1010101010101010, 0b1010101010101010, 0b1111111111111111 };</div>
+<div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a5bcdfdb6362b71cb2c73e684914ab279">BitArray&lt;48, u8&gt;::from</a>(src.begin(), src.end());</div>
+<div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;010101010101010101010101010101011111111111111111&quot;</span>);</div>
+<div class="line"><span class="keyword">auto</span> w = <a class="code hl_function" href="#a5bcdfdb6362b71cb2c73e684914ab279">BitArray&lt;48, u32&gt;::from</a>(src.begin(), src.end());</div>
+<div class="line">assert_eq(w.to_string(), <span class="stringliteral">&quot;010101010101010101010101010101011111111111111111&quot;</span>);</div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a5bcdfdb6362b71cb2c73e684914ab279"><div class="ttname"><a href="#a5bcdfdb6362b71cb2c73e684914ab279">gf2::BitArray::from</a></div><div class="ttdeci">static constexpr BitArray from(Src src)</div><div class="ttdoc">Factory method to construct a bit-array by copying all the bits from any Unsigned instance.</div><div class="ttdef"><b>Definition</b> BitArray.h:256</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="a5bcdfdb6362b71cb2c73e684914ab279" name="a5bcdfdb6362b71cb2c73e684914ab279"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bcdfdb6362b71cb2c73e684914ab279">&#9670;&#160;</a></span>from() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> N, Unsigned Word = usize&gt; </div>
+<div class="memtemplate">
+template&lt;Unsigned Src&gt; <br />
+requires (<a class="el" href="namespacegf2.html#ad1d8969ed4ed705fbc26eec1eed8b6ae">BITS</a>&lt;Src&gt; == N)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray</a> <a class="el" href="classgf2_1_1BitArray.html">gf2::BitArray</a>&lt; N, Word &gt;::from </td>
+          <td>(</td>
+          <td class="paramtype">Src</td>          <td class="paramname"><span class="paramname"><em>src</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Factory method to construct a bit-array by copying <em>all</em> the bits from <em>any</em> <span class="tt"><a class="el" href="conceptgf2_1_1Unsigned.html" title="The Unsigned concept is the same as std::unsigned_integral. It is satisfied by all primitive unsigned...">Unsigned</a></span> instance. </p>
+<h1 class="doxsection"><a class="anchor" id="note"></a>
+Note</h1>
+<p>The source type <span class="tt">Src</span> must have exactly <span class="tt">N</span> bits.</p>
+<h1 class="doxsection"><a class="anchor" id="example-23"></a>
+Example</h1>
+<div class="fragment"><div class="line"><a class="code hl_typedef" href="namespacegf2.html#a872a69469085fcdddf299ae4adc3c940">u8</a> s8 = 0b01010101;</div>
+<div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#a5bcdfdb6362b71cb2c73e684914ab279">BitArray&lt;8, u8&gt;::from</a>(s8);</div>
+<div class="line">assert_eq(u.to_string(), <span class="stringliteral">&quot;10101010&quot;</span>);</div>
+<div class="line"><a class="code hl_typedef" href="namespacegf2.html#ae858164ae3b877b1f9ea2606fae215a0">u16</a> s16 = 0b0101010101010101;</div>
+<div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a5bcdfdb6362b71cb2c73e684914ab279">BitArray&lt;16, u8&gt;::from</a>(s16);</div>
+<div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1010101010101010&quot;</span>);</div>
+<div class="line"><span class="keyword">auto</span> w = <a class="code hl_function" href="#a5bcdfdb6362b71cb2c73e684914ab279">BitArray&lt;8, u32&gt;::from</a>(s8);</div>
+<div class="line">assert_eq(w.to_string(), <span class="stringliteral">&quot;10101010&quot;</span>);</div>
 </div><!-- fragment --> 
 </div>
 </div>
 <a id="a4d89093857a783b598995b6a45b8c8dd" name="a4d89093857a783b598995b6a45b8c8dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d89093857a783b598995b6a45b8c8dd">&#9670;&#160;</a></span>from() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d89093857a783b598995b6a45b8c8dd">&#9670;&#160;</a></span>from() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1296,20 +1399,19 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Factory method to construct a bit-array from the bits of a <span class="tt">std::bitset</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="note"></a>
+<h1 class="doxsection"><a class="anchor" id="note-2"></a>
 Note</h1>
 <p>A <span class="tt">std::bitset</span> prints its bit elements in <em>bit-order</em> ...b2b1b0., we print in <em>vector-order</em> b0b1b2...</p>
-<h1 class="doxsection"><a class="anchor" id="example-23"></a>
+<h1 class="doxsection"><a class="anchor" id="example-25"></a>
 Example</h1>
 <div class="fragment"><div class="line">std::bitset&lt;10&gt; src{0b1010101010};</div>
-<div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a4d89093857a783b598995b6a45b8c8dd">BitArray&lt;10&gt;::from</a>(src);</div>
+<div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a5bcdfdb6362b71cb2c73e684914ab279">BitArray&lt;10&gt;::from</a>(src);</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;0101010101&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a4d89093857a783b598995b6a45b8c8dd"><div class="ttname"><a href="#a4d89093857a783b598995b6a45b8c8dd">gf2::BitArray::from</a></div><div class="ttdeci">static constexpr BitArray from(std::bitset&lt; N &gt; const &amp;src)</div><div class="ttdoc">Factory method to construct a bit-array from the bits of a std::bitset.</div><div class="ttdef"><b>Definition</b> BitArray.h:249</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
 <a id="a6ede5ef1640515441b749d6071fcf8c1" name="a6ede5ef1640515441b749d6071fcf8c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ede5ef1640515441b749d6071fcf8c1">&#9670;&#160;</a></span>from() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ede5ef1640515441b749d6071fcf8c1">&#9670;&#160;</a></span>from() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1340,9 +1442,9 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
   </table>
   </dd>
 </dl>
-<h1 class="doxsection"><a class="anchor" id="example-24"></a>
+<h1 class="doxsection"><a class="anchor" id="example-26"></a>
 Example</h1>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a4d89093857a783b598995b6a45b8c8dd">BitArray&lt;10, u8&gt;::from</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a5bcdfdb6362b71cb2c73e684914ab279">BitArray&lt;10, u8&gt;::from</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
 </div><!-- fragment --> 
 </div>
@@ -1373,16 +1475,16 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns <span class="tt">true</span> if the first bit element is set, <span class="tt">false</span> otherwise. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-4"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-5"></a>
 Panics</h1>
 <p>In debug mode the method panics if the bit-array is empty.</p>
-<h1 class="doxsection"><a class="anchor" id="example-30"></a>
+<h1 class="doxsection"><a class="anchor" id="example-32"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a399a6f87005a45a028c582d71201ee16">front</a>(), <span class="keyword">false</span>);</div>
 <div class="line">v.<a class="code hl_function" href="#aab2791cfd5ff853058cc609a4d3b354c">set_all</a>();</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a399a6f87005a45a028c582d71201ee16">front</a>(), <span class="keyword">true</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a399a6f87005a45a028c582d71201ee16"><div class="ttname"><a href="#a399a6f87005a45a028c582d71201ee16">gf2::BitArray::front</a></div><div class="ttdeci">constexpr bool front() const</div><div class="ttdoc">Returns true if the first bit element is set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:373</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a399a6f87005a45a028c582d71201ee16"><div class="ttname"><a href="#a399a6f87005a45a028c582d71201ee16">gf2::BitArray::front</a></div><div class="ttdeci">constexpr bool front() const</div><div class="ttdoc">Returns true if the first bit element is set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:426</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1412,16 +1514,16 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns <span class="tt">true</span> if the bit at the given index <span class="tt">i</span> is set, <span class="tt">false</span> otherwise. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-2"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-3"></a>
 Panics</h1>
 <p>In debug mode the index is bounds checked.</p>
-<h1 class="doxsection"><a class="anchor" id="example-28"></a>
+<h1 class="doxsection"><a class="anchor" id="example-30"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#aaa00b06652d4701559e37f9a510048a4">get</a>(0), <span class="keyword">false</span>);</div>
 <div class="line">v.<a class="code hl_function" href="#a07520d5580bf502c10a4b5e53aa7d667">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#aaa00b06652d4701559e37f9a510048a4">get</a>(0), <span class="keyword">true</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_aaa00b06652d4701559e37f9a510048a4"><div class="ttname"><a href="#aaa00b06652d4701559e37f9a510048a4">gf2::BitArray::get</a></div><div class="ttdeci">constexpr bool get(usize i) const</div><div class="ttdoc">Returns true if the bit at the given index i is set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:344</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_aaa00b06652d4701559e37f9a510048a4"><div class="ttname"><a href="#aaa00b06652d4701559e37f9a510048a4">gf2::BitArray::get</a></div><div class="ttdeci">constexpr bool get(usize i) const</div><div class="ttdoc">Returns true if the bit at the given index i is set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:397</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1451,13 +1553,13 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns <span class="tt">true</span> if the bit-array is empty, <span class="tt">false</span> otherwise. </p>
-<h1 class="doxsection"><a class="anchor" id="example-36"></a>
+<h1 class="doxsection"><a class="anchor" id="example-38"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;0&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#ad9a3e55e8989e6c85c9ec7ea4d0f7d7b">is_empty</a>(), <span class="keyword">true</span>);</div>
 <div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> u;</div>
 <div class="line">assert_eq(u.<a class="code hl_function" href="#ad9a3e55e8989e6c85c9ec7ea4d0f7d7b">is_empty</a>(), <span class="keyword">false</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_ad9a3e55e8989e6c85c9ec7ea4d0f7d7b"><div class="ttname"><a href="#ad9a3e55e8989e6c85c9ec7ea4d0f7d7b">gf2::BitArray::is_empty</a></div><div class="ttdeci">constexpr bool is_empty() const</div><div class="ttdoc">Returns true if the bit-array is empty, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:492</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_ad9a3e55e8989e6c85c9ec7ea4d0f7d7b"><div class="ttname"><a href="#ad9a3e55e8989e6c85c9ec7ea4d0f7d7b">gf2::BitArray::is_empty</a></div><div class="ttdeci">constexpr bool is_empty() const</div><div class="ttdoc">Returns true if the bit-array is empty, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:545</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1487,7 +1589,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the index of the last set bit in the bit-array or <span class="tt">{}</span> if no bits are set. </p>
-<h1 class="doxsection"><a class="anchor" id="example-53"></a>
+<h1 class="doxsection"><a class="anchor" id="example-55"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;37, u8&gt;</a> v;</div>
 <div class="line">assert(v.<a class="code hl_function" href="#a70869fd293d876be776d4a7664bd0382">last_set</a>() == std::optional&lt;usize&gt;{});</div>
@@ -1497,7 +1599,7 @@ Example</h1>
 <div class="line">assert(v.<a class="code hl_function" href="#a70869fd293d876be776d4a7664bd0382">last_set</a>() == std::optional&lt;usize&gt;{27});</div>
 <div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;0&gt;</a> empty;</div>
 <div class="line">assert(empty.<a class="code hl_function" href="#a70869fd293d876be776d4a7664bd0382">last_set</a>() == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a70869fd293d876be776d4a7664bd0382"><div class="ttname"><a href="#a70869fd293d876be776d4a7664bd0382">gf2::BitArray::last_set</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; last_set() const</div><div class="ttdoc">Returns the index of the last set bit in the bit-array or {} if no bits are set.</div><div class="ttdef"><b>Definition</b> BitArray.h:791</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a70869fd293d876be776d4a7664bd0382"><div class="ttname"><a href="#a70869fd293d876be776d4a7664bd0382">gf2::BitArray::last_set</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; last_set() const</div><div class="ttdoc">Returns the index of the last set bit in the bit-array or {} if no bits are set.</div><div class="ttdef"><b>Definition</b> BitArray.h:844</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1527,7 +1629,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the index of the last unset bit in the bit-array or <span class="tt">{}</span> if no bits are unset. </p>
-<h1 class="doxsection"><a class="anchor" id="example-57"></a>
+<h1 class="doxsection"><a class="anchor" id="example-59"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;37, u8&gt;</a> v; v.<a class="code hl_function" href="#aab2791cfd5ff853058cc609a4d3b354c">set_all</a>();</div>
 <div class="line">assert(v.<a class="code hl_function" href="#ab97cae6007e7a9155f3bc44aeea8396c">last_unset</a>() == std::optional&lt;usize&gt;{});</div>
@@ -1539,7 +1641,7 @@ Example</h1>
 <div class="line">assert(v.<a class="code hl_function" href="#ab97cae6007e7a9155f3bc44aeea8396c">last_unset</a>() == std::optional&lt;usize&gt;{27});</div>
 <div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;0&gt;</a> empty;</div>
 <div class="line">assert(empty.<a class="code hl_function" href="#ab97cae6007e7a9155f3bc44aeea8396c">last_unset</a>() == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_ab97cae6007e7a9155f3bc44aeea8396c"><div class="ttname"><a href="#ab97cae6007e7a9155f3bc44aeea8396c">gf2::BitArray::last_unset</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; last_unset() const</div><div class="ttdoc">Returns the index of the last unset bit in the bit-array or {} if no bits are unset.</div><div class="ttdef"><b>Definition</b> BitArray.h:857</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_ab97cae6007e7a9155f3bc44aeea8396c"><div class="ttname"><a href="#ab97cae6007e7a9155f3bc44aeea8396c">gf2::BitArray::last_unset</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; last_unset() const</div><div class="ttdoc">Returns the index of the last unset bit in the bit-array or {} if no bits are unset.</div><div class="ttdef"><b>Definition</b> BitArray.h:910</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1569,7 +1671,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the number of leading zeros in the bit-array. </p>
-<h1 class="doxsection"><a class="anchor" id="example-50"></a>
+<h1 class="doxsection"><a class="anchor" id="example-52"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;37, u8&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a0f54b5aa38bc62c0eb525456408a7b7c">leading_zeros</a>(), 37);</div>
@@ -1578,7 +1680,7 @@ Example</h1>
 <div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> w;</div>
 <div class="line">w.<a class="code hl_function" href="#aab2791cfd5ff853058cc609a4d3b354c">set_all</a>();</div>
 <div class="line">assert_eq(w.<a class="code hl_function" href="#a0f54b5aa38bc62c0eb525456408a7b7c">leading_zeros</a>(), 0);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a0f54b5aa38bc62c0eb525456408a7b7c"><div class="ttname"><a href="#a0f54b5aa38bc62c0eb525456408a7b7c">gf2::BitArray::leading_zeros</a></div><div class="ttdeci">constexpr usize leading_zeros() const</div><div class="ttdoc">Returns the number of leading zeros in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:744</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a0f54b5aa38bc62c0eb525456408a7b7c"><div class="ttname"><a href="#a0f54b5aa38bc62c0eb525456408a7b7c">gf2::BitArray::leading_zeros</a></div><div class="ttdeci">constexpr usize leading_zeros() const</div><div class="ttdoc">Returns the number of leading zeros in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:797</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1608,7 +1710,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the index of the next set bit after <span class="tt">index</span> in the bit-array or <span class="tt">{}</span> if no more set bits exist. </p>
-<h1 class="doxsection"><a class="anchor" id="example-54"></a>
+<h1 class="doxsection"><a class="anchor" id="example-56"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;37, u8&gt;</a> v;</div>
 <div class="line">assert(v.<a class="code hl_function" href="#a577fdc130a647d7eedada866c420103e">next_set</a>(0) == std::optional&lt;usize&gt;{});</div>
@@ -1617,7 +1719,7 @@ Example</h1>
 <div class="line">assert(v.<a class="code hl_function" href="#a577fdc130a647d7eedada866c420103e">next_set</a>(0) == std::optional&lt;usize&gt;{2});</div>
 <div class="line">assert(v.<a class="code hl_function" href="#a577fdc130a647d7eedada866c420103e">next_set</a>(2) == std::optional&lt;usize&gt;{27});</div>
 <div class="line">assert(v.<a class="code hl_function" href="#a577fdc130a647d7eedada866c420103e">next_set</a>(27) == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a577fdc130a647d7eedada866c420103e"><div class="ttname"><a href="#a577fdc130a647d7eedada866c420103e">gf2::BitArray::next_set</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; next_set(usize index) const</div><div class="ttdoc">Returns the index of the next set bit after index in the bit-array or {} if no more set bits exist.</div><div class="ttdef"><b>Definition</b> BitArray.h:805</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a577fdc130a647d7eedada866c420103e"><div class="ttname"><a href="#a577fdc130a647d7eedada866c420103e">gf2::BitArray::next_set</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; next_set(usize index) const</div><div class="ttdoc">Returns the index of the next set bit after index in the bit-array or {} if no more set bits exist.</div><div class="ttdef"><b>Definition</b> BitArray.h:858</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1647,7 +1749,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the index of the next unset bit after <span class="tt">index</span> in the bit-array or <span class="tt">{}</span> if no more unset bits exist. </p>
-<h1 class="doxsection"><a class="anchor" id="example-58"></a>
+<h1 class="doxsection"><a class="anchor" id="example-60"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;37, u8&gt;</a> v; v.<a class="code hl_function" href="#aab2791cfd5ff853058cc609a4d3b354c">set_all</a>();</div>
 <div class="line">assert(v.<a class="code hl_function" href="#ac98ac1300c5ceaa2d0ad24a26b60b297">next_unset</a>(0) == std::optional&lt;usize&gt;{});</div>
@@ -1658,7 +1760,7 @@ Example</h1>
 <div class="line">assert(v.<a class="code hl_function" href="#ac98ac1300c5ceaa2d0ad24a26b60b297">next_unset</a>(27) == std::optional&lt;usize&gt;{});</div>
 <div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;0&gt;</a> empty;</div>
 <div class="line">assert(empty.<a class="code hl_function" href="#ac98ac1300c5ceaa2d0ad24a26b60b297">next_unset</a>(0) == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_ac98ac1300c5ceaa2d0ad24a26b60b297"><div class="ttname"><a href="#ac98ac1300c5ceaa2d0ad24a26b60b297">gf2::BitArray::next_unset</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; next_unset(usize index) const</div><div class="ttdoc">Returns the index of the next unset bit after index in the bit-array or {} if no more unset bits exis...</div><div class="ttdef"><b>Definition</b> BitArray.h:873</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_ac98ac1300c5ceaa2d0ad24a26b60b297"><div class="ttname"><a href="#ac98ac1300c5ceaa2d0ad24a26b60b297">gf2::BitArray::next_unset</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; next_unset(usize index) const</div><div class="ttdoc">Returns the index of the next unset bit after index in the bit-array or {} if no more unset bits exis...</div><div class="ttdef"><b>Definition</b> BitArray.h:926</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1689,13 +1791,13 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns <span class="tt">true</span> if no bits in the bit-array are set, <span class="tt">false</span> otherwise. </p>
 <p><b>Note:</b> Empty bit-arrays have no set bits (logical connective for <span class="tt"><a class="el" href="#a900179c6249e397df28923963bc4e701" title="Returns true if no bits in the bit-array are set, false otherwise.">none</a></span> is <span class="tt">AND</span> with identity <span class="tt">true</span>).</p>
-<h1 class="doxsection"><a class="anchor" id="example-39"></a>
+<h1 class="doxsection"><a class="anchor" id="example-41"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a900179c6249e397df28923963bc4e701">none</a>(), <span class="keyword">true</span>);</div>
 <div class="line">v.<a class="code hl_function" href="#a07520d5580bf502c10a4b5e53aa7d667">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a900179c6249e397df28923963bc4e701">none</a>(), <span class="keyword">false</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a900179c6249e397df28923963bc4e701"><div class="ttname"><a href="#a900179c6249e397df28923963bc4e701">gf2::BitArray::none</a></div><div class="ttdeci">constexpr bool none() const</div><div class="ttdoc">Returns true if no bits in the bit-array are set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:533</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a900179c6249e397df28923963bc4e701"><div class="ttname"><a href="#a900179c6249e397df28923963bc4e701">gf2::BitArray::none</a></div><div class="ttdeci">constexpr bool none() const</div><div class="ttdoc">Returns true if no bits in the bit-array are set, false otherwise.</div><div class="ttdef"><b>Definition</b> BitArray.h:586</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1789,13 +1891,13 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns a "reference" to the bit element <span class="tt">i</span>. </p>
 <p>The returned object is a <span class="tt"><a class="el" href="classgf2_1_1BitRef.html" title="A BitRef is a proxy class to reference a single bit in a bit-store.">BitRef</a></span> reference for the bit element at <span class="tt">index</span> rather than a true reference.</p>
-<h1 class="doxsection"><a class="anchor" id="note-1"></a>
+<h1 class="doxsection"><a class="anchor" id="note-3"></a>
 Note</h1>
 <p>The referenced bit-array must continue to exist while the <span class="tt"><a class="el" href="classgf2_1_1BitRef.html" title="A BitRef is a proxy class to reference a single bit in a bit-store.">BitRef</a></span> is in use.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-7"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-8"></a>
 Panics</h1>
 <p>In debug mode the index is bounds-checked.</p>
-<h1 class="doxsection"><a class="anchor" id="example-33"></a>
+<h1 class="doxsection"><a class="anchor" id="example-35"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">v[2] = <span class="keyword">true</span>;</div>
@@ -1835,10 +1937,10 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the boolean value of the bit element <span class="tt">i</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-3"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-4"></a>
 Panics</h1>
 <p>In debug mode the index is bounds checked.</p>
-<h1 class="doxsection"><a class="anchor" id="example-29"></a>
+<h1 class="doxsection"><a class="anchor" id="example-31"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">assert(v[2] == <span class="keyword">false</span>);</div>
@@ -1874,7 +1976,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the index of the previous set bit before <span class="tt">index</span> in the bit-array or <span class="tt">{}</span> if there are none. </p>
-<h1 class="doxsection"><a class="anchor" id="example-55"></a>
+<h1 class="doxsection"><a class="anchor" id="example-57"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;37, u8&gt;</a> v;</div>
 <div class="line">assert(v.<a class="code hl_function" href="#a73051c3f6075d625c1a78ae6afd735c2">previous_set</a>(36) == std::optional&lt;usize&gt;{});</div>
@@ -1883,7 +1985,7 @@ Example</h1>
 <div class="line">assert(v.<a class="code hl_function" href="#a73051c3f6075d625c1a78ae6afd735c2">previous_set</a>(36) == std::optional&lt;usize&gt;{27});</div>
 <div class="line">assert(v.<a class="code hl_function" href="#a73051c3f6075d625c1a78ae6afd735c2">previous_set</a>(27) == std::optional&lt;usize&gt;{2});</div>
 <div class="line">assert(v.<a class="code hl_function" href="#a73051c3f6075d625c1a78ae6afd735c2">previous_set</a>(2)  == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a73051c3f6075d625c1a78ae6afd735c2"><div class="ttname"><a href="#a73051c3f6075d625c1a78ae6afd735c2">gf2::BitArray::previous_set</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; previous_set(usize index) const</div><div class="ttdoc">Returns the index of the previous set bit before index in the bit-array or {} if there are none.</div><div class="ttdef"><b>Definition</b> BitArray.h:819</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a73051c3f6075d625c1a78ae6afd735c2"><div class="ttname"><a href="#a73051c3f6075d625c1a78ae6afd735c2">gf2::BitArray::previous_set</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; previous_set(usize index) const</div><div class="ttdoc">Returns the index of the previous set bit before index in the bit-array or {} if there are none.</div><div class="ttdef"><b>Definition</b> BitArray.h:872</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1913,7 +2015,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the index of the previous unset bit before <span class="tt">index</span> in the bit-array or <span class="tt">{}</span> if no more unset bits exist. </p>
-<h1 class="doxsection"><a class="anchor" id="example-59"></a>
+<h1 class="doxsection"><a class="anchor" id="example-61"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;37, u8&gt;</a> v; v.<a class="code hl_function" href="#aab2791cfd5ff853058cc609a4d3b354c">set_all</a>();</div>
 <div class="line">assert(v.<a class="code hl_function" href="#a2f70552ecd9a67ade70df35fc747bb03">previous_unset</a>(0) == std::optional&lt;usize&gt;{});</div>
@@ -1924,7 +2026,7 @@ Example</h1>
 <div class="line">assert(v.<a class="code hl_function" href="#a2f70552ecd9a67ade70df35fc747bb03">previous_unset</a>(2) == std::optional&lt;usize&gt;{});</div>
 <div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;0&gt;</a> empty;</div>
 <div class="line">assert(empty.<a class="code hl_function" href="#a2f70552ecd9a67ade70df35fc747bb03">previous_unset</a>(0) == std::optional&lt;usize&gt;{});</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a2f70552ecd9a67ade70df35fc747bb03"><div class="ttname"><a href="#a2f70552ecd9a67ade70df35fc747bb03">gf2::BitArray::previous_unset</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; previous_unset(usize index) const</div><div class="ttdoc">Returns the index of the previous unset bit before index in the bit-array or {} if no more unset bits...</div><div class="ttdef"><b>Definition</b> BitArray.h:889</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a2f70552ecd9a67ade70df35fc747bb03"><div class="ttname"><a href="#a2f70552ecd9a67ade70df35fc747bb03">gf2::BitArray::previous_unset</a></div><div class="ttdeci">constexpr std::optional&lt; usize &gt; previous_unset(usize index) const</div><div class="ttdoc">Returns the index of the previous unset bit before index in the bit-array or {} if no more unset bits...</div><div class="ttdef"><b>Definition</b> BitArray.h:942</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1967,13 +2069,13 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
   </dd>
 </dl>
 <p>If <span class="tt">p &lt; 0</span> then the bit-array is all zeros, if <span class="tt">p &gt; 1</span> then the bit-array is all ones.</p>
-<h1 class="doxsection"><a class="anchor" id="example-25"></a>
+<h1 class="doxsection"><a class="anchor" id="example-27"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_typedef" href="namespacegf2.html#a770302128133591da0ca93ded6abf8aa">u64</a> seed = 1234567890;</div>
 <div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#acfbd3d13cf6f1050b32fbd30054b8448">BitArray&lt;10&gt;::random</a>(0.5, seed);</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#acfbd3d13cf6f1050b32fbd30054b8448">BitArray&lt;10&gt;::random</a>(0.5, seed);</div>
 <div class="line">assert(u == v);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_acfbd3d13cf6f1050b32fbd30054b8448"><div class="ttname"><a href="#acfbd3d13cf6f1050b32fbd30054b8448">gf2::BitArray::random</a></div><div class="ttdeci">static BitArray random(double p=0.5, u64 seed=0)</div><div class="ttdoc">Factory method to generate a bit-array of size N where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitArray.h:291</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_acfbd3d13cf6f1050b32fbd30054b8448"><div class="ttname"><a href="#acfbd3d13cf6f1050b32fbd30054b8448">gf2::BitArray::random</a></div><div class="ttdeci">static BitArray random(double p=0.5, u64 seed=0)</div><div class="ttdoc">Factory method to generate a bit-array of size N where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitArray.h:344</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2005,12 +2107,12 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 <p>Returns a new bit-vector that is the result of riffling the bits in this bit-array with zeros. </p>
 <p>If the bit-array has the bits <span class="tt">abcde</span> then the output bit-vector will have the bits <span class="tt">a0b0c0d0e</span>.</p>
 <p><b>Note:</b> There is no last zero bit in <span class="tt">dst</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="example-73"></a>
+<h1 class="doxsection"><a class="anchor" id="example-75"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> v; v.<a class="code hl_function" href="#aab2791cfd5ff853058cc609a4d3b354c">set_all</a>();</div>
 <div class="line"><span class="keyword">auto</span> dst = v.<a class="code hl_function" href="#a23cc27cefe65bd9b7459b564cd007534">riffled</a>();</div>
 <div class="line">assert_eq(dst.to_string(), <span class="stringliteral">&quot;1010101010101010101&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a23cc27cefe65bd9b7459b564cd007534"><div class="ttname"><a href="#a23cc27cefe65bd9b7459b564cd007534">gf2::BitArray::riffled</a></div><div class="ttdeci">constexpr void riffled(BitVector&lt; word_type &gt; &amp;dst) const</div><div class="ttdoc">Interleaves the bits of this bit-array with zeros storing the result into the bit-vector dst.</div><div class="ttdef"><b>Definition</b> BitArray.h:1133</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a23cc27cefe65bd9b7459b564cd007534"><div class="ttname"><a href="#a23cc27cefe65bd9b7459b564cd007534">gf2::BitArray::riffled</a></div><div class="ttdeci">constexpr void riffled(BitVector&lt; word_type &gt; &amp;dst) const</div><div class="ttdoc">Interleaves the bits of this bit-array with zeros storing the result into the bit-vector dst.</div><div class="ttdef"><b>Definition</b> BitArray.h:1186</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2042,14 +2144,14 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 <p>Interleaves the bits of this bit-array with zeros storing the result into the bit-vector <span class="tt">dst</span>. </p>
 <p>On return, <span class="tt">dst</span> will have the bits of this bit-array interleaved with zeros. For example, if this bit-array has the bits <span class="tt">abcde</span> then <span class="tt">dst</span> will have the bits <span class="tt">a0b0c0d0e</span>.</p>
 <p><b>Note:</b> There is no last zero bit in <span class="tt">dst</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="example-72"></a>
+<h1 class="doxsection"><a class="anchor" id="example-74"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> v; v.<a class="code hl_function" href="#aab2791cfd5ff853058cc609a4d3b354c">set_all</a>();</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1BitVector.html">BitVector&lt;u8&gt;</a> dst;</div>
 <div class="line">v.<a class="code hl_function" href="#a23cc27cefe65bd9b7459b564cd007534">riffled</a>(dst);</div>
 <div class="line">assert_eq(dst.<a class="code hl_function" href="classgf2_1_1BitVector.html#ad2b8ef3dc6d1ea250253135172bb48e7">to_string</a>(), <span class="stringliteral">&quot;1010101010101010101&quot;</span>);</div>
 <div class="ttc" id="aclassgf2_1_1BitVector_html"><div class="ttname"><a href="classgf2_1_1BitVector.html">gf2::BitVector</a></div><div class="ttdoc">A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...</div><div class="ttdef"><b>Definition</b> BitVector.h:23</div></div>
-<div class="ttc" id="aclassgf2_1_1BitVector_html_ad2b8ef3dc6d1ea250253135172bb48e7"><div class="ttname"><a href="classgf2_1_1BitVector.html#ad2b8ef3dc6d1ea250253135172bb48e7">gf2::BitVector::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVector.h:1763</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_ad2b8ef3dc6d1ea250253135172bb48e7"><div class="ttname"><a href="classgf2_1_1BitVector.html#ad2b8ef3dc6d1ea250253135172bb48e7">gf2::BitVector::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVector.h:1819</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2087,13 +2189,13 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
   </dd>
 </dl>
 <p>If <span class="tt">p &lt; 0</span> then the bit-array is all zeros, if <span class="tt">p &gt; 1</span> then the bit-array is all ones.</p>
-<h1 class="doxsection"><a class="anchor" id="example-26"></a>
+<h1 class="doxsection"><a class="anchor" id="example-28"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_typedef" href="namespacegf2.html#a770302128133591da0ca93ded6abf8aa">u64</a> seed = 1234567890;</div>
 <div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#ac3ce12d8dff51751e6434d1fa287b65c">BitArray&lt;10&gt;::seeded_random</a>(seed);</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#ac3ce12d8dff51751e6434d1fa287b65c">BitArray&lt;10&gt;::seeded_random</a>(seed);</div>
 <div class="line">assert(u == v);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_ac3ce12d8dff51751e6434d1fa287b65c"><div class="ttname"><a href="#ac3ce12d8dff51751e6434d1fa287b65c">gf2::BitArray::seeded_random</a></div><div class="ttdeci">static BitArray seeded_random(u64 seed)</div><div class="ttdoc">Factory method to generate a bit-array of size N where the elements are from independent fair coin fl...</div><div class="ttdef"><b>Definition</b> BitArray.h:313</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_ac3ce12d8dff51751e6434d1fa287b65c"><div class="ttname"><a href="#ac3ce12d8dff51751e6434d1fa287b65c">gf2::BitArray::seeded_random</a></div><div class="ttdeci">static BitArray seeded_random(u64 seed)</div><div class="ttdoc">Factory method to generate a bit-array of size N where the elements are from independent fair coin fl...</div><div class="ttdef"><b>Definition</b> BitArray.h:366</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2127,10 +2229,10 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Sets the bit-element <span class="tt">i</span> to the specified boolean <span class="tt">value</span> &amp; returns this for chaining. The default value for <span class="tt">value</span> is <span class="tt">true</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-6"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-7"></a>
 Panics</h1>
 <p>In debug mode the index is bounds-checked.</p>
-<h1 class="doxsection"><a class="anchor" id="example-32"></a>
+<h1 class="doxsection"><a class="anchor" id="example-34"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">assert_eq(v[0], <span class="keyword">false</span>);</div>
@@ -2166,7 +2268,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Sets all the bits in the bit-array to the boolean <span class="tt">value</span> and returns a reference to this for chaining. </p>
 <p>By default, all bits are set to <span class="tt">true</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="example-40"></a>
+<h1 class="doxsection"><a class="anchor" id="example-42"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#aab2791cfd5ff853058cc609a4d3b354c">set_all</a>();</div>
@@ -2201,14 +2303,14 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns an iterator over the <em>indices</em> of any <em>set</em> bits in the bit-array. </p>
 <p>You can use this iterator to iterate over the set bits in the bit-array and get the index of each bit.</p>
-<h1 class="doxsection"><a class="anchor" id="example-62"></a>
+<h1 class="doxsection"><a class="anchor" id="example-64"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#a6bbfb8e5e1b435b698caf37e85f23173">copy</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
 <div class="line"><span class="keyword">auto</span> indices = std::ranges::to&lt;std::vector&gt;(v.<a class="code hl_function" href="#a29841ea6a7a2723d17ed2f49df9ca5ba">set_bits</a>());</div>
 <div class="line">assert_eq(indices, (std::vector&lt;usize&gt;{0, 2, 4, 6, 8}));</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a29841ea6a7a2723d17ed2f49df9ca5ba"><div class="ttname"><a href="#a29841ea6a7a2723d17ed2f49df9ca5ba">gf2::BitArray::set_bits</a></div><div class="ttdeci">constexpr auto set_bits() const</div><div class="ttdoc">Returns an iterator over the indices of any set bits in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:938</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a29841ea6a7a2723d17ed2f49df9ca5ba"><div class="ttname"><a href="#a29841ea6a7a2723d17ed2f49df9ca5ba">gf2::BitArray::set_bits</a></div><div class="ttdeci">constexpr auto set_bits() const</div><div class="ttdoc">Returns an iterator over the indices of any set bits in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:991</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2321,10 +2423,10 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns a mutable bit-span encompassing the bit-array's bits in the half-open range <span class="tt">[begin, end)</span>. </p>
 <p>Mutability here is deep &ndash; the interior pointer in the returned span is to <em>non-const</em> words.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-15"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-16"></a>
 Panics</h1>
 <p>This method panics if the span range is not valid.</p>
-<h1 class="doxsection"><a class="anchor" id="example-68"></a>
+<h1 class="doxsection"><a class="anchor" id="example-70"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#a6bbfb8e5e1b435b698caf37e85f23173">copy</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
@@ -2333,7 +2435,7 @@ Example</h1>
 <div class="line">s.set_all();</div>
 <div class="line">assert_eq(s.to_string(), <span class="stringliteral">&quot;1111&quot;</span>);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;1111101010&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a5696c182958a4495cda1c3c1a10cbfd8"><div class="ttname"><a href="#a5696c182958a4495cda1c3c1a10cbfd8">gf2::BitArray::span</a></div><div class="ttdeci">constexpr auto span(usize begin, usize end) const</div><div class="ttdoc">Returns an immutable bit-span encompassing the bit-array&#39;s bits in the half-open range [begin,...</div><div class="ttdef"><b>Definition</b> BitArray.h:1021</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a5696c182958a4495cda1c3c1a10cbfd8"><div class="ttname"><a href="#a5696c182958a4495cda1c3c1a10cbfd8">gf2::BitArray::span</a></div><div class="ttdeci">constexpr auto span(usize begin, usize end) const</div><div class="ttdoc">Returns an immutable bit-span encompassing the bit-array&#39;s bits in the half-open range [begin,...</div><div class="ttdef"><b>Definition</b> BitArray.h:1074</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2368,10 +2470,10 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns an <em>immutable</em> bit-span encompassing the bit-array's bits in the half-open range <span class="tt">[begin, end)</span>. </p>
 <p>Immutability here is deep &ndash; the interior pointer in the returned span is to <em>const</em> words.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-14"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-15"></a>
 Panics</h1>
 <p>This method panics if the span range is not valid.</p>
-<h1 class="doxsection"><a class="anchor" id="example-67"></a>
+<h1 class="doxsection"><a class="anchor" id="example-69"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#a6bbfb8e5e1b435b698caf37e85f23173">copy</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
@@ -2408,10 +2510,10 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 <p>Views the bit-array as two parts containing the elements <span class="tt">[0, at)</span> and <span class="tt">[at, <a class="el" href="#a7ad104649695be7a116b76eab3978b10" title="Returns the number of bit-elements in the bit-array.">size()</a>)</span> respectively. </p>
 <p>Clones of the parts are returned as a pair of bit-vectors [<span class="tt">left</span>, <span class="tt">right</span>].</p>
 <p>On return, <span class="tt">left</span> is a clone of the bits from the start of the bit-array up to but not including <span class="tt">at</span> and <span class="tt">right</span> contains the bits from <span class="tt">at</span> to the end of the bit-array. This bit-array itself is not modified.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-18"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-19"></a>
 Panics</h1>
 <p>This method panics if the split point is beyond the end of the bit-array.</p>
-<h1 class="doxsection"><a class="anchor" id="example-71"></a>
+<h1 class="doxsection"><a class="anchor" id="example-73"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#a6bbfb8e5e1b435b698caf37e85f23173">copy</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
@@ -2419,7 +2521,7 @@ Example</h1>
 <div class="line">assert_eq(left.to_string(), <span class="stringliteral">&quot;10101&quot;</span>);</div>
 <div class="line">assert_eq(right.to_string(), <span class="stringliteral">&quot;01010&quot;</span>);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_ad780efa43f9e461bb5dd7bfda85529bc"><div class="ttname"><a href="#ad780efa43f9e461bb5dd7bfda85529bc">gf2::BitArray::split_at</a></div><div class="ttdeci">constexpr void split_at(usize at, BitVector&lt; word_type &gt; &amp;left, BitVector&lt; word_type &gt; &amp;right) const</div><div class="ttdoc">Views the bit-array as two parts containing the elements [0, at) and [at, size()) respectively.</div><div class="ttdef"><b>Definition</b> BitArray.h:1090</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_ad780efa43f9e461bb5dd7bfda85529bc"><div class="ttname"><a href="#ad780efa43f9e461bb5dd7bfda85529bc">gf2::BitArray::split_at</a></div><div class="ttdeci">constexpr void split_at(usize at, BitVector&lt; word_type &gt; &amp;left, BitVector&lt; word_type &gt; &amp;right) const</div><div class="ttdoc">Views the bit-array as two parts containing the elements [0, at) and [at, size()) respectively.</div><div class="ttdef"><b>Definition</b> BitArray.h:1143</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2461,10 +2563,10 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 <p>Clones of the parts are stored in the passed bit-vectors <span class="tt">left</span> and <span class="tt">right</span>.</p>
 <p>On return, <span class="tt">left</span> contains the bits from the start of the bit-array up to but not including <span class="tt">at</span> and <span class="tt">right</span> contains the bits from <span class="tt">at</span> to the end of the bit-array. This bit-array itself is not modified.</p>
 <p>This lets one reuse the <span class="tt">left</span> and <span class="tt">right</span> destinations without having to allocate new bit-vectors. This is useful when implementing iterative algorithms that need to split a bit-array into two parts repeatedly.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-17"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-18"></a>
 Panics</h1>
 <p>This method panics if the split point is beyond the end of the bit-array.</p>
-<h1 class="doxsection"><a class="anchor" id="example-70"></a>
+<h1 class="doxsection"><a class="anchor" id="example-72"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#a6bbfb8e5e1b435b698caf37e85f23173">copy</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
@@ -2575,7 +2677,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns a const iterator over all the <em>words</em> underlying the v. </p>
 <p>You can use this iterator to iterate over the words in the bit-array and read the <span class="tt">Word</span> value of each word. You <b>cannot</b> use this iterator to modify the words in the store.</p>
-<h1 class="doxsection"><a class="anchor" id="example-64"></a>
+<h1 class="doxsection"><a class="anchor" id="example-66"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a67ed2efa8a38a1bf3dbfc3d331806355">BitArray&lt;10, u8&gt;::ones</a>();</div>
 <div class="line">assert_eq(v.to_string(), <span class="stringliteral">&quot;1111111111&quot;</span>);</div>
@@ -2615,10 +2717,10 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns a <em>clone</em> of the elements in the half-open range <span class="tt">[begin, end)</span> as a new bit-vector. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-16"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-17"></a>
 Panics</h1>
 <p>This method panics if the range is not valid.</p>
-<h1 class="doxsection"><a class="anchor" id="example-69"></a>
+<h1 class="doxsection"><a class="anchor" id="example-71"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#a6bbfb8e5e1b435b698caf37e85f23173">copy</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
@@ -2627,7 +2729,7 @@ Example</h1>
 <div class="line">s.set_all();</div>
 <div class="line">assert_eq(s.to_string(), <span class="stringliteral">&quot;1111&quot;</span>);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a1487ea33eae413fc582a77fb16e62fa7"><div class="ttname"><a href="#a1487ea33eae413fc582a77fb16e62fa7">gf2::BitArray::sub</a></div><div class="ttdeci">constexpr auto sub(usize begin, usize end) const</div><div class="ttdoc">Returns a clone of the elements in the half-open range [begin, end) as a new bit-vector.</div><div class="ttdef"><b>Definition</b> BitArray.h:1061</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a1487ea33eae413fc582a77fb16e62fa7"><div class="ttname"><a href="#a1487ea33eae413fc582a77fb16e62fa7">gf2::BitArray::sub</a></div><div class="ttdeci">constexpr auto sub(usize begin, usize end) const</div><div class="ttdoc">Returns a clone of the elements in the half-open range [begin, end) as a new bit-vector.</div><div class="ttdef"><b>Definition</b> BitArray.h:1114</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2661,10 +2763,10 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Swaps the bits in the bit-array at indices <span class="tt">i0</span> and <span class="tt">i1</span> and returns this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-9"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-10"></a>
 Panics</h1>
 <p>In debug mode the indices are bounds-checked.</p>
-<h1 class="doxsection"><a class="anchor" id="example-35"></a>
+<h1 class="doxsection"><a class="anchor" id="example-37"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#a07520d5580bf502c10a4b5e53aa7d667">set</a>(0);</div>
@@ -2677,7 +2779,7 @@ Example</h1>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;0000000001&quot;</span>);</div>
 <div class="line">v.<a class="code hl_function" href="#a88a6d06d4385f76d7b2de8c65cbe95e7">swap</a>(0, 9);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;1000000000&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a88a6d06d4385f76d7b2de8c65cbe95e7"><div class="ttname"><a href="#a88a6d06d4385f76d7b2de8c65cbe95e7">gf2::BitArray::swap</a></div><div class="ttdeci">constexpr auto swap(usize i0, usize i1)</div><div class="ttdoc">Swaps the bits in the bit-array at indices i0 and i1 and returns this for chaining.</div><div class="ttdef"><b>Definition</b> BitArray.h:474</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a88a6d06d4385f76d7b2de8c65cbe95e7"><div class="ttname"><a href="#a88a6d06d4385f76d7b2de8c65cbe95e7">gf2::BitArray::swap</a></div><div class="ttdeci">constexpr auto swap(usize i0, usize i1)</div><div class="ttdoc">Swaps the bits in the bit-array at indices i0 and i1 and returns this for chaining.</div><div class="ttdef"><b>Definition</b> BitArray.h:527</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2725,14 +2827,14 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
   </table>
   </dd>
 </dl>
-<h1 class="doxsection"><a class="anchor" id="example-74"></a>
+<h1 class="doxsection"><a class="anchor" id="example-76"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#aecc7e50f56ff23a9df63f6505daf5f7d">to_binary_string</a>(), <span class="stringliteral">&quot;0000000000&quot;</span>);</div>
 <div class="line">v.<a class="code hl_function" href="#a07520d5580bf502c10a4b5e53aa7d667">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#aecc7e50f56ff23a9df63f6505daf5f7d">to_binary_string</a>(), <span class="stringliteral">&quot;1000000000&quot;</span>);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#aecc7e50f56ff23a9df63f6505daf5f7d">to_binary_string</a>(<span class="stringliteral">&quot;,&quot;</span>, <span class="stringliteral">&quot;[&quot;</span>, <span class="stringliteral">&quot;]&quot;</span>), <span class="stringliteral">&quot;[1,0,0,0,0,0,0,0,0,0]&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_aecc7e50f56ff23a9df63f6505daf5f7d"><div class="ttname"><a href="#aecc7e50f56ff23a9df63f6505daf5f7d">gf2::BitArray::to_binary_string</a></div><div class="ttdeci">std::string to_binary_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1169</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_aecc7e50f56ff23a9df63f6505daf5f7d"><div class="ttname"><a href="#aecc7e50f56ff23a9df63f6505daf5f7d">gf2::BitArray::to_binary_string</a></div><div class="ttdeci">std::string to_binary_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1222</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2774,7 +2876,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 <li><span class="tt">0X1.2</span> is the hex representation of the bit-array <span class="tt">1</span> =&gt; length 1.</li>
 </ul>
 <p>The output is in <em>vector-order</em>. If "h0" is the first hex digit in the output string, you can print it as four binary digits <span class="tt">v_0v_1v_2v_3</span>. For example, if h0 = "A" which is <span class="tt">1010</span> in binary, then v = 1010.</p>
-<h1 class="doxsection"><a class="anchor" id="example-77"></a>
+<h1 class="doxsection"><a class="anchor" id="example-79"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;0&gt;</a> v0;</div>
 <div class="line">assert_eq(v0.<a class="code hl_function" href="#a58407dca6afa59df2174fec1c730ebd8">to_hex_string</a>(), <span class="stringliteral">&quot;&quot;</span>);</div>
@@ -2786,7 +2888,7 @@ Example</h1>
 <div class="line">v3.<a class="code hl_function" href="#a6bbfb8e5e1b435b698caf37e85f23173">copy</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
 <div class="line">assert_eq(v3.<a class="code hl_function" href="#aecc7e50f56ff23a9df63f6505daf5f7d">to_binary_string</a>(), <span class="stringliteral">&quot;10101010&quot;</span>);</div>
 <div class="line">assert_eq(v3.<a class="code hl_function" href="#a58407dca6afa59df2174fec1c730ebd8">to_hex_string</a>(), <span class="stringliteral">&quot;AA&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a58407dca6afa59df2174fec1c730ebd8"><div class="ttname"><a href="#a58407dca6afa59df2174fec1c730ebd8">gf2::BitArray::to_hex_string</a></div><div class="ttdeci">std::string to_hex_string() const</div><div class="ttdoc">Returns the &quot;hex&quot; string representation of the bits in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1240</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a58407dca6afa59df2174fec1c730ebd8"><div class="ttname"><a href="#a58407dca6afa59df2174fec1c730ebd8">gf2::BitArray::to_hex_string</a></div><div class="ttdeci">std::string to_hex_string() const</div><div class="ttdoc">Returns the &quot;hex&quot; string representation of the bits in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1293</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2817,14 +2919,14 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns a "pretty" string representation of the bit-array. </p>
 <p>The output is a string of 0's and 1's with spaces between each bit, and the whole thing enclosed in square brackets.</p>
-<h1 class="doxsection"><a class="anchor" id="example-76"></a>
+<h1 class="doxsection"><a class="anchor" id="example-78"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10&gt;</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#a6bbfb8e5e1b435b698caf37e85f23173">copy</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a6755c8905474c30b4b07186f5eeb593e">to_pretty_string</a>(), <span class="stringliteral">&quot;[1,0,1,0,1,0,1,0,1,0]&quot;</span>);</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1BitArray.html">BitArray&lt;0&gt;</a> empty;</div>
 <div class="line">assert_eq(empty.<a class="code hl_function" href="#a6755c8905474c30b4b07186f5eeb593e">to_pretty_string</a>(), <span class="stringliteral">&quot;[]&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a6755c8905474c30b4b07186f5eeb593e"><div class="ttname"><a href="#a6755c8905474c30b4b07186f5eeb593e">gf2::BitArray::to_pretty_string</a></div><div class="ttdeci">std::string to_pretty_string() const</div><div class="ttdoc">Returns a &quot;pretty&quot; string representation of the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1207</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a6755c8905474c30b4b07186f5eeb593e"><div class="ttname"><a href="#a6755c8905474c30b4b07186f5eeb593e">gf2::BitArray::to_pretty_string</a></div><div class="ttdeci">std::string to_pretty_string() const</div><div class="ttdoc">Returns a &quot;pretty&quot; string representation of the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1260</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2872,7 +2974,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
   </table>
   </dd>
 </dl>
-<h1 class="doxsection"><a class="anchor" id="example-75"></a>
+<h1 class="doxsection"><a class="anchor" id="example-77"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;0000000000&quot;</span>);</div>
@@ -2909,7 +3011,7 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns a copy of the words underlying this bit-array as a <span class="tt">std::vector&lt;<a class="el" href="#a82a5c674165737fe7c72832867734ea6" title="The underlying unsigned word type used to store the bits.">word_type</a>&gt;</span>. </p>
 <p><b>Note:</b> The last word in the bit-array may not be fully occupied but unused slots will be all zeros.</p>
-<h1 class="doxsection"><a class="anchor" id="example-66"></a>
+<h1 class="doxsection"><a class="anchor" id="example-68"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a67ed2efa8a38a1bf3dbfc3d331806355">BitArray&lt;10, u8&gt;::ones</a>();</div>
 <div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="#afd6f73573f642499f95fe90639dc949f">words</a> = v.to_words();</div>
@@ -2943,14 +3045,14 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns a copy of the words underlying this bit-array and puts them into the passed output iterator. </p>
-<h1 class="doxsection"><a class="anchor" id="note-7"></a>
+<h1 class="doxsection"><a class="anchor" id="note-9"></a>
 Note</h1>
 <ol type="1">
 <li>The last word in the bit-array may not be fully occupied but unused slots will be all zeros.</li>
 <li>The output iterator must be able to accept values of the bit-array's <span class="tt"><a class="el" href="#a82a5c674165737fe7c72832867734ea6" title="The underlying unsigned word type used to store the bits.">word_type</a></span>.</li>
 <li>The output iterator must have enough space to accept all the words in the bit-array.</li>
 </ol>
-<h1 class="doxsection"><a class="anchor" id="example-65"></a>
+<h1 class="doxsection"><a class="anchor" id="example-67"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a67ed2efa8a38a1bf3dbfc3d331806355">BitArray&lt;10, u8&gt;::ones</a>();</div>
 <div class="line">std::vector&lt;u8&gt; out8(v.words());</div>
@@ -2988,13 +3090,13 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 </div><div class="memdoc">
 
 <p>Returns the number of trailing zeros in the bit-array. </p>
-<h1 class="doxsection"><a class="anchor" id="example-51"></a>
+<h1 class="doxsection"><a class="anchor" id="example-53"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;27, u8&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a60c2d91492bfab341c5fa299884aef54">trailing_zeros</a>(), 27);</div>
 <div class="line">v.<a class="code hl_function" href="#a07520d5580bf502c10a4b5e53aa7d667">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a60c2d91492bfab341c5fa299884aef54">trailing_zeros</a>(), 26);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a60c2d91492bfab341c5fa299884aef54"><div class="ttname"><a href="#a60c2d91492bfab341c5fa299884aef54">gf2::BitArray::trailing_zeros</a></div><div class="ttdeci">constexpr usize trailing_zeros() const</div><div class="ttdoc">Returns the number of trailing zeros in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:755</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a60c2d91492bfab341c5fa299884aef54"><div class="ttname"><a href="#a60c2d91492bfab341c5fa299884aef54">gf2::BitArray::trailing_zeros</a></div><div class="ttdeci">constexpr usize trailing_zeros() const</div><div class="ttdoc">Returns the number of trailing zeros in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:808</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -3060,14 +3162,14 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 
 <p>Returns an iterator over the <em>indices</em> of any <em>unset</em> bits in the bit-array. </p>
 <p>You can use this iterator to iterate over the unset bits in the bit-array and get the index of each bit.</p>
-<h1 class="doxsection"><a class="anchor" id="example-63"></a>
+<h1 class="doxsection"><a class="anchor" id="example-65"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> v;</div>
 <div class="line">v.<a class="code hl_function" href="#a6bbfb8e5e1b435b698caf37e85f23173">copy</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
 <div class="line"><span class="keyword">auto</span> indices = std::ranges::to&lt;std::vector&gt;(v.<a class="code hl_function" href="#a3d9e5783287dcffdc7f7479c5a017867">unset_bits</a>());</div>
 <div class="line">assert_eq(indices, (std::vector&lt;usize&gt;{1, 3, 5, 7, 9}));</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a3d9e5783287dcffdc7f7479c5a017867"><div class="ttname"><a href="#a3d9e5783287dcffdc7f7479c5a017867">gf2::BitArray::unset_bits</a></div><div class="ttdeci">constexpr auto unset_bits() const</div><div class="ttdoc">Returns an iterator over the indices of any unset bits in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:952</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a3d9e5783287dcffdc7f7479c5a017867"><div class="ttname"><a href="#a3d9e5783287dcffdc7f7479c5a017867">gf2::BitArray::unset_bits</a></div><div class="ttdeci">constexpr auto unset_bits() const</div><div class="ttdoc">Returns an iterator over the indices of any unset bits in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1005</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

@@ -1,5 +1,9 @@
 var NAVTREEINDEX2 =
 {
+"classgf2_1_1BitPolynomial.html#a03d22233357ad6872d11919977206587":[16,0,0,4,37],
+"classgf2_1_1BitPolynomial.html#a0ea7309b029a3ae322dd9fdade51e3bd":[14,0,0,4,39],
+"classgf2_1_1BitPolynomial.html#a0ea7309b029a3ae322dd9fdade51e3bd":[16,0,0,4,39],
+"classgf2_1_1BitPolynomial.html#a15acc6d7b5115d5ec9bb98908e4462b3":[14,0,0,4,7],
 "classgf2_1_1BitPolynomial.html#a15acc6d7b5115d5ec9bb98908e4462b3":[16,0,0,4,7],
 "classgf2_1_1BitPolynomial.html#a178abb5ed13f4efe219136a7a7c07fee":[14,0,0,4,45],
 "classgf2_1_1BitPolynomial.html#a178abb5ed13f4efe219136a7a7c07fee":[16,0,0,4,45],
@@ -245,9 +249,5 @@ var NAVTREEINDEX2 =
 "classgf2_1_1BitSpan.html#af6565a89efdf0ed61935915868041506":[16,0,0,6,11],
 "classgf2_1_1BitSpan.html#af936e824e11da1392f9ad55e5f2fe742":[14,0,0,6,53],
 "classgf2_1_1BitSpan.html#af936e824e11da1392f9ad55e5f2fe742":[16,0,0,6,53],
-"classgf2_1_1BitVector.html":[14,0,0,7],
-"classgf2_1_1BitVector.html":[16,0,0,7],
-"classgf2_1_1BitVector.html#a05813fe7456c3b44322f29f3a34cf7af":[14,0,0,7,76],
-"classgf2_1_1BitVector.html#a05813fe7456c3b44322f29f3a34cf7af":[16,0,0,7,76],
-"classgf2_1_1BitVector.html#a05d4d7648a2190f143ecc316d83383b5":[14,0,0,7,13]
+"classgf2_1_1BitVector.html":[14,0,0,7]
 };

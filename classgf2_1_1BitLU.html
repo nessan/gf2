@@ -210,7 +210,7 @@ template&lt;Unsigned Word&gt; </div>
 <p>On construction, this method computes a unit lower triangular matrix <span class="tt"><a class="el" href="#ab46e29baf332eea2bbc3296d55ae08f7" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span>, an upper triangular matrix <span class="tt"><a class="el" href="#a9ccba9d92861785aa4ed7aef1592d37f" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span>, and a permutation matrix <span class="tt">P</span> such that <span class="tt">P.A = L.U</span>. The <span class="tt"><a class="el" href="#ab46e29baf332eea2bbc3296d55ae08f7" title="Returns the unit lower triangular matrix L in the LU decomposition.">L</a></span> and <span class="tt"><a class="el" href="#a9ccba9d92861785aa4ed7aef1592d37f" title="Returns the upper triangular matrix U in the LU decomposition.">U</a></span> triangles are efficiently packed into a single matrix and <span class="tt">P</span> is stored as a vector of row swap instructions.</p>
 <p>The construction works even if <span class="tt">A</span> is singular, though the solver methods will not.</p>
 <p>If <span class="tt">A</span> is <span class="tt">n x n</span>, then the construction takes O(n^3) operations. There are block iterative methods that can reduce that to a sub-cubic count but they are not implemented here. Of course, the method works on whole words or bit elements at a time so is very efficient even without those enhancements.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-20"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-21"></a>
 Panics</h1>
 <p>Constructor panics if the <span class="tt">A</span> matrix is not square. There are generalisations of the LU decomposition for non-square matrices but those are not considered yet.</p>
 <h1 class="doxsection"><a class="anchor" id="example-checks-that-lu--pa-for-a-random-matrix-a"></a>
@@ -253,7 +253,7 @@ template&lt;Unsigned Word&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the inverse of the matrix <span class="tt">A</span> as a full independent bit-matrix or <span class="tt">std::nullopt</span> if the matrix is singular. </p>
-<h1 class="doxsection"><a class="anchor" id="example-90"></a>
+<h1 class="doxsection"><a class="anchor" id="example-92"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">BitMatrix&lt;&gt;::left_rotation</a>(100, 1);</div>
 <div class="line"><a class="code hl_function" href="#a92c7094a721d3bbfa9503612f7585866">BitLU</a> lu{A};</div>
@@ -294,10 +294,10 @@ template&lt;Unsigned Word&gt; </div>
 <p>Solves the linear system <span class="tt">A.X_for = B</span> for any <span class="tt">B</span> where <span class="tt">A</span> is the matrix used to construct the <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> object. </p>
 <p>This methods returns <span class="tt">std::nullopt</span> if the matrix is singular.</p>
 <p>Each column of <span class="tt">X</span> is a solution to the system <span class="tt">A.x_for = b</span> where <span class="tt">b</span> is the corresponding column of <span class="tt">B</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-24"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-25"></a>
 Panics</h1>
 <p>This method panics if the bit-matrix <span class="tt">B</span> has a different number of rows than the number of row swap instructions.</p>
-<h1 class="doxsection"><a class="anchor" id="example-89"></a>
+<h1 class="doxsection"><a class="anchor" id="example-91"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">BitMatrix&lt;&gt;::left_rotation</a>(100, 5);</div>
 <div class="line"><span class="keyword">auto</span> B = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a47a029b47df5b3641f6f06483b549ce6">BitMatrix&lt;&gt;::random</a>(100, 12);</div>
@@ -337,10 +337,10 @@ requires (std::same_as&lt;typename Store::word_type, Word&gt;)</div>
 
 <p>Solves the linear system <span class="tt">A.x_for = b</span> for any <span class="tt">b</span> where <span class="tt">A</span> is the matrix used to construct the <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> object. </p>
 <p>This methods returns <span class="tt">std::nullopt</span> if the matrix is singular.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-23"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-24"></a>
 Panics</h1>
 <p>This method panics if the bit-matrix <span class="tt">b</span> has a different number of rows than the number of row swap instructions.</p>
-<h1 class="doxsection"><a class="anchor" id="example-88"></a>
+<h1 class="doxsection"><a class="anchor" id="example-90"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> n = 100uz;</div>
 <div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">BitMatrix&lt;&gt;::left_rotation</a>(n, 1);</div>
@@ -348,7 +348,7 @@ Example</h1>
 <div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#a4b7006134bcff1ddfc81bcc8133dd3cc">BitVector&lt;&gt;::random</a>(n);</div>
 <div class="line"><span class="keyword">auto</span> x = lu(b).value();</div>
 <div class="line">assert_eq(A * x, b);</div>
-<div class="ttc" id="aclassgf2_1_1BitVector_html_a4b7006134bcff1ddfc81bcc8133dd3cc"><div class="ttname"><a href="classgf2_1_1BitVector.html#a4b7006134bcff1ddfc81bcc8133dd3cc">gf2::BitVector::random</a></div><div class="ttdeci">static BitVector random(usize size, double p=0.5, u64 seed=0)</div><div class="ttdoc">Factory method to generate a bit-vector of size size where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitVector.h:348</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_a4b7006134bcff1ddfc81bcc8133dd3cc"><div class="ttname"><a href="classgf2_1_1BitVector.html#a4b7006134bcff1ddfc81bcc8133dd3cc">gf2::BitVector::random</a></div><div class="ttdeci">static BitVector random(usize size, double p=0.5, u64 seed=0)</div><div class="ttdoc">Factory method to generate a bit-vector of size size where the elements are picked at random.</div><div class="ttdef"><b>Definition</b> BitVector.h:373</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -410,7 +410,7 @@ template&lt;Unsigned Word&gt; </div>
 </div><div class="memdoc">
 
 <p>Permutes the rows of the input matrix <span class="tt">B</span> in-place using our row-swap instruction vector. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-21"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-22"></a>
 Panics</h1>
 <p>This method panics if the dimensions of <span class="tt">B</span> and the row-swap instruction vector do not match. </p>
 
@@ -445,7 +445,7 @@ requires (std::same_as&lt;typename Store::word_type, Word&gt;)</div>
 </div><div class="memdoc">
 
 <p>Permute the rows of the input vector <span class="tt">b</span> in-place using our row-swap instruction vector. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-22"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-23"></a>
 Panics</h1>
 <p>This method panics if the dimensions of <span class="tt">b</span> and the row-swap instruction vector do not match. </p>
 
@@ -477,7 +477,7 @@ template&lt;Unsigned Word&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the rank of the matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-87"></a>
+<h1 class="doxsection"><a class="anchor" id="example-89"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a8b23de84fa10d85060a045c3c4058242">BitMatrix&lt;&gt;::left_rotation</a>(100, 1);</div>
 <div class="line"><span class="keyword">auto</span> lu = A.LU();</div>

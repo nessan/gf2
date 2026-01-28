@@ -257,7 +257,7 @@ Factory Constructors</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVector.html#aeed3a5c646dbc7c38b4298574734ae4a" title="Factory method to generate a bit-vector of length n looking like 101010....">gf2::BitVector::alternating</a></span>  </td><td class="markdownTableBodyNone">Returns a bit-vector where all the elements follow the pattern <span class="tt">101010...</span>  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVector.html#a3f33e12942bab8d475697297db924cb0" title="Factory method to construct a bit-vector by copying all the bits from any Unsigned instance....">gf2::BitVector::from</a></span>  </td><td class="markdownTableBodyNone">Returns a <span class="tt">BitVector</span> filled with bits from various sources.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVector.html#a3f33e12942bab8d475697297db924cb0" title="Factory method to construct a bit-vector by copying all the bits from any Unsigned instance....">gf2::BitVector::from</a></span>  </td><td class="markdownTableBodyNone">Returns a <span class="tt">BitVector</span> filled with bits copied from various sources.  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVector.html#a4b7006134bcff1ddfc81bcc8133dd3cc" title="Factory method to generate a bit-vector of size size where the elements are picked at random.">gf2::BitVector::random</a></span>  </td><td class="markdownTableBodyNone">Returns a <span class="tt">BitVector</span> with a random fill seeded from entropy.  </td></tr>
 <tr class="markdownTableRowOdd">
@@ -269,8 +269,10 @@ Factory Constructors</h1>
 <ul>
 <li><em>Any</em> other <span class="tt"><a class="el" href="conceptgf2_1_1BitStore.html" title="A concept that is satisfied by all bit-vector-like types, which we refer to as bit-stores.">gf2::BitStore</a></span> object. The source object need not share the same underlying storage type. <br  />
  This allows conversions from bit-stores based on a different word type.</li>
-<li><em>Any</em> unsigned integer type, where we copy the bits corresponding to the value.<br  />
+<li><em>Any</em> unsigned integer value, where we copy the bits in the passed value.<br  />
  The source type need not be the same as the underlying <span class="tt">Word</span> type used by the bit-vector. The size of the resulting vector is determined by the number of bits in the source type.</li>
+<li>An iteration of <em>any</em> unsigned integer values, where we copy all the bits in that iteration.<br  />
+ The source type need not be the same as the underlying <span class="tt">Word</span> type used by the bit-vector. The size of the resulting vector is determined by the number of bits in the iteration.</li>
 <li>A <a href="https://en.cppreference.com/w/cpp/utility/bitset"><span class="tt">std::bitset</span></a> where we copy the bits over.</li>
 <li>A callable object (a function of some sort) that generates bits on demand when passed an index.</li>
 </ul>
@@ -322,17 +324,19 @@ Appending Elements</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVector.html#ab1ec353b0b28d8f85f402b368883405e" title="Pushes a single bit b onto the bit-vector.">gf2::BitVector::push</a></span>  </td><td class="markdownTableBodyNone">Pushes a single bit (0 or 1) onto the end of the bit-vector.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVector.html#aa9116014ea3e714e7c5017a90a5d7ace" title="Appends all the bits from any unsigned integral src value and returns a reference to this for chainin...">gf2::BitVector::append</a></span>  </td><td class="markdownTableBodyNone">Appends bits from various sources to the end of the bit-vector.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVector.html#af801e281e5497e59086cae6042166ec3" title="Appends all the bits from any unsigned integral src value and returns a reference to this for chainin...">gf2::BitVector::append</a></span>  </td><td class="markdownTableBodyNone">Appends bits from various sources to the end of the bit-vector.  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVector.html#a7b73a1d27f306f5b7fc3909f46ab6809" title="Appends a single character c onto the end of bit-vector and returns this for chaining.">gf2::BitVector::append_digit</a></span>  </td><td class="markdownTableBodyNone">Appends a "character's" worth of bits to the end of the bit-vector.  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitVector.html#a95ad154ae65e3999bb24c7ad0e03db50" title="Appends a single hex digit character c onto the end of bit-vector and returns this for chaining.">gf2::BitVector::append_hex_digit</a></span>  </td><td class="markdownTableBodyNone">Appends four bits from a "hex-character" to the end of the bit-vector.  </td></tr>
 </table>
-<p>The <span class="tt"><a class="el" href="classgf2_1_1BitVector.html#aa9116014ea3e714e7c5017a90a5d7ace" title="Appends all the bits from any unsigned integral src value and returns a reference to this for chainin...">gf2::BitVector::append</a></span> method is overloaded to allow appending bits from:</p>
+<p>The <span class="tt"><a class="el" href="classgf2_1_1BitVector.html#af801e281e5497e59086cae6042166ec3" title="Appends all the bits from any unsigned integral src value and returns a reference to this for chainin...">gf2::BitVector::append</a></span> method is overloaded to allow appending bits from:</p>
 <ul>
 <li>A <a href="https://en.cppreference.com/w/cpp/utility/bitset"><span class="tt">std::bitset</span></a> where we append the bits to the end of the bit-vector.</li>
-<li><em>Any</em> unsigned integer type, where we append the bits corresponding to the value.<br  />
- The type need not be the same as the underlying <span class="tt">Word</span> type used by the bit-vector.</li>
+<li><em>Any</em> unsigned integer value, where we append the bits from the passed value to the end of the bit-vector.<br  />
+ The source type need not be the same as the underlying <span class="tt">Word</span> type used by the bit-vector.</li>
+<li>An iteration of <em>any</em> unsigned integer values, where we append all the bits from that iteration to the end of the bit-vector.<br  />
+ The source type need not be the same as the underlying <span class="tt">Word</span> type used by the bit-vector.</li>
 <li><em>Any</em> other <span class="tt"><a class="el" href="conceptgf2_1_1BitStore.html" title="A concept that is satisfied by all bit-vector-like types, which we refer to as bit-stores.">gf2::BitStore</a></span> object, which need not share the same underlying <span class="tt">Word</span> storage type.</li>
 </ul>
 <p>The <span class="tt"><a class="el" href="classgf2_1_1BitVector.html#a7b73a1d27f306f5b7fc3909f46ab6809" title="Appends a single character c onto the end of bit-vector and returns this for chaining.">gf2::BitVector::append_digit</a></span> method appends bits from a character representing a digit in one of the bases 2, 4, 8, or 16. It does nothing if it fails to parse the character.</p>

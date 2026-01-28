@@ -25,6 +25,8 @@ var classgf2_1_1BitArray =
     [ "first_unset", "classgf2_1_1BitArray.html#a511097c7ce5605ff98cda300d6ce558a", null ],
     [ "flip", "classgf2_1_1BitArray.html#a1cc837e63f24b06f9d6d756435451542", null ],
     [ "flip_all", "classgf2_1_1BitArray.html#ac03f099279bd6d712604d8d2468b0a74", null ],
+    [ "from", "classgf2_1_1BitArray.html#a9ad5d26dd30796f1fb0da4aaf74a2d2b", null ],
+    [ "from", "classgf2_1_1BitArray.html#a5bcdfdb6362b71cb2c73e684914ab279", null ],
     [ "from", "classgf2_1_1BitArray.html#a4d89093857a783b598995b6a45b8c8dd", null ],
     [ "from", "classgf2_1_1BitArray.html#a6ede5ef1640515441b749d6071fcf8c1", null ],
     [ "front", "classgf2_1_1BitArray.html#a399a6f87005a45a028c582d71201ee16", null ],

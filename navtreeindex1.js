@@ -1,5 +1,9 @@
 var NAVTREEINDEX1 =
 {
+"classgf2_1_1BitLU.html#a9ccba9d92861785aa4ed7aef1592d37f":[16,0,0,2,13],
+"classgf2_1_1BitLU.html#aa6eadf85c7d39dac296bc13d481e625b":[14,0,0,2,3],
+"classgf2_1_1BitLU.html#aa6eadf85c7d39dac296bc13d481e625b":[16,0,0,2,3],
+"classgf2_1_1BitLU.html#ab46e29baf332eea2bbc3296d55ae08f7":[14,0,0,2,4],
 "classgf2_1_1BitLU.html#ab46e29baf332eea2bbc3296d55ae08f7":[16,0,0,2,4],
 "classgf2_1_1BitLU.html#ad574b61e458a5f6f87220627a7e1df5e":[14,0,0,2,6],
 "classgf2_1_1BitLU.html#ad574b61e458a5f6f87220627a7e1df5e":[16,0,0,2,6],
@@ -245,9 +249,5 @@ var NAVTREEINDEX1 =
 "classgf2_1_1BitMatrix.html#afd1fbe0556d69c01f4ce0939cdeac05d":[16,0,0,3,70],
 "classgf2_1_1BitPolynomial.html":[14,0,0,4],
 "classgf2_1_1BitPolynomial.html":[16,0,0,4],
-"classgf2_1_1BitPolynomial.html#a03d22233357ad6872d11919977206587":[14,0,0,4,37],
-"classgf2_1_1BitPolynomial.html#a03d22233357ad6872d11919977206587":[16,0,0,4,37],
-"classgf2_1_1BitPolynomial.html#a0ea7309b029a3ae322dd9fdade51e3bd":[14,0,0,4,39],
-"classgf2_1_1BitPolynomial.html#a0ea7309b029a3ae322dd9fdade51e3bd":[16,0,0,4,39],
-"classgf2_1_1BitPolynomial.html#a15acc6d7b5115d5ec9bb98908e4462b3":[14,0,0,4,7]
+"classgf2_1_1BitPolynomial.html#a03d22233357ad6872d11919977206587":[14,0,0,4,37]
 };
