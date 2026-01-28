@@ -79,6 +79,7 @@ Here is an overview of the main methods available in the class:
 | [Queries](#vec-queries)                       | Methods to query the overall state of a bit-vector.                             |
 | [Mutators](#vec-mutators)                     | Methods to mutate the overall state of a bit-vector.                            |
 | [Fills](#vec-fills)                           | Methods to fill a bit-vector from various sources.                              |
+| [Exports](#vec-exports)                       | Methods to export the bits from a bit-vector to various destinations.           |
 | [Spans](#vec-span)                            | Methods to create non-owning views over a part of a bit-vector --- _bit-spans_. |
 | [Sub-vectors](#vec-sub-vectors)               | Methods to pull out a clone of piece of a bit-vector as new bit-vectors         |
 | [Riffling](#vec-riffling)                     | Methods to create vectors that copy a bit-vector with interleaved zeros.        |
@@ -287,15 +288,16 @@ The following methods let you populate the entire vector in a single call.
 
 ### Copies
 
-The `gf2::BitVector::copy` methods support copying bits from:
+The `gf2::BitVector::copy` method is overloaded to copy bit values from various sources, where the size of bit-vector **must** match the number of bits in the source:
 
 - Another bit-store of the same size but possibly a different underlying word type.
-- A [`std::bitset`] of the same size as the vector.
-- An unsigned integer that has the same number of bits as the vector. The integer type need not be the same as the underlying `Word` used by the bit-vector.
+- A single unsigned integer value, which need not be the same type as the underlying `Word` used here.
+- An iteration of unsigned integer values, which need not be the same type as the underlying `Word` used here.
 - A function or callable object that takes a single `usize` index argument and returns a boolean value for that index.
+- A [`std::bitset`] of the same size as the bit-vector.
 
 > [!NOTE]
-> In each case, the size of the source and destinations must match exactly and that condition is always checked unless the `NDEBUG` flag is set at compile time. You can always use a `gf2::BitSpan` to copy a subset of bits if needed.
+> In each case, the _number of bits_ in the source and destination must match exactly and that condition is always checked unless the `NDEBUG` flag is set at compile time. You can always use a `gf2::BitSpan` to copy a subset of bits if needed.
 
 ### Random Fills
 
@@ -303,6 +305,23 @@ By default, the random fill method uses a random number generator seeded with sy
 You can set a specific seed to get reproducible fills.
 
 The default probability that a bit is set is 50%, but you can pass a different probability in the range `[0.0, 1.0]` if desired.
+
+## Exports {#vec-exports}
+
+The following overloaded method lets you export the bits in the bit-vector to various destinations.
+
+| Method                     | Description                                           |
+| -------------------------- | ----------------------------------------------------- |
+| `gf2::BitVector::to_words` | Exports the bits in the bit-vector as unsigned words. |
+
+The ``gf2::BitVector::to_words` function can be passed an output iterator to fill where we assume:
+
+- The output iterator points to a location that can accept values of the underlying word type.
+- There is enough space at the output location to hold all those words.
+
+If `gf2::BitVector::to_words` is called with no argument it returns a new `std::vector` of the underlying word type.
+
+**Note:** The final word in the output may have unused high-order bits that are guaranteed to be set to zero.
 
 ## Spans {#vec-span}
 
@@ -390,7 +409,6 @@ The following methods create iterators for traversing the bits or underlying wor
 | `gf2::BitVector::set_bits`    | Returns a `gf2::SetBits` iterator to view the indices of all the set bits.     |
 | `gf2::BitVector::unset_bits`  | Returns a `gf2::UnsetBits` iterator to view the indices of all the unset bits. |
 | `gf2::BitVector::store_words` | Returns a `gf2::Words` iterator to view the "words" underlying the vector.     |
-| `gf2::BitVector::to_words`    | Returns a copy of the "words" underlying the bit-vector.                       |
 
 There are two overloads of the `gf2::BitVector::bits` method --- one for `const` bit-stores and one for non-`const` bit-stores:
 

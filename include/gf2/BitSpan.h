@@ -467,6 +467,30 @@ public:
         return *this;
     }
 
+    /// Copies all the bits from an iteration of _any_ unsigned integral `src` values to this _equal-sized_ bit-span.
+    ///
+    /// # Note
+    /// We allow *any* unsigned integral source, e.g. copying `u64` words into a `BitSpan<u8>` of the correct size.
+    ///
+    /// # Panics
+    /// Panics if the size of this bit-span does not match the number of bits in the source iteration.
+    ///
+    /// # Example
+    /// ```
+    /// BitArray<52, u8> v;
+    /// auto s = v.span(2,50);
+    /// std::vector<u16> src = { 0b1010101010101010, 0b1010101010101010, 0b1111111111111111 };
+    /// s.copy(src.begin(), src.end());
+    /// assert_eq(s.to_string(), "010101010101010101010101010101011111111111111111");
+    /// assert_eq(v.to_string(), "0001010101010101010101010101010101111111111111111100");
+    /// ```
+    template<typename Iter>
+        requires std::is_unsigned_v<typename std::iterator_traits<Iter>::value_type>
+    constexpr void copy(Iter src_begin, Iter src_end) {
+        gf2::copy(src_begin, src_end, *this);
+    }
+
+
     /// Copies all the bits from an equal-sized `src` bit-store and returns a reference to this for chaining.
     ///
     /// # Note
@@ -825,7 +849,31 @@ public:
     /// ```
     constexpr auto store_words() const { return gf2::store_words(*this); }
 
-    /// Returns a copy of the words underlying this bit-span.
+    /// @}
+    /// @name Exports:
+    /// @{
+
+    /// Returns a copy of the words underlying this bit-span and puts them into the passed output iterator.
+    ///
+    /// # Note
+    /// 1. The last word in the bit-span may not be fully occupied but unused slots will be all zeros.
+    /// 2. The output iterator must be able to accept values of the bit-span's `word_type`.
+    /// 3. The output iterator must have enough space to accept all the words in the bit-span.
+    ///
+    /// # Example
+    /// ```
+    /// auto v = BitVector<u8>::ones(100);
+    /// auto s = v.span(4,14);
+    /// std::vector<u8> out8(s.words());
+    /// s.to_words(out8.begin());
+    /// assert_eq(out8, (std::vector<u8>{0b1111'1111, 0b0000'0011}));
+    /// std::vector<u16> out16(s.words());
+    /// s.to_words(out16.begin());
+    /// assert_eq(out16, (std::vector<u16>{0b1111'1111, 0b0000'0011}));
+    /// ```
+    constexpr void to_words(std::output_iterator<word_type> auto out) { gf2::to_words(*this, out); }
+
+    /// Returns a copy of the words underlying this bit-span as a `std::vector<word_type>`.
     ///
     /// **Note:** The last word in the vector may not be fully occupied but unused slots will be all zeros.
     ///

@@ -151,6 +151,7 @@ The provided functions fall into categories:
 | [Queries](#store-queries)                     | Functions to query the overall state of a bit-store.                             |
 | [Mutators](#store-mutators)                   | Functions to mutate the overall state of a bit-store.                            |
 | [Fills](#store-fills)                         | Functions to fill a bit-store from various sources.                              |
+| [Exports](#store-exports)                     | Functions to export the bits in a bit-store to various destinations.             |
 | [Spans](#store-spans)                         | Functions to create non-owning views over a part of a bit-store --- _bit-spans_. |
 | [Sub-vectors](#store-sub-vectors)             | Functions to clone a piece of a bit-store as a new bit-vector.                   |
 | [Riffling](#store-riffling)                   | Functions to create vectors that copy a bit-store with interleaved zeros.        |
@@ -224,15 +225,16 @@ The following functions let you populate the entire store from multiple sources 
 
 ### Copies
 
-The `copy` functions support copying bit values from:
+The `copy` function is overloaded to copy bit values from various sources into a destination bit-store, where the size of destination bit-store **must** match the number of bits in the source:
 
 - Another bit-store of the same size but possibly a different underlying word type.
-- A [`std::bitset`] of the same size as the store.
-- An unsigned integer that has the same number of bits as the store. The integer type need not be the same as the underlying `Word` used by the bit-vector.
+- A single unsigned integer value, which need not be the same type as the underlying `Word` used by the bit-store.
+- An iteration of unsigned integer values, which need not be the same type as the underlying `Word` used by the bit-store.
 - A function or callable object that takes a single `usize` index argument and returns a boolean value for that index.
+- A [`std::bitset`] of the same size as the bit-store.
 
 > [!NOTE]
-> In each case, the _size_ of the source and destinations must match exactly and that condition is always checked unless the `NDEBUG` flag is set at compile time. You can always use a `gf2::BitSpan` to copy a subset of bits if needed. However, the underlying _word types_ need **not** match, so you can copy between bit-stores that use different underlying word types. You can use the `gf2::copy` method to convert between different `Word` type stores (e.g., from `BitVector<u32>` to `BitVector<u8>`) as long as the size of the source and destinations match.
+> In each case, the _number of bits_ in the source and destination must match exactly and that condition is always checked unless the `NDEBUG` flag is set at compile time. You can always use a `gf2::BitSpan` to copy a subset of bits if needed. However, the underlying _word types_ need **not** match, so you can copy between bit-stores that use different underlying word types. You can use the `gf2::copy` method to convert between different `Word` type stores (e.g., from `BitVector<u32>` to `BitVector<u8>`) as long as the size of the source and destinations match.
 
 ### Random Fills
 
@@ -240,6 +242,23 @@ By default, the random fill method uses a random number generator seeded with sy
 You can set a specific seed to get reproducible fills.
 
 The default probability that a bit is set is 50%, but you can pass a different probability in the range `[0.0, 1.0]` if desired.
+
+## Exports {#store-exports}
+
+The following overloaded function lets you export the bits in the bit-store to various destinations.
+
+| Method          | Description                                          |
+| --------------- | ---------------------------------------------------- |
+| `gf2::to_words` | Exports the bits in the bit-store as unsigned words. |
+
+The ``gf2::to_words` function can be passed an output iterator to fill where we assume:
+
+- The output iterator points to a location that can accept values of the underlying word type.
+- There is enough space at the output location to hold all those words.
+
+If `gf2::to_words` is called with no argument it returns a new `std::vector` of the bit-store's underlying word type.
+
+**Note:** The final word in the output may have unused high-order bits that are guaranteed to be set to zero.
 
 ## Spans {#store-spans}
 
@@ -330,7 +349,6 @@ The following functions create iterators for traversing the bits or underlying w
 | `gf2::set_bits`    | Returns a `gf2::SetBits` iterator to view the indices of all the set bits.     |
 | `gf2::unset_bits`  | Returns a `gf2::UnsetBits` iterator to view the indices of all the unset bits. |
 | `gf2::store_words` | Returns a `gf2::Words` iterator to view the "words" underlying the store.      |
-| `gf2::to_words`    | Returns a copy of the "words" underlying the bit-store.                        |
 
 There are two overloads of the `gf2::bits` function --- one for `const` bit-stores and one for non-`const` bit-stores:
 

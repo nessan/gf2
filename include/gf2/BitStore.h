@@ -484,25 +484,83 @@ template<Unsigned Src, BitStore Store>
 constexpr void
 copy(Src src, Store& store) {
     constexpr auto src_bits = BITS<Src>;
-    gf2_always_assert(store.size() == src_bits, "Lengths do not match: {} != {}.", store.size(), src_bits);
+    gf2_assert(store.size() == src_bits, "Lengths do not match: {} != {}.", store.size(), src_bits);
 
-    using word_type = typename Store::word_type;
-    constexpr auto bits_per_word = BITS<word_type>;
-    if constexpr (src_bits <= bits_per_word) {
-        // The source fits into a single store word
-        store.set_word(0, static_cast<word_type>(src));
+    using dst_type = typename Store::word_type;
+    constexpr auto dst_bpw = BITS<dst_type>;
+
+    if constexpr (src_bits <= dst_bpw) {
+        // The source fits into a single store word. We can pad the source to get it to the correct size.
+        // It happens that casting zero-pads --- but `set_word` only ever looks at the low `src_bits` piece anyway.
+        store.set_word(0, static_cast<dst_type>(src));
     } else {
-        // The source spans some number of store words (which we assume is an integer number).
-        constexpr auto num_words = src_bits / bits_per_word;
-        for (auto i = 0uz; i < num_words; ++i) {
-            auto shift = i * bits_per_word;
-            auto word_value = static_cast<word_type>((src >> shift) & MAX<word_type>);
-            store.set_word(i, word_value);
+        // The source spans some integer number of store words (we assume it is an integer number).
+        // Proceed by nibbling off destination-sized words from the larger source until its exhausted.
+        constexpr auto dst_words = src_bits / dst_bpw;
+        constexpr auto dst_mask = MAX<dst_type>;
+        for (auto i = 0uz; i < dst_words; ++i, src >>= dst_bpw) {
+            auto src_word = static_cast<dst_type>(src & dst_mask);
+            store.set_word(i, src_word);
         }
     }
 }
 
-/// Copies all the bits from _any_ `src` bit-store to another _equal-sized_ bit-store.
+/// Copies all the bits from an iteration of _any_ unsigned integral `src` values to an _equal-sized_ bit-store.
+///
+/// # Note
+/// We allow *any* unsigned integral source, e.g. copying `u64` words into a `BitVector<u8>` of the correct size.
+///
+/// # Panics
+/// Panics if the size of the store does not match the number of bits in the source iteration.
+///
+/// # Example
+/// ```
+/// BitVector<u8> v{48};
+/// std::vector<u16> src = { 0b1010101010101010, 0b1010101010101010, 0b1111111111111111 };
+/// gf2::copy(src.begin(), src.end(), v);
+/// assert_eq(to_string(v), "010101010101010101010101010101011111111111111111");
+/// BitVector<u32> w{48};
+/// gf2::copy(src.begin(), src.end(), w);
+/// assert_eq(to_string(w), "010101010101010101010101010101011111111111111111");
+/// ```
+template<typename Iter, BitStore Store>
+    requires std::is_unsigned_v<typename std::iterator_traits<Iter>::value_type>
+constexpr void
+copy(Iter src_begin, Iter src_end, Store& store) {
+
+    // What are the two word types (without any const qualifiers)?
+    using dst_type = std::remove_const_t<typename Store::word_type>;
+    using src_type = typename std::iterator_traits<Iter>::value_type;
+
+    // Numbers of bits per respective word.
+    constexpr auto dst_bpw = BITS<dst_type>;
+    constexpr auto src_bpw = BITS<src_type>;
+
+    // Size of the source in words and bits.
+    auto src_words = static_cast<std::size_t>(std::distance(src_begin, src_end));
+    auto src_bits = src_words * src_bpw;
+
+    // The sizes in bits must match ...
+    gf2_assert(store.size() == src_bits, "Lengths do not match: {} != {}.", store.size(), src_bits);
+
+    // What we do next depends on the size of the respective words.
+    if constexpr (src_bpw == dst_bpw) {
+        // Same sized words -- we can copy whole words directly ...
+        auto src_iter = src_begin;
+        for (auto i = 0uz; i < store.words(); ++i, ++src_iter) store.set_word(i, static_cast<dst_type>(*src_iter));
+    } else {
+        // Otherwise proceed by copying one source word at a time into the appropriate span in the destination store.
+        // The actual copying is done by the earlier method that copies any unsigned into the store,
+        auto src_iter = src_begin;
+        auto dst_begin = 0uz;
+        for (auto i = 0uz; i < src_words; ++i, ++src_iter, dst_begin += src_bpw) {
+            auto dst_span = span(store, dst_begin, dst_begin + src_bpw);
+            copy(*src_iter, dst_span);
+        }
+    }
+}
+
+/// Copies all the bits from _any_ `src` bit-store to another _equal-sized_ `dst` bit-store.
 ///
 /// # Note:
 /// This is one of the few methods in the library that *doesn't* require the two stores to have the same `word_type`.
@@ -519,61 +577,55 @@ copy(Src src, Store& store) {
 /// copy(BitVector<u8>::alternating(10), v);
 /// assert_eq(to_string(v), "1010101010");
 /// ```
-template<BitStore Src, BitStore Store>
+template<BitStore Src, BitStore Dst>
 constexpr void
-copy(Src const& src, Store& store) {
+copy(Src const& src, Dst& dst) {
     // The sizes must match ...
-    gf2_always_assert(store.size() == src.size(), "Lengths do not match: {} != {}.", store.size(), src.size());
+    gf2_assert(dst.size() == src.size(), "Lengths do not match: {} != {}.", dst.size(), src.size());
 
-    // What is the word types (without any const qualifiers)?
-    using word_type = std::remove_const_t<typename Store::word_type>;
-    using src_word_type = std::remove_const_t<typename Src::word_type>;
+    // What are the word types (without any const qualifiers)?
+    using dst_type = std::remove_const_t<typename Dst::word_type>;
+    using src_type = std::remove_const_t<typename Src::word_type>;
 
     // Numbers of bits per respective words
-    constexpr auto word_bits = BITS<word_type>;
-    constexpr auto src_word_bits = BITS<src_word_type>;
+    constexpr auto dst_bpw = BITS<dst_type>;
+    constexpr auto src_bpw = BITS<src_type>;
 
     // What we do next depends on the size of the respective words.
-    if constexpr (word_bits == src_word_bits) {
-        // Easiest case: Same sized words -- we can copy whole words directly ...
-        for (auto i = 0uz; i < store.words(); ++i) {
-            auto src_word = static_cast<word_type>(src.word(i));
-            store.set_word(i, src_word);
+    if constexpr (dst_bpw == src_bpw) {
+        // Same sized words holding the same number of bits => same number of words in each ...
+        for (auto i = 0uz; i < dst.words(); ++i) {
+            auto value = static_cast<dst_type>(src.word(i));
+            dst.set_word(i, value);
         }
-    } else if constexpr (word_bits > src_word_bits) {
-        // Our word type is larger -- some number of source words fit into each store word.
-        // We assume that our word size is an integer multiple of the source word size.
-        constexpr auto ratio = word_bits / src_word_bits;
+    } else if constexpr (dst_bpw > src_bpw) {
+        // The destination word type is larger -- some number of source words fit into each destination word.
+        // We assume that the destination word size is an integer multiple of the source word size.
+        constexpr auto ratio = dst_bpw / src_bpw;
 
         auto src_words = src.words();
-        for (auto i = 0uz; i < store.words(); ++i) {
-
-            // Combine `ratio` source words into a single destination word being careful not to run off the end ...
-            word_type dst_word = 0;
-            for (auto j = 0uz; j < ratio; ++j) {
-                auto      src_index = i * ratio + j;
-                word_type src_word = 0;
-                if (src_index < src_words) src_word = static_cast<word_type>(src.word(src_index));
-                dst_word |= (src_word << (j * src_word_bits));
+        for (auto i = 0uz; i < dst.words(); ++i) {
+            // Combine `ratio` source words into a single destination word being careful not to run off the end of `src`
+            auto value = ZERO<dst_type>;
+            for (auto j = 0uz, src_index = i * ratio; j < ratio && src_index < src_words; ++j, ++src_index) {
+                auto src_word = static_cast<dst_type>(src.word(src_index));
+                value |= (src_word << (j * src_bpw));
             }
-            store.set_word(i, dst_word);
+            dst.set_word(i, value);
         }
     } else {
-        // The store word size is smaller -- each source word becomes multiple destination words.
-        // We assume that the source word size is an integer multiple of our word size.
-        constexpr auto ratio = src_word_bits / word_bits;
+        // The destination word type is smaller -- each source word becomes multiple destination words.
+        // We assume that the source word size is an integer multiple of the destination word size.
+        constexpr auto ratio = src_bpw / dst_bpw;
 
-        auto dst_words = store.words();
-        for (auto src_index = 0uz; src_index < src.words(); ++src_index) {
-            auto src_word = src.word(src_index);
-
-            // Split the source word into `ratio` destination words ...
-            for (auto j = 0uz; j < ratio; ++j) {
-                auto dst_index = src_index * ratio + j;
-                if (dst_index >= dst_words) break;
-                auto shift = j * word_bits;
-                auto dst_word = static_cast<word_type>((src_word >> shift) & MAX<word_type>);
-                store.set_word(dst_index, dst_word);
+        auto dst_words = dst.words();
+        auto dst_mask = MAX<dst_type>;
+        for (auto i = 0uz; i < src.words(); ++i) {
+            // Split each source word into `ratio` destination words being careful not to run off the end of `dst`
+            auto src_word = src.word(i);
+            for (auto j = 0uz, dst_index = i * ratio; j < ratio && dst_index < dst_words; ++j, ++dst_index) {
+                dst.set_word(dst_index, static_cast<dst_type>(src_word & dst_mask));
+                src_word >>= dst_bpw;
             }
         }
     }
@@ -1160,10 +1212,34 @@ store_words(Store const& store) {
     return Words<Store>(&store);
 }
 
-/// Returns a copy of the words underlying this bit-store.
+/// Returns a copy of the words underlying this bit-store and puts them into the passed output iterator.
 ///
 /// # Note
-/// The last word in the store may not be fully occupied but unused slots will be all zeros.
+/// 1. The last word in the store may not be fully occupied but unused slots will be all zeros.
+/// 2. The output iterator must be able to accept values of the store's `word_type`.
+/// 3. The output iterator must have enough space to accept all the words in the store.
+///
+/// # Example
+/// ```
+/// auto v = BitVector<u8>::ones(10);
+/// std::vector<u8> out8(v.words());
+/// to_words(v, out8.begin());
+/// assert_eq(out8, (std::vector<u8>{0b1111'1111, 0b0000'0011}));
+/// std::vector<u16> out16(v.words());
+/// to_words(v, out16.begin());
+/// assert_eq(out16, (std::vector<u16>{0b1111'1111, 0b0000'0011}));
+/// ```
+template<BitStore Store>
+constexpr void
+to_words(Store const& store, std::output_iterator<typename Store::word_type> auto out) {
+    for (auto i = 0uz; i < store.words(); ++i, ++out) *out = store.word(i);
+}
+
+/// Returns a copy of the words underlying this bit-store as new `std::vector`.
+///
+/// # Note
+/// - The last word in the store may not be fully occupied but unused slots will be all zeros.
+/// - The returned `std::vector`'s element type will be the same as the store's `word_type`.
 ///
 /// # Example
 /// ```
