@@ -158,43 +158,45 @@ Methods Overview</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Category  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="#set-concept">Concept Methods</a>  </td><td class="markdownTableBodyNone">Methods needed to satisfy the <span class="tt"><a class="el" href="conceptgf2_1_1BitStore.html" title="A concept that is satisfied by all bit-vector-like types, which we refer to as bit-stores.">gf2::BitStore</a></span> concept.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-concept">Concept Methods</a>  </td><td class="markdownTableBodyNone">Methods needed to satisfy the <span class="tt"><a class="el" href="conceptgf2_1_1BitStore.html" title="A concept that is satisfied by all bit-vector-like types, which we refer to as bit-stores.">gf2::BitStore</a></span> concept.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="#set-constructors">Constructors</a>  </td><td class="markdownTableBodyNone">Methods to create bit-arrays with various initial values..  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-constructors">Constructors</a>  </td><td class="markdownTableBodyNone">Methods to create bit-arrays with various initial values..  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="#set-factory">Factory Constructors</a>  </td><td class="markdownTableBodyNone">Class methods to create bit-arrays with specific fills.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-factory">Factory Constructors</a>  </td><td class="markdownTableBodyNone">Class methods to create bit-arrays with specific fills.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="#set-bit-access">Bit Access</a>  </td><td class="markdownTableBodyNone">Methods to access individual bit elements in a bit-array.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-bit-access">Bit Access</a>  </td><td class="markdownTableBodyNone">Methods to access individual bit elements in a bit-array.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="#set-queries">Queries</a>  </td><td class="markdownTableBodyNone">Methods to query the overall state of a bit-array.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-queries">Queries</a>  </td><td class="markdownTableBodyNone">Methods to query the overall state of a bit-array.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="#set-mutators">Mutators</a>  </td><td class="markdownTableBodyNone">Methods to mutate the overall state of a bit-array.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-mutators">Mutators</a>  </td><td class="markdownTableBodyNone">Methods to mutate the overall state of a bit-array.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="#set-fills">Fills</a>  </td><td class="markdownTableBodyNone">Methods to fill a bit-array from various sources.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-fills">Fills</a>  </td><td class="markdownTableBodyNone">Methods to fill a bit-array from various sources.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="#set-span">Spans</a>  </td><td class="markdownTableBodyNone">Methods to create non-owning views over a part of a bit-array &mdash; <em>bit-spans</em>.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-exports">Exports</a>  </td><td class="markdownTableBodyNone">Methods to export the bits in the bit-array to various destinations.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="#set-sub-vectors">Sub-vectors</a>  </td><td class="markdownTableBodyNone">Methods to pull out a clone of piece of a bit-array as new bit-vector.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-span">Spans</a>  </td><td class="markdownTableBodyNone">Methods to create non-owning views over a part of a bit-array &mdash; <em>bit-spans</em>.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="#set-riffling">Riffling</a>  </td><td class="markdownTableBodyNone">Methods to create bit-vectors that copy a bit-array with interleaved zeros.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-sub-vectors">Sub-vectors</a>  </td><td class="markdownTableBodyNone">Methods to pull out a clone of piece of a bit-array as new bit-vector.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="#set-indices">Set/Unset Indices</a>  </td><td class="markdownTableBodyNone">Methods to find the indices of set &amp; unset bits in a bit-array.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-riffling">Riffling</a>  </td><td class="markdownTableBodyNone">Methods to create bit-vectors that copy a bit-array with interleaved zeros.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="#set-iterators">Iterators</a>  </td><td class="markdownTableBodyNone">Methods to create various iterators over a bit-array.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-indices">Set/Unset Indices</a>  </td><td class="markdownTableBodyNone">Methods to find the indices of set &amp; unset bits in a bit-array.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="#set-stringification">Stringification</a>  </td><td class="markdownTableBodyNone">Methods to create string representations of a bit-array.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="#array-iterators">Iterators</a>  </td><td class="markdownTableBodyNone">Methods to create various iterators over a bit-array.  </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="#array-stringification">Stringification</a>  </td><td class="markdownTableBodyNone">Methods to create string representations of a bit-array.  </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#equality-operator">Equality Operator</a>  </td><td class="markdownTableBodyNone">Operator to compare bit-stores, including bit-arrays for content equality.  </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#bit-shifts">Bit Shifts</a>  </td><td class="markdownTableBodyNone">Operators to shift the bits in bit-arrays left or right.  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#bit-wise-operators">Bit-wise Operators</a>  </td><td class="markdownTableBodyNone">Operators to combine bit-stores using logical operations.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#arithmetic-operators">Arithmetic Operators</a>  </td><td class="markdownTableBodyNone">Operators to add or subtract bit-stores.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#bit-wise-operators">Bit-wise Operators</a>  </td><td class="markdownTableBodyNone">Operators to combine bit-stores using logical operations.  </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#arithmetic-operators">Arithmetic Operators</a>  </td><td class="markdownTableBodyNone">Operators to add or subtract bit-stores.  </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#other-functions">Other Functions</a>  </td><td class="markdownTableBodyNone">Dot products, convolutions, concatenation etc. for bit-arrays.  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="set-concept"></a>
+<h1 class="doxsection"><a class="anchor" id="array-concept"></a>
 Concept Methods</h1>
 <p>Bit-arrays satisfy the <span class="tt"><a class="el" href="conceptgf2_1_1BitStore.html" title="A concept that is satisfied by all bit-vector-like types, which we refer to as bit-stores.">gf2::BitStore</a></span> concept and forwards many method calls to free functions defined for that concept. The concept requires us to provide the following methods:</p>
 <table class="markdownTable">
@@ -218,7 +220,7 @@ Concept Methods</h1>
 <p>These methods are trivial to implement for bit-arrays.</p>
 <p>The one place where care is needed is in the <span class="tt">set_word</span> method, which must ensure that any bits beyond the bitset's size remain set to zero.</p>
 <dl class="section warning"><dt>Warning</dt><dd>While the <span class="tt"><a class="el" href="classgf2_1_1BitArray.html#aa4052a792e8bc521a5a0a99bd696f804" title="Returns a const pointer to the underlying store of words .">gf2::BitArray::store</a></span> method provides write access to the underlying words, you must be careful when modifying them directly. You must ensure that any bits beyond the bitset's size remain zero. The <span class="tt"><a class="el" href="classgf2_1_1BitArray.html#ae9764d1b0853ec06b086499a3ab9d823" title="Sets word i in the bit-array&#39;s underlying word store to value (masked if necessary).">gf2::BitArray::set_word</a></span> method takes care of this for you, so prefer using that method when possible.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="set-constructors"></a>
+<h1 class="doxsection"><a class="anchor" id="array-constructors"></a>
 Constructors</h1>
 <p>The default constructor for a <span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size &quot;vector&quot; over GF(2) with N bit elements compactly stored in a standard array of primitiv...">gf2::BitArray</a>&lt;N&gt;</span> creates an a bit-array with <span class="tt">N</span> bits, all initialised to zero. You can also create a bit-vector with an initial fill using the following constructor:</p>
 <table class="markdownTable">
@@ -229,7 +231,7 @@ Constructors</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html" title="A fixed-size &quot;vector&quot; over GF(2) with N bit elements compactly stored in a standard array of primitiv...">gf2::BitArray(Word)</a></span>  </td><td class="markdownTableBodyNone">Constructs a bit-array of size <span class="tt">N</span> by repeatedly copying the bits from the <span class="tt">Word</span>  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="set-factory"></a>
+<h1 class="doxsection"><a class="anchor" id="array-factory"></a>
 Factory Constructors</h1>
 <p>There are also many static factory construction functions.</p>
 <table class="markdownTable">
@@ -259,7 +261,7 @@ Factory Constructors</h1>
 <li>A <a href="https://en.cppreference.com/w/cpp/utility/bitset"><span class="tt">std::bitset</span></a> where we copy the bits over.</li>
 <li>A callable object (a function of some sort) that generates bits on demand when passed an index.</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="set-bit-access"></a>
+<h1 class="doxsection"><a class="anchor" id="array-bit-access"></a>
 Bit Access</h1>
 <p>The following methods provide access to individual bit elements in the bit-array.</p>
 <table class="markdownTable">
@@ -283,7 +285,7 @@ Bit Access</h1>
 <dl class="section note"><dt>Note</dt><dd>You can set the <span class="tt">DEBUG</span> flag at compile time to enable bounds checks on the index arguments.</dd></dl>
 <p>The non-const version of <span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a21b4970c7bc711da4888caaeb71fbbab" title="Returns the boolean value of the bit element i.">gf2::BitArray::operator[]()</a></span> returns a <span class="tt"><a class="el" href="classgf2_1_1BitRef.html" title="A BitRef is a proxy class to reference a single bit in a bit-store.">gf2::BitRef</a></span>, which is "reference" to an individual bit in the vector. It is automatically converted to a boolean on reads, but it also allows writes, which means you can write natural-looking single-bit assignments:</p>
 <div class="fragment"><div class="line">v[12] = <span class="keyword">true</span>;</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="set-queries"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="array-queries"></a>
 Queries</h1>
 <p>The following methods let you query the overall state of a bit-array.</p>
 <table class="markdownTable">
@@ -307,7 +309,7 @@ Queries</h1>
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a60c2d91492bfab341c5fa299884aef54" title="Returns the number of trailing zeros in the bit-array.">gf2::BitArray::trailing_zeros</a></span>  </td><td class="markdownTableBodyNone">Returns the number of trailing unset bits in the bit-array.  </td></tr>
 </table>
 <p>These methods efficiently operate on words at a time, so they are inherently parallel.</p>
-<h1 class="doxsection"><a class="anchor" id="set-mutators"></a>
+<h1 class="doxsection"><a class="anchor" id="array-mutators"></a>
 Mutators</h1>
 <p>The following methods let you mutate the entire bit-array in a single call.</p>
 <table class="markdownTable">
@@ -319,7 +321,7 @@ Mutators</h1>
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#ac03f099279bd6d712604d8d2468b0a74" title="Flips the value of the bits in the bit-array and returns a reference to this for chaining.">gf2::BitArray::flip_all</a></span>  </td><td class="markdownTableBodyNone">Flips the values of all the bits in the bit-array.  </td></tr>
 </table>
 <p>The methods operate on words at a time, so are inherently parallel.</p>
-<h1 class="doxsection"><a class="anchor" id="set-fills"></a>
+<h1 class="doxsection"><a class="anchor" id="array-fills"></a>
 Copies &amp; Fills</h1>
 <p>The following methods let you populate the entire bit-array in a single call.</p>
 <table class="markdownTable">
@@ -332,19 +334,36 @@ Copies &amp; Fills</h1>
 </table>
 <h2 class="doxsection"><a class="anchor" id="copies-1"></a>
 Copies</h2>
-<p>The <span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a6bbfb8e5e1b435b698caf37e85f23173" title="Copies all the bits from any unsigned integral src value to this equal-sized bit-array....">gf2::BitArray::copy</a></span> methods support copying bits from:</p>
+<p>The <span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a6bbfb8e5e1b435b698caf37e85f23173" title="Copies all the bits from any unsigned integral src value to this equal-sized bit-array....">gf2::BitArray::copy</a></span> method is overloaded to copy bit values from various sources, where the size of bit-array <b>must</b> match the number of bits in the source:</p>
 <ul>
 <li>Another bit-store of the same size but possibly a different underlying word type.</li>
-<li>A <a href="https://en.cppreference.com/w/cpp/utility/bitset"><span class="tt">std::bitset</span></a> of the same size as the bit-array.</li>
-<li>An unsigned integer that has the same number of bits as the bit-array. The integer type need not be the same as the underlying <span class="tt">Word</span> used by the bit-array.</li>
+<li>A single unsigned integer value, which need not be the same type as the underlying <span class="tt">Word</span> used here.</li>
+<li>An iteration of unsigned integer values, which need not be the same type as the underlying <span class="tt">Word</span> used here.</li>
 <li>A function or callable object that takes a single <span class="tt">usize</span> index argument and returns a boolean value for that index.</li>
+<li>A <a href="https://en.cppreference.com/w/cpp/utility/bitset"><span class="tt">std::bitset</span></a> of the same size as the bit-array.</li>
 </ul>
-<dl class="section note"><dt>Note</dt><dd>In each case, the size of the source and destinations must match exactly and that condition is always checked unless the <span class="tt">NDEBUG</span> flag is set at compile time. You can always use a <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span> to copy a subset of bits if needed.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>In each case, the <em>number of bits</em> in the source and destination must match exactly and that condition is always checked unless the <span class="tt">NDEBUG</span> flag is set at compile time. You can always use a <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span> to copy a subset of bits if needed.</dd></dl>
 <h2 class="doxsection"><a class="anchor" id="random-fills-1"></a>
 Random Fills</h2>
 <p>By default, the random fill method uses a random number generator seeded with system entropy, so the results change from run to run. You can set a specific seed to get reproducible fills.</p>
 <p>The default probability that a bit is set is 50%, but you can pass a different probability in the range <span class="tt">[0.0, 1.0]</span> if desired.</p>
-<h1 class="doxsection"><a class="anchor" id="set-span"></a>
+<h1 class="doxsection"><a class="anchor" id="array-exports"></a>
+Exports</h1>
+<p>The following overloaded method lets you export the bits in the bit-array to various destinations.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Method  </th><th class="markdownTableHeadNone">Description  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a80e2eec6b618e005b794c20bc5367458" title="Returns a copy of the words underlying this bit-array and puts them into the passed output iterator.">gf2::BitArray::to_words</a></span>  </td><td class="markdownTableBodyNone">Exports the bits in the bit-array as unsigned words.  </td></tr>
+</table>
+<p>The `<span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a80e2eec6b618e005b794c20bc5367458" title="Returns a copy of the words underlying this bit-array and puts them into the passed output iterator.">gf2::BitArray::to_words</a></span> function can be passed an output iterator to fill where we assume:</p>
+<ul>
+<li>The output iterator points to a location that can accept values of the underlying word type.</li>
+<li>There is enough space at the output location to hold all those words.</li>
+</ul>
+<p>If <span class="tt"><a class="el" href="classgf2_1_1BitVector.html#ad634ddd3e30bbf06fbf58127ee3f21a5" title="Returns a copy of the words underlying this bit-vector and puts them into the passed output iterator.">gf2::BitVector::to_words</a></span> is called with no argument it returns a new <span class="tt">std::vector</span> of the underlying word type.</p>
+<p><b>Note:</b> The final word in the output may have unused high-order bits that are guaranteed to be set to zero.</p>
+<h1 class="doxsection"><a class="anchor" id="array-span"></a>
 Spans</h1>
 <p>The following methods let you create a <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span>, which is a non-owning view of some contiguous subset of bits in the bit-array.</p>
 <table class="markdownTable">
@@ -364,7 +383,7 @@ Spans</h1>
 <p>Mutability/immutability of the returned <span class="tt">BitSpan</span> is <em>deep</em>. The span's mutability reflects that of the underlying vector, so if the vector is mutable, so is the span, and vice versa.</p>
 <p>This is similar to the C++20 <a href="https://en.cppreference.com/w/cpp/container/span.html"><span class="tt">std::span</span></a> class for regular data collection types.</p>
 <dl class="section note"><dt>Note</dt><dd>A <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span> also satisfies the <span class="tt"><a class="el" href="conceptgf2_1_1BitStore.html" title="A concept that is satisfied by all bit-vector-like types, which we refer to as bit-stores.">gf2::BitStore</a></span> concept, so you can take a span of a span.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="set-sub-vectors"></a>
+<h1 class="doxsection"><a class="anchor" id="array-sub-vectors"></a>
 Sub-vectors</h1>
 <p>The following methods create or fill <em>independent</em> bit-vectors with copies of some contiguous subset of the bits in the vector.</p>
 <table class="markdownTable">
@@ -377,7 +396,7 @@ Sub-vectors</h1>
 </table>
 <p>The <span class="tt"><a class="el" href="classgf2_1_1BitArray.html#ad780efa43f9e461bb5dd7bfda85529bc" title="Views the bit-array as two parts containing the elements [0, at) and [at, size()) respectively.">gf2::BitArray::split_at</a></span> method can optionally take two pre-existing bit-vectors to fill, thereby avoiding unnecessary allocations in some iterative algorithms that repeatedly use this method.</p>
 <dl class="section note"><dt>Note</dt><dd>These methods do not alter the underlying vector.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="set-riffling"></a>
+<h1 class="doxsection"><a class="anchor" id="array-riffling"></a>
 Riffling</h1>
 <p>We have methods that can interleave (<em>riffle</em>) the bits in a bit-array with zeros.</p>
 <table class="markdownTable">
@@ -390,7 +409,7 @@ Riffling</h1>
 </table>
 <p>If the bit-array looks like \(v_0 v_1 v_2 \ldots v_n\), then the riffling operation produces the vector \(v_0 0 v_1 0 v_2 0 \ldots v_n\) where a zero is interleaved <em>between</em> every bit in the original bit-array (there is no trailing zero at the end).</p>
 <p>If you think of a bit-array as representing the coefficients of a polynomial over GF(2), then riffling corresponds to squaring that polynomial. See the documentation for <span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#a30309419a9ed46754fc450052ef19bfb" title="Fills dst with the square of this bit-polynomial.">gf2::BitPolynomial::squared</a></span> for more information.</p>
-<h1 class="doxsection"><a class="anchor" id="set-indices"></a>
+<h1 class="doxsection"><a class="anchor" id="array-indices"></a>
 Set/Unset Bit Indices</h1>
 <p>The following methods find the indices of set or unset bits in the vector.</p>
 <table class="markdownTable">
@@ -413,7 +432,7 @@ Set/Unset Bit Indices</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a2f70552ecd9a67ade70df35fc747bb03" title="Returns the index of the previous unset bit before index in the bit-array or {} if no more unset bits...">gf2::BitArray::previous_unset</a></span>  </td><td class="markdownTableBodyNone">Returns the index of the previous unset bit in the bit-array <em>before</em> the passed index.  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="set-iterators"></a>
+<h1 class="doxsection"><a class="anchor" id="array-iterators"></a>
 Iterators</h1>
 <p>The following methods create iterators for traversing the bits or underlying words in the bit-array:</p>
 <ul>
@@ -435,7 +454,7 @@ Iterators</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a12153716c09132e0920158ca213fe958" title="Returns a const iterator over all the words underlying the v.">gf2::BitArray::store_words</a></span>  </td><td class="markdownTableBodyNone">Returns a <span class="tt"><a class="el" href="classgf2_1_1Words.html" title="An iterator over the &quot;words&quot; underlying a bit-store.  You get this iterator by calling the BitStore::...">gf2::Words</a></span> iterator to view the "words" underlying the bit-array.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a2a0b33fa5dda7332b371911b27a662ed" title="Returns a copy of the words underlying this bit-array.">gf2::BitArray::to_words</a></span>  </td><td class="markdownTableBodyNone">Returns a copy of the "words" underlying the bit-array.  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitArray.html#a80e2eec6b618e005b794c20bc5367458" title="Returns a copy of the words underlying this bit-array and puts them into the passed output iterator.">gf2::BitArray::to_words</a></span>  </td><td class="markdownTableBodyNone">Returns a copy of the "words" underlying the bit-array.  </td></tr>
 </table>
 <p>There are two overloads of the <span class="tt"><a class="el" href="classgf2_1_1BitArray.html#ae827ae81443b13b09791f8987accc35e" title="Returns a const iterator over the bool values of the bits in the const bit-array.">gf2::BitArray::bits</a></span> method &mdash; one for <span class="tt">const</span> bit-stores and one for non-<span class="tt">const</span> bit-stores:</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> bits();        <span class="comment">// &lt;1&gt;</span></div>
@@ -444,7 +463,7 @@ Iterators</h1>
 <li>Returns a mutable <span class="tt"><a class="el" href="classgf2_1_1Bits.html" title="Two iterators over all the bits in a bit-store — one const and the other non-const....">gf2::Bits</a></span> that allows modification of the bits in the bit-array.</li>
 <li>Returns an immutable <span class="tt"><a class="el" href="classgf2_1_1Bits.html" title="Two iterators over all the bits in a bit-store — one const and the other non-const....">gf2::Bits</a></span> that only allows one to view the bits in the bit-array.</li>
 </ol>
-<h1 class="doxsection"><a class="anchor" id="set-stringification"></a>
+<h1 class="doxsection"><a class="anchor" id="array-stringification"></a>
 Stringification</h1>
 <p>The following methods return a string representation for a bit-array. The string can be in the obvious binary format or a more compact hex format.</p>
 <table class="markdownTable">

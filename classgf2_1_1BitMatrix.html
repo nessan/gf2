@@ -444,7 +444,7 @@ Comparison Operator</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;Unsigned Word = usize&gt;<br />
 class gf2::BitMatrix&lt; Word &gt;</div><p>A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the matrix. The row elements are compactly stored in standard vectors of primitive unsigned words whose type is given by the template parameter <span class="tt">Word</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="note-7"></a>
+<h1 class="doxsection"><a class="anchor" id="note-9"></a>
 Note</h1>
 <p>Bit-matrices are stored by row, so it is always more efficient to arrange computations to operate on rows instead of columns. The high-level methods in this library take care of this for you. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -474,7 +474,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>The default constructor creates an empty bit-matrix with no rows or columns. </p>
-<h1 class="doxsection"><a class="anchor" id="example-90"></a>
+<h1 class="doxsection"><a class="anchor" id="example-92"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae5c368ef2b300f03a588f7461623d177">BitMatrix</a> m;</div>
 <div class="line">assert_eq(m.<a class="code hl_function" href="#ad9f837326c007a7409f697c39fb7702d">to_compact_binary_string</a>(), <span class="stringliteral">&quot;&quot;</span>);</div>
@@ -510,7 +510,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Constructs the <span class="tt">n x n</span> square bit-matrix with all the elements set to 0. </p>
 <p>If <span class="tt">n</span> is zero, we create an empty bit-matrix with no rows or columns.</p>
-<h1 class="doxsection"><a class="anchor" id="example-91"></a>
+<h1 class="doxsection"><a class="anchor" id="example-93"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae5c368ef2b300f03a588f7461623d177">BitMatrix</a> m{3};</div>
 <div class="line">assert_eq(m.<a class="code hl_function" href="#ad9f837326c007a7409f697c39fb7702d">to_compact_binary_string</a>(), <span class="stringliteral">&quot;000 000 000&quot;</span>);</div>
@@ -548,7 +548,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Constructs the <span class="tt">m x n</span> bit-matrix with all the elements set to 0. </p>
 <p>If either <span class="tt">m</span> or <span class="tt">n</span> is zero, we create an empty bit-matrix with no rows or columns.</p>
-<h1 class="doxsection"><a class="anchor" id="example-92"></a>
+<h1 class="doxsection"><a class="anchor" id="example-94"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae5c368ef2b300f03a588f7461623d177">BitMatrix</a> m{3, 4};</div>
 <div class="line">assert_eq(m.<a class="code hl_function" href="#ad9f837326c007a7409f697c39fb7702d">to_compact_binary_string</a>(), <span class="stringliteral">&quot;0000 0000 0000&quot;</span>);</div>
@@ -581,10 +581,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Construct a bit-matrix by <em>copying</em> a given set of rows which can be any <span class="tt"><a class="el" href="conceptgf2_1_1BitStore.html" title="A concept that is satisfied by all bit-vector-like types, which we refer to as bit-stores.">BitStore</a></span> subclass. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-24"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-25"></a>
 Panics</h1>
 <p>We check that all the rows have the same size unless <span class="tt">NDEBUG</span> is defined.</p>
-<h1 class="doxsection"><a class="anchor" id="example-93"></a>
+<h1 class="doxsection"><a class="anchor" id="example-95"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="#a28475ec720b56857bf838222f5bcff28">rows</a> = std::vector{<a class="code hl_function" href="classgf2_1_1BitVector.html#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;&gt;::zeros</a>(3), <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3)};</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1BitMatrix.html">BitMatrix</a> m{<a class="code hl_function" href="#a28475ec720b56857bf838222f5bcff28">rows</a>};</div>
@@ -623,10 +623,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Construct a bit-matrix by <em>moving</em> the given rows. </p>
 <p>Use <span class="tt">std::move(rows)</span> in the constructor argument to get this version. The input rows are moved into the bit-matrix so they are no longer valid after this constructor.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-25"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-26"></a>
 Panics</h1>
 <p>We check that all the rows have the same size unless <span class="tt">NDEBUG</span> is defined.</p>
-<h1 class="doxsection"><a class="anchor" id="example-94"></a>
+<h1 class="doxsection"><a class="anchor" id="example-96"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="#a28475ec720b56857bf838222f5bcff28">rows</a> = std::vector{<a class="code hl_function" href="classgf2_1_1BitVector.html#a66ff1e24db7bf631af2d638dd0b620c1">BitVector&lt;&gt;::zeros</a>(3), <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3)};</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1BitMatrix.html">BitMatrix</a> m{std::move(<a class="code hl_function" href="#a28475ec720b56857bf838222f5bcff28">rows</a>)};</div>
@@ -661,10 +661,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Adds the identity bit-matrix to the bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-54"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-55"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if the bit-matrix is not square.</p>
-<h1 class="doxsection"><a class="anchor" id="example-170"></a>
+<h1 class="doxsection"><a class="anchor" id="example-172"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">m.add_identity();</div>
@@ -700,7 +700,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns <span class="tt">true</span> if all elements of the bit-matrix are set. </p>
 <p>Empty matrices are considered to have all bits set.</p>
-<h1 class="doxsection"><a class="anchor" id="example-128"></a>
+<h1 class="doxsection"><a class="anchor" id="example-130"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">assert_eq(m.all(), <span class="keyword">false</span>);</div>
@@ -737,7 +737,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to create the <span class="tt">m x m</span> square bit-matrix with alternating elements. </p>
-<h1 class="doxsection"><a class="anchor" id="example-100"></a>
+<h1 class="doxsection"><a class="anchor" id="example-102"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ae19b8bd9b773089f0e8d005ecccc8bb8">BitMatrix&lt;&gt;::alternating</a>(3);</div>
 <div class="line">assert_eq(m.to_compact_binary_string(), <span class="stringliteral">&quot;101 010 101&quot;</span>);</div>
@@ -775,7 +775,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to create the <span class="tt">m x n</span> bit-matrix with alternating elements. </p>
-<h1 class="doxsection"><a class="anchor" id="example-99"></a>
+<h1 class="doxsection"><a class="anchor" id="example-101"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ae19b8bd9b773089f0e8d005ecccc8bb8">BitMatrix&lt;&gt;::alternating</a>(3, 4);</div>
 <div class="line">assert_eq(m.to_compact_binary_string(), <span class="stringliteral">&quot;1010 0101 1010&quot;</span>);</div>
@@ -809,7 +809,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns <span class="tt">true</span> if any element of the bit-matrix is set. </p>
 <p>Empty matrices are considered to have no set bits.</p>
-<h1 class="doxsection"><a class="anchor" id="example-127"></a>
+<h1 class="doxsection"><a class="anchor" id="example-129"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">assert_eq(m.any(), <span class="keyword">false</span>);</div>
@@ -849,10 +849,10 @@ requires std::same_as&lt;typename Store::word_type, Word&gt;</div>
 </div><div class="memdoc">
 
 <p>Appends a single column <span class="tt"><a class="el" href="#ae6bccbc7ad5685af7a92f5f4cd867459" title="Returns a clone of the elements in column c from the bit-matrix as an independent bit-vector.">col</a></span> onto the right of the bit-matrix so <span class="tt">M</span> -&gt; <span class="tt">M|col</span> and returns a reference to the this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-48"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-49"></a>
 Panics</h1>
 <p>The column must have the same number of elements as the bit-matrix has rows.</p>
-<h1 class="doxsection"><a class="anchor" id="example-155"></a>
+<h1 class="doxsection"><a class="anchor" id="example-157"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="#ae6bccbc7ad5685af7a92f5f4cd867459">col</a> = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -888,10 +888,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Appends all the columns from the <span class="tt">src</span> bit-matrix onto the right of this bit-matrix so <span class="tt">M</span> -&gt; <span class="tt">M|src</span> and returns a reference to the this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-49"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-50"></a>
 Panics</h1>
 <p>The source bit-matrix must have the same number of rows as this bit-matrix.</p>
-<h1 class="doxsection"><a class="anchor" id="example-156"></a>
+<h1 class="doxsection"><a class="anchor" id="example-158"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> src = <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 2);</div>
@@ -931,10 +931,10 @@ requires std::same_as&lt;typename Store::word_type, Word&gt;</div>
 
 <p>Appends a single row onto the end of the bit-matrix by moving it and returns a reference to the this for chaining. </p>
 <p>Use <span class="tt">std::move(row)</span> in the method argument to guarantee this version. The input row is moved into the matrix and is no longer valid after this call.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-45"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-46"></a>
 Panics</h1>
 <p>The row must have the same number of elements as the bit-matrix has columns.</p>
-<h1 class="doxsection"><a class="anchor" id="example-152"></a>
+<h1 class="doxsection"><a class="anchor" id="example-154"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">m.append_row(<a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3));</div>
@@ -971,10 +971,10 @@ requires std::same_as&lt;typename Store::word_type, Word&gt;</div>
 </div><div class="memdoc">
 
 <p>Appends a single row onto the end of the bit-matrix by copying it and returns a reference to the this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-44"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-45"></a>
 Panics</h1>
 <p>The row must have the same number of elements as the bit-matrix has columns.</p>
-<h1 class="doxsection"><a class="anchor" id="example-151"></a>
+<h1 class="doxsection"><a class="anchor" id="example-153"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="#a23a559c0e9856fe9e40775724df31f8b">row</a> = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -1011,10 +1011,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Appends all the rows from the <span class="tt">src</span> bit-matrix onto the end of this bit-matrix by moving them and returns a reference to the this for chaining. </p>
 <p>Use <span class="tt">std::move(src)</span> in the method argument to guarantee this version. The source bit-matrix is moved into this matrix and is no longer valid after this call.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-47"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-48"></a>
 Panics</h1>
 <p>The source bit-matrix must have the same number of columns as this bit-matrix.</p>
-<h1 class="doxsection"><a class="anchor" id="example-154"></a>
+<h1 class="doxsection"><a class="anchor" id="example-156"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">m.append_rows(<a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3));</div>
@@ -1048,10 +1048,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Appends all the rows from the <span class="tt">src</span> bit-matrix onto the end of this bit-matrix by copying them and returns a reference to the this for chaining. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-46"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-47"></a>
 Panics</h1>
 <p>The source bit-matrix must have the same number of columns as this bit-matrix.</p>
-<h1 class="doxsection"><a class="anchor" id="example-153"></a>
+<h1 class="doxsection"><a class="anchor" id="example-155"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> src = <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
@@ -1097,7 +1097,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </table>
   </dd>
 </dl>
-<h1 class="doxsection"><a class="anchor" id="example-108"></a>
+<h1 class="doxsection"><a class="anchor" id="example-110"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#a1a6f5a1b96bdc7d9d4738d70cf32b49e">BitMatrix&lt;&gt;::biased_random</a>(10, 0.3);</div>
 <div class="line">assert_eq(u.size(), 100);</div>
@@ -1148,7 +1148,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </table>
   </dd>
 </dl>
-<h1 class="doxsection"><a class="anchor" id="example-107"></a>
+<h1 class="doxsection"><a class="anchor" id="example-109"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#a1a6f5a1b96bdc7d9d4738d70cf32b49e">BitMatrix&lt;&gt;::biased_random</a>(10, 7, 0.3);</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a1a6f5a1b96bdc7d9d4738d70cf32b49e">BitMatrix&lt;&gt;::biased_random</a>(10, 7, 0.3);</div>
@@ -1183,10 +1183,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns the characteristic polynomial of any square bit-matrix as a <span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">gf2::BitPolynomial</a></span>. </p>
 <p>The method uses similarity transformations to convert the bit-matrix to <em>Frobenius form</em> which has a readily computable characteristic polynomial. Similarity transformations preserve eigen-structure, and in particular they preserve the characteristic polynomial.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-61"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-62"></a>
 Panics</h1>
 <p>This method panics if the bit-matrix is not square.</p>
-<h1 class="doxsection"><a class="anchor" id="example-182"></a>
+<h1 class="doxsection"><a class="anchor" id="example-184"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m2 = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(2);</div>
 <div class="line">assert_eq(m2.characteristic_polynomial().to_string(), <span class="stringliteral">&quot;1 + x^2&quot;</span>);</div>
@@ -1227,7 +1227,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Removes all the elements from the bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-149"></a>
+<h1 class="doxsection"><a class="anchor" id="example-151"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">m.clear();</div>
@@ -1263,10 +1263,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns a <b>clone</b> of the elements in column <span class="tt">c</span> from the bit-matrix as an independent bit-vector. </p>
 <p>Matrices are stored by rows and there is no cheap reference style access to the <a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">BitMatrix</a> columns!</p>
-<h1 class="doxsection"><a class="anchor" id="panics-37"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-38"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if <span class="tt">c</span> is out of bounds.</p>
-<h1 class="doxsection"><a class="anchor" id="example-139"></a>
+<h1 class="doxsection"><a class="anchor" id="example-141"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="#ae6bccbc7ad5685af7a92f5f4cd867459">col</a> = m.col(1);</div>
@@ -1308,7 +1308,7 @@ requires std::same_as&lt;typename Store::word_type, Word&gt;</div>
 
 <p>Constructs a square <em>companion <a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">BitMatrix</a></em> with a copy of the given top row and a sub-diagonal of <span class="tt">1</span>s. </p>
 <p>The top row should be passed as a bit-store and is copied to the first row of the <a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">BitMatrix</a>. The rest of the <a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">BitMatrix</a> is initialized to zero and the sub-diagonal is set to <span class="tt">1</span>s.</p>
-<h1 class="doxsection"><a class="anchor" id="example-111"></a>
+<h1 class="doxsection"><a class="anchor" id="example-113"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> top_row = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(5);</div>
 <div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#aadfb60775af85b351d7f3de9bba17d24">BitMatrix&lt;&gt;::companion</a>(top_row);</div>
@@ -1346,7 +1346,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>The function expects to be passed the top row of the companion matrix as a bit-vector.</p>
 <p>A companion matrix is a square matrix that is all zeros except for an arbitrary top row and a principal sub-diagonal of all ones. Companion matrices can be compactly represented by their top rows only.</p>
 <p>The characteristic polynomial of a companion matrix can be computed from its top row.</p>
-<h1 class="doxsection"><a class="anchor" id="example-183"></a>
+<h1 class="doxsection"><a class="anchor" id="example-185"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> top_row = <a class="code hl_function" href="classgf2_1_1BitVector.html#a193a2ffb36fa664bbdbfe057f4f491d2">BitVector&lt;&gt;::from_binary_string</a>(<span class="stringliteral">&quot;101&quot;</span>).value();</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a12ed86c8502461391ab2c141748cbd18">BitMatrix&lt;&gt;::companion_matrix_characteristic_polynomial</a>(top_row).<a class="code hl_function" href="#a34bff5d41dfac388664628d34ee09229">to_string</a>(), <span class="stringliteral">&quot;1 + x^2 + x^3&quot;</span>);</div>
@@ -1382,7 +1382,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the number of one elements in the bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-123"></a>
+<h1 class="doxsection"><a class="anchor" id="example-125"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">assert_eq(m.count_ones(), 0);</div>
@@ -1417,10 +1417,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the number of ones on the main diagonal of the bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-26"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-27"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if the bit-matrix is not square.</p>
-<h1 class="doxsection"><a class="anchor" id="example-125"></a>
+<h1 class="doxsection"><a class="anchor" id="example-127"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">assert_eq(m.count_ones_on_diagonal(), 3);</div>
@@ -1453,7 +1453,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the number of zero elements in the bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-124"></a>
+<h1 class="doxsection"><a class="anchor" id="example-126"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">assert_eq(m.count_zeros(), 6);</div>
@@ -1490,10 +1490,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Flips the bit at row <span class="tt">r</span> and column <span class="tt">c</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-32"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-33"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if <span class="tt">r</span> or <span class="tt">c</span> is out of bounds.</p>
-<h1 class="doxsection"><a class="anchor" id="example-134"></a>
+<h1 class="doxsection"><a class="anchor" id="example-136"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">m.flip(0, 0);</div>
@@ -1527,7 +1527,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Flips all the elements of the bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-141"></a>
+<h1 class="doxsection"><a class="anchor" id="example-143"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">m.flip_all();</div>
@@ -1561,10 +1561,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Flips all the elements on the main diagonal of a square bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-39"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-40"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if the bit-matrix is not square.</p>
-<h1 class="doxsection"><a class="anchor" id="example-143"></a>
+<h1 class="doxsection"><a class="anchor" id="example-145"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">m.flip_diagonal();</div>
@@ -1599,10 +1599,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Flips all the elements on the sub-diagonal <span class="tt">d</span> of a square bit-matrix. </p>
 <p>Here <span class="tt">d = 0</span> is the main diagonal and <span class="tt">d = 1</span> is the first sub-diagonal etc.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-43"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-44"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if the bit-matrix is not square.</p>
-<h1 class="doxsection"><a class="anchor" id="example-147"></a>
+<h1 class="doxsection"><a class="anchor" id="example-149"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(5);</div>
 <div class="line">m.flip_sub_diagonal(1);</div>
@@ -1637,10 +1637,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Flips all the elements on the super-diagonal <span class="tt">d</span> of a square bit-matrix. </p>
 <p>Here <span class="tt">d = 0</span> is the main diagonal and <span class="tt">d = 1</span> is the first super-diagonal etc.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-41"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-42"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if the bit-matrix is not square.</p>
-<h1 class="doxsection"><a class="anchor" id="example-145"></a>
+<h1 class="doxsection"><a class="anchor" id="example-147"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(5);</div>
 <div class="line">m.flip_super_diagonal(1);</div>
@@ -1677,7 +1677,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>A Frobenius matrix is a square matrix that consists of one or more blocks of <em>companion matrices</em> along the diagonal. The companion matrices are square matrices that are all zeros except for an arbitrary top row and a principal sub-diagonal of all ones. Companion matrices can be compactly represented by their top rows only.</p>
 <p>We can convert any bit-matrix to Frobenius form via a sequence of similarity transformations that preserve the eigen-structure of the original matrix.</p>
 <p>We return the Frobenius companion matrices in a compact form as a <span class="tt">Vec</span> of their top rows as bit-vectors.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-62"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-63"></a>
 Panics</h1>
 <p>This method panics if the bit-matrix is not square. </p>
 
@@ -1749,7 +1749,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to construct an \(m \times n\) bit-matrix by repeatedly calling <span class="tt">f(i, j)</span> for each index pair. </p>
-<h1 class="doxsection"><a class="anchor" id="example-103"></a>
+<h1 class="doxsection"><a class="anchor" id="example-105"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a8cd8c97d9645de2420efe9075deb06d6">BitMatrix&lt;&gt;::from</a>(3, 2, [](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i, <a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a>) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
 <div class="line">assert_eq(m.to_compact_binary_string(), <span class="stringliteral">&quot;11 00 11&quot;</span>);</div>
@@ -1798,7 +1798,7 @@ requires std::same_as&lt;typename Store::word_type, Word&gt;</div>
   </table>
   </dd>
 </dl>
-<h1 class="doxsection"><a class="anchor" id="example-117"></a>
+<h1 class="doxsection"><a class="anchor" id="example-119"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(15);</div>
 <div class="line"><span class="keyword">auto</span> m1 = <a class="code hl_function" href="#aa15224a12a4c3d08fa80f8e1ab010f3f">BitMatrix&lt;&gt;::from_col_store</a>(v, 3).value();</div>
@@ -1844,7 +1844,7 @@ requires std::same_as&lt;typename Lhs::word_type, Word&gt; &amp;&amp; std::same_
 </div><div class="memdoc">
 
 <p>Factory method to create the <span class="tt">m x n</span> bit-matrix from the outer product of the given bit-stores. </p>
-<h1 class="doxsection"><a class="anchor" id="example-101"></a>
+<h1 class="doxsection"><a class="anchor" id="example-103"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">BitVector&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;101&quot;</span>).value();</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">BitVector&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;110&quot;</span>).value();</div>
@@ -1888,7 +1888,7 @@ requires std::same_as&lt;typename Lhs::word_type, Word&gt; &amp;&amp; std::same_
 </div><div class="memdoc">
 
 <p>Factory method to create the <span class="tt">m x n</span> bit-matrix from the outer sum of the given bit-stores. </p>
-<h1 class="doxsection"><a class="anchor" id="example-102"></a>
+<h1 class="doxsection"><a class="anchor" id="example-104"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">BitVector&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;101&quot;</span>).value();</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#a17ba4f50de43f5e84ef3943ad77410ea">BitVector&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;110&quot;</span>).value();</div>
@@ -1931,7 +1931,7 @@ requires std::same_as&lt;typename Store::word_type, Word&gt;</div>
 </div><div class="memdoc">
 
 <p>Factory method to reshape a bit-vector <span class="tt">v</span> that is assumed to a sequence of <span class="tt">r</span> rows into a bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-116"></a>
+<h1 class="doxsection"><a class="anchor" id="example-118"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(15);</div>
 <div class="line"><span class="keyword">auto</span> m1 = <a class="code hl_function" href="#abd6578b7c373b477d1af169915e9c893">BitMatrix&lt;&gt;::from_row_store</a>(v, 3).value();</div>
@@ -1973,7 +1973,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>The rows can be separated by newlines, white space, commas, single quotes, or semicolons. Each row should be a binary or hex string representation of a bit-vector. The rows can have an optional prefix of "0b", "0x" or "0X" to indicate that the string is binary or hex.</p>
 <p>A hex string can have a suffix of ".2", ".4", or ".8" to indicate the base of the last digit/character. This allows for rows of any length as opposed to just a multiple of 4.</p>
 <p>After parsing, the rows must all have the same length.</p>
-<h1 class="doxsection"><a class="anchor" id="example-118"></a>
+<h1 class="doxsection"><a class="anchor" id="example-120"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m1 = <a class="code hl_function" href="#a0b6cb72f20bd6a8b1377c0e5139ad482">BitMatrix&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;111   111\n111&quot;</span>).value();</div>
 <div class="line">assert_eq(m1.to_compact_binary_string(), <span class="stringliteral">&quot;111 111 111&quot;</span>);</div>
@@ -2015,10 +2015,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns <span class="tt">true</span> if the element at row <span class="tt">r</span> and column <span class="tt">c</span> is set. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-28"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-29"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if <span class="tt">r</span> or <span class="tt">c</span> is out of bounds.</p>
-<h1 class="doxsection"><a class="anchor" id="example-130"></a>
+<h1 class="doxsection"><a class="anchor" id="example-132"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">assert_eq(m.get(0, 0), <span class="keyword">false</span>);</div>
@@ -2053,7 +2053,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to create the <span class="tt">m x m</span> identity bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-110"></a>
+<h1 class="doxsection"><a class="anchor" id="example-112"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">assert_eq(m.to_compact_binary_string(), <span class="stringliteral">&quot;100 010 001&quot;</span>);</div>
@@ -2086,7 +2086,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the inverse of a square bit-matrix or <span class="tt">std::nullopt</span> if the matrix is singular. </p>
-<h1 class="doxsection"><a class="anchor" id="example-176"></a>
+<h1 class="doxsection"><a class="anchor" id="example-178"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">assert_eq(m.inverse().value().to_compact_binary_string(), <span class="stringliteral">&quot;100 010 001&quot;</span>);</div>
@@ -2119,7 +2119,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns <span class="tt">true</span> if this is the identity bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-121"></a>
+<h1 class="doxsection"><a class="anchor" id="example-123"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">assert_eq(m.is_identity(), <span class="keyword">true</span>);</div>
@@ -2153,7 +2153,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns <span class="tt">true</span> if this a square bit-matrix? Note that empty bit-matrices are NOT considered square. </p>
-<h1 class="doxsection"><a class="anchor" id="example-119"></a>
+<h1 class="doxsection"><a class="anchor" id="example-121"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae5c368ef2b300f03a588f7461623d177">BitMatrix</a> m;</div>
 <div class="line">assert_eq(m.<a class="code hl_function" href="#a643db1e6f224de8b2d6f83cd6122258d">is_square</a>(), <span class="keyword">false</span>);</div>
@@ -2192,7 +2192,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns <span class="tt">true</span> if this is a symmetric square bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-122"></a>
+<h1 class="doxsection"><a class="anchor" id="example-124"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">assert_eq(m.is_symmetric(), <span class="keyword">true</span>);</div>
@@ -2227,7 +2227,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns <span class="tt">true</span> if this a square <em>zero</em> bit-matrix? </p>
-<h1 class="doxsection"><a class="anchor" id="example-120"></a>
+<h1 class="doxsection"><a class="anchor" id="example-122"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae5c368ef2b300f03a588f7461623d177">BitMatrix</a> m;</div>
 <div class="line">assert_eq(m.<a class="code hl_function" href="#ae4bdba6def6fc1bbbfeba7ee3a350c1b">is_zero</a>(), <span class="keyword">false</span>);</div>
@@ -2269,7 +2269,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Constructs the <span class="tt">n x n</span> rotate-left by <span class="tt">p</span> places matrix. </p>
 <p>If the bit-matrix is multiplied by a bit-vector, the result is the bit-vector rotated right by <span class="tt">p</span> places.</p>
-<h1 class="doxsection"><a class="anchor" id="example-114"></a>
+<h1 class="doxsection"><a class="anchor" id="example-116"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a8b23de84fa10d85060a045c3c4058242">BitMatrix&lt;&gt;::left_rotation</a>(5, 2);</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#a193a2ffb36fa664bbdbfe057f4f491d2">BitVector&lt;&gt;::from_binary_string</a>(<span class="stringliteral">&quot;11100&quot;</span>).value();</div>
@@ -2310,7 +2310,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Constructs the <span class="tt">n x n</span> shift-left by <span class="tt">p</span> places <a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">BitMatrix</a>. </p>
 <p>If the bit-matrix is multiplied by a bit-vector, the result is the bit-vector shifted left by <span class="tt">p</span> places.</p>
-<h1 class="doxsection"><a class="anchor" id="example-112"></a>
+<h1 class="doxsection"><a class="anchor" id="example-114"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ae8dbd5a56c0ea28ea96298a5007e4ff4">BitMatrix&lt;&gt;::left_shift</a>(5, 2);</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(5);</div>
@@ -2345,7 +2345,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns an independent <em>clone</em> of the lower triangular part of the bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-162"></a>
+<h1 class="doxsection"><a class="anchor" id="example-164"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> sub_m = m.lower();</div>
@@ -2379,7 +2379,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the LU decomposition of the bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-179"></a>
+<h1 class="doxsection"><a class="anchor" id="example-181"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> lu = m.LU();</div>
@@ -2414,7 +2414,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Makes an arbitrary rectangular bit-matrix into a square <span class="tt"><a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">BitMatrix</a></span>. </p>
 <p>Existing elements are preserved. Any added elements are initialized to zero.</p>
-<h1 class="doxsection"><a class="anchor" id="example-150"></a>
+<h1 class="doxsection"><a class="anchor" id="example-152"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a0b6cb72f20bd6a8b1377c0e5139ad482">BitMatrix&lt;&gt;::from_string</a>(<span class="stringliteral">&quot;111 111 111 111&quot;</span>).value();</div>
 <div class="line">m.make_square(3);</div>
@@ -2449,7 +2449,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns <span class="tt">true</span> if no elements of the bit-matrix are set. </p>
 <p>Empty matrices are considered to have no set bits.</p>
-<h1 class="doxsection"><a class="anchor" id="example-129"></a>
+<h1 class="doxsection"><a class="anchor" id="example-131"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">assert_eq(m.none(), <span class="keyword">true</span>);</div>
@@ -2486,7 +2486,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to create the <span class="tt">m x m</span> square bit-matrix with all the elements set to 1. </p>
-<h1 class="doxsection"><a class="anchor" id="example-98"></a>
+<h1 class="doxsection"><a class="anchor" id="example-100"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3);</div>
 <div class="line">assert_eq(m.to_compact_binary_string(), <span class="stringliteral">&quot;111 111 111&quot;</span>);</div>
@@ -2523,7 +2523,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to create the <span class="tt">m x n</span> bit-matrix with all the elements set to 1. </p>
-<h1 class="doxsection"><a class="anchor" id="example-97"></a>
+<h1 class="doxsection"><a class="anchor" id="example-99"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 4);</div>
 <div class="line">assert_eq(m.to_compact_binary_string(), <span class="stringliteral">&quot;1111 1111 1111&quot;</span>);</div>
@@ -2556,10 +2556,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>The<span class="tt">AND</span> of this with a bit-matrix <span class="tt">rhs</span> returning a new bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-67"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-68"></a>
 Panics</h1>
 <p>This method panics if the dimensions do not match.</p>
-<h1 class="doxsection"><a class="anchor" id="example-188"></a>
+<h1 class="doxsection"><a class="anchor" id="example-190"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> lhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> rhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
@@ -2595,10 +2595,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>In-place <span class="tt">AND</span> with a bit-matrix <span class="tt">rhs</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-64"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-65"></a>
 Panics</h1>
 <p>This method panics if the dimensions do not match.</p>
-<h1 class="doxsection"><a class="anchor" id="example-185"></a>
+<h1 class="doxsection"><a class="anchor" id="example-187"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> lhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> rhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
@@ -2638,10 +2638,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the bit at row <span class="tt">r</span> and column <span class="tt">c</span> as a <span class="tt"><a class="el" href="classgf2_1_1BitRef.html" title="A BitRef is a proxy class to reference a single bit in a bit-store.">BitRef</a></span> reference which can be used to set the bit. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-31"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-32"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if <span class="tt">r</span> or <span class="tt">c</span> is out of bounds.</p>
-<h1 class="doxsection"><a class="anchor" id="example-133"></a>
+<h1 class="doxsection"><a class="anchor" id="example-135"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">assert_eq(m(0,0), <span class="keyword">false</span>);</div>
@@ -2680,10 +2680,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the value of the bit at row <span class="tt">r</span> and column <span class="tt">c</span> as a <span class="tt">bool</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-29"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-30"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if <span class="tt">r</span> or <span class="tt">c</span> is out of bounds.</p>
-<h1 class="doxsection"><a class="anchor" id="example-131"></a>
+<h1 class="doxsection"><a class="anchor" id="example-133"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">assert_eq(m(0, 0), <span class="keyword">false</span>);</div>
@@ -2718,10 +2718,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns a new bit-matrix that is <span class="tt">*this + rhs</span> which is <span class="tt">*this ^ rhs</span> in GF(2). </p>
-<h1 class="doxsection"><a class="anchor" id="panics-71"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-72"></a>
 Panics</h1>
 <p>This method panics if the dimensions do not match.</p>
-<h1 class="doxsection"><a class="anchor" id="example-193"></a>
+<h1 class="doxsection"><a class="anchor" id="example-195"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> lhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> rhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
@@ -2757,10 +2757,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>In-place addition with a bit-matrix <span class="tt">rhs</span> &ndash; in GF(2) addition is the same as <span class="tt">XOR</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-69"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-70"></a>
 Panics</h1>
 <p>This method panics if the dimensions do not match.</p>
-<h1 class="doxsection"><a class="anchor" id="example-191"></a>
+<h1 class="doxsection"><a class="anchor" id="example-193"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> lhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> rhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
@@ -2796,10 +2796,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns a new bit-matrix that is <span class="tt">*this - rhs</span> which is <span class="tt">*this ^ rhs</span> in GF(2). </p>
-<h1 class="doxsection"><a class="anchor" id="panics-72"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-73"></a>
 Panics</h1>
 <p>This method panics if the dimensions do not match.</p>
-<h1 class="doxsection"><a class="anchor" id="example-194"></a>
+<h1 class="doxsection"><a class="anchor" id="example-196"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> lhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> rhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
@@ -2835,10 +2835,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>In-place difference with a bit-matrix <span class="tt">rhs</span> &ndash; in GF(2) subtraction is the same as <span class="tt">XOR</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-70"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-71"></a>
 Panics</h1>
 <p>This method panics if the dimensions do not match.</p>
-<h1 class="doxsection"><a class="anchor" id="example-192"></a>
+<h1 class="doxsection"><a class="anchor" id="example-194"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> lhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> rhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
@@ -2874,10 +2874,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns a read-write reference to the row at index <span class="tt">r</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-36"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-37"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if <span class="tt">r</span> is out of bounds.</p>
-<h1 class="doxsection"><a class="anchor" id="example-138"></a>
+<h1 class="doxsection"><a class="anchor" id="example-140"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">m[0].set(1);</div>
@@ -2914,10 +2914,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns a read-only reference to the row at index <span class="tt">r</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-35"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-36"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if <span class="tt">r</span> is out of bounds.</p>
-<h1 class="doxsection"><a class="anchor" id="example-137"></a>
+<h1 class="doxsection"><a class="anchor" id="example-139"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">assert_eq(m[0].<a class="code hl_function" href="#a2266f12271b6353759a6b1941de6ccb4">to_binary_string</a>(), <span class="stringliteral">&quot;100&quot;</span>);</div>
@@ -2952,10 +2952,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>The<span class="tt">XOR</span> of this with a bit-matrix <span class="tt">rhs</span> returning a new bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-66"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-67"></a>
 Panics</h1>
 <p>This method panics if the dimensions do not match.</p>
-<h1 class="doxsection"><a class="anchor" id="example-187"></a>
+<h1 class="doxsection"><a class="anchor" id="example-189"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> lhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> rhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
@@ -2991,10 +2991,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>In-place <span class="tt">XOR</span> with a bit-matrix <span class="tt">rhs</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-63"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-64"></a>
 Panics</h1>
 <p>This method panics if the dimensions do not match.</p>
-<h1 class="doxsection"><a class="anchor" id="example-184"></a>
+<h1 class="doxsection"><a class="anchor" id="example-186"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> lhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> rhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
@@ -3030,10 +3030,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>The<span class="tt">OR</span> of this with a bit-matrix <span class="tt">rhs</span> returning a new bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-68"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-69"></a>
 Panics</h1>
 <p>This method panics if the dimensions do not match.</p>
-<h1 class="doxsection"><a class="anchor" id="example-189"></a>
+<h1 class="doxsection"><a class="anchor" id="example-191"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> lhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> rhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
@@ -3069,10 +3069,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>In-place <span class="tt">OR</span> with a bit-matrix <span class="tt">rhs</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-65"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-66"></a>
 Panics</h1>
 <p>This method panics if the dimensions do not match.</p>
-<h1 class="doxsection"><a class="anchor" id="example-186"></a>
+<h1 class="doxsection"><a class="anchor" id="example-188"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> lhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> rhs = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
@@ -3108,7 +3108,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns a copy of this bit-matrix with all the elements flipped. </p>
-<h1 class="doxsection"><a class="anchor" id="example-190"></a>
+<h1 class="doxsection"><a class="anchor" id="example-192"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> result = ~m;</div>
@@ -3143,10 +3143,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Class method that returns the probability that a square <span class="tt">n x n</span> bit-matrix is invertible if each element is chosen independently and uniformly at random by flips of a fair coin. </p>
 <p>For large <span class="tt">n</span>, the value is roughly 29% and that holds for n as low as 10.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-59"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-60"></a>
 Panics</h1>
 <p>This method panics if <span class="tt">n</span> is 0 &ndash; based on the assumption that querying the probability of a 0 x 0 bit-matrix being invertible is an upstream error somewhere.</p>
-<h1 class="doxsection"><a class="anchor" id="example-177"></a>
+<h1 class="doxsection"><a class="anchor" id="example-179"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#ad037ef7306a35e234e545aa70b34ead1">BitMatrix&lt;&gt;::probability_invertible</a>(10);</div>
 <div class="line">assert(abs(p - 0.289) &lt; 1e-3);</div>
@@ -3181,10 +3181,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Class method that returns the probability that a square <span class="tt">n x n</span> bit-matrix is singular if each element is chosen independently and uniformly at random by flips of a fair coin. </p>
 <p>For large <span class="tt">n</span>, the value is 71% and that holds for n as low as 10.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-60"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-61"></a>
 Panics</h1>
 <p>This method panics if <span class="tt">n</span> is 0 &ndash; based on the assumption that querying the probability of a 0 x 0 bit-matrix being invertible is an upstream error somewhere</p>
-<h1 class="doxsection"><a class="anchor" id="example-178"></a>
+<h1 class="doxsection"><a class="anchor" id="example-180"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#ac3a45b35307c319db9f475ee9a4c6efd">BitMatrix&lt;&gt;::probability_singular</a>(10);</div>
 <div class="line">assert(abs(p - 0.711) &lt; 1e-3);</div>
@@ -3244,7 +3244,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </dd>
 </dl>
 <p>If <span class="tt">p &lt; 0</span> then the bit-matrix is all zeros, if <span class="tt">p &gt; 1</span> then the bit-matrix is all ones.</p>
-<h1 class="doxsection"><a class="anchor" id="example-104"></a>
+<h1 class="doxsection"><a class="anchor" id="example-106"></a>
 Example</h1>
 <div class="fragment"><div class="line">std::uint64_t seed = 1234567890;</div>
 <div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#a47a029b47df5b3641f6f06483b549ce6">BitMatrix&lt;&gt;::random</a>(3, 2, 0.5, seed);</div>
@@ -3279,7 +3279,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Removes a column off the right of the bit-matrix and returns it or <span class="tt">std::nullopt</span> if the bit-matrix is empty. </p>
-<h1 class="doxsection"><a class="anchor" id="example-159"></a>
+<h1 class="doxsection"><a class="anchor" id="example-161"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="#ae6bccbc7ad5685af7a92f5f4cd867459">col</a> = m.remove_col();</div>
@@ -3314,7 +3314,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Removes a row off the end of the bit-matrix and returns it or <span class="tt">std::nullopt</span> if the bit-matrix is empty. </p>
-<h1 class="doxsection"><a class="anchor" id="example-157"></a>
+<h1 class="doxsection"><a class="anchor" id="example-159"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="#a23a559c0e9856fe9e40775724df31f8b">row</a> = m.remove_row();</div>
@@ -3349,7 +3349,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Removes <span class="tt">k</span> rows off the end of the bit-matrix and returns them as a new bit-matrix or <span class="tt">std::nullopt</span> if the bit-matrix has fewer than <span class="tt">k</span> rows. </p>
-<h1 class="doxsection"><a class="anchor" id="example-158"></a>
+<h1 class="doxsection"><a class="anchor" id="example-160"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> popped = m.remove_rows(2);</div>
@@ -3393,10 +3393,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Replaces the sub-matrix starting at row <span class="tt">top</span> and column <span class="tt">left</span> with a copy of the sub-matrix <span class="tt">src</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-51"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-52"></a>
 Panics</h1>
 <p>Panics if <span class="tt">src</span> does not fit within this bit-matrix starting at row <span class="tt">top</span> and column <span class="tt">left</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="example-161"></a>
+<h1 class="doxsection"><a class="anchor" id="example-163"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(5);</div>
 <div class="line">m.replace_sub_matrix(1, 1, <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3));</div>
@@ -3442,7 +3442,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </dd>
 </dl>
 <p>Any added elements are set to 0.</p>
-<h1 class="doxsection"><a class="anchor" id="example-148"></a>
+<h1 class="doxsection"><a class="anchor" id="example-150"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae5c368ef2b300f03a588f7461623d177">BitMatrix</a> m;</div>
 <div class="line">m.<a class="code hl_function" href="#a8eb76dca82ceaefd147bce32dacc8887">resize</a>(10, 10);</div>
@@ -3489,7 +3489,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Constructs the <span class="tt">n x n</span> rotate-right by <span class="tt">p</span> places matrix. </p>
 <p>If the bit-matrix is multiplied by a bit-vector, the result is the bit-vector rotated right by <span class="tt">p</span> places.</p>
-<h1 class="doxsection"><a class="anchor" id="example-115"></a>
+<h1 class="doxsection"><a class="anchor" id="example-117"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a6fefecbb0bd5f81e499abeec66751e60">BitMatrix&lt;&gt;::right_rotation</a>(5, 2);</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#a193a2ffb36fa664bbdbfe057f4f491d2">BitVector&lt;&gt;::from_binary_string</a>(<span class="stringliteral">&quot;11100&quot;</span>).value();</div>
@@ -3529,7 +3529,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Constructs the <span class="tt">n x n</span> shift-right by <span class="tt">p</span> places <a class="el" href="classgf2_1_1BitMatrix.html" title="A dynamically-sized matrix over GF(2) stored as a vector of bit-vectors representing the rows of the ...">BitMatrix</a>. </p>
 <p>If the bit-matrix is multiplied by a bit-vector, the result is the bit-vector shifted right by <span class="tt">p</span> places.</p>
-<h1 class="doxsection"><a class="anchor" id="example-113"></a>
+<h1 class="doxsection"><a class="anchor" id="example-115"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a58d167b1673c17996bac2c74a03f4bc2">BitMatrix&lt;&gt;::right_shift</a>(5, 2);</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(5);</div>
@@ -3564,10 +3564,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns a read-write reference to the row at index <span class="tt">r</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-34"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-35"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if <span class="tt">r</span> is out of bounds.</p>
-<h1 class="doxsection"><a class="anchor" id="example-136"></a>
+<h1 class="doxsection"><a class="anchor" id="example-138"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">m.row(0).set(1);</div>
@@ -3603,10 +3603,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns a read-only reference to the row at index <span class="tt">r</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-33"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-34"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if <span class="tt">r</span> is out of bounds.</p>
-<h1 class="doxsection"><a class="anchor" id="example-135"></a>
+<h1 class="doxsection"><a class="anchor" id="example-137"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">assert_eq(m.row(0).to_binary_string(), <span class="stringliteral">&quot;100&quot;</span>);</div>
@@ -3654,7 +3654,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </dd>
 </dl>
 <p>If <span class="tt">p &lt; 0</span> then the bit-matrix is all zeros, if <span class="tt">p &gt; 1</span> then the bit-matrix is all ones.</p>
-<h1 class="doxsection"><a class="anchor" id="example-106"></a>
+<h1 class="doxsection"><a class="anchor" id="example-108"></a>
 Example</h1>
 <div class="fragment"><div class="line">std::uint64_t seed = 1234567890;</div>
 <div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#ae64047186ba4f7f492488e6656b3a830">BitMatrix&lt;&gt;::seeded_random</a>(3, seed);</div>
@@ -3709,7 +3709,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </dd>
 </dl>
 <p>If <span class="tt">p &lt; 0</span> then the bit-matrix is all zeros, if <span class="tt">p &gt; 1</span> then the bit-matrix is all ones.</p>
-<h1 class="doxsection"><a class="anchor" id="example-105"></a>
+<h1 class="doxsection"><a class="anchor" id="example-107"></a>
 Example</h1>
 <div class="fragment"><div class="line">std::uint64_t seed = 1234567890;</div>
 <div class="line"><span class="keyword">auto</span> u = <a class="code hl_function" href="#ae64047186ba4f7f492488e6656b3a830">BitMatrix&lt;&gt;::seeded_random</a>(3, 2, seed);</div>
@@ -3753,10 +3753,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Sets the bit at row <span class="tt">r</span> and column <span class="tt">c</span> to the bool value <span class="tt">val</span>. The default is to set the bit to <span class="tt">true</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-30"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-31"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if <span class="tt">r</span> or <span class="tt">c</span> is out of bounds.</p>
-<h1 class="doxsection"><a class="anchor" id="example-132"></a>
+<h1 class="doxsection"><a class="anchor" id="example-134"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">m.set(0, 0);</div>
@@ -3791,7 +3791,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Sets all the elements of the bit-matrix to the specified boolean <span class="tt">value</span>. </p>
 <p>By default, all bits are set to <span class="tt">true</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="example-140"></a>
+<h1 class="doxsection"><a class="anchor" id="example-142"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">m.set_all();</div>
@@ -3825,10 +3825,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Sets the main diagonal of a square bit-matrix to the boolean value <span class="tt">val</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-38"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-39"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if the bit-matrix is not square.</p>
-<h1 class="doxsection"><a class="anchor" id="example-142"></a>
+<h1 class="doxsection"><a class="anchor" id="example-144"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">m.set_diagonal();</div>
@@ -3867,10 +3867,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Sets the elements on sub-diagonal <span class="tt">d</span> of a square bit-matrix to the boolean value <span class="tt">val</span>. </p>
 <p>Here <span class="tt">d = 0</span> is the main diagonal and <span class="tt">d = 1</span> is the first sub-diagonal etc.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-42"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-43"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if the bit-matrix is not square.</p>
-<h1 class="doxsection"><a class="anchor" id="example-146"></a>
+<h1 class="doxsection"><a class="anchor" id="example-148"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(5);</div>
 <div class="line">m.set_sub_diagonal(1);</div>
@@ -3909,10 +3909,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Sets the elements on super-diagonal <span class="tt">d</span> of a square bit-matrix to the boolean value <span class="tt">val</span>. </p>
 <p>Here <span class="tt">d = 0</span> is the main diagonal and <span class="tt">d = 1</span> is the first super-diagonal etc.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-40"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-41"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if the bit-matrix is not square.</p>
-<h1 class="doxsection"><a class="anchor" id="example-144"></a>
+<h1 class="doxsection"><a class="anchor" id="example-146"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(5);</div>
 <div class="line">m.set_super_diagonal(1);</div>
@@ -3949,7 +3949,7 @@ requires std::same_as&lt;typename Rhs::word_type, Word&gt;</div>
 </div><div class="memdoc">
 
 <p>Returns the Gaussian elimination solver for this bit-matrix and the passed r.h.s. vector <span class="tt">b</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="example-180"></a>
+<h1 class="doxsection"><a class="anchor" id="example-182"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -3989,7 +3989,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns an independent <em>clone</em> of the strictly lower triangular part of the bit-matrix. </p>
 <p>This is the same as <span class="tt"><a class="el" href="#ae78b4ac4135e4b133e56ed5a11208fac" title="Returns an independent clone of the lower triangular part of the bit-matrix.">lower()</a></span> but with the diagonal reset to zero.</p>
-<h1 class="doxsection"><a class="anchor" id="example-164"></a>
+<h1 class="doxsection"><a class="anchor" id="example-166"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> sub_m = m.strictly_lower();</div>
@@ -4024,7 +4024,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns an independent <em>clone</em> of the strictly upper triangular part of the bit-matrix. </p>
 <p>This is the same as <span class="tt"><a class="el" href="#ae78b4ac4135e4b133e56ed5a11208fac" title="Returns an independent clone of the lower triangular part of the bit-matrix.">lower()</a></span> but with the diagonal reset to zero.</p>
-<h1 class="doxsection"><a class="anchor" id="example-165"></a>
+<h1 class="doxsection"><a class="anchor" id="example-167"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> sub_m = m.strictly_upper();</div>
@@ -4073,10 +4073,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns an independent <em>clone</em> of the sub-matrix delimited by the given row and column ranges. </p>
 <p>The ranges are half open <span class="tt">[r_start, r_end) X [c_start, c_end)</span> where <span class="tt">r</span> is for rows and <span class="tt">c</span> for columns.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-50"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-51"></a>
 Panics</h1>
 <p>Panics if the bit-matrix has incompatible dimensions with the requested sub-matrix.</p>
-<h1 class="doxsection"><a class="anchor" id="example-160"></a>
+<h1 class="doxsection"><a class="anchor" id="example-162"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(5);</div>
 <div class="line"><span class="keyword">auto</span> sub1 = m.sub_matrix(1, 4, 1, 4);</div>
@@ -4116,10 +4116,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Swaps columns <span class="tt">i</span> and <span class="tt">j</span> of the bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-53"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-54"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if either of the indices is out of bounds.</p>
-<h1 class="doxsection"><a class="anchor" id="example-169"></a>
+<h1 class="doxsection"><a class="anchor" id="example-171"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">m.swap_cols(0, 1);</div>
@@ -4157,10 +4157,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Swaps rows <span class="tt">i</span> and <span class="tt">j</span> of the bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-52"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-53"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if either of the indices is out of bounds.</p>
-<h1 class="doxsection"><a class="anchor" id="example-168"></a>
+<h1 class="doxsection"><a class="anchor" id="example-170"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">m.swap_rows(0, 1);</div>
@@ -4218,7 +4218,7 @@ template&lt;Unsigned Word = usize&gt; </div>
   </dd>
 </dl>
 <p>The default prints each row as 0's and 1's without any formatting, and separates the rows with newlines.</p>
-<h1 class="doxsection"><a class="anchor" id="example-195"></a>
+<h1 class="doxsection"><a class="anchor" id="example-197"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> I = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(4);</div>
 <div class="line">assert_eq(I.to_binary_string(), <span class="stringliteral">&quot;1000\n0100\n0010\n0001&quot;</span>);</div>
@@ -4252,7 +4252,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns a one-line minimal binary string representation for this bit-matrix. </p>
 <p>Each row is shown as 0's and 1's without any formatting, and separates the rows with a single space.</p>
-<h1 class="doxsection"><a class="anchor" id="example-196"></a>
+<h1 class="doxsection"><a class="anchor" id="example-198"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> I = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(4);</div>
 <div class="line">assert_eq(I.to_compact_binary_string(), <span class="stringliteral">&quot;1000 0100 0010 0001&quot;</span>);</div>
@@ -4297,7 +4297,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <li><span class="tt">0X1.4</span> is the hex representation of the bit-vector <span class="tt">01</span> =&gt; length 2.</li>
 <li><span class="tt">0X1.2</span> is the hex representation of the bit-vector <span class="tt">1</span> =&gt; length 1.</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="example-200"></a>
+<h1 class="doxsection"><a class="anchor" id="example-202"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae5c368ef2b300f03a588f7461623d177">BitMatrix</a> m0;</div>
 <div class="line">assert_eq(m0.<a class="code hl_function" href="#a320c4578d71269d36c000cd1f5a897f2">to_compact_hex_string</a>(), <span class="stringliteral">&quot;&quot;</span>);</div>
@@ -4340,10 +4340,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>The method returns a bit-vector that shows which columns have a "pivot" (a non-zero on or below the diagonal). The matrix <em>rank</em> is the number of set bits in that pivot bit-vector.</p>
 <p>A bit-matrix is in echelon form if the first 1 in any row is to the right of the first 1 in the preceding row. It is a generalization of an upper triangular form &ndash; the result is a matrix with a "staircase" shape.</p>
 <p>The transformation is Gaussian elimination. Any all zero rows are moved to the bottom of the matrix. The echelon form is not unique.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-57"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-58"></a>
 Panics</h1>
 <p>This method will panic if the bit-matrix is empty.</p>
-<h1 class="doxsection"><a class="anchor" id="example-174"></a>
+<h1 class="doxsection"><a class="anchor" id="example-176"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">m.set(2, 1, <span class="keyword">false</span>);</div>
@@ -4391,7 +4391,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 <li><span class="tt">0X1.4</span> is the hex representation of the bit-vector <span class="tt">01</span> =&gt; length 2.</li>
 <li><span class="tt">0X1.2</span> is the hex representation of the bit-vector <span class="tt">1</span> =&gt; length 1.</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="example-199"></a>
+<h1 class="doxsection"><a class="anchor" id="example-201"></a>
 Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae5c368ef2b300f03a588f7461623d177">BitMatrix</a> m0;</div>
 <div class="line">assert_eq(m0.<a class="code hl_function" href="#a67c36a94bd9baa9fe134b41c966c4f8e">to_hex_string</a>(), <span class="stringliteral">&quot;&quot;</span>);</div>
@@ -4432,7 +4432,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns the default pretty string representation for this bit-matrix. </p>
 <p>Each row is shown as 0's and 1's with a space between each element. The rows are delimited by a light vertical bar on the left and right. The rows are separated by newlines.</p>
-<h1 class="doxsection"><a class="anchor" id="example-198"></a>
+<h1 class="doxsection"><a class="anchor" id="example-200"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> I = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> bar = <span class="stringliteral">&quot;\u2502&quot;</span>;</div>
@@ -4469,10 +4469,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Transforms the bit-matrix to reduced row-echelon form (in-place). </p>
 <p>The method returns a bit-vector that shows which columns have a "pivot" (a non-zero on or below the diagonal). The matrix <em>rank</em> is the number of set bits in that bit-vector.</p>
 <p>A bit-matrix is in reduced echelon form if it is in echelon form with at most one 1 in each column. The reduced echelon form is unique.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-58"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-59"></a>
 Panics</h1>
 <p>This method will panic if the bit-matrix is empty.</p>
-<h1 class="doxsection"><a class="anchor" id="example-175"></a>
+<h1 class="doxsection"><a class="anchor" id="example-177"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">m.set(2, 1, <span class="keyword">false</span>);</div>
@@ -4509,7 +4509,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns the default string representation for this bit-matrix. </p>
 <p>Each row is shown as 0's and 1's without any formatting, and separates the rows with a newline.</p>
-<h1 class="doxsection"><a class="anchor" id="example-197"></a>
+<h1 class="doxsection"><a class="anchor" id="example-199"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> I = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(4);</div>
 <div class="line">assert_eq(I.to_string(), <span class="stringliteral">&quot;1000\n0100\n0010\n0001&quot;</span>);</div>
@@ -4547,10 +4547,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns a new bit-matrix that is this one raised to some power <span class="tt">n</span> or <span class="tt">2^n</span>. </p>
 <p>We efficiently compute <span class="tt">M^e</span> by using a square and multiply algorithm where by default <span class="tt">e = n</span>. If the second argument <span class="tt">n_is_log2 = true</span> then we consider <span class="tt">e = 2^n</span> instead.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-56"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-57"></a>
 Panics</h1>
 <p>This method will panic if the bit-matrix is not square.</p>
-<h1 class="doxsection"><a class="anchor" id="example-173"></a>
+<h1 class="doxsection"><a class="anchor" id="example-175"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a47a029b47df5b3641f6f06483b549ce6">BitMatrix&lt;&gt;::random</a>(100, 100);</div>
 <div class="line"><span class="keyword">auto</span> p1 = m.to_the(3);</div>
@@ -4589,10 +4589,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns the "sum" of the main diagonal elements of the bit-matrix. </p>
 <p>Returns the "sum" of the main diagonal elements of the bit-matrix.</p>
-<h1 class="doxsection"><a class="anchor" id="panics-27"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-28"></a>
 Panics</h1>
 <p>In debug mode, this method will panic if the bit-matrix is not square.</p>
-<h1 class="doxsection"><a class="anchor" id="example-126"></a>
+<h1 class="doxsection"><a class="anchor" id="example-128"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m1 = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line">assert_eq(m1.trace(), <span class="keyword">true</span>);</div>
@@ -4627,10 +4627,10 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Transposes a <em>square</em> bit-matrix in place. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-55"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-56"></a>
 Panics</h1>
 <p>This method will panic if the bit-matrix is not square.</p>
-<h1 class="doxsection"><a class="anchor" id="example-172"></a>
+<h1 class="doxsection"><a class="anchor" id="example-174"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">m.row(0).set_all();</div>
@@ -4667,7 +4667,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns a new bit-matrix that is the transpose of this one. </p>
 <p><b>Note:</b> This method isn't particularly efficient as it works by iterating over all elements of the bit-matrix.</p>
-<h1 class="doxsection"><a class="anchor" id="example-171"></a>
+<h1 class="doxsection"><a class="anchor" id="example-173"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ac1d3def1adcb007ac348873c3580f276">BitMatrix&lt;&gt;::zeros</a>(3, 2);</div>
 <div class="line">m.row(0).set_all();</div>
@@ -4705,7 +4705,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns an independent <em>clone</em> of the unit lower triangular part of the bit-matrix. </p>
 <p>This is the same as <span class="tt"><a class="el" href="#ae78b4ac4135e4b133e56ed5a11208fac" title="Returns an independent clone of the lower triangular part of the bit-matrix.">lower()</a></span> but with the diagonal set to one.</p>
-<h1 class="doxsection"><a class="anchor" id="example-166"></a>
+<h1 class="doxsection"><a class="anchor" id="example-168"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ac1d3def1adcb007ac348873c3580f276">BitMatrix&lt;&gt;::zeros</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> sub_m = m.unit_lower();</div>
@@ -4740,7 +4740,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 
 <p>Returns an independent <em>clone</em> of the unit upper triangular part of the bit-matrix. </p>
 <p>This is the same as <span class="tt"><a class="el" href="#a28ffed34d9f4b0cbbef78a7797298d8a" title="Returns an independent clone of the upper triangular part of the bit-matrix.">upper()</a></span> but with the diagonal set to one.</p>
-<h1 class="doxsection"><a class="anchor" id="example-167"></a>
+<h1 class="doxsection"><a class="anchor" id="example-169"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ac1d3def1adcb007ac348873c3580f276">BitMatrix&lt;&gt;::zeros</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> sub_m = m.unit_upper();</div>
@@ -4774,7 +4774,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns an independent <em>clone</em> of the upper triangular part of the bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-163"></a>
+<h1 class="doxsection"><a class="anchor" id="example-165"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> sub_m = m.upper();</div>
@@ -4811,7 +4811,7 @@ requires std::same_as&lt;typename Rhs::word_type, Word&gt;</div>
 </div><div class="memdoc">
 
 <p>Returns a solution to the system of linear equations <span class="tt">A.x_ = b</span> or <span class="tt">std::nullopt</span> if there are none. </p>
-<h1 class="doxsection"><a class="anchor" id="example-181"></a>
+<h1 class="doxsection"><a class="anchor" id="example-183"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -4846,7 +4846,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to create the <span class="tt">m x m</span> square "zero" bit-matrix. </p>
-<h1 class="doxsection"><a class="anchor" id="example-109"></a>
+<h1 class="doxsection"><a class="anchor" id="example-111"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#a54ad547e9cbfad34e4eadee8ebc7b5f8">BitMatrix&lt;&gt;::zero</a>(3);</div>
 <div class="line">assert_eq(m.to_compact_binary_string(), <span class="stringliteral">&quot;000 000 000&quot;</span>);</div>
@@ -4879,7 +4879,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to create the <span class="tt">m x m</span> square bit-matrix with all the elements set to 0. </p>
-<h1 class="doxsection"><a class="anchor" id="example-96"></a>
+<h1 class="doxsection"><a class="anchor" id="example-98"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ac1d3def1adcb007ac348873c3580f276">BitMatrix&lt;&gt;::zeros</a>(3);</div>
 <div class="line">assert_eq(m.to_compact_binary_string(), <span class="stringliteral">&quot;000 000 000&quot;</span>);</div>
@@ -4916,7 +4916,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Factory method to create the <span class="tt">m x n</span> zero bit-matrix with all the elements set to 0. </p>
-<h1 class="doxsection"><a class="anchor" id="example-95"></a>
+<h1 class="doxsection"><a class="anchor" id="example-97"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> m = <a class="code hl_function" href="#ac1d3def1adcb007ac348873c3580f276">BitMatrix&lt;&gt;::zeros</a>(3, 4);</div>
 <div class="line">assert_eq(m.to_compact_binary_string(), <span class="stringliteral">&quot;0000 0000 0000&quot;</span>);</div>
@@ -4954,7 +4954,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Equality operator checks that any pair of bit-matrices are equal in content. </p>
-<h1 class="doxsection"><a class="anchor" id="example-201"></a>
+<h1 class="doxsection"><a class="anchor" id="example-203"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> q = <a class="code hl_function" href="#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>

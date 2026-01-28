@@ -166,26 +166,28 @@ Methods Overview</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><a class="el" href="#span-fills">Fills</a>  </td><td class="markdownTableBodyNone">Methods to fill a bit-span from various sources.  </td></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="#span-exports">Exports</a>  </td><td class="markdownTableBodyNone">Methods to export the bits in the bit-span to various destinations.  </td></tr>
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><a class="el" href="#span-span">Spans</a>  </td><td class="markdownTableBodyNone">Methods to create non-owning views over a part of a bit-span &mdash; <em>sib-bit-spans</em>.  </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><a class="el" href="#span-sub-vectors">Sub-vectors</a>  </td><td class="markdownTableBodyNone">Methods to pull out a clone of piece of a bit-span as new bit-vector.  </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><a class="el" href="#span-riffling">Riffling</a>  </td><td class="markdownTableBodyNone">Methods to create bit-vectors that copy a bit-span with interleaved zeros.  </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><a class="el" href="#span-indices">Set/Unset Indices</a>  </td><td class="markdownTableBodyNone">Methods to find the indices of set &amp; unset bits in a bit-span.  </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><a class="el" href="#span-iterators">Iterators</a>  </td><td class="markdownTableBodyNone">Methods to create various iterators over a bit-span.  </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><a class="el" href="#span-stringification">Stringification</a>  </td><td class="markdownTableBodyNone">Methods to create string representations of a bit-span.  </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#equality-operator">Equality Operator</a>  </td><td class="markdownTableBodyNone">Operator to compare bit-stores, including bit-spans for content equality.  </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#bit-shifts">Bit Shifts</a>  </td><td class="markdownTableBodyNone">Operators to shift the bits in bit-spans left or right.  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#bit-wise-operators">Bit-wise Operators</a>  </td><td class="markdownTableBodyNone">Operators to combine bit-stores using logical operations.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#arithmetic-operators">Arithmetic Operators</a>  </td><td class="markdownTableBodyNone">Operators to add or subtract bit-stores.  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#bit-wise-operators">Bit-wise Operators</a>  </td><td class="markdownTableBodyNone">Operators to combine bit-stores using logical operations.  </td></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#arithmetic-operators">Arithmetic Operators</a>  </td><td class="markdownTableBodyNone">Operators to add or subtract bit-stores.  </td></tr>
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#other-functions">Other Functions</a>  </td><td class="markdownTableBodyNone">Dot products, convolutions, concatenation etc. for bit-spans.  </td></tr>
 </table>
 <h1 class="doxsection"><a class="anchor" id="span-concept"></a>
@@ -315,20 +317,37 @@ Fills</h1>
 </table>
 <h2 class="doxsection"><a class="anchor" id="copies-3"></a>
 Copies</h2>
-<p>The <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html#ae29df65f10c228aa9b8db2f02c594e9a" title="Copies all the bits from any unsigned integral src value to this equal-sized bit-span and returns a r...">gf2::BitSpan::copy</a></span> methods support copying bits from:</p>
+<p>TThe <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html#ae29df65f10c228aa9b8db2f02c594e9a" title="Copies all the bits from any unsigned integral src value to this equal-sized bit-span and returns a r...">gf2::BitSpan::copy</a></span> method is overloaded to copy bit values from various sources, where the size of bit-span <b>must</b> match the number of bits in the source:</p>
 <ul>
 <li>Another bit-store of the same size but possibly a different underlying word type.</li>
-<li>A <a href="https://en.cppreference.com/w/cpp/utility/bitset"><span class="tt">std::bitset</span></a> of the same size as the bit-span.</li>
-<li>An unsigned integer that has the same number of bits as the span. The integer type need not be the same as the underlying <span class="tt">Word</span> used by the bit-span.</li>
+<li>A single unsigned integer value, which need not be the same type as the underlying <span class="tt">Word</span> used here.</li>
+<li>An iteration of unsigned integer values, which need not be the same type as the underlying <span class="tt">Word</span> used here.</li>
 <li>A function or callable object that takes a single <span class="tt">usize</span> index argument and returns a boolean value for that index.</li>
+<li>A <a href="https://en.cppreference.com/w/cpp/utility/bitset"><span class="tt">std::bitset</span></a> of the same size as the bit-span.</li>
 </ul>
-<dl class="section note"><dt>Note</dt><dd>In each case, the size of the source and destinations must match exactly and that condition is always checked unless the <span class="tt">NDEBUG</span> flag is set at compile time. You can always use a <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span> sub-span to copy a subset of bits if needed.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>In each case, the <em>number of bits</em> in the source and destination must match exactly and that condition is always checked unless the <span class="tt">NDEBUG</span> flag is set at compile time. You can always use a <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span> to copy a sub-span of bits if needed.</dd></dl>
 <h2 class="doxsection"><a class="anchor" id="random-fills-3"></a>
 Random Fills</h2>
 <p>By default, the random fill method uses a random number generator seeded with system entropy, so the results change from run to run. You can set a specific seed to get reproducible fills.</p>
 <p>The default probability that a bit is set is 50%, but you can pass a different probability in the range <span class="tt">[0.0, 1.0]</span> if desired.</p>
-<h1 class="doxsection"><a class="anchor" id="span-span"></a>
-Spans</h1>
+<h1 class="doxsection"><a class="anchor" id="span-exports"></a>
+Exports</h1>
+<p>The following overloaded method lets you export the bits in the bit-span to various destinations.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Method  </th><th class="markdownTableHeadNone">Description  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitSpan.html#ad07d3093b1f91f1613f9344f45690eab" title="Returns a copy of the words underlying this bit-span and puts them into the passed output iterator.">gf2::BitSpan::to_words</a></span>  </td><td class="markdownTableBodyNone">Exports the bits in the bit-span as unsigned words.  </td></tr>
+</table>
+<p>The `<span class="tt"><a class="el" href="classgf2_1_1BitSpan.html#ad07d3093b1f91f1613f9344f45690eab" title="Returns a copy of the words underlying this bit-span and puts them into the passed output iterator.">gf2::BitSpan::to_words</a></span> function can be passed an output iterator to fill where we assume:</p>
+<ul>
+<li>The output iterator points to a location that can accept values of the underlying word type.</li>
+<li>There is enough space at the output location to hold all those words.</li>
+</ul>
+<p>If <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html#ad07d3093b1f91f1613f9344f45690eab" title="Returns a copy of the words underlying this bit-span and puts them into the passed output iterator.">gf2::BitSpan::to_words</a></span> is called with no argument it returns a new <span class="tt">std::vector</span> of the underlying word type.</p>
+<p><b>Note:</b> The final word in the output may have unused high-order bits that are guaranteed to be set to zero.</p>
+<h2 class="doxsection"><a class="anchor" id="span-span"></a>
+Spans</h2>
 <p>The following methods let you create a <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span> from a bit-span &mdash; a <em>sub-bit-span</em>.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -347,8 +366,8 @@ Spans</h1>
 <p>Mutability/immutability of the returned <span class="tt">BitSpan</span> is <em>deep</em>. The span's mutability reflects that of the underlying vector, so if the vector is mutable, so is the span, and vice versa.</p>
 <p>This is similar to the C++20 <a href="https://en.cppreference.com/w/cpp/container/span.html"><span class="tt">std::span</span></a> class for regular data collection types.</p>
 <dl class="section note"><dt>Note</dt><dd>A <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span> also satisfies the <span class="tt"><a class="el" href="conceptgf2_1_1BitStore.html" title="A concept that is satisfied by all bit-vector-like types, which we refer to as bit-stores.">gf2::BitStore</a></span> concept, so you can take a span of a span.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="span-sub-vectors"></a>
-Sub-vectors</h1>
+<h2 class="doxsection"><a class="anchor" id="span-sub-vectors"></a>
+Sub-vectors</h2>
 <p>The following methods create or fill <em>independent</em> bit-vectors with copies of some contiguous subset of the bits in the vector.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -360,8 +379,8 @@ Sub-vectors</h1>
 </table>
 <p>The <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html#ae116b38d6233851868423b5351684880" title="Views a bit-span as two parts containing the elements [0, at) and [at, size()) respectively.">gf2::BitSpan::split_at</a></span> method can optionally take two pre-existing bit-vectors to fill, thereby avoiding unnecessary allocations in some iterative algorithms that repeatedly use this method.</p>
 <dl class="section note"><dt>Note</dt><dd>These methods do not alter the underlying vector.</dd></dl>
-<h1 class="doxsection"><a class="anchor" id="span-riffling"></a>
-Riffling</h1>
+<h2 class="doxsection"><a class="anchor" id="span-riffling"></a>
+Riffling</h2>
 <p>We have methods that can interleave (<em>riffle</em>) the bits in a span with zeros.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -373,8 +392,8 @@ Riffling</h1>
 </table>
 <p>If the bit-span looks like \(v_0 v_1 v_2 \ldots v_n\), then the riffling operation produces the vector \(v_0 0 v_1 0 v_2 0 \ldots v_n\) where a zero is interleaved <em>between</em> every bit in the original bit-span (there is no trailing zero at the end).</p>
 <p>If you think of a bit-span as representing the coefficients of a polynomial over GF(2), then riffling corresponds to squaring that polynomial. See the documentation for <span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html#a30309419a9ed46754fc450052ef19bfb" title="Fills dst with the square of this bit-polynomial.">gf2::BitPolynomial::squared</a></span> for more information.</p>
-<h1 class="doxsection"><a class="anchor" id="span-indices"></a>
-Set/Unset Bit Indices</h1>
+<h2 class="doxsection"><a class="anchor" id="span-indices"></a>
+Set/Unset Bit Indices</h2>
 <p>The following methods find the indices of set or unset bits in the vector.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -396,8 +415,8 @@ Set/Unset Bit Indices</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitSpan.html#ad388e08f60848e03910e2c0a4a779d2f" title="Returns the index of the previous unset bit before index in the bit-span or {} if no more unset bits ...">gf2::BitSpan::previous_unset</a></span>  </td><td class="markdownTableBodyNone">Returns the index of the previous unset bit in the bit-span <em>before</em> the passed index.  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="span-iterators"></a>
-Iterators</h1>
+<h2 class="doxsection"><a class="anchor" id="span-iterators"></a>
+Iterators</h2>
 <p>The following methods create iterators for traversing the bits or underlying words in the bit-span:</p>
 <ul>
 <li>Read-only iteration through the individual bits.</li>
@@ -417,8 +436,6 @@ Iterators</h1>
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitSpan.html#a1de37852da1f30fba3fe368b50b05a96" title="Returns an iterator over the indices of any unset bits in the bit-span.">gf2::BitSpan::unset_bits</a></span>  </td><td class="markdownTableBodyNone">Returns a <span class="tt"><a class="el" href="classgf2_1_1UnsetBits.html" title="An iterator over the index locations of the unset bits in a bit-store.  You get this iterator by call...">gf2::UnsetBits</a></span> iterator to view the indices of all the unset bits.  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitSpan.html#aa9dc6987e7cd000ddae27d53b5734078" title="Returns a const iterator over all the words underlying the bit-span.">gf2::BitSpan::store_words</a></span>  </td><td class="markdownTableBodyNone">Returns a <span class="tt"><a class="el" href="classgf2_1_1Words.html" title="An iterator over the &quot;words&quot; underlying a bit-store.  You get this iterator by calling the BitStore::...">gf2::Words</a></span> iterator to view the "words" underlying the bit-span.  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitSpan.html#af936e824e11da1392f9ad55e5f2fe742" title="Returns a copy of the words underlying this bit-span.">gf2::BitSpan::to_words</a></span>  </td><td class="markdownTableBodyNone">Returns a copy of the "words" underlying the bit-span.  </td></tr>
 </table>
 <p>There are two overloads of the <span class="tt"><a class="el" href="classgf2_1_1BitSpan.html#a8362316bef3380d4ff685dd7e21f27ba" title="Returns a const iterator over the bool values of the bits in the const bit-span.">gf2::BitSpan::bits</a></span> method &mdash; one for <span class="tt">const</span> bit-stores and one for non-<span class="tt">const</span> bit-stores:</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> bits();        <span class="comment">// &lt;1&gt;</span></div>
@@ -427,8 +444,8 @@ Iterators</h1>
 <li>Returns a mutable <span class="tt"><a class="el" href="classgf2_1_1Bits.html" title="Two iterators over all the bits in a bit-store — one const and the other non-const....">gf2::Bits</a></span> that allows modification of the bits in the bit-span.</li>
 <li>Returns an immutable <span class="tt"><a class="el" href="classgf2_1_1Bits.html" title="Two iterators over all the bits in a bit-store — one const and the other non-const....">gf2::Bits</a></span> that only allows one to view the bits in the bit-span.</li>
 </ol>
-<h1 class="doxsection"><a class="anchor" id="span-stringification"></a>
-Stringification</h1>
+<h2 class="doxsection"><a class="anchor" id="span-stringification"></a>
+Stringification</h2>
 <p>The following methods return a string representation for a bit-span. The string can be in the obvious binary format or a more compact hex format.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -442,8 +459,8 @@ Stringification</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt"><a class="el" href="classgf2_1_1BitSpan.html#aa1b295282604bd942c5831fb835d4af3" title="Returns the &quot;hex&quot; string representation of the bits in the bit-span.">gf2::BitSpan::to_hex_string</a></span>  </td><td class="markdownTableBodyNone">Returns a compact hex string representation for a bit-span.  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="other-operators-and-functions-2"></a>
-Other Operators and Functions</h1>
+<h2 class="doxsection"><a class="anchor" id="other-operators-and-functions-2"></a>
+Other Operators and Functions</h2>
 <p>There are many operators and free functions defined for any <span class="tt"><a class="el" href="conceptgf2_1_1BitStore.html" title="A concept that is satisfied by all bit-vector-like types, which we refer to as bit-stores.">gf2::BitStore</a></span> compatible class, including:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -459,8 +476,8 @@ Other Operators and Functions</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><a class="el" href="md_docs_2pages_2BitStore.html#other-functions">Other Functions</a>  </td><td class="markdownTableBodyNone">Dot products, convolutions, concatenation etc. for bit-spans.  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="see-also-3"></a>
-See Also</h1>
+<h2 class="doxsection"><a class="anchor" id="see-also-3"></a>
+See Also</h2>
 <ul>
 <li><span class="tt"><a class="el" href="classgf2_1_1BitSpan.html" title="A bit_span is a non-owning view of contiguous bits in a bit-store.  .">gf2::BitSpan</a></span> for detailed documentation of all class methods.</li>
 <li><a class="el" href="md_docs_2pages_2BitStore.html"><span class="tt">BitStore</span></a> for the common API shared by all bit-stores.</li>

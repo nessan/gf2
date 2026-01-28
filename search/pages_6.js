@@ -1,9 +1,9 @@
 var searchData=
 [
   ['binary_20string_20encoding_0',['Binary String Encoding',['../md_docs_2pages_2BitStore.html#binary-string-encoding',1,'']]],
-  ['bit_20access_1',['Bit Access',['../md_docs_2pages_2BitStore.html#store-bit-access',1,'Bit Access'],['../md_docs_2pages_2BitArray.html#set-bit-access',1,'Bit Access'],['../md_docs_2pages_2BitVector.html#vec-bit-access',1,'Bit Access'],['../md_docs_2pages_2BitSpan.html#span-bit-access',1,'Bit Access']]],
+  ['bit_20access_1',['Bit Access',['../md_docs_2pages_2BitStore.html#store-bit-access',1,'Bit Access'],['../md_docs_2pages_2BitArray.html#array-bit-access',1,'Bit Access'],['../md_docs_2pages_2BitVector.html#vec-bit-access',1,'Bit Access'],['../md_docs_2pages_2BitSpan.html#span-bit-access',1,'Bit Access']]],
   ['bit_20counts_2',['Bit Counts',['../md_docs_2pages_2BitMatrix.html#bit-counts',1,'Bit Counts'],['../md_docs_2pages_2Unsigned.html#bit-counts-1',1,'Bit Counts']]],
-  ['bit_20indices_3',['Bit Indices',['../md_docs_2pages_2BitStore.html#store-indices',1,'Set/Unset Bit Indices'],['../md_docs_2pages_2BitArray.html#set-indices',1,'Set/Unset Bit Indices'],['../md_docs_2pages_2BitVector.html#vec-indices',1,'Set/Unset Bit Indices'],['../md_docs_2pages_2BitSpan.html#span-indices',1,'Set/Unset Bit Indices']]],
+  ['bit_20indices_3',['Bit Indices',['../md_docs_2pages_2BitStore.html#store-indices',1,'Set/Unset Bit Indices'],['../md_docs_2pages_2BitArray.html#array-indices',1,'Set/Unset Bit Indices'],['../md_docs_2pages_2BitVector.html#vec-indices',1,'Set/Unset Bit Indices'],['../md_docs_2pages_2BitSpan.html#span-indices',1,'Set/Unset Bit Indices']]],
   ['bit_20location_4',['Bit Location',['../md_docs_2pages_2Unsigned.html#bit-location',1,'']]],
   ['bit_20matrices_5',['Danilevsky for Bit-Matrices',['../Danilevsky.html#danilevsky-for-bit-matrices',1,'']]],
   ['bit_20shifts_6',['Bit Shifts',['../md_docs_2pages_2BitStore.html#bit-shifts',1,'']]],

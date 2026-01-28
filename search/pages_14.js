@@ -16,7 +16,7 @@ var searchData=
   ['reshaping_20from_20vectors_13',['Reshaping from Vectors',['../md_docs_2pages_2BitMatrix.html#reshaping-from-vectors',1,'']]],
   ['resizing_14',['Resizing',['../md_docs_2pages_2BitVector.html#vec-resizing',1,'']]],
   ['resizing_20and_20reshaping_15',['Resizing and Reshaping',['../md_docs_2pages_2BitMatrix.html#resizing-and-reshaping',1,'']]],
-  ['riffling_16',['Riffling',['../md_docs_2pages_2BitStore.html#store-riffling',1,'Riffling'],['../md_docs_2pages_2BitArray.html#set-riffling',1,'Riffling'],['../md_docs_2pages_2BitVector.html#vec-riffling',1,'Riffling'],['../md_docs_2pages_2BitSpan.html#span-riffling',1,'Riffling']]],
+  ['riffling_16',['Riffling',['../md_docs_2pages_2BitStore.html#store-riffling',1,'Riffling'],['../md_docs_2pages_2BitArray.html#array-riffling',1,'Riffling'],['../md_docs_2pages_2BitVector.html#vec-riffling',1,'Riffling'],['../md_docs_2pages_2BitSpan.html#span-riffling',1,'Riffling']]],
   ['rows_20columns_17',['Appending and Removing Rows/Columns',['../md_docs_2pages_2BitMatrix.html#appending-and-removing-rowscolumns',1,'']]],
   ['rust_20version_18',['Rust Version',['../index.html#rust-version',1,'']]]
 ];

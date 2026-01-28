@@ -43,6 +43,7 @@ var NAVTREE =
         [ "Copies", "md_docs_2pages_2BitStore.html#copies", null ],
         [ "Random Fills", "md_docs_2pages_2BitStore.html#random-fills", null ]
       ] ],
+      [ "Exports", "md_docs_2pages_2BitStore.html#store-exports", null ],
       [ "Spans", "md_docs_2pages_2BitStore.html#store-spans", null ],
       [ "Sub-vectors", "md_docs_2pages_2BitStore.html#store-sub-vectors", null ],
       [ "Riffling", "md_docs_2pages_2BitStore.html#store-riffling", null ],
@@ -64,22 +65,23 @@ var NAVTREE =
       [ "Introduction", "md_docs_2pages_2BitArray.html#introduction-1", null ],
       [ "Declaration", "md_docs_2pages_2BitArray.html#declaration", null ],
       [ "Methods Overview", "md_docs_2pages_2BitArray.html#methods-overview", null ],
-      [ "Concept Methods", "md_docs_2pages_2BitArray.html#set-concept", null ],
-      [ "Constructors", "md_docs_2pages_2BitArray.html#set-constructors", null ],
-      [ "Factory Constructors", "md_docs_2pages_2BitArray.html#set-factory", null ],
-      [ "Bit Access", "md_docs_2pages_2BitArray.html#set-bit-access", null ],
-      [ "Queries", "md_docs_2pages_2BitArray.html#set-queries", null ],
-      [ "Mutators", "md_docs_2pages_2BitArray.html#set-mutators", null ],
-      [ "Copies &amp; Fills", "md_docs_2pages_2BitArray.html#set-fills", [
+      [ "Concept Methods", "md_docs_2pages_2BitArray.html#array-concept", null ],
+      [ "Constructors", "md_docs_2pages_2BitArray.html#array-constructors", null ],
+      [ "Factory Constructors", "md_docs_2pages_2BitArray.html#array-factory", null ],
+      [ "Bit Access", "md_docs_2pages_2BitArray.html#array-bit-access", null ],
+      [ "Queries", "md_docs_2pages_2BitArray.html#array-queries", null ],
+      [ "Mutators", "md_docs_2pages_2BitArray.html#array-mutators", null ],
+      [ "Copies &amp; Fills", "md_docs_2pages_2BitArray.html#array-fills", [
         [ "Copies", "md_docs_2pages_2BitArray.html#copies-1", null ],
         [ "Random Fills", "md_docs_2pages_2BitArray.html#random-fills-1", null ]
       ] ],
-      [ "Spans", "md_docs_2pages_2BitArray.html#set-span", null ],
-      [ "Sub-vectors", "md_docs_2pages_2BitArray.html#set-sub-vectors", null ],
-      [ "Riffling", "md_docs_2pages_2BitArray.html#set-riffling", null ],
-      [ "Set/Unset Bit Indices", "md_docs_2pages_2BitArray.html#set-indices", null ],
-      [ "Iterators", "md_docs_2pages_2BitArray.html#set-iterators", null ],
-      [ "Stringification", "md_docs_2pages_2BitArray.html#set-stringification", null ],
+      [ "Exports", "md_docs_2pages_2BitArray.html#array-exports", null ],
+      [ "Spans", "md_docs_2pages_2BitArray.html#array-span", null ],
+      [ "Sub-vectors", "md_docs_2pages_2BitArray.html#array-sub-vectors", null ],
+      [ "Riffling", "md_docs_2pages_2BitArray.html#array-riffling", null ],
+      [ "Set/Unset Bit Indices", "md_docs_2pages_2BitArray.html#array-indices", null ],
+      [ "Iterators", "md_docs_2pages_2BitArray.html#array-iterators", null ],
+      [ "Stringification", "md_docs_2pages_2BitArray.html#array-stringification", null ],
       [ "Other Operators and Functions", "md_docs_2pages_2BitArray.html#other-operators-and-functions", null ],
       [ "See Also", "md_docs_2pages_2BitArray.html#see-also-1", null ]
     ] ],
@@ -101,6 +103,7 @@ var NAVTREE =
         [ "Copies", "md_docs_2pages_2BitVector.html#copies-2", null ],
         [ "Random Fills", "md_docs_2pages_2BitVector.html#random-fills-2", null ]
       ] ],
+      [ "Exports", "md_docs_2pages_2BitVector.html#vec-exports", null ],
       [ "Spans", "md_docs_2pages_2BitVector.html#vec-span", null ],
       [ "Sub-vectors", "md_docs_2pages_2BitVector.html#vec-sub-vectors", null ],
       [ "Riffling", "md_docs_2pages_2BitVector.html#vec-riffling", null ],
@@ -125,14 +128,16 @@ var NAVTREE =
         [ "Copies", "md_docs_2pages_2BitSpan.html#copies-3", null ],
         [ "Random Fills", "md_docs_2pages_2BitSpan.html#random-fills-3", null ]
       ] ],
-      [ "Spans", "md_docs_2pages_2BitSpan.html#span-span", null ],
-      [ "Sub-vectors", "md_docs_2pages_2BitSpan.html#span-sub-vectors", null ],
-      [ "Riffling", "md_docs_2pages_2BitSpan.html#span-riffling", null ],
-      [ "Set/Unset Bit Indices", "md_docs_2pages_2BitSpan.html#span-indices", null ],
-      [ "Iterators", "md_docs_2pages_2BitSpan.html#span-iterators", null ],
-      [ "Stringification", "md_docs_2pages_2BitSpan.html#span-stringification", null ],
-      [ "Other Operators and Functions", "md_docs_2pages_2BitSpan.html#other-operators-and-functions-2", null ],
-      [ "See Also", "md_docs_2pages_2BitSpan.html#see-also-3", null ]
+      [ "Exports", "md_docs_2pages_2BitSpan.html#span-exports", [
+        [ "Spans", "md_docs_2pages_2BitSpan.html#span-span", null ],
+        [ "Sub-vectors", "md_docs_2pages_2BitSpan.html#span-sub-vectors", null ],
+        [ "Riffling", "md_docs_2pages_2BitSpan.html#span-riffling", null ],
+        [ "Set/Unset Bit Indices", "md_docs_2pages_2BitSpan.html#span-indices", null ],
+        [ "Iterators", "md_docs_2pages_2BitSpan.html#span-iterators", null ],
+        [ "Stringification", "md_docs_2pages_2BitSpan.html#span-stringification", null ],
+        [ "Other Operators and Functions", "md_docs_2pages_2BitSpan.html#other-operators-and-functions-2", null ],
+        [ "See Also", "md_docs_2pages_2BitSpan.html#see-also-3", null ]
+      ] ]
     ] ],
     [ "The <span class=\"tt\">BitRef</span> Reference", "md_docs_2pages_2BitRef.html", [
       [ "Introduction", "md_docs_2pages_2BitRef.html#introduction-4", null ],
@@ -280,11 +285,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "BitArray_8h.html",
-"classgf2_1_1BitMatrix.html",
-"classgf2_1_1BitPolynomial.html#a1b9b2ccbbd1840d8c4d278e34c812a67",
-"classgf2_1_1BitVector.html#a146f71d85f944143c73ee666c66c878b",
-"md_docs_2pages_2BitArray.html#other-operators-and-functions",
-"namespacegf2.html#a91d03fc055e7a9b1f082e80b34b30bbf"
+"classgf2_1_1BitLU.html#ab46e29baf332eea2bbc3296d55ae08f7",
+"classgf2_1_1BitPolynomial.html#a15acc6d7b5115d5ec9bb98908e4462b3",
+"classgf2_1_1BitVector.html#a05d4d7648a2190f143ecc316d83383b5",
+"index.html#a-simple-example",
+"namespacegf2.html#a730c7cf46f5de572063287be53c53e70"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

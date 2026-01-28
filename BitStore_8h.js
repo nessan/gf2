@@ -8,7 +8,8 @@ var BitStore_8h =
     [ "gf2::bits", "namespacegf2.html#a23dcec6af2e6ea3a742511ee90f3ad2b", null ],
     [ "gf2::bits", "namespacegf2.html#a9505618cfe91d94fb220381ca468058e", null ],
     [ "gf2::convolve", "namespacegf2.html#a3b0ea5c405d2ed08ce9fa5bbbb2cc169", null ],
-    [ "gf2::copy", "namespacegf2.html#a739e22001c04845986952808f9f4b3fd", null ],
+    [ "gf2::copy", "namespacegf2.html#aa5f56a386e445b784b0cb9e59df06d1e", null ],
+    [ "gf2::copy", "namespacegf2.html#a8eb955c97a414b3b094534847cd75e97", null ],
     [ "gf2::copy", "namespacegf2.html#ab9a3ab2cfb7f67f6b195372d0e66e734", null ],
     [ "gf2::copy", "namespacegf2.html#aa91135dc9362ddf9d47b1b9a6ec968da", null ],
     [ "gf2::copy", "namespacegf2.html#a75cfaac28a1a498d1706808c3cfa6018", null ],
@@ -69,6 +70,7 @@ var BitStore_8h =
     [ "gf2::to_pretty_string", "namespacegf2.html#a75fa1cd092371f7093307f09dbd71c55", null ],
     [ "gf2::to_string", "namespacegf2.html#a355af2e0599965ef8d4eada941eee8e3", null ],
     [ "gf2::to_words", "namespacegf2.html#a91d03fc055e7a9b1f082e80b34b30bbf", null ],
+    [ "gf2::to_words", "namespacegf2.html#abda627169916e771d25c9a1af8dad123", null ],
     [ "gf2::trailing_zeros", "namespacegf2.html#abdf2434cc208bb1633add06c3619bf06", null ],
     [ "gf2::unset_bits", "namespacegf2.html#a976e9da1d5515af13d3d805fa2339b58", null ]
 ];

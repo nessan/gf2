@@ -145,7 +145,7 @@ template&lt;class FormatContext&gt; </td></tr>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="conceptgf2_1_1Unsigned.html">gf2::Unsigned</a> Word&gt;<br />
 struct std::formatter&lt; gf2::BitPolynomial&lt; Word &gt; &gt;</div><p>Specialise <span class="tt">std::formatter</span> for our <span class="tt"><a class="el" href="classgf2_1_1BitPolynomial.html" title="A BitPolynomial represents a polynomial over GF(2) where we store the polynomial coefficients in a bi...">gf2::BitPolynomial</a>&lt;Word&gt;</span> type. </p>
 <p>You can use the format specifier to set the variable symbol (the default is "x"). For example, <span class="tt">std::format("{:mat}", p)</span> -&gt; "p0 + p1*mat + p2*mat^2 + ...".</p>
-<h1 class="doxsection"><a class="anchor" id="example-202"></a>
+<h1 class="doxsection"><a class="anchor" id="example-204"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> p = BitPolynomial&lt;&gt;::ones(2);</div>
 <div class="line"><span class="keyword">auto</span> px = std::format(<span class="stringliteral">&quot;{}&quot;</span>, p);</div>

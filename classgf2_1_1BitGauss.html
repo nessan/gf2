@@ -166,10 +166,10 @@ If the system is consistent then we can index into the solutions by an integer &
 - The &lt;tt&gt;BitGauss::operator(i)&lt;/tt&gt; method returns "the" solution indexed &lt;tt&gt;i&lt;/tt&gt;.
 
 For underdetermined systems, the "indexing" is something convenient and consistent across runs but not unique.</p>
-<h1 class="doxsection"><a class="anchor" id="note-6"></a>
+<h1 class="doxsection"><a class="anchor" id="note-8"></a>
 Note</h1>
 <p>The <span class="tt"><a class="el" href="classgf2_1_1BitLU.html" title="The BitLU class provides the LU decomposition for bit-matrices.">BitLU</a></span> class provides another, often more efficient, way to solve systems of linear equations over GF(2). It also provides the <span class="tt"><a class="el" href="classgf2_1_1BitLU.html#a79cdebce01c27f3d9f3c2136a6b77d71" title="Returns the inverse of the matrix A as a full independent bit-matrix or std::nullopt if the matrix is...">BitLU::inverse</a></span> method for computing the inverse of a matrix.</p>
-<h1 class="doxsection"><a class="anchor" id="example-76"></a>
+<h1 class="doxsection"><a class="anchor" id="example-78"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -215,10 +215,10 @@ requires std::same_as&lt;typename Rhs::word_type, Word&gt;</div>
 </div><div class="memdoc">
 
 <p>Constructs a new <span class="tt"><a class="el" href="classgf2_1_1BitGauss.html" title="The BitGauss class is a Gaussian elimination solver for systems of linear equations over GF(2)....">BitGauss</a></span> object where we are solving the system of linear equations <span class="tt">A.x = b</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="panics-18"></a>
+<h1 class="doxsection"><a class="anchor" id="panics-19"></a>
 Panics</h1>
 <p>Constructor panics if the <span class="tt">A</span> matrix is not square or if the <span class="tt">A</span> matrix and <span class="tt">b</span> vector have a different number of rows</p>
-<h1 class="doxsection"><a class="anchor" id="example-77"></a>
+<h1 class="doxsection"><a class="anchor" id="example-79"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -264,7 +264,7 @@ template&lt;Unsigned Word&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the number of free variables in the system. </p>
-<h1 class="doxsection"><a class="anchor" id="example-79"></a>
+<h1 class="doxsection"><a class="anchor" id="example-81"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -300,7 +300,7 @@ template&lt;Unsigned Word&gt; </div>
 
 <p>Returns <span class="tt">true</span> if the system of linear equations <span class="tt">A.x = b</span> is consistent. </p>
 <p>A system is consistent if there is at least one solution.</p>
-<h1 class="doxsection"><a class="anchor" id="example-81"></a>
+<h1 class="doxsection"><a class="anchor" id="example-83"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -335,7 +335,7 @@ template&lt;Unsigned Word&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns <span class="tt">true</span> if the system is underdetermined. </p>
-<h1 class="doxsection"><a class="anchor" id="example-80"></a>
+<h1 class="doxsection"><a class="anchor" id="example-82"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -371,14 +371,14 @@ template&lt;Unsigned Word&gt; </div>
 
 <p>Returns a solution to the system of linear equations <span class="tt">A.x = b</span> or <span class="tt">std::nullopt</span> if the system is inconsistent. </p>
 <p>If the system is underdetermined with <span class="tt">f</span> free variables the returned solution will have <span class="tt">f</span> random 0/1 entries for those indices.</p>
-<h1 class="doxsection"><a class="anchor" id="example-83"></a>
+<h1 class="doxsection"><a class="anchor" id="example-85"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#ab34ac8ed7a00be3f9f1548bb881e216e">BitMatrix&lt;&gt;::identity</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
 <div class="line"><span class="keyword">auto</span> solver = A.solver_for(b);</div>
 <div class="line">assert_eq(solver().value().<a class="code hl_function" href="namespacegf2.html#a355af2e0599965ef8d4eada941eee8e3">to_string</a>(), <span class="stringliteral">&quot;111&quot;</span>);</div>
 <div class="ttc" id="aclassgf2_1_1BitMatrix_html_ab34ac8ed7a00be3f9f1548bb881e216e"><div class="ttname"><a href="classgf2_1_1BitMatrix.html#ab34ac8ed7a00be3f9f1548bb881e216e">gf2::BitMatrix::identity</a></div><div class="ttdeci">static constexpr BitMatrix identity(usize m)</div><div class="ttdoc">Factory method to create the m x m identity bit-matrix.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:383</div></div>
-<div class="ttc" id="anamespacegf2_html_a355af2e0599965ef8d4eada941eee8e3"><div class="ttname"><a href="namespacegf2.html#a355af2e0599965ef8d4eada941eee8e3">gf2::to_string</a></div><div class="ttdeci">static std::string to_string(Store const &amp;store, std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;)</div><div class="ttdoc">Returns a binary string representation of a store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1511</div></div>
+<div class="ttc" id="anamespacegf2_html_a355af2e0599965ef8d4eada941eee8e3"><div class="ttname"><a href="namespacegf2.html#a355af2e0599965ef8d4eada941eee8e3">gf2::to_string</a></div><div class="ttdeci">static std::string to_string(Store const &amp;store, std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;)</div><div class="ttdoc">Returns a binary string representation of a store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1587</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -410,7 +410,7 @@ template&lt;Unsigned Word&gt; </div>
 <p>Returns the <span class="tt">i</span>th solution to the system of linear equations <span class="tt">A.x = b</span> or <span class="tt">std::nullopt</span> if the system is inconsistent or if <span class="tt">i</span> is out of bounds. </p>
 <p>If the system is consistent and determined, there is a unique solution and <span class="tt">operator()(0)</span> is the same as <span class="tt"><a class="el" href="#a9726ce68a368c0e7fb737de927b9248c" title="Returns a solution to the system of linear equations A.x = b or std::nullopt if the system is inconsi...">operator()()</a></span>.</p>
 <p>If the system is underdetermined with <span class="tt">f</span> free variables, it has <span class="tt">2^f</span> possible solutions. If <span class="tt">f</span> is large, <span class="tt">2^f</span> may not fit in <span class="tt"><a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8" title="Word type alias for the platform&#39;s &quot;native&quot;-sized unsigned integer.">usize</a></span> but here we limit the number of <em>indexable</em> solutions to the largest power of 2 that fits in <span class="tt"><a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8" title="Word type alias for the platform&#39;s &quot;native&quot;-sized unsigned integer.">usize</a></span>. The indexing scheme is certainly not unique but it is consistent across runs.</p>
-<h1 class="doxsection"><a class="anchor" id="example-84"></a>
+<h1 class="doxsection"><a class="anchor" id="example-86"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -449,7 +449,7 @@ template&lt;Unsigned Word&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the rank of the matrix <span class="tt">A</span>. </p>
-<h1 class="doxsection"><a class="anchor" id="example-78"></a>
+<h1 class="doxsection"><a class="anchor" id="example-80"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
@@ -486,7 +486,7 @@ template&lt;Unsigned Word&gt; </div>
 <p>Returns the maximum number of solutions we can index into. </p>
 <p>This may be 0, 1, or 2^f for some <span class="tt">f</span> where <span class="tt">f</span> is the number of free variables in an underdetermined system. For the <span class="tt">xi_for(i: usize)</span> function we limit that to the largest power of 2 that fits in <span class="tt"><a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8" title="Word type alias for the platform&#39;s &quot;native&quot;-sized unsigned integer.">usize</a></span>.</p>
 <p>If <span class="tt"><a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8" title="Word type alias for the platform&#39;s &quot;native&quot;-sized unsigned integer.">usize</a></span> is 64 bits then <span class="tt"><a class="el" href="#aaa7df7ea05c8204898229089f69f477a" title="Returns the maximum number of solutions we can index into.">solution_count</a> = min(2^f, 2^63)</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="example-82"></a>
+<h1 class="doxsection"><a class="anchor" id="example-84"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code hl_function" href="classgf2_1_1BitMatrix.html#a95ec8df5690d34cb09e4446271b18f05">BitMatrix&lt;&gt;::ones</a>(3, 3);</div>
 <div class="line"><span class="keyword">auto</span> b = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(3);</div>
