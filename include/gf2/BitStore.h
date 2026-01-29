@@ -1215,9 +1215,10 @@ store_words(Store const& store) {
 /// Returns a copy of the words underlying this bit-store and puts them into the passed output iterator.
 ///
 /// # Note
-/// 1. The last word in the store may not be fully occupied but unused slots will be all zeros.
-/// 2. The output iterator must be able to accept values of the store's `word_type`.
-/// 3. The output iterator must have enough space to accept all the words in the store.
+/// - The last word in the store may not be fully occupied but unused slots will be all zeros.
+/// - The output iterator must be able to accept values of the store's `word_type`.
+/// - The output iterator must have enough space to accept all the words in the store.
+/// - If there is extra space in the output iterator, those extra slots are left unchanged.
 ///
 /// # Example
 /// ```
@@ -1387,10 +1388,10 @@ split(Store const& store, usize at, BitVector<typename Store::word_type>& left,
       BitVector<typename Store::word_type>& right) {
     auto sz = store.size();
     gf2_assert(at <= sz, "Oops, split point {} is beyond the end of the bit-store {}", at, sz);
-    left.clear();
-    right.clear();
-    left.append(span(store, 0, at));
-    right.append(span(store, at, sz));
+    left.resize(at);
+    right.resize(sz - at);
+    copy(span(store, 0, at), left);
+    copy(span(store, at, sz), right);
 }
 
 /// Views a bit-store as two parts containing the elements `[0, at)` and `[at, size())` respectively.

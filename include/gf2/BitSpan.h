@@ -855,10 +855,12 @@ public:
 
     /// Returns a copy of the words underlying this bit-span and puts them into the passed output iterator.
     ///
+    ///
     /// # Note
-    /// 1. The last word in the bit-span may not be fully occupied but unused slots will be all zeros.
-    /// 2. The output iterator must be able to accept values of the bit-span's `word_type`.
-    /// 3. The output iterator must have enough space to accept all the words in the bit-span.
+    /// - The last word in the bit-span may not be fully occupied but unused slots will be all zeros.
+    /// - The output iterator must be able to accept values of the bit-span's `word_type`.
+    /// - The output iterator must have enough space to accept all the words in the bit-span.
+    /// - If there is extra space in the output iterator, those extra slots are left unchanged.
     ///
     /// # Example
     /// ```

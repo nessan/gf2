@@ -255,6 +255,7 @@ The ``gf2::to_words` function can be passed an output iterator to fill where we 
 
 - The output iterator points to a location that can accept values of the underlying word type.
 - There is enough space at the output location to hold all those words.
+- Any extra bits in the final word are guaranteed to be set to zero.
 
 If `gf2::to_words` is called with no argument it returns a new `std::vector` of the bit-store's underlying word type.
 

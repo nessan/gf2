@@ -231,7 +231,8 @@ reduce_x_to_the(usize n, const gf2::BitPolynomial<Word>& P) {
     // Then for any exponent e: x^e = (P(x) + c)^e = terms in powers of P(x) + c^e => x^e mod P(x) = c^e = c.
     if (d == 1) return gf2::BitPolynomial<Word>::constant(poly[0]);
 
-    // We can write poly(x) = p_0 + p_1 x + ... + p_{d-1} x^{d-1}. All that matters are those coefficients.
+    // We can write poly(x) = x^d + p(x) where p(x) = p_0 + p_1 x + ... + p_{d-1} x^{d-1}.
+    // All that matters are those coefficients [p_0, ..., p_{d-1}].
     auto p = poly.coefficients().sub(0, d);
 
     // Small powers n < d:

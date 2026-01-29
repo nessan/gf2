@@ -810,13 +810,14 @@ public:
 
         // Edge case: P(x) = x + c where c is a constant so x = P(x) + c (subtraction in GF(2) is the same as addition).
         // Then x^e = (P(x) + c)^e = terms in powers of P(x) + c^e. Hence, x^e mod P(x) = c^e = c.
-        if (d == 1) return BitPolynomial<Word>::constant(m_coeffs.get(1));
+        if (d == 1) return BitPolynomial<Word>::constant(m_coeffs.get(0));
 
-        // We can write p(x) = p_0 + p_1 x + ... + p_{d-1} x^{d-1}. All that matters are those coefficients.
+        // This polynomial is P(x) where P(x) = x^d + p(x) where p(x) = p_0 + p_1 x + ... + p_{d-1} x^{d-1}.
+        // All that matters are the `d` coefficients of p(x).
         auto p = m_coeffs.sub(0, d);
 
         // A lambda to perform: q(x) <- x*q(x) mod P(x) where degree(q) < d.
-        // The lambda works on the coefficients of q(x) passed as a bit-vector q.
+        // The lambda works in-place on the coefficients of q(x) passed as a bit-vector q of size d.
         auto times_x_step = [&](auto& q) {
             bool add_p = q[d - 1];
             q >>= 1;
@@ -824,7 +825,7 @@ public:
         };
 
         // Iteratively precompute x^{d+i} mod P(x) for i = 0, 1, ..., d-1 starting with x^d mod P(x) ~ p.
-        // We store all the bit-vectors in a standard `std::vector` of length d.
+        // We store all those bit-vectors in a standard `std::vector` of length d.
         std::vector<coeffs_type> power_mod(d, coeffs_type{d});
         power_mod[0] = p;
         for (auto i = 1uz; i < d; ++i) {
@@ -836,7 +837,7 @@ public:
         coeffs_type s{2 * d}, h{d};
 
         // lambda to perform: q(x) <- q(x)^2 mod P(x) where degree(q) < d.
-        // The lambda works on the coefficients of q(x) passed as a bit-vector q.
+        // The lambda works in-place on the coefficients of q(x) passed as a bit-vector q of size d.
         auto square_step = [&](auto& q) {
             // Square q(x) storing the result in workspace `s`.
             q.riffled(s);
@@ -845,8 +846,8 @@ public:
             // We reuse q(x) for l(x).
             s.split_at(d, q, h);
 
-            // s(x) = q(x) + h(x) so s(x) mod P(x) = q(x) + h(x) mod P(x) which we handle term by term.
-            // If h(x) != 0 then at most every second term in h(x) is 1 (nature of BitPolynomial squares in GF(2)).
+            // s(x) = q(x) + x^d h(x) so s(x) mod P(x) = q(x) + x^d h(x) mod P(x) which we handle term by term.
+            // If h(x) != 0 then at most every second term in h(x) is 1 (nature of bit-polynomial squares in GF(2)).
             if (auto h_first = h.first_set()) {
                 auto h_last = h.last_set();
                 for (auto i = *h_first; i <= *h_last; i += 2)
