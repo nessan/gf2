@@ -364,7 +364,7 @@ Example</h1>
 <div class="line">assert_eq(u.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;&quot;</span>);</div>
 <div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> v;</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;0000000000&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a7e7ba662c7a451fb55b1f64d29d013d1"><div class="ttname"><a href="#a7e7ba662c7a451fb55b1f64d29d013d1">gf2::BitArray::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1243</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a7e7ba662c7a451fb55b1f64d29d013d1"><div class="ttname"><a href="#a7e7ba662c7a451fb55b1f64d29d013d1">gf2::BitArray::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1244</div></div>
 <div class="ttc" id="aclassgf2_1_1BitArray_html_ae52f2a1cd4ba693f95405eaa007b42fc"><div class="ttname"><a href="#ae52f2a1cd4ba693f95405eaa007b42fc">gf2::BitArray::BitArray</a></div><div class="ttdeci">constexpr BitArray()</div><div class="ttdoc">Constructs a bit-array of length N with all the bit elements set to 0.</div><div class="ttdef"><b>Definition</b> BitArray.h:148</div></div>
 </div><!-- fragment --> 
 </div>
@@ -2112,7 +2112,7 @@ Example</h1>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#ae52f2a1cd4ba693f95405eaa007b42fc">BitArray&lt;10, u8&gt;</a> v; v.<a class="code hl_function" href="#aab2791cfd5ff853058cc609a4d3b354c">set_all</a>();</div>
 <div class="line"><span class="keyword">auto</span> dst = v.<a class="code hl_function" href="#a23cc27cefe65bd9b7459b564cd007534">riffled</a>();</div>
 <div class="line">assert_eq(dst.to_string(), <span class="stringliteral">&quot;1010101010101010101&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a23cc27cefe65bd9b7459b564cd007534"><div class="ttname"><a href="#a23cc27cefe65bd9b7459b564cd007534">gf2::BitArray::riffled</a></div><div class="ttdeci">constexpr void riffled(BitVector&lt; word_type &gt; &amp;dst) const</div><div class="ttdoc">Interleaves the bits of this bit-array with zeros storing the result into the bit-vector dst.</div><div class="ttdef"><b>Definition</b> BitArray.h:1186</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a23cc27cefe65bd9b7459b564cd007534"><div class="ttname"><a href="#a23cc27cefe65bd9b7459b564cd007534">gf2::BitArray::riffled</a></div><div class="ttdeci">constexpr void riffled(BitVector&lt; word_type &gt; &amp;dst) const</div><div class="ttdoc">Interleaves the bits of this bit-array with zeros storing the result into the bit-vector dst.</div><div class="ttdef"><b>Definition</b> BitArray.h:1187</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2151,7 +2151,7 @@ Example</h1>
 <div class="line">v.<a class="code hl_function" href="#a23cc27cefe65bd9b7459b564cd007534">riffled</a>(dst);</div>
 <div class="line">assert_eq(dst.<a class="code hl_function" href="classgf2_1_1BitVector.html#ad2b8ef3dc6d1ea250253135172bb48e7">to_string</a>(), <span class="stringliteral">&quot;1010101010101010101&quot;</span>);</div>
 <div class="ttc" id="aclassgf2_1_1BitVector_html"><div class="ttname"><a href="classgf2_1_1BitVector.html">gf2::BitVector</a></div><div class="ttdoc">A dynamically-sized vector over GF(2) with bit elements compactly stored in a standard vector of prim...</div><div class="ttdef"><b>Definition</b> BitVector.h:23</div></div>
-<div class="ttc" id="aclassgf2_1_1BitVector_html_ad2b8ef3dc6d1ea250253135172bb48e7"><div class="ttname"><a href="classgf2_1_1BitVector.html#ad2b8ef3dc6d1ea250253135172bb48e7">gf2::BitVector::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVector.h:1819</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_ad2b8ef3dc6d1ea250253135172bb48e7"><div class="ttname"><a href="classgf2_1_1BitVector.html#ad2b8ef3dc6d1ea250253135172bb48e7">gf2::BitVector::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVector.h:1820</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2435,7 +2435,7 @@ Example</h1>
 <div class="line">s.set_all();</div>
 <div class="line">assert_eq(s.to_string(), <span class="stringliteral">&quot;1111&quot;</span>);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;1111101010&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a5696c182958a4495cda1c3c1a10cbfd8"><div class="ttname"><a href="#a5696c182958a4495cda1c3c1a10cbfd8">gf2::BitArray::span</a></div><div class="ttdeci">constexpr auto span(usize begin, usize end) const</div><div class="ttdoc">Returns an immutable bit-span encompassing the bit-array&#39;s bits in the half-open range [begin,...</div><div class="ttdef"><b>Definition</b> BitArray.h:1074</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a5696c182958a4495cda1c3c1a10cbfd8"><div class="ttname"><a href="#a5696c182958a4495cda1c3c1a10cbfd8">gf2::BitArray::span</a></div><div class="ttdeci">constexpr auto span(usize begin, usize end) const</div><div class="ttdoc">Returns an immutable bit-span encompassing the bit-array&#39;s bits in the half-open range [begin,...</div><div class="ttdef"><b>Definition</b> BitArray.h:1075</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2521,7 +2521,7 @@ Example</h1>
 <div class="line">assert_eq(left.to_string(), <span class="stringliteral">&quot;10101&quot;</span>);</div>
 <div class="line">assert_eq(right.to_string(), <span class="stringliteral">&quot;01010&quot;</span>);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_ad780efa43f9e461bb5dd7bfda85529bc"><div class="ttname"><a href="#ad780efa43f9e461bb5dd7bfda85529bc">gf2::BitArray::split_at</a></div><div class="ttdeci">constexpr void split_at(usize at, BitVector&lt; word_type &gt; &amp;left, BitVector&lt; word_type &gt; &amp;right) const</div><div class="ttdoc">Views the bit-array as two parts containing the elements [0, at) and [at, size()) respectively.</div><div class="ttdef"><b>Definition</b> BitArray.h:1143</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_ad780efa43f9e461bb5dd7bfda85529bc"><div class="ttname"><a href="#ad780efa43f9e461bb5dd7bfda85529bc">gf2::BitArray::split_at</a></div><div class="ttdeci">constexpr void split_at(usize at, BitVector&lt; word_type &gt; &amp;left, BitVector&lt; word_type &gt; &amp;right) const</div><div class="ttdoc">Views the bit-array as two parts containing the elements [0, at) and [at, size()) respectively.</div><div class="ttdef"><b>Definition</b> BitArray.h:1144</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2729,7 +2729,7 @@ Example</h1>
 <div class="line">s.set_all();</div>
 <div class="line">assert_eq(s.to_string(), <span class="stringliteral">&quot;1111&quot;</span>);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7e7ba662c7a451fb55b1f64d29d013d1">to_string</a>(), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a1487ea33eae413fc582a77fb16e62fa7"><div class="ttname"><a href="#a1487ea33eae413fc582a77fb16e62fa7">gf2::BitArray::sub</a></div><div class="ttdeci">constexpr auto sub(usize begin, usize end) const</div><div class="ttdoc">Returns a clone of the elements in the half-open range [begin, end) as a new bit-vector.</div><div class="ttdef"><b>Definition</b> BitArray.h:1114</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a1487ea33eae413fc582a77fb16e62fa7"><div class="ttname"><a href="#a1487ea33eae413fc582a77fb16e62fa7">gf2::BitArray::sub</a></div><div class="ttdeci">constexpr auto sub(usize begin, usize end) const</div><div class="ttdoc">Returns a clone of the elements in the half-open range [begin, end) as a new bit-vector.</div><div class="ttdef"><b>Definition</b> BitArray.h:1115</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2834,7 +2834,7 @@ Example</h1>
 <div class="line">v.<a class="code hl_function" href="#a07520d5580bf502c10a4b5e53aa7d667">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#aecc7e50f56ff23a9df63f6505daf5f7d">to_binary_string</a>(), <span class="stringliteral">&quot;1000000000&quot;</span>);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#aecc7e50f56ff23a9df63f6505daf5f7d">to_binary_string</a>(<span class="stringliteral">&quot;,&quot;</span>, <span class="stringliteral">&quot;[&quot;</span>, <span class="stringliteral">&quot;]&quot;</span>), <span class="stringliteral">&quot;[1,0,0,0,0,0,0,0,0,0]&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_aecc7e50f56ff23a9df63f6505daf5f7d"><div class="ttname"><a href="#aecc7e50f56ff23a9df63f6505daf5f7d">gf2::BitArray::to_binary_string</a></div><div class="ttdeci">std::string to_binary_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1222</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_aecc7e50f56ff23a9df63f6505daf5f7d"><div class="ttname"><a href="#aecc7e50f56ff23a9df63f6505daf5f7d">gf2::BitArray::to_binary_string</a></div><div class="ttdeci">std::string to_binary_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1223</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2888,7 +2888,7 @@ Example</h1>
 <div class="line">v3.<a class="code hl_function" href="#a6bbfb8e5e1b435b698caf37e85f23173">copy</a>([](<a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> i) { <span class="keywordflow">return</span> i % 2 == 0; });</div>
 <div class="line">assert_eq(v3.<a class="code hl_function" href="#aecc7e50f56ff23a9df63f6505daf5f7d">to_binary_string</a>(), <span class="stringliteral">&quot;10101010&quot;</span>);</div>
 <div class="line">assert_eq(v3.<a class="code hl_function" href="#a58407dca6afa59df2174fec1c730ebd8">to_hex_string</a>(), <span class="stringliteral">&quot;AA&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a58407dca6afa59df2174fec1c730ebd8"><div class="ttname"><a href="#a58407dca6afa59df2174fec1c730ebd8">gf2::BitArray::to_hex_string</a></div><div class="ttdeci">std::string to_hex_string() const</div><div class="ttdoc">Returns the &quot;hex&quot; string representation of the bits in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1293</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a58407dca6afa59df2174fec1c730ebd8"><div class="ttname"><a href="#a58407dca6afa59df2174fec1c730ebd8">gf2::BitArray::to_hex_string</a></div><div class="ttdeci">std::string to_hex_string() const</div><div class="ttdoc">Returns the &quot;hex&quot; string representation of the bits in the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1294</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -2926,7 +2926,7 @@ Example</h1>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a6755c8905474c30b4b07186f5eeb593e">to_pretty_string</a>(), <span class="stringliteral">&quot;[1,0,1,0,1,0,1,0,1,0]&quot;</span>);</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1BitArray.html">BitArray&lt;0&gt;</a> empty;</div>
 <div class="line">assert_eq(empty.<a class="code hl_function" href="#a6755c8905474c30b4b07186f5eeb593e">to_pretty_string</a>(), <span class="stringliteral">&quot;[]&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitArray_html_a6755c8905474c30b4b07186f5eeb593e"><div class="ttname"><a href="#a6755c8905474c30b4b07186f5eeb593e">gf2::BitArray::to_pretty_string</a></div><div class="ttdeci">std::string to_pretty_string() const</div><div class="ttdoc">Returns a &quot;pretty&quot; string representation of the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1260</div></div>
+<div class="ttc" id="aclassgf2_1_1BitArray_html_a6755c8905474c30b4b07186f5eeb593e"><div class="ttname"><a href="#a6755c8905474c30b4b07186f5eeb593e">gf2::BitArray::to_pretty_string</a></div><div class="ttdeci">std::string to_pretty_string() const</div><div class="ttdoc">Returns a &quot;pretty&quot; string representation of the bit-array.</div><div class="ttdef"><b>Definition</b> BitArray.h:1261</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -3047,11 +3047,12 @@ template&lt;<a class="el" href="namespacegf2.html#abed1a83530f112d069e809d8883c1
 <p>Returns a copy of the words underlying this bit-array and puts them into the passed output iterator. </p>
 <h1 class="doxsection"><a class="anchor" id="note-9"></a>
 Note</h1>
-<ol type="1">
+<ul>
 <li>The last word in the bit-array may not be fully occupied but unused slots will be all zeros.</li>
-<li>The output iterator must be able to accept values of the bit-array's <span class="tt"><a class="el" href="#a82a5c674165737fe7c72832867734ea6" title="The underlying unsigned word type used to store the bits.">word_type</a></span>.</li>
+<li>The output iterator must be able to accept values of the bit-arrays's <span class="tt"><a class="el" href="#a82a5c674165737fe7c72832867734ea6" title="The underlying unsigned word type used to store the bits.">word_type</a></span>.</li>
 <li>The output iterator must have enough space to accept all the words in the bit-array.</li>
-</ol>
+<li>If there is extra space in the output iterator, those extra slots are left unchanged.</li>
+</ul>
 <h1 class="doxsection"><a class="anchor" id="example-67"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a67ed2efa8a38a1bf3dbfc3d331806355">BitArray&lt;10, u8&gt;::ones</a>();</div>

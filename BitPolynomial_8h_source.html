@@ -476,210 +476,211 @@ $(function(){initNavTree('BitPolynomial_8h_source.html','',''); });
 <div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span> </div>
 <div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span>        <span class="comment">// Edge case: P(x) = x + c where c is a constant so x = P(x) + c (subtraction in GF(2) is the same as addition).</span></div>
 <div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>        <span class="comment">// Then x^e = (P(x) + c)^e = terms in powers of P(x) + c^e. Hence, x^e mod P(x) = c^e = c.</span></div>
-<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>        <span class="keywordflow">if</span> (d == 1) <span class="keywordflow">return</span> <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a989aa8102d0470dea8397a15e3f66fdb">BitPolynomial&lt;Word&gt;::constant</a>(m_coeffs.get(1));</div>
+<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>        <span class="keywordflow">if</span> (d == 1) <span class="keywordflow">return</span> <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a989aa8102d0470dea8397a15e3f66fdb">BitPolynomial&lt;Word&gt;::constant</a>(m_coeffs.get(0));</div>
 <div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span> </div>
-<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>        <span class="comment">// We can write p(x) = p_0 + p_1 x + ... + p_{d-1} x^{d-1}. All that matters are those coefficients.</span></div>
-<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>        <span class="keyword">auto</span> p = m_coeffs.sub(0, d);</div>
-<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span> </div>
-<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>        <span class="comment">// A lambda to perform: q(x) &lt;- x*q(x) mod P(x) where degree(q) &lt; d.</span></div>
-<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>        <span class="comment">// The lambda works on the coefficients of q(x) passed as a bit-vector q.</span></div>
-<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>        <span class="keyword">auto</span> times_x_step = [&amp;](<span class="keyword">auto</span>&amp; q) {</div>
-<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>            <span class="keywordtype">bool</span> add_p = q[d - 1];</div>
-<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span>            q &gt;&gt;= 1;</div>
-<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>            <span class="keywordflow">if</span> (add_p) q ^= p;</div>
-<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>        };</div>
-<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span> </div>
-<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>        <span class="comment">// Iteratively precompute x^{d+i} mod P(x) for i = 0, 1, ..., d-1 starting with x^d mod P(x) ~ p.</span></div>
-<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>        <span class="comment">// We store all the bit-vectors in a standard `std::vector` of length d.</span></div>
-<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>        std::vector&lt;coeffs_type&gt; power_mod(d, <a class="code hl_typedef" href="classgf2_1_1BitPolynomial.html#a4ae64510f3430e312e2e4855a2b9ac50">coeffs_type</a>{d});</div>
-<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>        power_mod[0] = p;</div>
-<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 1uz; i &lt; d; ++i) {</div>
-<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span>            power_mod[i] = power_mod[i - 1];</div>
-<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>            times_x_step(power_mod[i]);</div>
-<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>        }</div>
-<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span> </div>
-<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>        <span class="comment">// Some workspace we use/reuse below in order to minimize allocations/deallocations.</span></div>
-<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>        <a class="code hl_typedef" href="classgf2_1_1BitPolynomial.html#a4ae64510f3430e312e2e4855a2b9ac50">coeffs_type</a> s{2 * d}, h{d};</div>
-<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span> </div>
-<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>        <span class="comment">// lambda to perform: q(x) &lt;- q(x)^2 mod P(x) where degree(q) &lt; d.</span></div>
-<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>        <span class="comment">// The lambda works on the coefficients of q(x) passed as a bit-vector q.</span></div>
-<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>        <span class="keyword">auto</span> square_step = [&amp;](<span class="keyword">auto</span>&amp; q) {</div>
-<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>            <span class="comment">// Square q(x) storing the result in workspace `s`.</span></div>
-<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>            q.riffled(s);</div>
-<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span> </div>
-<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>            <span class="comment">// Split s(x) = l(x) + x^d * h(x) where l(x) &amp; h(x) are both of degree less than d.</span></div>
-<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>            <span class="comment">// We reuse q(x) for l(x).</span></div>
-<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>            s.<a class="code hl_function" href="classgf2_1_1BitVector.html#a6e2078e3f40d295f483d87a09d26a92f">split_at</a>(d, q, h);</div>
-<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span> </div>
-<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>            <span class="comment">// s(x) = q(x) + h(x) so s(x) mod P(x) = q(x) + h(x) mod P(x) which we handle term by term.</span></div>
-<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>            <span class="comment">// If h(x) != 0 then at most every second term in h(x) is 1 (nature of BitPolynomial squares in GF(2)).</span></div>
-<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>            <span class="keywordflow">if</span> (<span class="keyword">auto</span> h_first = h.first_set()) {</div>
-<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>                <span class="keyword">auto</span> h_last = h.last_set();</div>
-<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>                <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = *h_first; i &lt;= *h_last; i += 2)</div>
-<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>                    <span class="keywordflow">if</span> (h[i]) q ^= power_mod[i];</div>
-<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>            }</div>
-<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>        };</div>
-<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span> </div>
-<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>        <span class="comment">// Our return value r(x) := x^e mod P(x) has degree &lt; d: r(x) = r_0 + r_1 x + ... + r_{d-1} x^{d-1}.</span></div>
-<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>        <a class="code hl_typedef" href="classgf2_1_1BitPolynomial.html#a4ae64510f3430e312e2e4855a2b9ac50">coeffs_type</a> r{d};</div>
-<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span> </div>
-<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>        <span class="comment">// If `n_is_log2` is `true`, we are reducing x^(2^n) mod P(x) which is done iteratively by squaring.</span></div>
-<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>        <span class="keywordflow">if</span> (n_is_log2) {</div>
-<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>            <span class="comment">// Note that we already handled edge case where P(x) = x + c above.</span></div>
-<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>            <span class="comment">// Start with r(x) = x mod P(x) -&gt; x^2 mod P(x) -&gt; x^4 mod P(x) ...</span></div>
-<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>            r[1] = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0uz; i &lt; n; ++i) square_step(r);</div>
-<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a>{std::move(r)};</div>
-<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>        }</div>
-<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span> </div>
-<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>        <span class="comment">// Small exponent case: n &lt; d =&gt; x^n mod P(x) = x^n.</span></div>
-<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>        <span class="keywordflow">if</span> (n &lt; d) <span class="keywordflow">return</span> <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a6907fccf1e429bc894f952d3eb17a059">BitPolynomial::x_to_the</a>(n);</div>
-<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span> </div>
-<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>        <span class="comment">// Matching exponent case: n = d =&gt; x^n mod P(x) = x^d mod P(x) = p(x).</span></div>
-<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>        <span class="keywordflow">if</span> (n == d) <span class="keywordflow">return</span> <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a>{std::move(p)};</div>
-<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span> </div>
-<div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span>        <span class="comment">// General case: n &gt; d is handled by a square &amp; multiply algorithm.</span></div>
-<div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span>        <a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> n_bit = std::bit_floor(n);</div>
-<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span> </div>
-<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span>        <span class="comment">// Start with r(x) = x mod P(x) which takes care of the most significant binary digit in n.</span></div>
-<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>        <span class="comment">// TODO: We could start a bit further along with a higher power r(x) := x^? mod P(x) where ? &lt; n but &gt; 1.</span></div>
-<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>        r[1] = 1;</div>
-<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span>        n_bit &gt;&gt;= 1;</div>
-<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span> </div>
-<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span>        <span class="comment">// And off we go ...</span></div>
-<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span>        <span class="keywordflow">while</span> (n_bit) {</div>
-<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span> </div>
-<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span>            <span class="comment">// Always do a square step and then a times_x step if necessary (i.e. if current bit in N is set).</span></div>
-<div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span>            square_step(r);</div>
-<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span>            <span class="keywordflow">if</span> (n &amp; n_bit) times_x_step(r);</div>
-<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span> </div>
-<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span>            <span class="comment">// On to the next bit position in n.</span></div>
-<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span>            n_bit &gt;&gt;= 1;</div>
-<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span>        }</div>
-<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span> </div>
-<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>        <span class="comment">// Made it.</span></div>
-<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a>{std::move(r)};</div>
-<div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span>    }</div>
+<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>        <span class="comment">// This polynomial is P(x) where P(x) = x^d + p(x) where p(x) = p_0 + p_1 x + ... + p_{d-1} x^{d-1}.</span></div>
+<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>        <span class="comment">// All that matters are the `d` coefficients of p(x).</span></div>
+<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>        <span class="keyword">auto</span> p = m_coeffs.sub(0, d);</div>
+<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span> </div>
+<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>        <span class="comment">// A lambda to perform: q(x) &lt;- x*q(x) mod P(x) where degree(q) &lt; d.</span></div>
+<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>        <span class="comment">// The lambda works in-place on the coefficients of q(x) passed as a bit-vector q of size d.</span></div>
+<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>        <span class="keyword">auto</span> times_x_step = [&amp;](<span class="keyword">auto</span>&amp; q) {</div>
+<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span>            <span class="keywordtype">bool</span> add_p = q[d - 1];</div>
+<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>            q &gt;&gt;= 1;</div>
+<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>            <span class="keywordflow">if</span> (add_p) q ^= p;</div>
+<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>        };</div>
+<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span> </div>
+<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>        <span class="comment">// Iteratively precompute x^{d+i} mod P(x) for i = 0, 1, ..., d-1 starting with x^d mod P(x) ~ p.</span></div>
+<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>        <span class="comment">// We store all those bit-vectors in a standard `std::vector` of length d.</span></div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>        std::vector&lt;coeffs_type&gt; power_mod(d, <a class="code hl_typedef" href="classgf2_1_1BitPolynomial.html#a4ae64510f3430e312e2e4855a2b9ac50">coeffs_type</a>{d});</div>
+<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>        power_mod[0] = p;</div>
+<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 1uz; i &lt; d; ++i) {</div>
+<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>            power_mod[i] = power_mod[i - 1];</div>
+<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>            times_x_step(power_mod[i]);</div>
+<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>        }</div>
+<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span> </div>
+<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>        <span class="comment">// Some workspace we use/reuse below in order to minimize allocations/deallocations.</span></div>
+<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>        <a class="code hl_typedef" href="classgf2_1_1BitPolynomial.html#a4ae64510f3430e312e2e4855a2b9ac50">coeffs_type</a> s{2 * d}, h{d};</div>
+<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span> </div>
+<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>        <span class="comment">// lambda to perform: q(x) &lt;- q(x)^2 mod P(x) where degree(q) &lt; d.</span></div>
+<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>        <span class="comment">// The lambda works in-place on the coefficients of q(x) passed as a bit-vector q of size d.</span></div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>        <span class="keyword">auto</span> square_step = [&amp;](<span class="keyword">auto</span>&amp; q) {</div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>            <span class="comment">// Square q(x) storing the result in workspace `s`.</span></div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>            q.riffled(s);</div>
+<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span> </div>
+<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>            <span class="comment">// Split s(x) = l(x) + x^d * h(x) where l(x) &amp; h(x) are both of degree less than d.</span></div>
+<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>            <span class="comment">// We reuse q(x) for l(x).</span></div>
+<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>            s.<a class="code hl_function" href="classgf2_1_1BitVector.html#a6e2078e3f40d295f483d87a09d26a92f">split_at</a>(d, q, h);</div>
+<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span> </div>
+<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>            <span class="comment">// s(x) = q(x) + x^d h(x) so s(x) mod P(x) = q(x) + x^d h(x) mod P(x) which we handle term by term.</span></div>
+<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>            <span class="comment">// If h(x) != 0 then at most every second term in h(x) is 1 (nature of bit-polynomial squares in GF(2)).</span></div>
+<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>            <span class="keywordflow">if</span> (<span class="keyword">auto</span> h_first = h.first_set()) {</div>
+<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>                <span class="keyword">auto</span> h_last = h.last_set();</div>
+<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>                <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = *h_first; i &lt;= *h_last; i += 2)</div>
+<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>                    <span class="keywordflow">if</span> (h[i]) q ^= power_mod[i];</div>
+<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>            }</div>
+<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>        };</div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span> </div>
+<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>        <span class="comment">// Our return value r(x) := x^e mod P(x) has degree &lt; d: r(x) = r_0 + r_1 x + ... + r_{d-1} x^{d-1}.</span></div>
+<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>        <a class="code hl_typedef" href="classgf2_1_1BitPolynomial.html#a4ae64510f3430e312e2e4855a2b9ac50">coeffs_type</a> r{d};</div>
+<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span> </div>
+<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>        <span class="comment">// If `n_is_log2` is `true`, we are reducing x^(2^n) mod P(x) which is done iteratively by squaring.</span></div>
+<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>        <span class="keywordflow">if</span> (n_is_log2) {</div>
+<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>            <span class="comment">// Note that we already handled edge case where P(x) = x + c above.</span></div>
+<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>            <span class="comment">// Start with r(x) = x mod P(x) -&gt; x^2 mod P(x) -&gt; x^4 mod P(x) ...</span></div>
+<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span>            r[1] = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0uz; i &lt; n; ++i) square_step(r);</div>
+<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a>{std::move(r)};</div>
+<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>        }</div>
+<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span> </div>
+<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>        <span class="comment">// Small exponent case: n &lt; d =&gt; x^n mod P(x) = x^n.</span></div>
+<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>        <span class="keywordflow">if</span> (n &lt; d) <span class="keywordflow">return</span> <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a6907fccf1e429bc894f952d3eb17a059">BitPolynomial::x_to_the</a>(n);</div>
+<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span> </div>
+<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>        <span class="comment">// Matching exponent case: n = d =&gt; x^n mod P(x) = x^d mod P(x) = p(x).</span></div>
+<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>        <span class="keywordflow">if</span> (n == d) <span class="keywordflow">return</span> <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a>{std::move(p)};</div>
+<div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span> </div>
+<div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span>        <span class="comment">// General case: n &gt; d is handled by a square &amp; multiply algorithm.</span></div>
+<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span>        <a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> n_bit = std::bit_floor(n);</div>
+<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span> </div>
+<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>        <span class="comment">// Start with r(x) = x mod P(x) which takes care of the most significant binary digit in n.</span></div>
+<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>        <span class="comment">// TODO: We could start a bit further along with a higher power r(x) := x^? mod P(x) where ? &lt; n but &gt; 1.</span></div>
+<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span>        r[1] = 1;</div>
+<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span>        n_bit &gt;&gt;= 1;</div>
+<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span> </div>
+<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span>        <span class="comment">// And off we go ...</span></div>
+<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span>        <span class="keywordflow">while</span> (n_bit) {</div>
+<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span> </div>
+<div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span>            <span class="comment">// Always do a square step and then a times_x step if necessary (i.e. if current bit in N is set).</span></div>
+<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span>            square_step(r);</div>
+<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>            <span class="keywordflow">if</span> (n &amp; n_bit) times_x_step(r);</div>
+<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span> </div>
+<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span>            <span class="comment">// On to the next bit position in n.</span></div>
+<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span>            n_bit &gt;&gt;= 1;</div>
+<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>        }</div>
+<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span> </div>
+<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>        <span class="comment">// Made it.</span></div>
+<div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a>{std::move(r)};</div>
+<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span>    }</div>
 </div>
-<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span></div>
-<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span></div>
-<div class="foldopen" id="foldopen00914" data-start="{" data-end="}">
-<div class="line"><a id="l00914" name="l00914"></a><span class="lineno"><a class="line" href="classgf2_1_1BitPolynomial.html#ad1fbf0f547d577a09ae151e9ca28deea">  914</a></span>    std::string <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(std::string_view var = <span class="stringliteral">&quot;x&quot;</span>)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span>        <span class="comment">// Edge case: the zero BitPolynomial.</span></div>
-<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a259bc0b612c3667b0f4635e5ce154f31">is_zero</a>()) <span class="keywordflow">return</span> <span class="stringliteral">&quot;0&quot;</span>;</div>
-<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span> </div>
-<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span>        <span class="comment">// Otherwise we construct the string ...</span></div>
-<div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span>        std::ostringstream ss;</div>
-<div class="line"><a id="l00920" name="l00920"></a><span class="lineno">  920</span> </div>
-<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span>        <span class="comment">// All terms other than the first one are preceded by a &quot;+&quot;</span></div>
-<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span>        <span class="keywordtype">bool</span> first_term = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0uz; i &lt;= <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a8ae665db25f0ca00d53a4d8275c2a579">degree</a>(); ++i) {</div>
-<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span>            <span class="keywordflow">if</span> (m_coeffs.get(i)) {</div>
-<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>                <span class="keywordflow">if</span> (i == 0) {</div>
-<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>                    ss &lt;&lt; <span class="stringliteral">&quot;1&quot;</span>;</div>
-<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>                    <span class="keywordflow">if</span> (!first_term) ss &lt;&lt; <span class="stringliteral">&quot; + &quot;</span>;</div>
-<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>                    <span class="keywordflow">if</span> (i == 1)</div>
-<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span>                        ss &lt;&lt; var;</div>
-<div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span>                    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>                        ss &lt;&lt; var &lt;&lt; <span class="stringliteral">&quot;^&quot;</span> &lt;&lt; i;</div>
-<div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span>                }</div>
-<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span>                first_term = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span>            }</div>
-<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>        }</div>
-<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>        <span class="keywordflow">return</span> ss.str();</div>
-<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>    }</div>
+<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span></div>
+<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span></div>
+<div class="foldopen" id="foldopen00915" data-start="{" data-end="}">
+<div class="line"><a id="l00915" name="l00915"></a><span class="lineno"><a class="line" href="classgf2_1_1BitPolynomial.html#ad1fbf0f547d577a09ae151e9ca28deea">  915</a></span>    std::string <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(std::string_view var = <span class="stringliteral">&quot;x&quot;</span>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>        <span class="comment">// Edge case: the zero BitPolynomial.</span></div>
+<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a259bc0b612c3667b0f4635e5ce154f31">is_zero</a>()) <span class="keywordflow">return</span> <span class="stringliteral">&quot;0&quot;</span>;</div>
+<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span> </div>
+<div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span>        <span class="comment">// Otherwise we construct the string ...</span></div>
+<div class="line"><a id="l00920" name="l00920"></a><span class="lineno">  920</span>        std::ostringstream ss;</div>
+<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span> </div>
+<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span>        <span class="comment">// All terms other than the first one are preceded by a &quot;+&quot;</span></div>
+<div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span>        <span class="keywordtype">bool</span> first_term = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0uz; i &lt;= <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a8ae665db25f0ca00d53a4d8275c2a579">degree</a>(); ++i) {</div>
+<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>            <span class="keywordflow">if</span> (m_coeffs.get(i)) {</div>
+<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>                <span class="keywordflow">if</span> (i == 0) {</div>
+<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>                    ss &lt;&lt; <span class="stringliteral">&quot;1&quot;</span>;</div>
+<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>                    <span class="keywordflow">if</span> (!first_term) ss &lt;&lt; <span class="stringliteral">&quot; + &quot;</span>;</div>
+<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span>                    <span class="keywordflow">if</span> (i == 1)</div>
+<div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span>                        ss &lt;&lt; var;</div>
+<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>                    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span>                        ss &lt;&lt; var &lt;&lt; <span class="stringliteral">&quot;^&quot;</span> &lt;&lt; i;</div>
+<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span>                }</div>
+<div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span>                first_term = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>            }</div>
+<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>        }</div>
+<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>        <span class="keywordflow">return</span> ss.str();</div>
+<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span>    }</div>
 </div>
-<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span></div>
-<div class="foldopen" id="foldopen00952" data-start="{" data-end="}">
-<div class="line"><a id="l00952" name="l00952"></a><span class="lineno"><a class="line" href="classgf2_1_1BitPolynomial.html#a4fb80fdbc97e94b8d7836329ace31f89">  952</a></span>    std::string <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a4fb80fdbc97e94b8d7836329ace31f89">to_full_string</a>(std::string_view var = <span class="stringliteral">&quot;x&quot;</span>)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>        <span class="comment">// Edge case: the zero BitPolynomial.</span></div>
-<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a8d28bd071e4e7344d0c8e9a34f550ea8">is_empty</a>()) <span class="keywordflow">return</span> <span class="stringliteral">&quot;0&quot;</span>;</div>
-<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span> </div>
-<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span>        <span class="comment">// Otherwise we construct the string ...</span></div>
-<div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span>        std::ostringstream ss;</div>
-<div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span> </div>
-<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span>        <span class="comment">// Start with the first term ...</span></div>
-<div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span>        <span class="keywordflow">if</span> (m_coeffs.get(0))</div>
-<div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span>            ss &lt;&lt; <span class="stringliteral">&quot;1&quot;</span>;</div>
-<div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span>            ss &lt;&lt; <span class="stringliteral">&quot;0&quot;</span>;</div>
-<div class="line"><a id="l00964" name="l00964"></a><span class="lineno">  964</span> </div>
-<div class="line"><a id="l00965" name="l00965"></a><span class="lineno">  965</span>        <span class="comment">// Now all the other terms, each preceded by a &quot;+&quot;</span></div>
-<div class="line"><a id="l00966" name="l00966"></a><span class="lineno">  966</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 1uz; i &lt; <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#ad38c2969e7285ab9ba99b67a02b8241c">size</a>(); ++i) {</div>
-<div class="line"><a id="l00967" name="l00967"></a><span class="lineno">  967</span>            ss &lt;&lt; <span class="stringliteral">&quot; + &quot;</span>;</div>
-<div class="line"><a id="l00968" name="l00968"></a><span class="lineno">  968</span>            <span class="keywordflow">if</span> (m_coeffs.get(i) == <span class="keyword">false</span>) ss &lt;&lt; <span class="stringliteral">&quot;0&quot;</span>;</div>
-<div class="line"><a id="l00969" name="l00969"></a><span class="lineno">  969</span>            <span class="keywordflow">if</span> (i == 1)</div>
-<div class="line"><a id="l00970" name="l00970"></a><span class="lineno">  970</span>                ss &lt;&lt; var;</div>
-<div class="line"><a id="l00971" name="l00971"></a><span class="lineno">  971</span>            <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00972" name="l00972"></a><span class="lineno">  972</span>                ss &lt;&lt; var &lt;&lt; <span class="stringliteral">&quot;^&quot;</span> &lt;&lt; i;</div>
-<div class="line"><a id="l00973" name="l00973"></a><span class="lineno">  973</span>        }</div>
-<div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span>        <span class="keywordflow">return</span> ss.str();</div>
-<div class="line"><a id="l00975" name="l00975"></a><span class="lineno">  975</span>    }</div>
+<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span></div>
+<div class="foldopen" id="foldopen00953" data-start="{" data-end="}">
+<div class="line"><a id="l00953" name="l00953"></a><span class="lineno"><a class="line" href="classgf2_1_1BitPolynomial.html#a4fb80fdbc97e94b8d7836329ace31f89">  953</a></span>    std::string <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a4fb80fdbc97e94b8d7836329ace31f89">to_full_string</a>(std::string_view var = <span class="stringliteral">&quot;x&quot;</span>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span>        <span class="comment">// Edge case: the zero BitPolynomial.</span></div>
+<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a8d28bd071e4e7344d0c8e9a34f550ea8">is_empty</a>()) <span class="keywordflow">return</span> <span class="stringliteral">&quot;0&quot;</span>;</div>
+<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span> </div>
+<div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span>        <span class="comment">// Otherwise we construct the string ...</span></div>
+<div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span>        std::ostringstream ss;</div>
+<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span> </div>
+<div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span>        <span class="comment">// Start with the first term ...</span></div>
+<div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span>        <span class="keywordflow">if</span> (m_coeffs.get(0))</div>
+<div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span>            ss &lt;&lt; <span class="stringliteral">&quot;1&quot;</span>;</div>
+<div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00964" name="l00964"></a><span class="lineno">  964</span>            ss &lt;&lt; <span class="stringliteral">&quot;0&quot;</span>;</div>
+<div class="line"><a id="l00965" name="l00965"></a><span class="lineno">  965</span> </div>
+<div class="line"><a id="l00966" name="l00966"></a><span class="lineno">  966</span>        <span class="comment">// Now all the other terms, each preceded by a &quot;+&quot;</span></div>
+<div class="line"><a id="l00967" name="l00967"></a><span class="lineno">  967</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 1uz; i &lt; <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#ad38c2969e7285ab9ba99b67a02b8241c">size</a>(); ++i) {</div>
+<div class="line"><a id="l00968" name="l00968"></a><span class="lineno">  968</span>            ss &lt;&lt; <span class="stringliteral">&quot; + &quot;</span>;</div>
+<div class="line"><a id="l00969" name="l00969"></a><span class="lineno">  969</span>            <span class="keywordflow">if</span> (m_coeffs.get(i) == <span class="keyword">false</span>) ss &lt;&lt; <span class="stringliteral">&quot;0&quot;</span>;</div>
+<div class="line"><a id="l00970" name="l00970"></a><span class="lineno">  970</span>            <span class="keywordflow">if</span> (i == 1)</div>
+<div class="line"><a id="l00971" name="l00971"></a><span class="lineno">  971</span>                ss &lt;&lt; var;</div>
+<div class="line"><a id="l00972" name="l00972"></a><span class="lineno">  972</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00973" name="l00973"></a><span class="lineno">  973</span>                ss &lt;&lt; var &lt;&lt; <span class="stringliteral">&quot;^&quot;</span> &lt;&lt; i;</div>
+<div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span>        }</div>
+<div class="line"><a id="l00975" name="l00975"></a><span class="lineno">  975</span>        <span class="keywordflow">return</span> ss.str();</div>
+<div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span>    }</div>
 </div>
-<div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span></div>
-<div class="line"><a id="l00978" name="l00978"></a><span class="lineno"><a class="line" href="classgf2_1_1BitPolynomial.html#ab08f731896a82fc6310b4485d2cfaa55">  978</a></span>    std::ostream&amp; <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#ab08f731896a82fc6310b4485d2cfaa55">operator&lt;&lt;</a>(std::ostream&amp; s)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> s &lt;&lt; <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(); }</div>
-<div class="line"><a id="l00979" name="l00979"></a><span class="lineno">  979</span></div>
-<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span></div>
-<div class="foldopen" id="foldopen00995" data-start="{" data-end="}">
-<div class="line"><a id="l00995" name="l00995"></a><span class="lineno"><a class="line" href="classgf2_1_1BitPolynomial.html#ae29df06811167f533e342c9c2157a845">  995</a></span>    <span class="keyword">friend</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_friend" href="classgf2_1_1BitPolynomial.html#ae29df06811167f533e342c9c2157a845">operator==</a>(<a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> <span class="keyword">const</span>&amp; lhs, <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> <span class="keyword">const</span>&amp; rhs) {</div>
-<div class="line"><a id="l00996" name="l00996"></a><span class="lineno">  996</span>        <span class="comment">// Edge case.</span></div>
-<div class="line"><a id="l00997" name="l00997"></a><span class="lineno">  997</span>        <span class="keywordflow">if</span> (&amp;lhs == &amp;rhs) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00998" name="l00998"></a><span class="lineno">  998</span> </div>
-<div class="line"><a id="l00999" name="l00999"></a><span class="lineno">  999</span>        <span class="comment">// Check the active words for equality.</span></div>
-<div class="line"><a id="l01000" name="l01000"></a><span class="lineno"> 1000</span>        <span class="keyword">auto</span> count = lhs.monic_word_count();</div>
-<div class="line"><a id="l01001" name="l01001"></a><span class="lineno"> 1001</span>        <span class="keywordflow">if</span> (rhs.monic_word_count() != count) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l01002" name="l01002"></a><span class="lineno"> 1002</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0uz; i &lt; count; ++i)</div>
-<div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span>            <span class="keywordflow">if</span> (lhs.m_coeffs.<a class="code hl_function" href="classgf2_1_1BitVector.html#a94f28415157fbc4b4486555fe71b98bd">word</a>(i) != rhs.m_coeffs.<a class="code hl_function" href="classgf2_1_1BitVector.html#a94f28415157fbc4b4486555fe71b98bd">word</a>(i)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l01004" name="l01004"></a><span class="lineno"> 1004</span> </div>
-<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span>        <span class="comment">// Made it</span></div>
-<div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span>    }</div>
+<div class="line"><a id="l00977" name="l00977"></a><span class="lineno">  977</span></div>
+<div class="line"><a id="l00979" name="l00979"></a><span class="lineno"><a class="line" href="classgf2_1_1BitPolynomial.html#ab08f731896a82fc6310b4485d2cfaa55">  979</a></span>    std::ostream&amp; <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#ab08f731896a82fc6310b4485d2cfaa55">operator&lt;&lt;</a>(std::ostream&amp; s)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> s &lt;&lt; <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(); }</div>
+<div class="line"><a id="l00980" name="l00980"></a><span class="lineno">  980</span></div>
+<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span></div>
+<div class="foldopen" id="foldopen00996" data-start="{" data-end="}">
+<div class="line"><a id="l00996" name="l00996"></a><span class="lineno"><a class="line" href="classgf2_1_1BitPolynomial.html#ae29df06811167f533e342c9c2157a845">  996</a></span>    <span class="keyword">friend</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_friend" href="classgf2_1_1BitPolynomial.html#ae29df06811167f533e342c9c2157a845">operator==</a>(<a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> <span class="keyword">const</span>&amp; lhs, <a class="code hl_function" href="classgf2_1_1BitPolynomial.html#a9288a6402252424b52e4208d9129c5a8">BitPolynomial</a> <span class="keyword">const</span>&amp; rhs) {</div>
+<div class="line"><a id="l00997" name="l00997"></a><span class="lineno">  997</span>        <span class="comment">// Edge case.</span></div>
+<div class="line"><a id="l00998" name="l00998"></a><span class="lineno">  998</span>        <span class="keywordflow">if</span> (&amp;lhs == &amp;rhs) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00999" name="l00999"></a><span class="lineno">  999</span> </div>
+<div class="line"><a id="l01000" name="l01000"></a><span class="lineno"> 1000</span>        <span class="comment">// Check the active words for equality.</span></div>
+<div class="line"><a id="l01001" name="l01001"></a><span class="lineno"> 1001</span>        <span class="keyword">auto</span> count = lhs.monic_word_count();</div>
+<div class="line"><a id="l01002" name="l01002"></a><span class="lineno"> 1002</span>        <span class="keywordflow">if</span> (rhs.monic_word_count() != count) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0uz; i &lt; count; ++i)</div>
+<div class="line"><a id="l01004" name="l01004"></a><span class="lineno"> 1004</span>            <span class="keywordflow">if</span> (lhs.m_coeffs.<a class="code hl_function" href="classgf2_1_1BitVector.html#a94f28415157fbc4b4486555fe71b98bd">word</a>(i) != rhs.m_coeffs.<a class="code hl_function" href="classgf2_1_1BitVector.html#a94f28415157fbc4b4486555fe71b98bd">word</a>(i)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span> </div>
+<div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span>        <span class="comment">// Made it</span></div>
+<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l01008" name="l01008"></a><span class="lineno"> 1008</span>    }</div>
 </div>
-<div class="line"><a id="l01008" name="l01008"></a><span class="lineno"> 1008</span></div>
-<div class="line"><a id="l01010" name="l01010"></a><span class="lineno"> 1010</span> </div>
-<div class="line"><a id="l01011" name="l01011"></a><span class="lineno"> 1011</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l01012" name="l01012"></a><span class="lineno"> 1012</span>    <span class="comment">// Returns the number of &quot;active&quot; words underlying the coefficient bit-vector.</span></div>
-<div class="line"><a id="l01013" name="l01013"></a><span class="lineno"> 1013</span>    <span class="comment">// There may be high order trailing zero coefficients that have no real impact on most bit-polynomial calculations.</span></div>
-<div class="line"><a id="l01014" name="l01014"></a><span class="lineno"> 1014</span>    <span class="comment">// This method returns the number of &quot;words&quot; that matter in the coefficient bit-vector store of words.</span></div>
-<div class="line"><a id="l01015" name="l01015"></a><span class="lineno"> 1015</span>    <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> monic_word_count()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l01016" name="l01016"></a><span class="lineno"> 1016</span>        <span class="keywordflow">if</span> (<span class="keyword">auto</span> deg = m_coeffs.<a class="code hl_function" href="classgf2_1_1BitVector.html#a0623e155d7ddf9d08f64d3eee6e7aec3">last_set</a>()) <span class="keywordflow">return</span> <a class="code hl_function" href="namespacegf2.html#aaf2ed88c6da45988348d97b3b209a210">word_index&lt;Word&gt;</a>(*deg) + 1;</div>
-<div class="line"><a id="l01017" name="l01017"></a><span class="lineno"> 1017</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l01018" name="l01018"></a><span class="lineno"> 1018</span>    }</div>
-<div class="line"><a id="l01019" name="l01019"></a><span class="lineno"> 1019</span>};</div>
+<div class="line"><a id="l01009" name="l01009"></a><span class="lineno"> 1009</span></div>
+<div class="line"><a id="l01011" name="l01011"></a><span class="lineno"> 1011</span> </div>
+<div class="line"><a id="l01012" name="l01012"></a><span class="lineno"> 1012</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l01013" name="l01013"></a><span class="lineno"> 1013</span>    <span class="comment">// Returns the number of &quot;active&quot; words underlying the coefficient bit-vector.</span></div>
+<div class="line"><a id="l01014" name="l01014"></a><span class="lineno"> 1014</span>    <span class="comment">// There may be high order trailing zero coefficients that have no real impact on most bit-polynomial calculations.</span></div>
+<div class="line"><a id="l01015" name="l01015"></a><span class="lineno"> 1015</span>    <span class="comment">// This method returns the number of &quot;words&quot; that matter in the coefficient bit-vector store of words.</span></div>
+<div class="line"><a id="l01016" name="l01016"></a><span class="lineno"> 1016</span>    <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">usize</a> monic_word_count()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l01017" name="l01017"></a><span class="lineno"> 1017</span>        <span class="keywordflow">if</span> (<span class="keyword">auto</span> deg = m_coeffs.<a class="code hl_function" href="classgf2_1_1BitVector.html#a0623e155d7ddf9d08f64d3eee6e7aec3">last_set</a>()) <span class="keywordflow">return</span> <a class="code hl_function" href="namespacegf2.html#aaf2ed88c6da45988348d97b3b209a210">word_index&lt;Word&gt;</a>(*deg) + 1;</div>
+<div class="line"><a id="l01018" name="l01018"></a><span class="lineno"> 1018</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l01019" name="l01019"></a><span class="lineno"> 1019</span>    }</div>
+<div class="line"><a id="l01020" name="l01020"></a><span class="lineno"> 1020</span>};</div>
 </div>
-<div class="line"><a id="l01020" name="l01020"></a><span class="lineno"> 1020</span> </div>
-<div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span>} <span class="comment">// namespace gf2</span></div>
-<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"> 1022</span> </div>
-<div class="line"><a id="l01023" name="l01023"></a><span class="lineno"> 1023</span><span class="comment">// --------------------------------------------------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l01024" name="l01024"></a><span class="lineno"> 1024</span><span class="comment">// Specialises `std::formatter` to handle bit-polynomials ...</span></div>
-<div class="line"><a id="l01025" name="l01025"></a><span class="lineno"> 1025</span><span class="comment">// -------------------------------------------------------------------------------------------------------------------</span></div>
-<div class="line"><a id="l01026" name="l01026"></a><span class="lineno"> 1026</span></div>
-<div class="line"><a id="l01040" name="l01040"></a><span class="lineno"> 1040</span><span class="keyword">template</span>&lt;gf2::Un<span class="keywordtype">signed</span> Word&gt;</div>
-<div class="foldopen" id="foldopen01041" data-start="{" data-end="};">
-<div class="line"><a id="l01041" name="l01041"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html"> 1041</a></span><span class="keyword">struct </span>std::formatter&lt;<a class="code hl_namespace" href="namespacegf2.html">gf2</a>::BitPolynomial&lt;Word&gt;&gt; {</div>
-<div class="line"><a id="l01042" name="l01042"></a><span class="lineno"> 1042</span></div>
-<div class="foldopen" id="foldopen01044" data-start="{" data-end="}">
-<div class="line"><a id="l01044" name="l01044"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a2c24db03a37b3a69b2d8b3afe18fecd6"> 1044</a></span>    <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a2c24db03a37b3a69b2d8b3afe18fecd6">parse</a>(std::format_parse_context <span class="keyword">const</span>&amp; ctx) {</div>
-<div class="line"><a id="l01045" name="l01045"></a><span class="lineno"> 1045</span>        <span class="keyword">auto</span> it = ctx.begin();</div>
-<div class="line"><a id="l01046" name="l01046"></a><span class="lineno"> 1046</span>        <span class="keywordflow">if</span> (*it != <span class="charliteral">&#39;}&#39;</span>) m_var.clear();</div>
-<div class="line"><a id="l01047" name="l01047"></a><span class="lineno"> 1047</span>        <span class="keywordflow">while</span> (it != ctx.end() &amp;&amp; *it != <span class="charliteral">&#39;}&#39;</span>) {</div>
-<div class="line"><a id="l01048" name="l01048"></a><span class="lineno"> 1048</span>            m_var += *it;</div>
-<div class="line"><a id="l01049" name="l01049"></a><span class="lineno"> 1049</span>            ++it;</div>
-<div class="line"><a id="l01050" name="l01050"></a><span class="lineno"> 1050</span>        }</div>
-<div class="line"><a id="l01051" name="l01051"></a><span class="lineno"> 1051</span>        <span class="keywordflow">return</span> it;</div>
-<div class="line"><a id="l01052" name="l01052"></a><span class="lineno"> 1052</span>    }</div>
+<div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span> </div>
+<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"> 1022</span>} <span class="comment">// namespace gf2</span></div>
+<div class="line"><a id="l01023" name="l01023"></a><span class="lineno"> 1023</span> </div>
+<div class="line"><a id="l01024" name="l01024"></a><span class="lineno"> 1024</span><span class="comment">// --------------------------------------------------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l01025" name="l01025"></a><span class="lineno"> 1025</span><span class="comment">// Specialises `std::formatter` to handle bit-polynomials ...</span></div>
+<div class="line"><a id="l01026" name="l01026"></a><span class="lineno"> 1026</span><span class="comment">// -------------------------------------------------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l01027" name="l01027"></a><span class="lineno"> 1027</span></div>
+<div class="line"><a id="l01041" name="l01041"></a><span class="lineno"> 1041</span><span class="keyword">template</span>&lt;gf2::Un<span class="keywordtype">signed</span> Word&gt;</div>
+<div class="foldopen" id="foldopen01042" data-start="{" data-end="};">
+<div class="line"><a id="l01042" name="l01042"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html"> 1042</a></span><span class="keyword">struct </span>std::formatter&lt;<a class="code hl_namespace" href="namespacegf2.html">gf2</a>::BitPolynomial&lt;Word&gt;&gt; {</div>
+<div class="line"><a id="l01043" name="l01043"></a><span class="lineno"> 1043</span></div>
+<div class="foldopen" id="foldopen01045" data-start="{" data-end="}">
+<div class="line"><a id="l01045" name="l01045"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a2c24db03a37b3a69b2d8b3afe18fecd6"> 1045</a></span>    <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a2c24db03a37b3a69b2d8b3afe18fecd6">parse</a>(std::format_parse_context <span class="keyword">const</span>&amp; ctx) {</div>
+<div class="line"><a id="l01046" name="l01046"></a><span class="lineno"> 1046</span>        <span class="keyword">auto</span> it = ctx.begin();</div>
+<div class="line"><a id="l01047" name="l01047"></a><span class="lineno"> 1047</span>        <span class="keywordflow">if</span> (*it != <span class="charliteral">&#39;}&#39;</span>) m_var.clear();</div>
+<div class="line"><a id="l01048" name="l01048"></a><span class="lineno"> 1048</span>        <span class="keywordflow">while</span> (it != ctx.end() &amp;&amp; *it != <span class="charliteral">&#39;}&#39;</span>) {</div>
+<div class="line"><a id="l01049" name="l01049"></a><span class="lineno"> 1049</span>            m_var += *it;</div>
+<div class="line"><a id="l01050" name="l01050"></a><span class="lineno"> 1050</span>            ++it;</div>
+<div class="line"><a id="l01051" name="l01051"></a><span class="lineno"> 1051</span>        }</div>
+<div class="line"><a id="l01052" name="l01052"></a><span class="lineno"> 1052</span>        <span class="keywordflow">return</span> it;</div>
+<div class="line"><a id="l01053" name="l01053"></a><span class="lineno"> 1053</span>    }</div>
 </div>
-<div class="line"><a id="l01053" name="l01053"></a><span class="lineno"> 1053</span></div>
-<div class="line"><a id="l01055" name="l01055"></a><span class="lineno"> 1055</span>    <span class="keyword">template</span>&lt;<span class="keyword">class</span> FormatContext&gt;</div>
-<div class="foldopen" id="foldopen01056" data-start="{" data-end="}">
-<div class="line"><a id="l01056" name="l01056"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a72a41ba96322d8f46df574879d7ce305"> 1056</a></span>    <span class="keyword">auto</span> <a class="code hl_function" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a72a41ba96322d8f46df574879d7ce305">format</a>(<a class="code hl_class" href="classgf2_1_1BitPolynomial.html">gf2::BitPolynomial&lt;Word&gt;</a> <span class="keyword">const</span>&amp; rhs, FormatContext&amp; ctx)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l01057" name="l01057"></a><span class="lineno"> 1057</span>        <span class="keywordflow">return</span> std::format_to(ctx.out(), <span class="stringliteral">&quot;{}&quot;</span>, rhs.<a class="code hl_function" href="classgf2_1_1BitPolynomial.html#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(m_var));</div>
-<div class="line"><a id="l01058" name="l01058"></a><span class="lineno"> 1058</span>    }</div>
+<div class="line"><a id="l01054" name="l01054"></a><span class="lineno"> 1054</span></div>
+<div class="line"><a id="l01056" name="l01056"></a><span class="lineno"> 1056</span>    <span class="keyword">template</span>&lt;<span class="keyword">class</span> FormatContext&gt;</div>
+<div class="foldopen" id="foldopen01057" data-start="{" data-end="}">
+<div class="line"><a id="l01057" name="l01057"></a><span class="lineno"><a class="line" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a72a41ba96322d8f46df574879d7ce305"> 1057</a></span>    <span class="keyword">auto</span> <a class="code hl_function" href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a72a41ba96322d8f46df574879d7ce305">format</a>(<a class="code hl_class" href="classgf2_1_1BitPolynomial.html">gf2::BitPolynomial&lt;Word&gt;</a> <span class="keyword">const</span>&amp; rhs, FormatContext&amp; ctx)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l01058" name="l01058"></a><span class="lineno"> 1058</span>        <span class="keywordflow">return</span> std::format_to(ctx.out(), <span class="stringliteral">&quot;{}&quot;</span>, rhs.<a class="code hl_function" href="classgf2_1_1BitPolynomial.html#ad1fbf0f547d577a09ae151e9ca28deea">to_string</a>(m_var));</div>
+<div class="line"><a id="l01059" name="l01059"></a><span class="lineno"> 1059</span>    }</div>
 </div>
-<div class="line"><a id="l01059" name="l01059"></a><span class="lineno"> 1059</span> </div>
-<div class="line"><a id="l01060" name="l01060"></a><span class="lineno"> 1060</span>    std::string m_var = <span class="stringliteral">&quot;x&quot;</span>;</div>
-<div class="line"><a id="l01061" name="l01061"></a><span class="lineno"> 1061</span>};</div>
+<div class="line"><a id="l01060" name="l01060"></a><span class="lineno"> 1060</span> </div>
+<div class="line"><a id="l01061" name="l01061"></a><span class="lineno"> 1061</span>    std::string m_var = <span class="stringliteral">&quot;x&quot;</span>;</div>
+<div class="line"><a id="l01062" name="l01062"></a><span class="lineno"> 1062</span>};</div>
 </div>
 <div class="ttc" id="aBitVector_8h_html"><div class="ttname"><a href="BitVector_8h.html">BitVector.h</a></div><div class="ttdoc">Vectors over GF(2) with compactly stored bit-elements in a standard vector of primitive unsigned word...</div></div>
 <div class="ttc" id="aassert_8h_html_a8b8f43b80dc4843439f1a05910d5ad65"><div class="ttname"><a href="assert_8h.html#a8b8f43b80dc4843439f1a05910d5ad65">gf2_assert</a></div><div class="ttdeci">#define gf2_assert(cond,...)</div><div class="ttdoc">A confirmation macro that checks a boolean condition cond.   On failure, the confirmation prints an e...</div><div class="ttdef"><b>Definition</b> assert.h:98</div></div>
@@ -702,7 +703,7 @@ $(function(){initNavTree('BitPolynomial_8h_source.html','',''); });
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a405187693de8aa18ac710caec3cdb4c7"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#a405187693de8aa18ac710caec3cdb4c7">gf2::BitPolynomial::operator()</a></div><div class="ttdeci">constexpr auto operator()(BitMatrix&lt; Word &gt; const &amp;M) const</div><div class="ttdoc">Evaluates the bit-polynomial for a square gf2::BitMatrix argument M.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:746</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a4ae64510f3430e312e2e4855a2b9ac50"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#a4ae64510f3430e312e2e4855a2b9ac50">gf2::BitPolynomial::coeffs_type</a></div><div class="ttdeci">BitVector&lt; Word &gt; coeffs_type</div><div class="ttdoc">The type used to store the bit-polynomial coefficients.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:36</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a4d1a91a4370f0999c651c83ac86faaf7"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#a4d1a91a4370f0999c651c83ac86faaf7">gf2::BitPolynomial::one</a></div><div class="ttdeci">static constexpr BitPolynomial one()</div><div class="ttdoc">Factory method to return the &quot;one&quot; bit-polynomial p(x) := 1.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:104</div></div>
-<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a4fb80fdbc97e94b8d7836329ace31f89"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#a4fb80fdbc97e94b8d7836329ace31f89">gf2::BitPolynomial::to_full_string</a></div><div class="ttdeci">std::string to_full_string(std::string_view var=&quot;x&quot;) const</div><div class="ttdoc">Returns a readable full string representation of the bit-polynomial.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:952</div></div>
+<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a4fb80fdbc97e94b8d7836329ace31f89"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#a4fb80fdbc97e94b8d7836329ace31f89">gf2::BitPolynomial::to_full_string</a></div><div class="ttdeci">std::string to_full_string(std::string_view var=&quot;x&quot;) const</div><div class="ttdoc">Returns a readable full string representation of the bit-polynomial.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:953</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a53603451055ebde3b58c0415d2cc1485"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#a53603451055ebde3b58c0415d2cc1485">gf2::BitPolynomial::squared</a></div><div class="ttdeci">constexpr BitPolynomial squared() const</div><div class="ttdoc">Returns a new BitPolynomial that is the square of this BitPolynomial.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:584</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a5f4593b61b4e2eb435b33218930e279d"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#a5f4593b61b4e2eb435b33218930e279d">gf2::BitPolynomial::ones</a></div><div class="ttdeci">static constexpr BitPolynomial ones(usize n)</div><div class="ttdoc">Factory method to return a monic bit-polynomial of degree n with n + 1 coefficients,...</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:137</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a5fc0a519edcf2b5f905430512607918b"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#a5fc0a519edcf2b5f905430512607918b">gf2::BitPolynomial::from</a></div><div class="ttdeci">static constexpr BitPolynomial from(usize n, std::invocable&lt; usize &gt; auto f)</div><div class="ttdoc">Factory method to return a new bit-polynomial of degree n with coefficients set by calling the functi...</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:158</div></div>
@@ -726,18 +727,18 @@ $(function(){initNavTree('BitPolynomial_8h_source.html','',''); });
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_a9b9c7fc51c23aa61f8cba0e6d4342cef"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#a9b9c7fc51c23aa61f8cba0e6d4342cef">gf2::BitPolynomial::move_coefficients</a></div><div class="ttdeci">constexpr void move_coefficients(coeffs_type &amp;&amp;coeffs)</div><div class="ttdoc">Set the BitPolynomial coefficients by moving a bit-vector of coefficients into place.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:339</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_aa689ce1a2406150ca949056456d6c389"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#aa689ce1a2406150ca949056456d6c389">gf2::BitPolynomial::split</a></div><div class="ttdeci">constexpr void split(usize d, BitPolynomial &amp;lo, BitPolynomial &amp;hi) const</div><div class="ttdoc">Splits the bit-polynomial into a low and high part where the low part has degree at most d....</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:676</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_aab94ad1948e22e3dfceac3b21c48c71c"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#aab94ad1948e22e3dfceac3b21c48c71c">gf2::BitPolynomial::sub</a></div><div class="ttdeci">constexpr auto sub(usize d) const</div><div class="ttdoc">Returns a new bit-polynomial that is a copy of the low d + 1 coefficients of this bit-polynomial....</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:652</div></div>
-<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ab08f731896a82fc6310b4485d2cfaa55"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ab08f731896a82fc6310b4485d2cfaa55">gf2::BitPolynomial::operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;s) const</div><div class="ttdoc">The usual output stream operator for a bit-polynomial.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:978</div></div>
+<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ab08f731896a82fc6310b4485d2cfaa55"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ab08f731896a82fc6310b4485d2cfaa55">gf2::BitPolynomial::operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;s) const</div><div class="ttdoc">The usual output stream operator for a bit-polynomial.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:979</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ab4ae356df16e262c6736f683a0247fc2"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ab4ae356df16e262c6736f683a0247fc2">gf2::BitPolynomial::operator()</a></div><div class="ttdeci">constexpr bool operator()(bool x) const</div><div class="ttdoc">Evaluates the BitPolynomial at the boolean scalar point x and returns the result.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:718</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ab8b98b3994a5606bf01b3bde4a126d3d"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ab8b98b3994a5606bf01b3bde4a126d3d">gf2::BitPolynomial::seeded_random</a></div><div class="ttdeci">static constexpr BitPolynomial seeded_random(usize n, std::uint64_t seed)</div><div class="ttdoc">Factory method to return a new bit-polynomial of degree n with n + 1 coefficients picked uniformly at...</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:193</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_abdd695f14c6c1087e441a15b2ec41250"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#abdd695f14c6c1087e441a15b2ec41250">gf2::BitPolynomial::reduce_x_to_the</a></div><div class="ttdeci">BitPolynomial reduce_x_to_the(usize n, bool n_is_log2=false) const</div><div class="ttdoc">If this polynomial is P(x) we return x^e mod P(x) for e = n or e = 2^n depending on the n_is_log2 arg...</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:798</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ac6babba260f8b8fa3a03e79468804898"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ac6babba260f8b8fa3a03e79468804898">gf2::BitPolynomial::operator[]</a></div><div class="ttdeci">constexpr auto operator[](usize i)</div><div class="ttdoc">Returns the coefficient of  in the bit-polynomial as a BitRef.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:278</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_accdc721f4b491ca560eeb126952de1fa"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#accdc721f4b491ca560eeb126952de1fa">gf2::BitPolynomial::clear</a></div><div class="ttdeci">constexpr BitPolynomial &amp; clear()</div><div class="ttdoc">Clears the BitPolynomial, i.e., sets it to the zero BitPolynomial &amp; returns self.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:354</div></div>
-<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ad1fbf0f547d577a09ae151e9ca28deea"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ad1fbf0f547d577a09ae151e9ca28deea">gf2::BitPolynomial::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view var=&quot;x&quot;) const</div><div class="ttdoc">Returns a readable string representation of the bit-polynomial p(x) = p0 + p1x + ....</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:914</div></div>
+<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ad1fbf0f547d577a09ae151e9ca28deea"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ad1fbf0f547d577a09ae151e9ca28deea">gf2::BitPolynomial::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view var=&quot;x&quot;) const</div><div class="ttdoc">Returns a readable string representation of the bit-polynomial p(x) = p0 + p1x + ....</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:915</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ad38c2969e7285ab9ba99b67a02b8241c"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ad38c2969e7285ab9ba99b67a02b8241c">gf2::BitPolynomial::size</a></div><div class="ttdeci">constexpr usize size() const</div><div class="ttdoc">Returns the &quot;size&quot; of the bit-polynomial which is its total number of coefficients.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:232</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ad4ae90fdeddbe2e374bca7b6d0c473bb"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ad4ae90fdeddbe2e374bca7b6d0c473bb">gf2::BitPolynomial::word_type</a></div><div class="ttdeci">Word word_type</div><div class="ttdoc">The underlying unsigned word type used to store the bits.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:39</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ada1764cdb89b7fed87ad03971af2c4c2"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ada1764cdb89b7fed87ad03971af2c4c2">gf2::BitPolynomial::operator*</a></div><div class="ttdeci">constexpr auto operator*(BitPolynomial&lt; Word &gt; const &amp;rhs) const</div><div class="ttdoc">Returns the product of two bit-polynomials.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:538</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_adddccba2c1d877e846c552619a21fda3"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#adddccba2c1d877e846c552619a21fda3">gf2::BitPolynomial::is_one</a></div><div class="ttdeci">constexpr bool is_one() const</div><div class="ttdoc">Returns true if the bit-polynomial is p(x) := 1.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:241</div></div>
-<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ae29df06811167f533e342c9c2157a845"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ae29df06811167f533e342c9c2157a845">gf2::BitPolynomial::operator==</a></div><div class="ttdeci">friend constexpr bool operator==(BitPolynomial const &amp;lhs, BitPolynomial const &amp;rhs)</div><div class="ttdoc">Equality operator checks that any pair of bit-polynomials are equal in content.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:995</div></div>
+<div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ae29df06811167f533e342c9c2157a845"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ae29df06811167f533e342c9c2157a845">gf2::BitPolynomial::operator==</a></div><div class="ttdeci">friend constexpr bool operator==(BitPolynomial const &amp;lhs, BitPolynomial const &amp;rhs)</div><div class="ttdoc">Equality operator checks that any pair of bit-polynomials are equal in content.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:996</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ae4c6c41981c36e0ad1fe58288833b01b"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ae4c6c41981c36e0ad1fe58288833b01b">gf2::BitPolynomial::is_monic</a></div><div class="ttdeci">constexpr bool is_monic() const</div><div class="ttdoc">Returns true if the bit-polynomial is monic, i.e., no trailing zero coefficients.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:247</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_ae7da0476a16cb8123348ddaf33cc4519"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#ae7da0476a16cb8123348ddaf33cc4519">gf2::BitPolynomial::operator+=</a></div><div class="ttdeci">constexpr BitPolynomial &amp; operator+=(BitPolynomial const &amp;rhs)</div><div class="ttdoc">In-place addition with another bit-polynomial, returning a reference to the result.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:427</div></div>
 <div class="ttc" id="aclassgf2_1_1BitPolynomial_html_af5976981c47b34d0159ff3ed37bfa0a2"><div class="ttname"><a href="classgf2_1_1BitPolynomial.html#af5976981c47b34d0159ff3ed37bfa0a2">gf2::BitPolynomial::operator-=</a></div><div class="ttdeci">constexpr BitPolynomial &amp; operator-=(BitPolynomial const &amp;rhs)</div><div class="ttdoc">In-place subtraction with another bit-polynomial, returning a reference to the result.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:459</div></div>
@@ -748,19 +749,19 @@ $(function(){initNavTree('BitPolynomial_8h_source.html','',''); });
 <div class="ttc" id="aclassgf2_1_1BitVector_html_a4b7006134bcff1ddfc81bcc8133dd3cc"><div class="ttname"><a href="classgf2_1_1BitVector.html#a4b7006134bcff1ddfc81bcc8133dd3cc">gf2::BitVector&lt; Word &gt;::random</a></div><div class="ttdeci">static BitVector random(usize size, double p=0.5, u64 seed=0)</div><div class="ttdef"><b>Definition</b> BitVector.h:373</div></div>
 <div class="ttc" id="aclassgf2_1_1BitVector_html_a66ff1e24db7bf631af2d638dd0b620c1"><div class="ttname"><a href="classgf2_1_1BitVector.html#a66ff1e24db7bf631af2d638dd0b620c1">gf2::BitVector&lt; Word &gt;::zeros</a></div><div class="ttdeci">static constexpr BitVector zeros(usize n)</div><div class="ttdef"><b>Definition</b> BitVector.h:196</div></div>
 <div class="ttc" id="aclassgf2_1_1BitVector_html_a6772a3f88ec78ec6d26ee559d2e20e7f"><div class="ttname"><a href="classgf2_1_1BitVector.html#a6772a3f88ec78ec6d26ee559d2e20e7f">gf2::BitVector&lt; Word &gt;::constant</a></div><div class="ttdeci">static constexpr BitVector constant(usize n, bool value)</div><div class="ttdef"><b>Definition</b> BitVector.h:215</div></div>
-<div class="ttc" id="aclassgf2_1_1BitVector_html_a6e2078e3f40d295f483d87a09d26a92f"><div class="ttname"><a href="classgf2_1_1BitVector.html#a6e2078e3f40d295f483d87a09d26a92f">gf2::BitVector::split_at</a></div><div class="ttdeci">constexpr void split_at(usize at, BitVector&lt; word_type &gt; &amp;left, BitVector&lt; word_type &gt; &amp;right) const</div><div class="ttdoc">Views the bit-vector as two parts containing the elements [0, at) and [at, size()) respectively.</div><div class="ttdef"><b>Definition</b> BitVector.h:1720</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_a6e2078e3f40d295f483d87a09d26a92f"><div class="ttname"><a href="classgf2_1_1BitVector.html#a6e2078e3f40d295f483d87a09d26a92f">gf2::BitVector::split_at</a></div><div class="ttdeci">constexpr void split_at(usize at, BitVector&lt; word_type &gt; &amp;left, BitVector&lt; word_type &gt; &amp;right) const</div><div class="ttdoc">Views the bit-vector as two parts containing the elements [0, at) and [at, size()) respectively.</div><div class="ttdef"><b>Definition</b> BitVector.h:1721</div></div>
 <div class="ttc" id="aclassgf2_1_1BitVector_html_a94f28415157fbc4b4486555fe71b98bd"><div class="ttname"><a href="classgf2_1_1BitVector.html#a94f28415157fbc4b4486555fe71b98bd">gf2::BitVector::word</a></div><div class="ttdeci">constexpr Word word(usize i) const</div><div class="ttdoc">Returns word i from the bit-vector&#39;s underlying word store.</div><div class="ttdef"><b>Definition</b> BitVector.h:80</div></div>
 <div class="ttc" id="aclassgf2_1_1BitVector_html_abcfb7a88f30c8faa177519571a76ba8d"><div class="ttname"><a href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">gf2::BitVector&lt; Word &gt;::ones</a></div><div class="ttdeci">static constexpr BitVector ones(usize n)</div><div class="ttdef"><b>Definition</b> BitVector.h:204</div></div>
 <div class="ttc" id="aclassgf2_1_1BitVector_html_adaced7a7dcdc71fa7ac67f2fefb5553c"><div class="ttname"><a href="classgf2_1_1BitVector.html#adaced7a7dcdc71fa7ac67f2fefb5553c">gf2::BitVector&lt; Word &gt;::seeded_random</a></div><div class="ttdeci">static BitVector seeded_random(usize size, u64 seed)</div><div class="ttdef"><b>Definition</b> BitVector.h:396</div></div>
 <div class="ttc" id="anamespacegf2_html"><div class="ttname"><a href="namespacegf2.html">gf2</a></div><div class="ttdoc">The namespace for the gf2 library.</div><div class="ttdef"><b>Definition</b> assert.h:119</div></div>
-<div class="ttc" id="anamespacegf2_html_a3b0ea5c405d2ed08ce9fa5bbbb2cc169"><div class="ttname"><a href="namespacegf2.html#a3b0ea5c405d2ed08ce9fa5bbbb2cc169">gf2::convolve</a></div><div class="ttdeci">auto convolve(Lhs const &amp;lhs, Rhs const &amp;rhs)</div><div class="ttdoc">Convolutions:</div><div class="ttdef"><b>Definition</b> BitStore.h:2222</div></div>
+<div class="ttc" id="anamespacegf2_html_a3b0ea5c405d2ed08ce9fa5bbbb2cc169"><div class="ttname"><a href="namespacegf2.html#a3b0ea5c405d2ed08ce9fa5bbbb2cc169">gf2::convolve</a></div><div class="ttdeci">auto convolve(Lhs const &amp;lhs, Rhs const &amp;rhs)</div><div class="ttdoc">Convolutions:</div><div class="ttdef"><b>Definition</b> BitStore.h:2223</div></div>
 <div class="ttc" id="anamespacegf2_html_a612727967670558acfd0fd2adc99eccf"><div class="ttname"><a href="namespacegf2.html#a612727967670558acfd0fd2adc99eccf">gf2::dot</a></div><div class="ttdeci">constexpr auto dot(BitMatrix&lt; Word &gt; const &amp;lhs, Rhs const &amp;rhs)</div><div class="ttdoc">Bit-matrix, bit-store multiplication, M * v, returning a new bit-vector.</div><div class="ttdef"><b>Definition</b> BitMatrix.h:2573</div></div>
 <div class="ttc" id="anamespacegf2_html_aa8fd09a196762464e1cffe2941779149"><div class="ttname"><a href="namespacegf2.html#aa8fd09a196762464e1cffe2941779149">gf2::count_ones</a></div><div class="ttdeci">constexpr usize count_ones(Store const &amp;store)</div><div class="ttdoc">Returns the number of set bits in the store.</div><div class="ttdef"><b>Definition</b> BitStore.h:745</div></div>
 <div class="ttc" id="anamespacegf2_html_aaf2ed88c6da45988348d97b3b209a210"><div class="ttname"><a href="namespacegf2.html#aaf2ed88c6da45988348d97b3b209a210">gf2::word_index</a></div><div class="ttdeci">constexpr usize word_index(usize i)</div><div class="ttdoc">Returns the index of the Unsigned word holding bit element i.</div><div class="ttdef"><b>Definition</b> Unsigned.h:547</div></div>
 <div class="ttc" id="anamespacegf2_html_abed1a83530f112d069e809d8883c13a8"><div class="ttname"><a href="namespacegf2.html#abed1a83530f112d069e809d8883c13a8">gf2::usize</a></div><div class="ttdeci">std::size_t usize</div><div class="ttdoc">Word type alias for the platform&#39;s &quot;native&quot;-sized unsigned integer.</div><div class="ttdef"><b>Definition</b> Unsigned.h:42</div></div>
 <div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdoc">STL namespace.</div></div>
-<div class="ttc" id="astructstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4_html_a2c24db03a37b3a69b2d8b3afe18fecd6"><div class="ttname"><a href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a2c24db03a37b3a69b2d8b3afe18fecd6">std::formatter&lt; gf2::BitPolynomial&lt; Word &gt; &gt;::parse</a></div><div class="ttdeci">constexpr auto parse(std::format_parse_context const &amp;ctx)</div><div class="ttdoc">Parse a bit-polynomial format specifier for a variable name (default is &quot;x&quot;).</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:1044</div></div>
-<div class="ttc" id="astructstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4_html_a72a41ba96322d8f46df574879d7ce305"><div class="ttname"><a href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a72a41ba96322d8f46df574879d7ce305">std::formatter&lt; gf2::BitPolynomial&lt; Word &gt; &gt;::format</a></div><div class="ttdeci">auto format(gf2::BitPolynomial&lt; Word &gt; const &amp;rhs, FormatContext &amp;ctx) const</div><div class="ttdoc">Defer the work to the to_string(...) method in the class.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:1056</div></div>
+<div class="ttc" id="astructstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4_html_a2c24db03a37b3a69b2d8b3afe18fecd6"><div class="ttname"><a href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a2c24db03a37b3a69b2d8b3afe18fecd6">std::formatter&lt; gf2::BitPolynomial&lt; Word &gt; &gt;::parse</a></div><div class="ttdeci">constexpr auto parse(std::format_parse_context const &amp;ctx)</div><div class="ttdoc">Parse a bit-polynomial format specifier for a variable name (default is &quot;x&quot;).</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:1045</div></div>
+<div class="ttc" id="astructstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4_html_a72a41ba96322d8f46df574879d7ce305"><div class="ttname"><a href="structstd_1_1formatter_3_01gf2_1_1BitPolynomial_3_01Word_01_4_01_4.html#a72a41ba96322d8f46df574879d7ce305">std::formatter&lt; gf2::BitPolynomial&lt; Word &gt; &gt;::format</a></div><div class="ttdeci">auto format(gf2::BitPolynomial&lt; Word &gt; const &amp;rhs, FormatContext &amp;ctx) const</div><div class="ttdoc">Defer the work to the to_string(...) method in the class.</div><div class="ttdef"><b>Definition</b> BitPolynomial.h:1057</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

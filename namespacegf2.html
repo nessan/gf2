@@ -797,7 +797,7 @@ Example</h1>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; bit : <a class="code hl_function" href="#a9505618cfe91d94fb220381ca468058e">bits</a>(v)) bit = <span class="keyword">true</span>;</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a355af2e0599965ef8d4eada941eee8e3">to_string</a>(v), <span class="stringliteral">&quot;1111111111&quot;</span>);</div>
 <div class="ttc" id="aclassgf2_1_1BitVector_html_a66ff1e24db7bf631af2d638dd0b620c1"><div class="ttname"><a href="classgf2_1_1BitVector.html#a66ff1e24db7bf631af2d638dd0b620c1">gf2::BitVector::zeros</a></div><div class="ttdeci">static constexpr BitVector zeros(usize n)</div><div class="ttdoc">Factory method to generate a bit-vector of length n where the elements are all 0.</div><div class="ttdef"><b>Definition</b> BitVector.h:196</div></div>
-<div class="ttc" id="anamespacegf2_html_a355af2e0599965ef8d4eada941eee8e3"><div class="ttname"><a href="#a355af2e0599965ef8d4eada941eee8e3">gf2::to_string</a></div><div class="ttdeci">static std::string to_string(Store const &amp;store, std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;)</div><div class="ttdoc">Returns a binary string representation of a store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1587</div></div>
+<div class="ttc" id="anamespacegf2_html_a355af2e0599965ef8d4eada941eee8e3"><div class="ttname"><a href="#a355af2e0599965ef8d4eada941eee8e3">gf2::to_string</a></div><div class="ttdeci">static std::string to_string(Store const &amp;store, std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;)</div><div class="ttdoc">Returns a binary string representation of a store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1588</div></div>
 <div class="ttc" id="anamespacegf2_html_a9505618cfe91d94fb220381ca468058e"><div class="ttname"><a href="#a9505618cfe91d94fb220381ca468058e">gf2::bits</a></div><div class="ttdeci">constexpr auto bits(Store const &amp;store)</div><div class="ttdoc">Returns a const iterator over the bool values of the bits in the const bit-store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1133</div></div>
 </div><!-- fragment --> 
 </div>
@@ -870,7 +870,7 @@ Example</h1>
 <div class="line"><span class="keyword">auto</span> rhs = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;&gt;::ones</a>(2);</div>
 <div class="line"><span class="keyword">auto</span> result = <a class="code hl_function" href="#a3b0ea5c405d2ed08ce9fa5bbbb2cc169">convolve</a>(lhs, rhs);</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a355af2e0599965ef8d4eada941eee8e3">to_string</a>(result), <span class="stringliteral">&quot;1001&quot;</span>);</div>
-<div class="ttc" id="anamespacegf2_html_a3b0ea5c405d2ed08ce9fa5bbbb2cc169"><div class="ttname"><a href="#a3b0ea5c405d2ed08ce9fa5bbbb2cc169">gf2::convolve</a></div><div class="ttdeci">auto convolve(Lhs const &amp;lhs, Rhs const &amp;rhs)</div><div class="ttdoc">Convolutions:</div><div class="ttdef"><b>Definition</b> BitStore.h:2222</div></div>
+<div class="ttc" id="anamespacegf2_html_a3b0ea5c405d2ed08ce9fa5bbbb2cc169"><div class="ttname"><a href="#a3b0ea5c405d2ed08ce9fa5bbbb2cc169">gf2::convolve</a></div><div class="ttdeci">auto convolve(Lhs const &amp;lhs, Rhs const &amp;rhs)</div><div class="ttdoc">Convolutions:</div><div class="ttdef"><b>Definition</b> BitStore.h:2223</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -1885,7 +1885,7 @@ Example</h1>
 <div class="line"><span class="keyword">auto</span> rhs = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(12);</div>
 <div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#a10232b64eb69a81bc462f7b7cc18e0fc">join</a>(lhs, rhs);</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a355af2e0599965ef8d4eada941eee8e3">to_string</a>(v), <span class="stringliteral">&quot;000000000000111111111111&quot;</span>);</div>
-<div class="ttc" id="anamespacegf2_html_a10232b64eb69a81bc462f7b7cc18e0fc"><div class="ttname"><a href="#a10232b64eb69a81bc462f7b7cc18e0fc">gf2::join</a></div><div class="ttdeci">auto join(Lhs const &amp;lhs, Rhs const &amp;rhs)</div><div class="ttdoc">Returns a new bit-vector formed by joining two bit-stores lhs and rhs.</div><div class="ttdef"><b>Definition</b> BitStore.h:1435</div></div>
+<div class="ttc" id="anamespacegf2_html_a10232b64eb69a81bc462f7b7cc18e0fc"><div class="ttname"><a href="#a10232b64eb69a81bc462f7b7cc18e0fc">gf2::join</a></div><div class="ttdeci">auto join(Lhs const &amp;lhs, Rhs const &amp;rhs)</div><div class="ttdoc">Returns a new bit-vector formed by joining two bit-stores lhs and rhs.</div><div class="ttdef"><b>Definition</b> BitStore.h:1436</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -3378,7 +3378,7 @@ Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> dst = <a class="code hl_function" href="#ac462028756047a28bd47ba5134841371">riffle</a>(v);</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a355af2e0599965ef8d4eada941eee8e3">to_string</a>(dst), <span class="stringliteral">&quot;1010101010101010101&quot;</span>);</div>
-<div class="ttc" id="anamespacegf2_html_ac462028756047a28bd47ba5134841371"><div class="ttname"><a href="#ac462028756047a28bd47ba5134841371">gf2::riffle</a></div><div class="ttdeci">constexpr void riffle(Store const &amp;store, BitVector&lt; typename Store::word_type &gt; &amp;dst)</div><div class="ttdoc">Interleaves the bits of a bit-store with zeros storing the result into the passed bit-vector dst.</div><div class="ttdef"><b>Definition</b> BitStore.h:1467</div></div>
+<div class="ttc" id="anamespacegf2_html_ac462028756047a28bd47ba5134841371"><div class="ttname"><a href="#ac462028756047a28bd47ba5134841371">gf2::riffle</a></div><div class="ttdeci">constexpr void riffle(Store const &amp;store, BitVector&lt; typename Store::word_type &gt; &amp;dst)</div><div class="ttdoc">Interleaves the bits of a bit-store with zeros storing the result into the passed bit-vector dst.</div><div class="ttdef"><b>Definition</b> BitStore.h:1468</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -3719,7 +3719,7 @@ Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> s = <a class="code hl_function" href="#a91642aa97f8c3823b3630dde99574a8b">span</a>(v, 1, 5);</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a355af2e0599965ef8d4eada941eee8e3">to_string</a>(s), <span class="stringliteral">&quot;0101&quot;</span>);</div>
-<div class="ttc" id="anamespacegf2_html_a91642aa97f8c3823b3630dde99574a8b"><div class="ttname"><a href="#a91642aa97f8c3823b3630dde99574a8b">gf2::span</a></div><div class="ttdeci">static constexpr auto span(Store const &amp;store, usize begin, usize end)</div><div class="ttdoc">Constructs a read-only bit-span over the const bit-store store for its bits in the range [begin,...</div><div class="ttdef"><b>Definition</b> BitStore.h:1276</div></div>
+<div class="ttc" id="anamespacegf2_html_a91642aa97f8c3823b3630dde99574a8b"><div class="ttname"><a href="#a91642aa97f8c3823b3630dde99574a8b">gf2::span</a></div><div class="ttdeci">static constexpr auto span(Store const &amp;store, usize begin, usize end)</div><div class="ttdoc">Constructs a read-only bit-span over the const bit-store store for its bits in the range [begin,...</div><div class="ttdef"><b>Definition</b> BitStore.h:1277</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -3811,7 +3811,7 @@ Example</h1>
 <div class="line">assert_eq(<a class="code hl_function" href="#a355af2e0599965ef8d4eada941eee8e3">to_string</a>(left), <span class="stringliteral">&quot;10101&quot;</span>);</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a355af2e0599965ef8d4eada941eee8e3">to_string</a>(right), <span class="stringliteral">&quot;01010&quot;</span>);</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a355af2e0599965ef8d4eada941eee8e3">to_string</a>(v), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
-<div class="ttc" id="anamespacegf2_html_a56284774b49c6d8b626c41eb23c285db"><div class="ttname"><a href="#a56284774b49c6d8b626c41eb23c285db">gf2::split</a></div><div class="ttdeci">constexpr void split(Store const &amp;store, usize at, BitVector&lt; typename Store::word_type &gt; &amp;left, BitVector&lt; typename Store::word_type &gt; &amp;right)</div><div class="ttdoc">Views a bit-store as two parts containing the elements [0, at) and [at, size()) respectively....</div><div class="ttdef"><b>Definition</b> BitStore.h:1386</div></div>
+<div class="ttc" id="anamespacegf2_html_a56284774b49c6d8b626c41eb23c285db"><div class="ttname"><a href="#a56284774b49c6d8b626c41eb23c285db">gf2::split</a></div><div class="ttdeci">constexpr void split(Store const &amp;store, usize at, BitVector&lt; typename Store::word_type &gt; &amp;left, BitVector&lt; typename Store::word_type &gt; &amp;right)</div><div class="ttdoc">Views a bit-store as two parts containing the elements [0, at) and [at, size()) respectively....</div><div class="ttdef"><b>Definition</b> BitStore.h:1387</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -3957,7 +3957,7 @@ Example</h1>
 <div class="line">s.set_all();</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a355af2e0599965ef8d4eada941eee8e3">to_string</a>(s), <span class="stringliteral">&quot;1111&quot;</span>);</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a355af2e0599965ef8d4eada941eee8e3">to_string</a>(v), <span class="stringliteral">&quot;1010101010&quot;</span>);</div>
-<div class="ttc" id="anamespacegf2_html_a8fe2ab8650590f082f800d223fdd6422"><div class="ttname"><a href="#a8fe2ab8650590f082f800d223fdd6422">gf2::sub</a></div><div class="ttdeci">constexpr auto sub(Store const &amp;store, usize begin, usize end)</div><div class="ttdoc">Returns a clone of the elements in the half-open range [begin, end) as a new bit-vector.</div><div class="ttdef"><b>Definition</b> BitStore.h:1355</div></div>
+<div class="ttc" id="anamespacegf2_html_a8fe2ab8650590f082f800d223fdd6422"><div class="ttname"><a href="#a8fe2ab8650590f082f800d223fdd6422">gf2::sub</a></div><div class="ttdeci">constexpr auto sub(Store const &amp;store, usize begin, usize end)</div><div class="ttdoc">Returns a clone of the elements in the half-open range [begin, end) as a new bit-vector.</div><div class="ttdef"><b>Definition</b> BitStore.h:1356</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -4073,7 +4073,7 @@ Example</h1>
 <div class="line"><a class="code hl_function" href="#a0185d340520fd8519443cff59ddbe8a2">set</a>(v, 0);</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#af1900fd540d8f3670454d39b003d9667">to_binary_string</a>(v), <span class="stringliteral">&quot;1000000000&quot;</span>);</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#af1900fd540d8f3670454d39b003d9667">to_binary_string</a>(v, <span class="stringliteral">&quot;,&quot;</span>, <span class="stringliteral">&quot;[&quot;</span>, <span class="stringliteral">&quot;]&quot;</span>), <span class="stringliteral">&quot;[1,0,0,0,0,0,0,0,0,0]&quot;</span>);</div>
-<div class="ttc" id="anamespacegf2_html_af1900fd540d8f3670454d39b003d9667"><div class="ttname"><a href="#af1900fd540d8f3670454d39b003d9667">gf2::to_binary_string</a></div><div class="ttdeci">static std::string to_binary_string(Store const &amp;store, std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;)</div><div class="ttdoc">Returns a binary string representation of a store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1536</div></div>
+<div class="ttc" id="anamespacegf2_html_af1900fd540d8f3670454d39b003d9667"><div class="ttname"><a href="#af1900fd540d8f3670454d39b003d9667">gf2::to_binary_string</a></div><div class="ttdeci">static std::string to_binary_string(Store const &amp;store, std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;)</div><div class="ttdoc">Returns a binary string representation of a store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1537</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -4159,7 +4159,7 @@ Example</h1>
 <div class="line"><span class="keyword">auto</span> v3 = <a class="code hl_function" href="classgf2_1_1BitVector.html#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(8);</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#af1900fd540d8f3670454d39b003d9667">to_binary_string</a>(v3), <span class="stringliteral">&quot;10101010&quot;</span>);</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#aa8641a61d375c82684b921764e373cce">to_hex_string</a>(v3), <span class="stringliteral">&quot;AA&quot;</span>);</div>
-<div class="ttc" id="anamespacegf2_html_aa8641a61d375c82684b921764e373cce"><div class="ttname"><a href="#aa8641a61d375c82684b921764e373cce">gf2::to_hex_string</a></div><div class="ttdeci">static std::string to_hex_string(Store const &amp;store)</div><div class="ttdoc">Returns the &quot;hex&quot; string representation of the bits in the bit-store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1641</div></div>
+<div class="ttc" id="anamespacegf2_html_aa8641a61d375c82684b921764e373cce"><div class="ttname"><a href="#aa8641a61d375c82684b921764e373cce">gf2::to_hex_string</a></div><div class="ttdeci">static std::string to_hex_string(Store const &amp;store)</div><div class="ttdoc">Returns the &quot;hex&quot; string representation of the bits in the bit-store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1642</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -4229,7 +4229,7 @@ Example</h1>
 <div class="line">assert_eq(<a class="code hl_function" href="#a75fa1cd092371f7093307f09dbd71c55">to_pretty_string</a>(v), <span class="stringliteral">&quot;[1,0,1,0,1,0,1,0,1,0]&quot;</span>);</div>
 <div class="line"><a class="code hl_class" href="classgf2_1_1BitVector.html">BitVector</a> empty;</div>
 <div class="line">assert_eq(<a class="code hl_function" href="#a75fa1cd092371f7093307f09dbd71c55">to_pretty_string</a>(empty), <span class="stringliteral">&quot;[]&quot;</span>);</div>
-<div class="ttc" id="anamespacegf2_html_a75fa1cd092371f7093307f09dbd71c55"><div class="ttname"><a href="#a75fa1cd092371f7093307f09dbd71c55">gf2::to_pretty_string</a></div><div class="ttdeci">static std::string to_pretty_string(Store const &amp;store)</div><div class="ttdoc">Returns a &quot;pretty&quot; string representation of a store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1605</div></div>
+<div class="ttc" id="anamespacegf2_html_a75fa1cd092371f7093307f09dbd71c55"><div class="ttname"><a href="#a75fa1cd092371f7093307f09dbd71c55">gf2::to_pretty_string</a></div><div class="ttdeci">static std::string to_pretty_string(Store const &amp;store)</div><div class="ttdoc">Returns a &quot;pretty&quot; string representation of a store.</div><div class="ttdef"><b>Definition</b> BitStore.h:1606</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -4330,7 +4330,7 @@ Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
 <div class="line"><span class="keyword">auto</span> words = <a class="code hl_function" href="#abda627169916e771d25c9a1af8dad123">to_words</a>(v);</div>
 <div class="line">assert_eq(words, (std::vector&lt;u8&gt;{0b1111&#39;1111, 0b0000&#39;0011}));</div>
-<div class="ttc" id="anamespacegf2_html_abda627169916e771d25c9a1af8dad123"><div class="ttname"><a href="#abda627169916e771d25c9a1af8dad123">gf2::to_words</a></div><div class="ttdeci">constexpr void to_words(Store const &amp;store, std::output_iterator&lt; typename Store::word_type &gt; auto out)</div><div class="ttdoc">Returns a copy of the words underlying this bit-store and puts them into the passed output iterator.</div><div class="ttdef"><b>Definition</b> BitStore.h:1234</div></div>
+<div class="ttc" id="anamespacegf2_html_abda627169916e771d25c9a1af8dad123"><div class="ttname"><a href="#abda627169916e771d25c9a1af8dad123">gf2::to_words</a></div><div class="ttdeci">constexpr void to_words(Store const &amp;store, std::output_iterator&lt; typename Store::word_type &gt; auto out)</div><div class="ttdoc">Returns a copy of the words underlying this bit-store and puts them into the passed output iterator.</div><div class="ttdef"><b>Definition</b> BitStore.h:1235</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -4366,11 +4366,12 @@ template&lt;BitStore Store&gt; </div>
 <p>Returns a copy of the words underlying this bit-store and puts them into the passed output iterator. </p>
 <h1 class="doxsection"><a class="anchor" id="note-35"></a>
 Note</h1>
-<ol type="1">
+<ul>
 <li>The last word in the store may not be fully occupied but unused slots will be all zeros.</li>
 <li>The output iterator must be able to accept values of the store's <span class="tt">word_type</span>.</li>
 <li>The output iterator must have enough space to accept all the words in the store.</li>
-</ol>
+<li>If there is extra space in the output iterator, those extra slots are left unchanged.</li>
+</ul>
 <h1 class="doxsection"><a class="anchor" id="example-352"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="classgf2_1_1BitVector.html#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>

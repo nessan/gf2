@@ -417,7 +417,7 @@ Example</h1>
 <div class="line"><a class="code hl_function" href="#a14c3dd77166009bede404d9de9f20b7f">BitVector&lt;u8&gt;</a> v{10};</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#ad2b8ef3dc6d1ea250253135172bb48e7">to_string</a>(), <span class="stringliteral">&quot;0000000000&quot;</span>);</div>
 <div class="ttc" id="aclassgf2_1_1BitVector_html_a14c3dd77166009bede404d9de9f20b7f"><div class="ttname"><a href="#a14c3dd77166009bede404d9de9f20b7f">gf2::BitVector::BitVector</a></div><div class="ttdeci">constexpr BitVector(usize size=0)</div><div class="ttdoc">Constructs a bit-vector of length n with all the bit elements set to 0.</div><div class="ttdef"><b>Definition</b> BitVector.h:150</div></div>
-<div class="ttc" id="aclassgf2_1_1BitVector_html_ad2b8ef3dc6d1ea250253135172bb48e7"><div class="ttname"><a href="#ad2b8ef3dc6d1ea250253135172bb48e7">gf2::BitVector::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVector.h:1819</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_ad2b8ef3dc6d1ea250253135172bb48e7"><div class="ttname"><a href="#ad2b8ef3dc6d1ea250253135172bb48e7">gf2::BitVector::to_string</a></div><div class="ttdeci">std::string to_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVector.h:1820</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -3712,7 +3712,7 @@ Example</h1>
 <div class="line">v.<a class="code hl_function" href="#a73c5c0d160af7ae95e495e1288f73440">set</a>(0);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7cc78c5e7773c30d8da8916af258d081">to_binary_string</a>(), <span class="stringliteral">&quot;1000000000&quot;</span>);</div>
 <div class="line">assert_eq(v.<a class="code hl_function" href="#a7cc78c5e7773c30d8da8916af258d081">to_binary_string</a>(<span class="stringliteral">&quot;,&quot;</span>, <span class="stringliteral">&quot;[&quot;</span>, <span class="stringliteral">&quot;]&quot;</span>), <span class="stringliteral">&quot;[1,0,0,0,0,0,0,0,0,0]&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitVector_html_a7cc78c5e7773c30d8da8916af258d081"><div class="ttname"><a href="#a7cc78c5e7773c30d8da8916af258d081">gf2::BitVector::to_binary_string</a></div><div class="ttdeci">std::string to_binary_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVector.h:1798</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_a7cc78c5e7773c30d8da8916af258d081"><div class="ttname"><a href="#a7cc78c5e7773c30d8da8916af258d081">gf2::BitVector::to_binary_string</a></div><div class="ttdeci">std::string to_binary_string(std::string_view sep=&quot;&quot;, std::string_view pre=&quot;&quot;, std::string_view post=&quot;&quot;) const</div><div class="ttdoc">Returns a binary string representation of the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVector.h:1799</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -3765,7 +3765,7 @@ Example</h1>
 <div class="line"><span class="keyword">auto</span> v3 = <a class="code hl_function" href="#aeed3a5c646dbc7c38b4298574734ae4a">BitVector&lt;&gt;::alternating</a>(8);</div>
 <div class="line">assert_eq(v3.to_binary_string(), <span class="stringliteral">&quot;10101010&quot;</span>);</div>
 <div class="line">assert_eq(v3.to_hex_string(), <span class="stringliteral">&quot;AA&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitVector_html_afec1640c73d1be249030207fcd061ab1"><div class="ttname"><a href="#afec1640c73d1be249030207fcd061ab1">gf2::BitVector::to_hex_string</a></div><div class="ttdeci">std::string to_hex_string() const</div><div class="ttdoc">Returns the &quot;hex&quot; string representation of the bits in the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVector.h:1867</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_afec1640c73d1be249030207fcd061ab1"><div class="ttname"><a href="#afec1640c73d1be249030207fcd061ab1">gf2::BitVector::to_hex_string</a></div><div class="ttdeci">std::string to_hex_string() const</div><div class="ttdoc">Returns the &quot;hex&quot; string representation of the bits in the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVector.h:1868</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -3802,7 +3802,7 @@ Example</h1>
 <div class="line">assert_eq(v.to_pretty_string(), <span class="stringliteral">&quot;[1,0,1,0,1,0,1,0,1,0]&quot;</span>);</div>
 <div class="line"><a class="code hl_function" href="#a14c3dd77166009bede404d9de9f20b7f">BitVector</a> empty;</div>
 <div class="line">assert_eq(empty.<a class="code hl_function" href="#aebf24ce533ec44f83c83105b55a3b5e3">to_pretty_string</a>(), <span class="stringliteral">&quot;[]&quot;</span>);</div>
-<div class="ttc" id="aclassgf2_1_1BitVector_html_aebf24ce533ec44f83c83105b55a3b5e3"><div class="ttname"><a href="#aebf24ce533ec44f83c83105b55a3b5e3">gf2::BitVector::to_pretty_string</a></div><div class="ttdeci">std::string to_pretty_string() const</div><div class="ttdoc">Returns a &quot;pretty&quot; string representation of the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVector.h:1835</div></div>
+<div class="ttc" id="aclassgf2_1_1BitVector_html_aebf24ce533ec44f83c83105b55a3b5e3"><div class="ttname"><a href="#aebf24ce533ec44f83c83105b55a3b5e3">gf2::BitVector::to_pretty_string</a></div><div class="ttdeci">std::string to_pretty_string() const</div><div class="ttdoc">Returns a &quot;pretty&quot; string representation of the bit-vector.</div><div class="ttdef"><b>Definition</b> BitVector.h:1836</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -3886,7 +3886,7 @@ template&lt;Unsigned Word = usize&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns a copy of the words underlying this bit-vector as a new <span class="tt">std::vector&lt;<a class="el" href="#aca1c8345774c71accac5a29b6d79e166" title="The underlying unsigned word type used to store the bits.">word_type</a>&gt;</span>. </p>
-<p><b>Note:</b> The last word in the vector may not be fully occupied but unused slots will be all zeros.</p>
+<p>**Note: The last word in the vector may not be fully occupied but unused slots will be all zeros.</p>
 <h1 class="doxsection"><a class="anchor" id="example-461"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>
@@ -3923,11 +3923,12 @@ template&lt;Unsigned Word = usize&gt; </div>
 <p>Returns a copy of the words underlying this bit-vector and puts them into the passed output iterator. </p>
 <h1 class="doxsection"><a class="anchor" id="note-49"></a>
 Note</h1>
-<ol type="1">
+<ul>
 <li>The last word in the bit-vector may not be fully occupied but unused slots will be all zeros.</li>
 <li>The output iterator must be able to accept values of the bit-vector's <span class="tt"><a class="el" href="#aca1c8345774c71accac5a29b6d79e166" title="The underlying unsigned word type used to store the bits.">word_type</a></span>.</li>
 <li>The output iterator must have enough space to accept all the words in the bit-vector.</li>
-</ol>
+<li>If there is extra space in the output iterator, those extra slots are left unchanged.</li>
+</ul>
 <h1 class="doxsection"><a class="anchor" id="example-460"></a>
 Example</h1>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> v = <a class="code hl_function" href="#abcfb7a88f30c8faa177519571a76ba8d">BitVector&lt;u8&gt;::ones</a>(10);</div>

@@ -372,6 +372,7 @@ Exports</h1>
 <ul>
 <li>The output iterator points to a location that can accept values of the underlying word type.</li>
 <li>There is enough space at the output location to hold all those words.</li>
+<li>Any extra bits in the final word are guaranteed to be set to zero.</li>
 </ul>
 <p>If <span class="tt"><a class="el" href="namespacegf2.html#abda627169916e771d25c9a1af8dad123" title="Returns a copy of the words underlying this bit-store and puts them into the passed output iterator.">gf2::to_words</a></span> is called with no argument it returns a new <span class="tt">std::vector</span> of the bit-store's underlying word type.</p>
 <p><b>Note:</b> The final word in the output may have unused high-order bits that are guaranteed to be set to zero.</p>
