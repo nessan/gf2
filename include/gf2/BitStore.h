@@ -536,12 +536,12 @@ copy(Iter src_begin, Iter src_end, Store& store) {
     constexpr auto dst_bpw = BITS<dst_type>;
     constexpr auto src_bpw = BITS<src_type>;
 
-    // Size of the source in words and bits.
+    // Size of the source in words
     auto src_words = static_cast<std::size_t>(std::distance(src_begin, src_end));
-    auto src_bits = src_words * src_bpw;
 
     // The sizes in bits must match ...
-    gf2_assert(store.size() == src_bits, "Lengths do not match: {} != {}.", store.size(), src_bits);
+    gf2_assert(store.size() == src_words * src_bpw, "Lengths do not match: {} != {}.", store.size(),
+               src_words * src_bpw);
 
     // What we do next depends on the size of the respective words.
     if constexpr (src_bpw == dst_bpw) {
