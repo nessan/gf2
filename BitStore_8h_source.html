@@ -385,12 +385,12 @@ $(function(){initNavTree('BitStore_8h_source.html','',''); });
 <div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>    <span class="keyword">constexpr</span> <span class="keyword">auto</span> dst_bpw = <a class="code hl_variable" href="namespacegf2.html#ad1d8969ed4ed705fbc26eec1eed8b6ae">BITS&lt;dst_type&gt;</a>;</div>
 <div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>    <span class="keyword">constexpr</span> <span class="keyword">auto</span> src_bpw = <a class="code hl_variable" href="namespacegf2.html#ad1d8969ed4ed705fbc26eec1eed8b6ae">BITS&lt;src_type&gt;</a>;</div>
 <div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span> </div>
-<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>    <span class="comment">// Size of the source in words and bits.</span></div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>    <span class="comment">// Size of the source in words</span></div>
 <div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    <span class="keyword">auto</span> src_words = <span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(std::distance(src_begin, src_end));</div>
-<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    <span class="keyword">auto</span> src_bits = src_words * src_bpw;</div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span> </div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    <span class="comment">// The sizes in bits must match ...</span></div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    <a class="code hl_define" href="assert_8h.html#a8b8f43b80dc4843439f1a05910d5ad65">gf2_assert</a>(store.size() == src_bits, <span class="stringliteral">&quot;Lengths do not match: {} != {}.&quot;</span>, store.size(), src_bits);</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span> </div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    <span class="comment">// The sizes in bits must match ...</span></div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    <a class="code hl_define" href="assert_8h.html#a8b8f43b80dc4843439f1a05910d5ad65">gf2_assert</a>(store.size() == src_words * src_bpw, <span class="stringliteral">&quot;Lengths do not match: {} != {}.&quot;</span>, store.size(),</div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>               src_words * src_bpw);</div>
 <div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span> </div>
 <div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>    <span class="comment">// What we do next depends on the size of the respective words.</span></div>
 <div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (src_bpw == dst_bpw) {</div>
