@@ -59,6 +59,7 @@ if (PROJECT_IS_TOP_LEVEL)
     # We have a CMake module that makes that traversal straightforward.
     include(add_executables)
     add_executables(${CMAKE_SOURCE_DIR}/examples
+        COMBINED_TARGET "all_examples"
         LIBRARIES ${PROJECT_NAME}::${PROJECT_NAME} utilities::utilities)
 
     # -------------------------------------------------------------------------------------------------------------------
